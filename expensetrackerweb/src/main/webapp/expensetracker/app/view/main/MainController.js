@@ -9,14 +9,54 @@ Ext.define('expensetracker.view.main.MainController', {
 	extend : 'Ext.app.ViewController',
 
 	alias : 'controller.main',
-
-	onItemSelected : function(sender, record) {
-		Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
+	listen: {
+		controller: {
+			'#': {
+				unmatchedroute: 'handleUnmatchedRoute'
+			}
+		}
+	},
+	routes: {
+		':view':'onRouteChange'
+	},
+	
+	onRouteChange: function(hash) {
+		var me = this;
+		hash = (hash || '').toLowerCase();
+		
+		var refs = me.getReferences();
+		var mainView = refs.mainView;
+		var navigationMenu = refs.navigationMenu;
+		
+		var store = navigationMenu.getStore();
+		var node = store.findNode('routeId', hash) || store.findNode('viewXType', hash);
+		
+		var item = mainView.child('component[routeId=' +hash +']');
+		
+		if(item === null) {
+			item = mainView.add({
+				xtype: node.get('viewXType'),
+				routeId: hash
+			});
+		}
+		
+		mainView.setActiveItem(item);
+		navigationMenu.setSelection(node);
+	},
+	
+	handleUnmatchedRoute: function(hash) {
+		
 	},
 
-	onConfirm : function(choice) {
-		if (choice === 'yes') {
-			//
+	onNavItemClick: function(navigator, navInfo, opts) {
+				
+	},
+	
+	onNavItemSelectionChange: function(navigator, node) {
+		var to = node && (node.get('routeId') || node.get('viewXType'))
+		if(to) {
+			this.redirectTo(to);
 		}
 	}
+	
 });

@@ -2,6 +2,8 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	extend : 'Ext.Toolbar',
 	xtype : 'maintoolbar',
 	alias : 'view.toolbar',
+	requires: ['Ext.Component',
+	'Ext.Button'],
 	items : [ {
 		xtype : 'component',
 		userCls : 'app-name',

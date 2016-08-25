@@ -9,10 +9,13 @@ Ext.define('expensetracker.store.NavigationStore', {
 		children : [ {
 			text : 'Dashboard',
 			iconCls : 'x-fa fa-desktop',
+			routeId: 'dashboard',
+			viewXType: 'dashboard',
 			leaf : true
 		}, {
 			text : 'Reports',
-			iconCls : 'x-fa fa-search',
+			iconCls : 'x-fa fa-search',			
+			viewXType: 'reports',			
 			leaf : true
 		} ]
 	}

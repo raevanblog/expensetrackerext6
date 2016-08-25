@@ -13,29 +13,37 @@ Ext.define('expensetracker.view.main.Main', {
 	requires : [ 'expensetracker.view.main.MainController',
 			'expensetracker.view.main.MainModel',
 			'expensetracker.view.main.Toolbar',
-			'expensetracker.store.NavigationStore' ],
+			'expensetracker.store.NavigationStore',
+			'Ext.navigation.View'],
 	controller : 'main',
 	viewModel : 'main',
 	layout : 'hbox',
 	items : [ {
 		xtype : 'maintoolbar',
 		userCls : 'main-toolbar',
+		reference: 'mainToolbar',
 		docked : 'top'
 	}, {
 		xtype : 'container',
 		userCls : 'nav-container',
 		items : [ {
 			xtype : 'treelist',
+			reference: 'navigationMenu',
 			ui : 'navigation',
 			store : {
 				type : 'navigationstore'
 			},
 			expanderFirst : false,
-			expanderOnly : false
-		} ]
+			expanderOnly : false,
+			listeners: {
+				itemclick: 'onNavItemClick',
+				selectionchange: 'onNavItemSelectionChange'
+			}
+		} ]		
 	}, {
 		xtype : 'navigationview',
 		userCls : 'main-container',
+		reference: 'mainView',
 		navigationBar : false,
 		flex : 1
 	} ]
