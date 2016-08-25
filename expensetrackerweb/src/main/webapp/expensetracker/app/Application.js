@@ -11,6 +11,7 @@ Ext.define('expensetracker.Application', {
     stores: [
         // TODO: add global / shared stores here
     ],
+	defaultToken: 'dashboard',
     
     launch: function () {
         // TODO - Launch the application
