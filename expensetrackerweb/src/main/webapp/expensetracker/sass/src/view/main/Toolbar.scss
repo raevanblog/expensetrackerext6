@@ -1,0 +1,40 @@
+$toolbar-background-color: $base-color;
+
+
+@include button-ui(
+    $ui: 'toolbar-button',
+    $color: #fff,
+    $icon-color: $app-name-bg-color,
+    $background-color: #FFF,
+	$border-radius: 50%,	
+    $border-width: 0
+);
+
+.toolbar-button{
+	height: 35px;
+	width: 35px;
+	position: relative;
+}
+
+.app-name {
+	font-family: Cambria, helvetica, arial, verdana, sans-serif;
+	font-size: 20px;
+	background-color: $app-name-bg-color;
+	height: $main-toolbar-height;
+	line-height: $main-toolbar-height;
+	width: $nav-width;
+	position: relative;
+	color: #fff; 
+	
+	&: before { content : " ";
+	position: absolute;
+	width: 20px;
+	}
+}
+
+.main-toolbar {
+	z-index: 1;
+	border: none;
+	padding: 0 38px 0 0;
+	height: $main-toolbar-height;
+}

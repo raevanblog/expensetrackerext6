@@ -1,0 +1,81 @@
+@include treelist-ui(
+    $ui: 'navigation',
+    $padding: 0 10px,
+   
+    $background-color: $panel-navigation-background-color,
+    $toolstrip-background-color: #32404e,
+    $tool-float-indicator-color: $base-color,
+    $tool-float-indicator-width: 5px,
+    $tool-indicator-selected-color: $base-color,
+    $tool-indicator-selected-width: 5px,
+    $tool-selected-background-color: mix(white, $panel-navigation-background-color, 10%),
+    
+ 
+    $item-line-height : $panel-navigation-item-line-height,
+    $row-over-background-color: mix(white, $panel-navigation-background-color, 5%),
+    $row-selected-background-color: mix(white, $panel-navigation-background-color, 10%),
+ 
+    $item-icon-color: $panel-navigation-item-text-color,
+    $item-expander-color: #fff,
+    $item-text-color: #ADB3B8,
+ 
+    $item-icon-over-color: #fff,
+    $item-expander-over-color: #fff,
+    $item-text-over-color: mix(white, $panel-navigation-item-text-color, 50%),
+    $item-text-font-size: 14px,
+ 
+    $item-icon-font-size: 18px,
+    $item-icon-width: 44px,
+    $item-expander-font-size: 16px,
+    $item-expander-width: 24px,
+ 
+ 
+    $row-indicator-width: 5px,
+    $row-indicator-selected-color: $app-name-bg-color,
+    $row-indicator-selected-over-color: lighten($app-name-bg-color, 7%),
+    $row-indicator-over-color: transparent
+);
+
+.x-treelist-navigation:not(.x-treelist-floater) {
+	min-height: calc(100vh - #{$main-toolbar-height});
+}
+
+.x-treelist-navigation {
+    transition: width 0.3s;
+}
+
+.nav-container {
+	position: relative;
+	height: calc(100vh - #{$main-toolbar-height});
+	width: $nav-width;
+	transition: width 0.3s;
+};
+
+.main-container {
+    height: calc(100vh - #{$main-toolbar-height});
+}
+
+.nav-tree-badge:after {
+    position: absolute;
+    height: 18px;
+    width: 3.3em;
+    display: inline-block;
+    text-align: center;
+    top: 50%;
+    margin-top: -9px;
+    right: 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 18px;
+}
+
+.nav-tree-badge-reports:after {
+    content: "HOT";
+    background-color: #e3495a;
+}
+
+.nav-tree-badge-new:after {
+    content: "NEW";
+    background-color: #e3495a;
+}
