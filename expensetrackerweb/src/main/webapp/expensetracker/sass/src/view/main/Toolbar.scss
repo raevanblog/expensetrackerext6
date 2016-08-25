@@ -26,9 +26,10 @@ $toolbar-background-color: $base-color;
 	position: relative;
 	color: #fff; 
 	
-	&: before { content : " ";
-	position: absolute;
-	width: 20px;
+	&:before { 
+		content : " ";
+		position: absolute;
+		width: 20px;
 	}
 }
 
