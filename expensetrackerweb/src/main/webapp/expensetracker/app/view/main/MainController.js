@@ -57,6 +57,10 @@ Ext.define('expensetracker.view.main.MainController', {
 		if(to) {
 			this.redirectTo(to);
 		}
-	}
+	},
 	
+	onToggleNavigation: function(button) {
+			
+	}
+		
 });

@@ -14,7 +14,8 @@ Ext.define('expensetracker.view.main.Main', {
 			'expensetracker.view.main.MainModel',
 			'expensetracker.view.main.Toolbar',
 			'expensetracker.store.NavigationStore',
-			'Ext.navigation.View'],
+			'Ext.navigation.View',
+			'Ext.fx.Animation'],
 	controller : 'main',
 	viewModel : 'main',
 	layout : 'hbox',
@@ -45,6 +46,14 @@ Ext.define('expensetracker.view.main.Main', {
 		userCls : 'main-container',
 		reference: 'mainView',
 		navigationBar : false,
+		layout: {
+            type: 'card',
+            animation: {
+                duration: 600,
+                easing: 'ease-out',
+                type: 'fade'                
+            }
+        },
 		flex : 1
 	} ]
 });

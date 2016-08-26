@@ -8,6 +8,13 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		xtype : 'component',
 		userCls : 'app-name',
 		html : '  Expense Tracker'
+	},{
+		xtype: 'button',
+		userCls: 'toolbar-button-nav-toggle',
+		iconCls: 'x-fa fa-bars',
+		listeners: {
+			tap:  onToggleNavigation
+		}
 	}, '->', {
 		xtype : 'button',
 		ui : 'toolbar-button',

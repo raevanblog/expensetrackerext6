@@ -14,7 +14,7 @@ Ext.define('expensetracker.Application', {
 	defaultToken: 'dashboard',
     
     launch: function () {
-        // TODO - Launch the application
+        Ext.getBody().getById('appLoadingIndicator').destroy();
     },
 
     onAppUpdate: function () {
