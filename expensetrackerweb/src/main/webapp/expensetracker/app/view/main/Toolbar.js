@@ -13,7 +13,7 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		userCls: 'toolbar-button-nav-toggle',
 		iconCls: 'x-fa fa-bars',
 		listeners: {
-			tap:  onToggleNavigation
+			tap:  'onToggleNavigation'
 		}
 	}, '->', {
 		xtype : 'button',

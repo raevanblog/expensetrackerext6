@@ -1,0 +1,55 @@
+.dashboard > * > .x-inner,
+.dashboard > * > * > .x-inner {
+    padding: $item-spacing $item-spacing $item-spacing $item-spacing;
+}
+
+.dashboard-item {
+	padding: $item-spacing $item-spacing $item-spacing $item-spacing; 	
+    float: left;
+}
+
+.small-100 {
+	width: calc(100%- #{$item-spacing});
+}
+
+.small-60 {
+    width: calc(60% - #{$item-spacing});
+}
+
+.small-50 {
+    width: calc(50% - #{$item-spacing});
+}
+
+.small-40 {
+    width: calc(40% - #{$item-spacing});
+}
+
+.small-20 {
+    width: calc(20% - #{$item-spacing});
+}
+
+@media (min-width: 1000px) {
+    .big-100 {
+        width: calc(100% - #{$item-spacing});
+    }
+
+    .big-60 {
+        width: calc(60% - #{$item-spacing});
+    }
+
+    .big-50 {
+        width: calc(50% - #{$item-spacing});
+    }
+
+    .big-40 {
+        width: calc(40% - #{$item-spacing});
+    }
+
+    .big-33 {
+        width: calc(33.3% - #{$item-spacing});
+    }
+
+    .big-20 {
+        width: calc(20% - #{$item-spacing});
+    }
+}

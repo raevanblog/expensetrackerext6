@@ -12,6 +12,11 @@ Ext.define('expensetracker.store.NavigationStore', {
 			routeId: 'dashboard',
 			viewXType: 'dashboard',
 			leaf : true
+		},{
+			text : 'Expense Sheet',
+			iconCls : 'x-fa fa-money',			
+			viewXType: 'expensedashboard',			
+			leaf : true
 		}, {
 			text : 'Reports',
 			iconCls : 'x-fa fa-search',			
