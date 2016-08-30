@@ -1,2 +1,0 @@
-# theme-exptr - Read Me
-
