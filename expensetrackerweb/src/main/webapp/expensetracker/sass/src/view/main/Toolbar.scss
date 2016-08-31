@@ -1,0 +1,16 @@
+.logo-component {
+   line-height: $main-toolbar-height;
+   color: #FFFFFF;
+   display: block;
+   padding: 0 0 0 $navigation-menu-collapsed-width;
+   font-family: dynamic('Cambria',helvetica, arial, verdana, sans-serif);
+   font-size: 16px;
+   width: $navigation-menu-width;
+   background: $panel-header-background-color; /* For browsers that do not support gradients */
+   background: -webkit-linear-gradient(-90deg, $panel-header-background-color, #7AB7EB); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(-90deg, $panel-header-background-color, #7AB7EB); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(-90deg, $panel-header-background-color, #7AB7EB); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(-90deg, $panel-header-background-color, #7AB7EB); /* Standard syntax */   
+}
+
+$toolbar-background-color: lighten($panel-navigation-background-color, 20%);

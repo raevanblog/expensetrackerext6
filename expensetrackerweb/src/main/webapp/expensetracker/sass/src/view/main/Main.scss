@@ -1,0 +1,84 @@
+.maintoolbar {
+    padding:0 30px 0 0;
+    position:fixed;
+    width:100%;
+    z-index:10;
+    border:none;
+    .header-right-profile-image {
+        border-radius: 20px;
+    }
+}
+
+
+@include treelist-ui(
+    $ui: 'navigation',
+    $padding: 0 10px,
+   
+    $background-color: lighten($panel-navigation-background-color, 10%),
+    $toolstrip-background-color: #32404e,
+    $tool-float-indicator-color: $panel-header-background-color,
+    $tool-float-indicator-width: 5px,
+    $tool-indicator-selected-color: $panel-header-background-color,
+    $tool-indicator-selected-width: 5px,
+    $tool-selected-background-color: mix(white, $panel-navigation-background-color, 10%),
+   
+    $item-expanded-background-color: #2c3845,
+   
+    $item-line-height : $panel-navigation-item-line-height,
+    $row-over-background-color: mix(white, $panel-navigation-background-color, 5%),
+    $row-selected-background-color: mix(white, $panel-navigation-background-color, 10%),
+   
+    $item-icon-color: $panel-navigation-item-text-color,
+    $item-expander-color: #fff,
+    $item-text-color: #ADB3B8,
+   
+    $item-icon-over-color: #fff,
+    $item-expander-over-color: #fff,
+    $item-text-over-color: mix(white, $panel-navigation-item-text-color, 50%),
+    $item-text-font-size: 14px,
+   
+    $item-icon-font-size: 18px,
+    $item-icon-width: 44px,
+    $item-expander-font-size: 16px,
+    $item-expander-width: 24px,
+    
+    $row-indicator-width: 5px,
+    $row-indicator-selected-color: $panel-header-background-color,
+    $row-indicator-selected-over-color: lighten($panel-header-background-color, 7%),
+    $row-indicator-over-color: transparent
+);
+
+.big-100 {
+    @include responsivecolumn-item(100%);
+}
+
+.big-60 {
+    @include responsivecolumn-item(60%);
+}
+
+.big-50 {
+    @include responsivecolumn-item(50%);
+}
+
+.big-40 {
+    @include responsivecolumn-item(40%);
+}
+
+.big-33 {
+    @include responsivecolumn-item(33.33%);
+}
+
+.big-20 {
+    @include responsivecolumn-item(20%);
+}
+
+.x-responsivecolumn-small {
+    
+     > .small-100 {
+         @include responsivecolumn-item(100%);
+     }
+
+     > .small-50 {
+         @include responsivecolumn-item(50%);
+     }
+}
