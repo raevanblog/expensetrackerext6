@@ -83,6 +83,59 @@ Ext.define('expensetracker.view.main.MainController', {
 		if (!window.location.hash) {
 			this.redirectTo("dashboard");
 		}
+	},
+	onToggleNavigation : function(button) {
+		var me = this;
+		var refs = me.getReferences();
+		var navMenu = refs.navigationMenu;
+		var maindash = refs.maindashboard;
+
+		var collapsing = !navMenu.getMicro();
+
+		var new_width = collapsing ? 64 : 250;
+
+		if (Ext.isIE9m || !Ext.os.is.Desktop) {
+			Ext.suspendLayouts();
+
+			refs.senchaLogo.setWidth(new_width);
+			navMenu.setWidth(new_width);
+			navMenu.setMicro(collapsing);
+
+			Ext.resumeLayouts();
+
+			maindash.layout.animatePolicy = maindash.layout.animate = null;
+			maindash.updateLayout();
+		} else {
+
+			if (!collapsing) {
+
+				navMenu.setMicro(false);
+			}
+
+			refs.logcomponent.animate({
+				dynamic : true,
+				to : {
+					width : new_width
+				}
+			});
+
+			navMenu.width = new_width;
+			maindash.updateLayout({
+				isRoot : true
+			});
+
+			navMenu.el.addCls('nav-tree-animating');
+
+			if (collapsing) {
+				navMenu.on({
+					afterlayoutanimation : function() {
+						navMenu.setMicro(true);
+						navMenu.el.removeCls('nav-tree-animating');
+					},
+					single : true
+				});
+			}
+		}
 	}
 
 });

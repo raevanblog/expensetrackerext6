@@ -5,10 +5,14 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	items : [ {
 		xtype : 'component',
 		html : '  Expense Tracker',
+		reference : 'logcomponent',
+		width : 250,
 		cls : 'logo-component'
 	}, {
 		xtype : 'button',
-		iconCls : 'x-fa fa-bars'
+		iconCls : 'x-fa fa-bars',
+		reference : 'toggleNavigation',
+		handler : 'onToggleNavigation'
 	}, '->', {
 		xtype : 'button',
 		iconCls : 'x-fa fa-info-circle'
