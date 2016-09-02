@@ -4,8 +4,8 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	xtype : 'maintoolbar',
 	items : [ {
 		xtype : 'component',
-		html : '  Expense Tracker',
-		reference : 'logcomponent',
+		html : 'Expense Tracker',
+		reference : 'logocomponent',
 		width : 250,
 		cls : 'logo-component'
 	}, {

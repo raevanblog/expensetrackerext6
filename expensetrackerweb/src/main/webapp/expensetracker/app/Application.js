@@ -10,8 +10,10 @@ Ext.define('expensetracker.Application', {
 
     stores: [
         // TODO: add global / shared stores here
-    ],
-    
+    ],   	
+	
+	defaultToken: 'login',
+	
     launch: function () {
         // TODO - Launch the application
     },

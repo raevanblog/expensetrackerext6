@@ -10,8 +10,8 @@ Ext.define('expensetracker.store.NavigationMenu', {
 		children : [ {
 			text : 'Dashboard',
 			iconCls : 'x-fa fa-desktop',
-			viewType : 'dashboard',
-			routeId : 'dashboard',
+			viewType : 'maindashboard',
+			routeId : 'maindashboard',
 			leaf : true
 		}, {
 			text : 'Expense Sheet',
