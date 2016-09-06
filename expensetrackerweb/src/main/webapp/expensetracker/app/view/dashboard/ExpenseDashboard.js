@@ -1,7 +1,7 @@
-Ext.define('expensetracker.view.dashboard.Dashboard', {
+Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	extend : 'Ext.container.Container',
-	xtype : 'maindashboard',
-	alias : 'view.maindashboard',
+	xtype : 'expensedashboard',
+	alias : 'view.expensedashboard',
 	requires : [ 'Ext.ux.layout.ResponsiveColumn' ],
 	layout : 'responsivecolumn',
 	items : [ {
