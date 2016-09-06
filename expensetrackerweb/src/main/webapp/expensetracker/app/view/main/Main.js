@@ -10,7 +10,7 @@ Ext.define('expensetracker.view.main.Main', {
 	extend : 'Ext.container.Viewport',
 	xtype : 'app-main',
 
-	requires : [ 'expensetracker.view.main.MainCard', 'expensetracker.view.main.Toolbar', 'expensetracker.view.main.MainController',
+	requires : [ 'expensetracker.view.main.MainDashboard', 'expensetracker.view.main.Toolbar', 'expensetracker.view.main.MainController',
 			'expensetracker.view.main.MainModel' ],
 
 	controller : 'main',
@@ -27,8 +27,8 @@ Ext.define('expensetracker.view.main.Main', {
 		cls : 'maintoolbar',	
 		height : 70
 	}, {
-		xtype : 'maincard',
-		reference : 'maincard',
+		xtype : 'maindashboard',
+		reference : 'mainDashboard',
 		flex : 1
 	} ]
 

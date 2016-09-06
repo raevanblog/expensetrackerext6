@@ -82,17 +82,17 @@ Ext.define('expensetracker.view.main.MainController', {
 	onMainViewRender : function() {
 		console.log(window.location.hash);
 		if (!window.location.hash || window.location.hash === '#login') {
-			this.redirectTo("maindashboard");
+			this.redirectTo("expensedashboard");
 		}
 	},
 	onToggleNavigation : function(button) {
 		var me = this;
 		var refs = me.getReferences();
-		var navMenu = refs.navigationMenu;
-		var maindash = refs.maincard;
+		var navMenu = refs.navigationMenu;		
+		var mainDashboard = refs.mainDashboard;
 
 		var collapsing = !navMenu.getMicro();
-		console.log(collapsing);
+		
 		var new_width = collapsing ? 64 : 250;
 
 		if (Ext.isIE9m || !Ext.os.is.Desktop) {
@@ -109,10 +109,10 @@ Ext.define('expensetracker.view.main.MainController', {
 
 			Ext.resumeLayouts();
 
-			maindash.layout.animatePolicy = maindash.layout.animate = null;
-			maindash.updateLayout();
+			mainDashboard.layout.animatePolicy = mainDashboard.layout.animate = null;
+			mainDashboard.updateLayout();
 		} else {
-
+			
 			if (!collapsing) {
 
 				navMenu.setMicro(false);
@@ -124,13 +124,15 @@ Ext.define('expensetracker.view.main.MainController', {
 					width : new_width
 				}
 			});
-
+			
 			navMenu.width = new_width;
-			maindash.updateLayout({
+			
+			navMenu.el.addCls('nav-tree-animating');
+			
+			mainDashboard.updateLayout({
 				isRoot : true
 			});
-
-			navMenu.el.addCls('nav-tree-animating');
+			
 
 			if (collapsing) {
 				navMenu.on({

@@ -1,0 +1,69 @@
+$thumbnail-size: 96px;
+
+$thumbnail-background-color : darken($base-color, 5%);
+$thumbnail-color: $base-color;
+
+.thumbnails {
+   display : table;
+}
+
+.thumbnail-item {
+    float: left;
+    width: $thumbnail-size + 20;
+    height: $thumbnail-size + 60;
+    margin-right: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.thumbnail-text {
+    text-align: center;
+}
+
+.icon-square:before {
+	content: "\e6c9";
+}
+
+.thumbnail-icon-wrap {
+    width: $thumbnail-size;
+    height: $thumbnail-size;
+    text-align: center;
+    font-size: $thumbnail-size;
+    line-height: $thumbnail-size;
+    font-family: 'FontAwesome';
+    margin: 0 auto 8px;
+    position: relative;
+    overflow: hidden;
+    color: $thumbnail-background-color;
+}
+
+
+.thumbnail-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: $thumbnail-size / 2;
+    line-height: $thumbnail-size;
+    color: $thumbnail-color;
+    overflow: hidden;
+}
+
+.x-rtl.thumbnails {
+    .thumbnail-item {
+        direction: ltr;
+        float: right;
+        margin-right: 0;
+        margin-left: 20px;
+    }
+    .thumbnail-text {
+        direction: rtl;
+    }
+}
+
+.icon-calendar:before {
+   	font-family: 'FontAwesome';
+ 	content: $fa-var-calendar;   
+}

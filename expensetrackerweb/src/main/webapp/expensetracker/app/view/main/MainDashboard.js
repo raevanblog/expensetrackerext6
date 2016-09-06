@@ -2,8 +2,8 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 	extend : 'Ext.container.Container',
 	alias : 'view.maindashboard',
 	xtype : 'maindashboard',
-	requires : [ 'Ext.layout.container.HBox', 'Ext.list.Tree', 'expensetracker.store.NavigationMenu', 'expensetracker.view.dashboard.Dashboard',
-			'expensetracker.view.dashboard.ExpenseView' ],
+	requires : [ 'Ext.layout.container.HBox', 'Ext.list.Tree', 'expensetracker.store.NavigationMenu', 'expensetracker.view.dashboard.ExpenseDashboard',
+			'expensetracker.view.expense.ExpenseView' ],
 	scrollable : 'y',
 	layout : {
 		type : 'hbox',
@@ -22,8 +22,7 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 
 		navMenu.setStyle({
 			'min-height' : height + 'px'
-		});
-		console.log(navMenu);
+		});	
 		me.callParent(arguments);
 	},
 	items : [ {

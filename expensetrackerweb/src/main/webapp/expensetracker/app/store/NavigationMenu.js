@@ -1,7 +1,7 @@
 Ext.define('expensetracker.store.NavigationMenu', {
 	extend : 'Ext.data.TreeStore',
 	storeId : 'NavigationMenu',
-	alias: 'store.navigationmenu',
+	alias: 'store.navigationmenu',	
 	fields : [ {
 		name : 'text'
 	} ],
@@ -10,8 +10,8 @@ Ext.define('expensetracker.store.NavigationMenu', {
 		children : [ {
 			text : 'Dashboard',
 			iconCls : 'x-fa fa-desktop',
-			viewType : 'maindashboard',
-			routeId : 'maindashboard',
+			viewType : 'expensedashboard',
+			routeId : 'expensedashboard',
 			leaf : true
 		}, {
 			text : 'Expense Sheet',
