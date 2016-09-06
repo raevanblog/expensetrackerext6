@@ -16,24 +16,38 @@ Ext.define('expensetracker.view.expense.ExpenseView', {
 		items : [ {
 			xtype : 'fieldcontainer',
 			layout : {
-				type : 'hbox'
-			},
+				type : 'hbox',
+				padding: '0 0 0 15'
+			},			
 			items : [ {
-				xtype : 'displayfield',
+				xtype : 'component',
 				reference : 'expviewselyear',
-				width : 100
+				html: '',	
+				cls: 'year-square'			
 			}, {
 				xtype : 'sliderfield',
-				fieldLabel : 'Select Year',
+				fieldLabel : 'Select Year',				
 				labelSeparator : '',
 				value : 2016,
+				padding: '20 10 0 10',
 				increment : 1,
 				minValue : 1990,
 				maxValue : 2016,
-				flex : 1,
+				flex : 0.80,
+				platformConfig: {
+					'!desktop': {
+						width: '100%'
+					}
+				},
 				listeners: {
-					changecomplete: 'onYearSelection'
+					changecomplete: 'onYearSelection',
+					afterrender: 'onRenderSlider'
 				}
+			},{
+				xtype: 'button',				
+				flex : 0.10,
+				margin: '20 0 0 0',
+				text: 'Open Book'
 			} ]
 		} ]
 	}, {

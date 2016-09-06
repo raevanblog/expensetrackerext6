@@ -14,7 +14,7 @@
 		<snapshot.version>1.0-SNAPSHOT</snapshot.version>
 		<sencha.env>testing</sencha.env>
 		<release.version>1.0</release.version>
-		<springboot.version>1.4.0.RELEASE</springboot.version>
+		<spring-version>4.3.2.RELEASE</spring-version>
 	</properties>
 
 	<url>http://www.slabs.com</url>
@@ -156,7 +156,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.9</version>
+			<version>1.7.21</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-version}</version>
 		</dependency>
 	</dependencies>
 
@@ -192,5 +197,7 @@
 
 	<modules>
 		<module>expensetrackerweb</module>
+		<module>expensetracker-core</module>
+		<module>expensetracker-util</module>
 	</modules>
 </project>

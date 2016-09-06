@@ -7,6 +7,12 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 	onYearSelection : function(slider, newValue, thumb, eOpts) {
 		var me = this;
 		var refs = me.getReferences();
-		refs.expviewselyear.setValue(newValue);
+		refs.expviewselyear.update(newValue);
+	},
+	onRenderSlider: function(slider) {
+		var me = this;
+		var value = slider.getValue();
+		var refs = me.getReferences();
+		refs.expviewselyear.update(value);
 	}
 });
