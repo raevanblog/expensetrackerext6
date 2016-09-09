@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.db;
+package com.slabs.expense.tracker.database;
 
 import java.io.IOException;
 
