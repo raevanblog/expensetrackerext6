@@ -32,7 +32,7 @@ public class ServiceFactory {
 
 	public void initialize() {
 		if (context == null) {
-			context = new ClassPathXmlApplicationContext("classpath:expense-tracker-spring.xml");
+			context = new ClassPathXmlApplicationContext("classpath*:*.xml");
 		}
 	}
 

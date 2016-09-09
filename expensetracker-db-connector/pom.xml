@@ -8,24 +8,34 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>expensetracker-core</artifactId>
+	<artifactId>expensetracker-db-connector</artifactId>
 
-	<name>expensetracker-core</name>
+	<name>expensetracker-db-connector</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<dependencies>
 
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.9.1.0</version>
-		</dependency>
+	<dependencies>
 		<dependency>
 			<groupId>com.slabs</groupId>
-			<artifactId>expensetracker-db-connector</artifactId>
+			<artifactId>expensetracker-common</artifactId>
 			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -33,5 +43,4 @@
 			<version>${spring-version}</version>
 		</dependency>
 	</dependencies>
-
 </project>

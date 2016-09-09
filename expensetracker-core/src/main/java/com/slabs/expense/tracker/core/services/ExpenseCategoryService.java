@@ -19,7 +19,7 @@ public class ExpenseCategoryService implements BaseService {
 
 	private static final Logger L = LoggerFactory.getLogger(ExpenseCategoryService.class);
 
-	@Autowired
+	@Autowired	
 	private Mapper mapper;
 
 	public List<ExpenseCategory> selectExpenseCategory(Map<String, String> parameters) throws Exception {

@@ -199,5 +199,6 @@
 		<module>expensetracker-core</module>
 		<module>expensetracker-util</module>
     <module>expensetracker-common</module>
+    <module>expensetracker-db-connector</module>
   </modules>
 </project>
