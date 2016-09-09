@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.core.db.entity.ExpenseCategory;
+import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.database.mapper.Mapper;
 
 @Service(value = "ExpenseCategoryService")

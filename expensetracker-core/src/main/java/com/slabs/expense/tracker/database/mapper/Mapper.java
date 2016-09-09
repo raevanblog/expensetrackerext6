@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.slabs.expense.tracker.core.db.entity.ExpenseCategory;
+import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 
 public interface Mapper {
 

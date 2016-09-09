@@ -3,7 +3,7 @@ package com.slabs.expense.tracker.core.db;
 import java.util.List;
 
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.core.db.entity.ExpenseCategory;
+import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.core.server.Server;
 import com.slabs.expense.tracker.core.services.ExpenseCategoryService;
 
