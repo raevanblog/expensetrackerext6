@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.slabs.expense.tracker.core.services.BaseService;
+import com.slabs.expense.tracker.core.services.Services;
 
 public class ServiceFactory {
 
@@ -36,10 +37,11 @@ public class ServiceFactory {
 		}
 	}
 
-	public BaseService getService(String name) {
+	public BaseService getService(Services service) {
+
 		if (context == null) {
 			initialize();
 		}
-		return (BaseService) context.getBean(name);
+		return (BaseService) context.getBean(service.toString());
 	}
 }

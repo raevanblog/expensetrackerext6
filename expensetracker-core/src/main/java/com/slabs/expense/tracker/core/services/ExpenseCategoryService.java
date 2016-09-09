@@ -13,16 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 
-@Service(value = "ExpenseCategoryService")
-@Transactional(isolation=Isolation.READ_COMMITTED, timeout=2000)
-public class ExpenseCategoryService implements BaseService {
+@Service(value = "expensecategory")
+@Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
+public class ExpenseCategoryService implements BaseService<ExpenseCategory> {
 
 	private static final Logger L = LoggerFactory.getLogger(ExpenseCategoryService.class);
 
-	@Autowired	
+	@Autowired
 	private ExpenseMapper mapper;
 
-	public List<ExpenseCategory> selectExpenseCategory(Map<String, String> parameters) throws Exception {
+	public List<ExpenseCategory> select(Map<String, String> parameters) throws Exception {
+
 		return mapper.retrieveCategory(parameters);
 	}
+
 }
