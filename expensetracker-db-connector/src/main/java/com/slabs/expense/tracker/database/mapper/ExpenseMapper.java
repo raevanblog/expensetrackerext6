@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 
-public interface Mapper {
+public interface ExpenseMapper {
 
 	public List<ExpenseCategory> retrieveCategory(@Param("parameters") Map<String, String> parameters) throws Exception;
 

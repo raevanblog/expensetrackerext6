@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.slabs.expense.tracker.database.mapper.Mapper">
+<mapper namespace="com.slabs.expense.tracker.database.mapper.ExpenseMapper">
 	<select id="retrieveCategory" parameterType="map"
 		resultType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
 			select * from EXPENSETRACKER.EXPENSE_CATEGORY
