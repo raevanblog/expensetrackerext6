@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.slabs.expense.tracker.core.services.BaseService;
 import com.slabs.expense.tracker.core.services.Services;
 
 public class ServiceFactory {
@@ -37,11 +36,11 @@ public class ServiceFactory {
 		}
 	}
 
-	public BaseService getService(Services service) {
+	public <T extends Object> T getService(Services service, Class<T> cls) {
 
 		if (context == null) {
 			initialize();
 		}
-		return (BaseService) context.getBean(service.toString());
+		return (T) context.getBean(service.toString());
 	}
 }

@@ -1,7 +1,6 @@
 package com.slabs.expense.tracker.core.services;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +14,16 @@ import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 
 @Service(value = "expensecategory")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
-public class ExpenseCategoryService implements BaseService<ExpenseCategory> {
+public class ExpenseCategoryService {
 
 	private static final Logger L = LoggerFactory.getLogger(ExpenseCategoryService.class);
 
 	@Autowired
 	private ExpenseMapper mapper;
 
-	public List<ExpenseCategory> select(Map<String, String> parameters) throws Exception {
+	public List<ExpenseCategory> select(Integer categoryId) throws Exception {
 
-		return mapper.retrieveCategory(parameters);
+		return mapper.retrieveCategory(categoryId);
 	}
 
 }
