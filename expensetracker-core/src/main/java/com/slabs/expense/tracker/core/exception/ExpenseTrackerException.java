@@ -1,28 +1,44 @@
 package com.slabs.expense.tracker.core.exception;
 
-public class ExpenseTrackerException extends Exception {
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
+@Provider
+public class ExpenseTrackerException extends Exception implements ExceptionMapper<ExpenseTrackerException> {
 
 	private static final long serialVersionUID = -9175347861593491223L;
+
+	private ErrorStatus status;
 
 	public ExpenseTrackerException() {
 		super();
 	}
 
-	public ExpenseTrackerException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
+	public ExpenseTrackerException(String message, ErrorStatus status, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
+		this.status = status;
 	}
 
-	public ExpenseTrackerException(String message, Throwable cause) {
+	public ExpenseTrackerException(String message, ErrorStatus status, Throwable cause) {
 		super(message, cause);
+		this.status = status;
 	}
 
-	public ExpenseTrackerException(String message) {
+	public ExpenseTrackerException(String message, ErrorStatus status) {
 		super(message);
+		this.status = status;
 	}
 
-	public ExpenseTrackerException(Throwable cause) {
+	public ExpenseTrackerException(Throwable cause, ErrorStatus status) {
 		super(cause);
+		this.status = status;
+	}
+
+	public Response toResponse(ExpenseTrackerException ex) {
+
+		return Response.status(status.getErrorCode()).entity(ex.getMessage()).type(MediaType.APPLICATION_JSON).build();
 	}
 
 }
