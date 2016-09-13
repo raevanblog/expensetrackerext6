@@ -1,8 +1,6 @@
 package com.slabs.expense.tracker.core.web.services;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.core.services.ExpenseCategoryService;
 import com.slabs.expense.tracker.core.services.Services;
 
@@ -26,22 +25,21 @@ public class ExpenseWebService {
 	@Path("expensecategory/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<ExpenseCategory> getExpenseCategory() {
+	public List<ExpenseCategory> getExpenseCategory() throws ExpenseTrackerException {
 		return getExpenseCategory(null);
 	}
 
 	@Path("expensecategory/category_id/{category_id}")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<ExpenseCategory> getExpenseCategory(@PathParam("category_id") Integer categoryId) {
-		ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
-				ExpenseCategoryService.class);
+	public List<ExpenseCategory> getExpenseCategory(@PathParam("category_id") Integer categoryId) throws ExpenseTrackerException {
 		try {
+			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
 			return service.select(categoryId);
 		} catch (Exception e) {
-			L.error("Exception, {} ", e);
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e);
 		}
-		return null;
 	}
 
 }
