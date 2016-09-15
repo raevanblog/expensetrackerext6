@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.core.web.services.ExpenseTrackerServices;
 import com.slabs.expense.tracker.core.web.services.ExpenseWebService;
 
 import io.netty.channel.Channel;
@@ -50,9 +51,8 @@ public class Server {
 	public void start() {
 		initialize();
 		L.info("Starting Server...");
-		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();
-		ResourceConfig resourceConfig = new ResourceConfig(ExpenseWebService.class);
-		Channel server = NettyHttpContainerProvider.createHttp2Server(baseUri, resourceConfig, null);
+		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();		
+		Channel server = NettyHttpContainerProvider.createHttp2Server(baseUri, new ExpenseTrackerServices(), null);
 	}
 
 }

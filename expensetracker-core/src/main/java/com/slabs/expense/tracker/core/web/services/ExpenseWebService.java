@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.core.exception.ErrorStatus;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.core.services.ExpenseCategoryService;
 import com.slabs.expense.tracker.core.services.Services;
@@ -38,7 +39,7 @@ public class ExpenseWebService {
 			return service.select(categoryId);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(e, ErrorStatus.SERVER_ERROR);
 		}
 	}
 

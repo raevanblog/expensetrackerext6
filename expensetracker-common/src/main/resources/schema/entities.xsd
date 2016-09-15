@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://slabs.com/expense/tracker/common/db/entity"
-	xmlns:et="http://slabs.com/expense/tracker/common/db/entity" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://slabs.com/expense/tracker/common/db/entity" xmlns:et="http://slabs.com/expense/tracker/common/db/entity"
+	elementFormDefault="qualified">
 
-	<element name="ExpenseCategory" type="et:ExpenseCategory">
-		<annotation>
-		 <documentation source="https://raevanblog.blogspot.in/">
-		     Schema: EXPENSETRACKER
-		     Table: EXPENSE_CATEGORY
-		     Expense Category will hold the data for table EXPENSE_CATEGORY
-		 </documentation>
-		</annotation>
-	</element>
+	<element name="ExpenseCategory" type="et:ExpenseCategory" />
 
 
 
 	<complexType name="ExpenseCategory">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: EXPENSE_CATEGORY
+				Expense Category will hold the data for table EXPENSE_CATEGORY
+			</documentation>
+		</annotation>
 		<sequence>
 			<element name="category_id" type="int" nillable="false" />
 			<element name="category" type="string" nillable="false" />
