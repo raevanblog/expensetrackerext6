@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://slabs.com/expense/tracker/webservice/response" xmlns:et="http://slabs.com/expense/tracker/webservice/response"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" jaxb:extensionBindingPrefixes="annox" jaxb:version="2.1"
+	elementFormDefault="qualified">
+
+	<element name="Response" type="et:Response" />
+
+	<complexType name="Response">
+		<annotation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="status_code" type="int" />
+			<element name="status_message" type="string" />
+			<element name="exception" type="string" />
+			<element name="result" type="et:result" />
+		</sequence>
+	</complexType>
+
+	<complexType name="result">
+		<annotation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="noOfRecords" type="int" />
+			<any maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+</schema>

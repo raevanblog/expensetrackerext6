@@ -26,4 +26,8 @@ public class ExpenseCategoryService {
 		return mapper.retrieveCategory(categoryId);
 	}
 
+	public Integer delete(Integer categoryId) throws Exception {
+		return mapper.deleteCategory(categoryId);
+	}
+
 }

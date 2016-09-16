@@ -36,7 +36,7 @@ public class ServiceFactory {
 		}
 	}
 
-	public <T extends Object> T getService(Services service, Class<T> cls) {
+	public synchronized <T extends Object> T getService(Services service, Class<T> cls) {
 
 		if (context == null) {
 			initialize();

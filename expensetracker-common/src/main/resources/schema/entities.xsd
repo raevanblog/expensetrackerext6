@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://slabs.com/expense/tracker/common/db/entity" xmlns:et="http://slabs.com/expense/tracker/common/db/entity"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" jaxb:extensionBindingPrefixes="annox" jaxb:version="2.1"
 	elementFormDefault="qualified">
 
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
@@ -13,11 +14,16 @@
 				Table: EXPENSE_CATEGORY
 				Expense Category will hold the data for table EXPENSE_CATEGORY
 			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="category_id" type="int" nillable="false" />
-			<element name="category" type="string" nillable="false" />
-			<element name="description" type="string" nillable="false" />
+			<element name="category_id" type="int" />
+			<element name="category" type="string" />
+			<element name="description" type="string" />
 		</sequence>
 	</complexType>
 

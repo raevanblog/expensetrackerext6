@@ -48,11 +48,18 @@ public class Server {
 
 	}
 
-	public void start() {
-		initialize();
-		L.info("Starting Server...");
-		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();		
+	private void start() {
+		L.info("Starting ExpenseTracker Web Server...");
+		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();
+		L.info("Registering Web Services API...");
 		Channel server = NettyHttpContainerProvider.createHttp2Server(baseUri, new ExpenseTrackerServices(), null);
+		L.info("Server is started and available @ http://localhost:9998/exptr-web-api");
+	}
+
+	public static void main(String args[]) {
+		L.info("Initializing Expense Tracker Server...");
+		Server.getInstance().initialize();		
+		Server.getInstance().start();
 	}
 
 }

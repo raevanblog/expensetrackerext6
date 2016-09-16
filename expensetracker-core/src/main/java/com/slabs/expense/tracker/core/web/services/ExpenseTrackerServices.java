@@ -8,7 +8,7 @@ public class ExpenseTrackerServices extends ResourceConfig {
 
 	public ExpenseTrackerServices() {
 		super();
-		packages("com.slabs.expense.tracker.core.web");
+		packages("com.slabs.expense.tracker.core.web");		
 		register(com.slabs.expense.tracker.core.exception.ExpenseTrackerException.class);
 	}
 

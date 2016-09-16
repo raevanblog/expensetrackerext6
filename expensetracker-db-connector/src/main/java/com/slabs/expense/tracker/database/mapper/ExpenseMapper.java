@@ -10,4 +10,6 @@ public interface ExpenseMapper {
 
 	public List<ExpenseCategory> retrieveCategory(@Param("categoryId") Integer categoryId) throws Exception;
 
+	public Integer deleteCategory(@Param("categoryId") Integer categoryId) throws Exception;
+
 }

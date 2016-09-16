@@ -9,4 +9,12 @@
 			where category_id = #{categoryId}
 		</if>
 	</select>
+
+	<delete id="deleteCategory" parameterType="int">
+		delete from EXPENSETRACKER.EXPENSE_CATEGORY
+		<if test="categoryId != null">
+			where category_id=#{categoryId}
+		</if>
+	</delete>
+
 </mapper>
