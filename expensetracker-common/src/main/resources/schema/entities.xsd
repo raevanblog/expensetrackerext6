@@ -21,7 +21,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="category_id" type="int" />
+			<element name="categoryId" type="int" />
 			<element name="category" type="string" />
 			<element name="description" type="string" />
 		</sequence>

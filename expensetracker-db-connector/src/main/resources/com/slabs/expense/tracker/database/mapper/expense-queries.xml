@@ -3,17 +3,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.slabs.expense.tracker.database.mapper.ExpenseMapper">
-	<select id="retrieveCategory" parameterType="int" resultType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
+
+	<insert id="insertExpenseCategory" parameterType="java.util.List">
+		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION) values
+		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.category},
+			#{record.description}
+		</foreach>
+	</insert>
+
+	<update id="updateExpenseCategory" parameterType="java.util.List">
+
+		update EXPENSETRACKER.EXPENSE_CATEGORY set
+		<if test="record.category != null">
+			category=#{record.category},
+		</if>
+		<if test="record.description != null">
+			description=#{record.description}
+		</if>
+		where categoryId=#{record.categoryId}
+
+	</update>
+
+	<select id="retrieveExpenseCategory" parameterType="int" resultType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
 		select * from EXPENSETRACKER.EXPENSE_CATEGORY
 		<if test="categoryId != null">
-			where category_id = #{categoryId}
+			where categoryId = #{categoryId}
 		</if>
 	</select>
 
-	<delete id="deleteCategory" parameterType="int">
+	<delete id="deleteExpenseCategory" parameterType="int">
 		delete from EXPENSETRACKER.EXPENSE_CATEGORY
 		<if test="categoryId != null">
-			where category_id=#{categoryId}
+			where categoryId=#{categoryId}
 		</if>
 	</delete>
 

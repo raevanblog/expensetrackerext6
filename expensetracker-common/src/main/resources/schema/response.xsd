@@ -17,6 +17,7 @@
 			<element name="status_code" type="int" />
 			<element name="status_message" type="string" />
 			<element name="exception" type="string" />
+			<element name="success" type="boolean"/>
 			<element name="result" type="et:result" />
 		</sequence>
 	</complexType>
@@ -31,8 +32,19 @@
 		</annotation>
 		<sequence>
 			<element name="noOfRecords" type="int" />
+			<element name="operation" type="et:operation" />
+			<element name="message" type="string" />
 			<any maxOccurs="unbounded" />
 		</sequence>
 	</complexType>
+
+	<simpleType name="operation">
+		<restriction base="string">
+			<enumeration value="SELECT" />
+			<enumeration value="INSERT" />
+			<enumeration value="DELETE" />
+			<enumeration value="UPDATE" />
+		</restriction>
+	</simpleType>
 
 </schema>

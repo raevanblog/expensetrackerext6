@@ -4,11 +4,14 @@ import java.util.Set;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
+import com.slabs.expense.tracker.core.JAXBContextResolver;
+
 public class ExpenseTrackerServices extends ResourceConfig {
 
 	public ExpenseTrackerServices() {
 		super();
-		packages("com.slabs.expense.tracker.core.web");		
+		packages("com.slabs.expense.tracker.core.web");
+		register(JAXBContextResolver.class);
 		register(com.slabs.expense.tracker.core.exception.ExpenseTrackerException.class);
 	}
 
