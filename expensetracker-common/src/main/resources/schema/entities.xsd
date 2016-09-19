@@ -4,7 +4,52 @@
 	elementFormDefault="qualified">
 
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
+	<element name="UserInfo" type="et:UserInfo" />
+	<element name="UserPermission" type="et:UserPermission" />
+	<element name="Expense" type="et:Expense" />
 
+
+	<complexType name="UserInfo">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: USERINFO
+				UserInfo will hold the data for table USERINFO
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="username" type="string" />
+			<element name="password" type="string" />
+			<element name="email" type="string" />
+			<element name="mobile" type="string" />
+			<element name="address" type="string" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="UserPermission">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: USER_PERMISSION
+				UserPermission will hold the data for table USER_PERMISSION
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="username" type="string" />
+			<element name="isAdmin" type="boolean" />
+			<element name="isVerified" type="boolean" />			
+		</sequence>
+	</complexType>
 
 
 	<complexType name="ExpenseCategory">
@@ -24,6 +69,29 @@
 			<element name="categoryId" type="int" />
 			<element name="category" type="string" />
 			<element name="description" type="string" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Expense">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: EXPENSE
+				Expense will hold the data for table EXPENSE
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="itemName" type="string" />
+			<element name="expdate" type="date" />
+			<element name="username" type="string" />
+			<element name="category" type="string" />
+			<element name="price" type="float" />
+			<element name="qty" type="float" />
 		</sequence>
 	</complexType>
 

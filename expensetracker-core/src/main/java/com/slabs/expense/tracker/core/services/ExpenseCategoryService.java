@@ -30,7 +30,7 @@ public class ExpenseCategoryService {
 	private SqlSessionFactory factory;
 
 	public Integer insert(List<ExpenseCategory> records) throws Exception {
-		return mapper.insertExpenseCategory(records);
+		return mapper.insertExpenseCategory(records);		
 	}
 
 	public Integer update(List<ExpenseCategory> records) throws Exception {

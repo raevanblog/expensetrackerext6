@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Flush;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.executor.BatchResult;
 
+import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 
 public interface ExpenseMapper {
+
+	public Integer insertExpense(@Param("records") List<Expense> records) throws Exception;
 
 	public Integer insertExpenseCategory(@Param("records") List<ExpenseCategory> records) throws Exception;
 
@@ -18,6 +22,6 @@ public interface ExpenseMapper {
 	public Integer deleteExpenseCategory(@Param("categoryId") Integer categoryId) throws Exception;
 
 	@Flush
-	public List flush();
+	public List<BatchResult> flush();
 
 }
