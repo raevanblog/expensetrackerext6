@@ -29,8 +29,7 @@
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="factory" />
-		<constructor-arg index="1" value="BATCH" />
+		<constructor-arg index="0" ref="factory" />		
 	</bean>	
 
 </beans>
