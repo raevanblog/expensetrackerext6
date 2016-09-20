@@ -26,10 +26,11 @@
 	<bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath*:com/slabs/expense/tracker/database/mapper/*.xml" />
+		<property name="typeHandlersPackage" value="com.slabs.expense.tracker.database.type" />
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="factory" />		
-	</bean>	
+		<constructor-arg index="0" ref="factory" />
+	</bean>
 
 </beans>

@@ -12,6 +12,10 @@ public class ResponseGenerator {
 
 	private static final String DATA_FOUND = "DATA_FOUND";
 
+	private static final String DATA_INSERTED = "DATA_INSERTED";
+
+	private static final String NO_DATA_INSERTED = "NO_DATA_INSERTED";
+
 	public static Response getExceptionResponse(ResponseStatus status, Throwable cause) {
 		Response resp = new Response();
 		resp.setStatus_Code(status.getStatusCode());
@@ -36,9 +40,17 @@ public class ResponseGenerator {
 		if (list != null && !list.isEmpty()) {
 			result.setNoOfRecords(list.size());
 			result.getAny().addAll(list);
-			result.setMessage(DATA_FOUND);
+			if (Operation.INSERT == operation) {
+				result.setMessage(DATA_INSERTED);
+			} else {
+				result.setMessage(DATA_FOUND);
+			}
 		} else {
-			result.setMessage(NO_DATA_FOUND);
+			if (Operation.INSERT == operation) {
+				result.setMessage(NO_DATA_INSERTED);
+			} else {
+				result.setMessage(NO_DATA_FOUND);
+			}
 			result.setNoOfRecords(0);
 		}
 		response.setResult(result);
@@ -53,9 +65,17 @@ public class ResponseGenerator {
 		result.setOperation(operation);
 
 		if (noOfRecords == 0) {
-			result.setMessage(NO_DATA_FOUND);
+			if (Operation.INSERT == operation) {
+				result.setMessage(NO_DATA_INSERTED);
+			} else {
+				result.setMessage(NO_DATA_FOUND);
+			}
 		} else {
-			result.setMessage(DATA_FOUND);
+			if (Operation.INSERT == operation) {
+				result.setMessage(DATA_INSERTED);
+			} else {
+				result.setMessage(DATA_FOUND);
+			}
 		}
 
 		response.setResult(result);

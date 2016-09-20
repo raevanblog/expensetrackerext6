@@ -13,6 +13,8 @@ public interface ExpenseMapper {
 
 	public Integer insertExpense(@Param("records") List<Expense> records) throws Exception;
 
+	public List<Expense> getExpense(@Param("username") String username) throws Exception;
+
 	public Integer insertExpenseCategory(@Param("records") List<ExpenseCategory> records) throws Exception;
 
 	public Integer updateExpenseCategory(@Param("record") ExpenseCategory record) throws Exception;
