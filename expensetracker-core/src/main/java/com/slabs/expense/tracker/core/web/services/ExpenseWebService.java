@@ -38,7 +38,7 @@ public class ExpenseWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response insertExpenseCategory(List<ExpenseCategory> records) throws ExpenseTrackerException {
 		try {
-			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
+			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
 					ExpenseCategoryService.class);
 			return ResponseGenerator.getSucessResponse(service.insert(records), Operation.INSERT);
 		} catch (Exception e) {
