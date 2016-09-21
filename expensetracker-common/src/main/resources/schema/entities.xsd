@@ -86,6 +86,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
+			<element name="id" type="int" />
 			<element name="itemName" type="string" />
 			<element name="expdate" type="date" />
 			<element name="username" type="string" />

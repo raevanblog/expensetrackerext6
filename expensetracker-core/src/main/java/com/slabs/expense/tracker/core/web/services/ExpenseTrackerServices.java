@@ -5,6 +5,7 @@ import java.util.Set;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.slabs.expense.tracker.core.JAXBContextResolver;
+import com.slabs.expense.tracker.core.ObjectMapperResolver;
 
 public class ExpenseTrackerServices extends ResourceConfig {
 
@@ -12,6 +13,7 @@ public class ExpenseTrackerServices extends ResourceConfig {
 		super();
 		packages("com.slabs.expense.tracker.core.web");
 		register(JAXBContextResolver.class);
+		register(ObjectMapperResolver.class);
 		register(com.slabs.expense.tracker.core.exception.ExpenseTrackerException.class);
 	}
 

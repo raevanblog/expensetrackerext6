@@ -32,6 +32,7 @@ public class XMLGregorianTypeHandler extends BaseTypeHandler<XMLGregorianCalenda
 	public XMLGregorianCalendar getNullableResult(ResultSet rs, String columnName) throws SQLException {
 		Date date = rs.getDate(columnName);
 		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
 		try {
 			return DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
 		} catch (DatatypeConfigurationException e) {
@@ -44,6 +45,7 @@ public class XMLGregorianTypeHandler extends BaseTypeHandler<XMLGregorianCalenda
 	public XMLGregorianCalendar getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
 		Date date = rs.getDate(columnIndex);
 		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
 		try {
 			return DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
 		} catch (DatatypeConfigurationException e) {
@@ -56,6 +58,7 @@ public class XMLGregorianTypeHandler extends BaseTypeHandler<XMLGregorianCalenda
 	public XMLGregorianCalendar getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
 		Date date = cs.getDate(columnIndex);
 		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
 		try {
 			return DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
 		} catch (DatatypeConfigurationException e) {

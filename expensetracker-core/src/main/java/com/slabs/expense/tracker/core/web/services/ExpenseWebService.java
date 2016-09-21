@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
@@ -106,8 +107,39 @@ public class ExpenseWebService {
 
 	}
 
+	@Path("expense/year/{year}/month/{month}")
+	@GET
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getExpenseByMonth(@QueryParam("username") String username, @PathParam("month") int month,
+			@PathParam("year") int year) throws ExpenseTrackerException {
+		try {
+			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
+					ExpenseService.class);
+			return service.selectByMonth(username, month, year);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+	
+	@Path("expense/year/{year}/")
+	@GET
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getExpenseByYear(@QueryParam("username") String username,
+			@PathParam("year") int year) throws ExpenseTrackerException {
+		try {
+			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
+					ExpenseService.class);
+			return service.selectByYear(username, year);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
 	@Path("expense/")
 	@POST
+	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response insertExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {

@@ -16,6 +16,16 @@
 		</foreach>
 	</insert>
 
+	<select id="getExpenseByMonth" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
+		select * from EXPENSETRACKER.EXPENSE where
+		MONTH(expdate) = #{month} and YEAR(expdate)=#{year} and username=#{username}
+	</select>
+
+	<select id="getExpenseByYear" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
+		select * from EXPENSETRACKER.EXPENSE where
+		YEAR(expdate)=#{year}  and username=#{username}
+	</select>
+
 	<insert id="insertExpenseCategory" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION) values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">

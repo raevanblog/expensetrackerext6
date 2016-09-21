@@ -27,4 +27,12 @@ public class ExpenseService {
 	public Response insert(List<Expense> records) throws Exception {
 		return ResponseGenerator.getSucessResponse(mapper.insertExpense(records), Operation.INSERT);
 	}
+
+	public Response selectByMonth(String username, int month, int year) throws Exception {
+		return ResponseGenerator.getSucessResponse(mapper.getExpenseByMonth(username, month, year), Operation.SELECT);
+	}
+
+	public Response selectByYear(String username, int year) throws Exception {
+		return ResponseGenerator.getSucessResponse(mapper.getExpenseByYear(username, year), Operation.SELECT);
+	}
 }
