@@ -18,13 +18,28 @@
 
 	<select id="getExpenseByMonth" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
-		MONTH(expdate) = #{month} and YEAR(expdate)=#{year} and username=#{username}
+		MONTH(expdate) = #{month} and YEAR(expdate)=#{year} and
+		username=#{username}
 	</select>
 
 	<select id="getExpenseByYear" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
-		YEAR(expdate)=#{year}  and username=#{username}
+		YEAR(expdate)=#{year} and username=#{username}
 	</select>
+
+	<select id="getExpenseById" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
+		select * from EXPENSETRACKER.EXPENSE where
+		id=#{id}
+	</select>
+
+	<select id="selectExpenseTypes" resultType="String">
+		select distinct itemname from EXPENSETRACKER.EXPENSE where username=#{username}
+	</select>
+
+	<delete id="deleteExpense">
+		delete from EXPENSETRACKER.EXPENSE
+		where id=#{id} and username=#{username}
+	</delete>
 
 	<insert id="insertExpenseCategory" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION) values
@@ -34,7 +49,7 @@
 		</foreach>
 	</insert>
 
-	<update id="updateExpenseCategory" parameterType="java.util.List">
+	<update id="updateExpenseCategory" parameterType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
 
 		update EXPENSETRACKER.EXPENSE_CATEGORY set
 		<if test="record.category != null">

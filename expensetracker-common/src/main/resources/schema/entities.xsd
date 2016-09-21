@@ -30,7 +30,7 @@
 			<element name="address" type="string" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="UserPermission">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
@@ -47,7 +47,7 @@
 		<sequence>
 			<element name="username" type="string" />
 			<element name="isAdmin" type="boolean" />
-			<element name="isVerified" type="boolean" />			
+			<element name="isVerified" type="boolean" />
 		</sequence>
 	</complexType>
 
@@ -71,7 +71,7 @@
 			<element name="description" type="string" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="Expense">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
@@ -93,6 +93,7 @@
 			<element name="category" type="string" />
 			<element name="price" type="float" />
 			<element name="qty" type="float" />
+			<element name="pricePerUnit" type="float" />
 		</sequence>
 	</complexType>
 

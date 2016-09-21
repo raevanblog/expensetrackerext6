@@ -18,6 +18,12 @@ public interface ExpenseMapper {
 
 	public List<Expense> getExpenseByYear(@Param("username") String username, @Param("year") int year) throws Exception;
 
+	public List<Expense> getExpenseById(@Param("id") Integer id) throws Exception;
+
+	public Integer deleteExpense(@Param("username")String username, @Param("id") Integer id) throws Exception;
+	
+	public List<String> selectExpenseTypes(@Param("username")String username) throws Exception;
+
 	public Integer insertExpenseCategory(@Param("records") List<ExpenseCategory> records) throws Exception;
 
 	public Integer updateExpenseCategory(@Param("record") ExpenseCategory record) throws Exception;

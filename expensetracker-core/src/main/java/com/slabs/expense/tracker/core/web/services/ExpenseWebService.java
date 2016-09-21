@@ -106,6 +106,20 @@ public class ExpenseWebService {
 		}
 
 	}
+	
+	@Path("expense/expensetypes/")
+	@GET	
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getExpenseTypes(@QueryParam("username")String username) throws ExpenseTrackerException {
+		try {
+			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
+					ExpenseService.class);
+			return service.selectExpenseTypes(username);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
 
 	@Path("expense/year/{year}/month/{month}")
 	@GET
@@ -121,12 +135,12 @@ public class ExpenseWebService {
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
-	
+
 	@Path("expense/year/{year}/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseByYear(@QueryParam("username") String username,
-			@PathParam("year") int year) throws ExpenseTrackerException {
+	public Response getExpenseByYear(@QueryParam("username") String username, @PathParam("year") int year)
+			throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
@@ -146,6 +160,22 @@ public class ExpenseWebService {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
 			return service.insert(records);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	@Path("expense/id/{id}")
+	@DELETE
+	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response deleteExpense(@QueryParam("username") String username, @PathParam("id") Integer id)
+			throws ExpenseTrackerException {
+		try {
+			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
+					ExpenseService.class);
+			return service.delete(username, id);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);

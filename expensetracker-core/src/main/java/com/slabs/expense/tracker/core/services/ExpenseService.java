@@ -35,4 +35,16 @@ public class ExpenseService {
 	public Response selectByYear(String username, int year) throws Exception {
 		return ResponseGenerator.getSucessResponse(mapper.getExpenseByYear(username, year), Operation.SELECT);
 	}
+
+	public Response selectById(Integer id) throws Exception {
+		return ResponseGenerator.getSucessResponse(mapper.getExpenseById(id), Operation.SELECT);
+	}
+
+	public Response delete(String username, Integer id) throws Exception {
+		return ResponseGenerator.getSucessResponse(mapper.deleteExpense(username, id), Operation.DELETE);
+	}
+
+	public Response selectExpenseTypes(String username) throws Exception {
+		return ResponseGenerator.getSucessResponse(mapper.selectExpenseTypes(username), Operation.SELECT);
+	}
 }
