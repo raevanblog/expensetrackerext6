@@ -21,7 +21,7 @@ Ext.define('expensetracker.view.main.MainController', {
 	onRouteChange : function(id) {
 		this.setCurrentView(id);
 	},
-	lastView : null,	
+	lastView : null,
 	setCurrentView : function(hashTag) {
 		var me = this;
 		var hashTag = (hashTag || '').toLowerCase();
@@ -80,7 +80,6 @@ Ext.define('expensetracker.view.main.MainController', {
 		}
 	},
 	onMainViewRender : function() {
-		console.log(window.location.hash);
 		if (!window.location.hash || window.location.hash === '#login') {
 			this.redirectTo("expensedashboard");
 		}
@@ -88,11 +87,11 @@ Ext.define('expensetracker.view.main.MainController', {
 	onToggleNavigation : function(button) {
 		var me = this;
 		var refs = me.getReferences();
-		var navMenu = refs.navigationMenu;		
+		var navMenu = refs.navigationMenu;
 		var mainDashboard = refs.mainDashboard;
 
 		var collapsing = !navMenu.getMicro();
-		
+
 		var new_width = collapsing ? 64 : 250;
 
 		if (Ext.isIE9m || !Ext.os.is.Desktop) {
@@ -101,9 +100,9 @@ Ext.define('expensetracker.view.main.MainController', {
 			refs.logocomponent.setWidth(new_width);
 			navMenu.setWidth(new_width);
 			navMenu.setMicro(collapsing);
-			if(collapsing) {
+			if (collapsing) {
 				refs.logocomponent.update('ET');
-			}else{
+			} else {
 				refs.logocomponent.update('Expense Tracker');
 			}
 
@@ -112,7 +111,7 @@ Ext.define('expensetracker.view.main.MainController', {
 			mainDashboard.layout.animatePolicy = mainDashboard.layout.animate = null;
 			mainDashboard.updateLayout();
 		} else {
-			
+
 			if (!collapsing) {
 
 				navMenu.setMicro(false);
@@ -124,15 +123,14 @@ Ext.define('expensetracker.view.main.MainController', {
 					width : new_width
 				}
 			});
-			
+
 			navMenu.width = new_width;
-			
+
 			navMenu.el.addCls('nav-tree-animating');
-			
+
 			mainDashboard.updateLayout({
 				isRoot : true
 			});
-			
 
 			if (collapsing) {
 				navMenu.on({
@@ -144,5 +142,5 @@ Ext.define('expensetracker.view.main.MainController', {
 				});
 			}
 		}
-	}	
+	}
 });
