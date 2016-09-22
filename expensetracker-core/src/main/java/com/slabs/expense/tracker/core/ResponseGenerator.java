@@ -25,6 +25,15 @@ public class ResponseGenerator {
 		return resp;
 	}
 
+	public static Response getExceptionResponse(ResponseStatus status, String message) {
+		Response resp = new Response();
+		resp.setStatus_Code(status.getStatusCode());
+		resp.setStatus_Message(status.name());
+		resp.setSuccess(false);
+		resp.setException(message);
+		return resp;
+	}
+
 	private static Response getSucessResponse() {
 		Response response = new Response();
 		response.setStatus_Code(ResponseStatus.OK.getStatusCode());

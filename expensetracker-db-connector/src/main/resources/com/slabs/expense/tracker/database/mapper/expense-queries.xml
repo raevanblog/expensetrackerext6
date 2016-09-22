@@ -16,16 +16,18 @@
 		</foreach>
 	</insert>
 
-	<select id="getExpenseByMonth" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
+	<select id="getExpense" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
-		MONTH(expdate) = #{month} and YEAR(expdate)=#{year} and
 		username=#{username}
+		<if test="month != null">
+			and MONTH(expdate) = #{month}
+		</if>
+		<if test="year != null">
+			and YEAR(expdate)=#{year}
+		</if>
+
 	</select>
 
-	<select id="getExpenseByYear" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
-		select * from EXPENSETRACKER.EXPENSE where
-		YEAR(expdate)=#{year} and username=#{username}
-	</select>
 
 	<select id="getExpenseById" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where

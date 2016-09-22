@@ -66,14 +66,7 @@ public class ExpenseWebService {
 	@Path("expensecategory/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseCategory() throws ExpenseTrackerException {
-		return getExpenseCategory(null);
-	}
-
-	@Path("expensecategory/categoryid/{category_id}")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseCategory(@PathParam("category_id") Integer categoryId) throws ExpenseTrackerException {
+	public Response getExpenseCategory(@QueryParam("categoryId") Integer categoryId) throws ExpenseTrackerException {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
 					ExpenseCategoryService.class);
@@ -88,14 +81,7 @@ public class ExpenseWebService {
 	@Path("expensecategory/")
 	@DELETE
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteExpenseCategory() throws ExpenseTrackerException {
-		return deleteExpenseCategory(null);
-	}
-
-	@Path("expensecategory/categoryid/{category_id}")
-	@DELETE
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteExpenseCategory(@PathParam("category_id") Integer categoryId) throws ExpenseTrackerException {
+	public Response deleteExpenseCategory(@QueryParam("categoryId") Integer categoryId) throws ExpenseTrackerException {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
 					ExpenseCategoryService.class);
@@ -106,11 +92,11 @@ public class ExpenseWebService {
 		}
 
 	}
-	
+
 	@Path("expense/expensetypes/")
-	@GET	
+	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseTypes(@QueryParam("username")String username) throws ExpenseTrackerException {
+	public Response getExpenseTypes(@QueryParam("username") String username) throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
@@ -121,30 +107,19 @@ public class ExpenseWebService {
 		}
 	}
 
-	@Path("expense/year/{year}/month/{month}")
+	@Path("expense/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseByMonth(@QueryParam("username") String username, @PathParam("month") int month,
-			@PathParam("year") int year) throws ExpenseTrackerException {
+	public Response getExpense(@QueryParam("username") String username, @QueryParam("month") Integer month,
+			@QueryParam("year") Integer year) throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
-			return service.selectByMonth(username, month, year);
-		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
-		}
-	}
-
-	@Path("expense/year/{year}/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseByYear(@QueryParam("username") String username, @PathParam("year") int year)
-			throws ExpenseTrackerException {
-		try {
-			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
-					ExpenseService.class);
-			return service.selectByYear(username, year);
+			if (username == null) {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST,
+						"Parameter {username} is required");
+			}
+			return service.select(username, month, year);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -166,15 +141,21 @@ public class ExpenseWebService {
 		}
 	}
 
-	@Path("expense/id/{id}")
+	@Path("expense/")
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteExpense(@QueryParam("username") String username, @PathParam("id") Integer id)
+	public Response deleteExpense(@QueryParam("username") String username, @QueryParam("id") Integer id)
 			throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
+			if (username == null) {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST,
+						"Parameter {username} is required");
+			} else if (id == null) {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Parameter {id} is required");
+			}
 			return service.delete(username, id);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
