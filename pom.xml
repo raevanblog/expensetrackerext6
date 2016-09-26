@@ -84,7 +84,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-site-plugin</artifactId>
-						<version>3.4</version>
+						<version>3.5.1</version>
 						<configuration>
 							<generateProjectInfo>true</generateProjectInfo>
 							<generateReports>true</generateReports>
@@ -107,11 +107,23 @@
 						<artifactId>maven-project-info-reports-plugin</artifactId>
 						<version>2.7</version>
 					</plugin>
-					<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-release-plugin</artifactId> 
-						<version>2.5.1</version> <configuration> <tagNameFormat>v@{release.version}</tagNameFormat> 
-						<releaseProfiles>release-profile</releaseProfiles> </configuration> <executions> 
-						<execution> <goals> <goal>perform</goal> </goals> <phase>deploy</phase> </execution> 
-						</executions> </plugin> -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.1</version>
+						<configuration>
+							<tagNameFormat>v@{release.version}</tagNameFormat>
+							<releaseProfiles>release-profile</releaseProfiles>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>perform</goal>
+								</goals>
+								<phase>deploy</phase>
+							</execution>
+						</executions>
+					</plugin>
 				</plugins>
 			</build>
 
@@ -190,15 +202,17 @@
 		</developer>
 	</developers>
 
-	<!-- <scm> <connection>scm:git:https://github.com/raevanblog/ExpenseTrackerApp.git</connection> 
-		<developerConnection>scm:git:https://github.com/raevanblog/ExpenseTrackerApp.git</developerConnection> 
-		<url>https://github.com/raevanblog/ExpenseTrackerApp</url> </scm> -->
+	<scm>
+		<connection>scm:git:https://github.com/raevanblog/expensetrackerext6.git</connection>
+		<developerConnection>scm:git:https://github.com/raevanblog/expensetrackerext6.git</developerConnection>
+		<url>https://github.com/raevanblog/expensetrackerext6</url>
+	</scm>
 
 	<modules>
 		<module>expensetrackerweb</module>
 		<module>expensetracker-core</module>
 		<module>expensetracker-util</module>
-    <module>expensetracker-common</module>
-    <module>expensetracker-db-connector</module>
-  </modules>
+		<module>expensetracker-common</module>
+		<module>expensetracker-db-connector</module>
+	</modules>
 </project>
