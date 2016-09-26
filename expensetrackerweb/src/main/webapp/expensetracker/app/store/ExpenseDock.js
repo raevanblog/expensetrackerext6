@@ -1,32 +1,48 @@
 Ext.define('expensetracker.store.ExpenseDock', {
 	extend : 'Ext.data.Store',
-	alias : 'store.expensedock',		
+	alias : 'store.expensedock',
 	fields : [ {
-		name : 'month'
+		name : 'month',
+		type : 'string'
+	}, {
+		name : 'monthNo',
+		type : 'int'
 	} ],
 	data : [ {
-		month : 'January'
+		month : 'January',
+		monthNo : 1
 	}, {
-		month : 'February'
+		month : 'February',
+		monthNo : 2
 	}, {
-		month : 'March'
+		month : 'March',
+		monthNo : 3
 	}, {
-		month : 'April'
+		month : 'April',
+		monthNo : 4
 	}, {
-		month : 'May'
+		month : 'May',
+		monthNo : 5
 	}, {
-		month : 'June'
+		month : 'June',
+		monthNo : 6
 	}, {
-		month : 'July'
+		month : 'July',
+		monthNo : 7
 	}, {
-		month : 'August'
+		month : 'August',
+		monthNo : 8
 	}, {
-		month : 'September'
+		month : 'September',
+		monthNo : 9
 	}, {
-		month : 'October'
+		month : 'October',
+		monthNo : 10
 	}, {
-		month : 'November'
+		month : 'November',
+		monthNo : 11
 	}, {
-		month : 'December'
+		month : 'December',
+		monthNo : 12
 	} ]
 });

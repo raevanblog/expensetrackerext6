@@ -8,7 +8,7 @@ Ext.define('expensetracker.Application', {
 
 	name : 'expensetracker',
 
-	stores : [ 'ExpenseCategory', 'Expense' ],
+	stores : [ 'ExpenseCategory', 'Expense', 'ExpenseType' ],
 
 	requires : [ 'expensetracker.util.Url' ],
 

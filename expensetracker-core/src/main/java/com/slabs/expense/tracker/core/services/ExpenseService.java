@@ -28,10 +28,18 @@ public class ExpenseService {
 		return ResponseGenerator.getSucessResponse(mapper.insertExpense(records), Operation.INSERT);
 	}
 
+	public Response update(List<Expense> records) throws Exception {
+		int noOfRecords = 0;
+		for (Expense record : records) {
+			noOfRecords = noOfRecords + mapper.updateExpense(record);
+		}
+		return ResponseGenerator.getSucessResponse(noOfRecords, Operation.UPDATE);
+	}
+
 	public Response select(String username, Integer month, Integer year) throws Exception {
 		return ResponseGenerator.getSucessResponse(mapper.getExpense(username, month, year), Operation.SELECT);
 	}
-	
+
 	public Response selectById(Integer id) throws Exception {
 		return ResponseGenerator.getSucessResponse(mapper.getExpenseById(id), Operation.SELECT);
 	}

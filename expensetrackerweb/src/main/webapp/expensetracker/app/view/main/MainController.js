@@ -142,5 +142,47 @@ Ext.define('expensetracker.view.main.MainController', {
 				});
 			}
 		}
+	},
+	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
+		var grid = this.lookup('expensegrid');
+		grid.getStore().filter('itemName', newValue);
+	},
+	onAddExpenseRecord : function(addexpenseBtn) {
+		var grid = this.lookup('expensegrid');
+		var store = grid.getStore();
+		var model = new expensetracker.model.Expense({
+			itemName : '',
+			expdate : new Date(),
+			price : 0.0,
+			qty : 0.0,
+			username : 'shyamcse07'
+		});
+		store.insert(0, model);
+		grid.getView().refresh();
+	},
+	onQtyChange : function(gridqtytext, newValue, oldValue, options) {
+		var grid = this.lookup('expensegrid');
+		var selection = grid.getSelectionModel().getSelection();
+		var price = selection[0].get('price');
+		var pricePerUnit = 0.0;
+		if (newValue != 0.0) {
+			pricePerUnit = price / newValue;
+			selection[0].set('pricePerUnit', pricePerUnit);
+		}
+	},
+	onPriceChange : function(gridqtytext, newValue, oldValue, options) {
+		var grid = this.lookup('expensegrid');
+		var selection = grid.getSelectionModel().getSelection();
+		var qty = selection[0].get('qty');
+		var pricePerUnit = 0.0;
+		if (qty != 0.0) {
+			pricePerUnit = newValue / qty;
+			selection[0].set('pricePerUnit', pricePerUnit);
+		}
+	},
+	onSaveOrUpdate : function(saveBtn) {
+		var grid = this.lookup('expensegrid');
+		console.log(grid.getStore().getUpdatedRecords());
+		grid.getStore().sync();
 	}
 });

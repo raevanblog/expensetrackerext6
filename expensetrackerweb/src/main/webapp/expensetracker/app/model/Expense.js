@@ -3,15 +3,20 @@ Ext.define('expensetracker.model.Expense', {
 	alias : 'model.expense',
 	fields : [ {
 		name : 'id',
-		type : 'int'
+		type : 'int',
+		persist : false
 	}, {
 		name : 'itemName',
 		type : 'string'
 	}, {
 		name : 'expdate',
-		type : 'date'
+		type : 'date',
+		dateFormat : 'Y-m-d'
 	}, {
 		name : 'category',
+		type : 'string'
+	}, {
+		name : 'exptype',
 		type : 'string'
 	}, {
 		name : 'price',

@@ -2,8 +2,9 @@ Ext.define('expensetracker.view.expense.ExpenseView', {
 	extend : 'Ext.container.Container',
 	xtype : 'expenseview',
 	alias : 'view.expenseview',
-	requires : [ 'expensetracker.view.expense.ExpenseDock', 'expensetracker.view.expense.ExpenseViewController', 'Ext.form.FieldSet',
-			'Ext.form.FieldContainer', 'Ext.form.SliderField' ],
+	requires : [ 'expensetracker.view.expense.ExpenseDock', 'expensetracker.view.expense.ExpenseViewController',
+			'expensetracker.view.expense.ExpenseGrid', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField',
+			'expensetracker.store.ExpenseCategory' ],
 	controller : 'expenseviewcontroller',
 	layout : {
 		type : 'vbox',
@@ -24,6 +25,7 @@ Ext.define('expensetracker.view.expense.ExpenseView', {
 				xtype : 'component',
 				reference : 'expviewselyear',
 				html : '',
+				margin : '10 10 10 10',
 				cls : 'year-square'
 			}, {
 				xtype : 'sliderfield',

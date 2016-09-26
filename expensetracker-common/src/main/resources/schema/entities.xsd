@@ -7,6 +7,7 @@
 	<element name="UserInfo" type="et:UserInfo" />
 	<element name="UserPermission" type="et:UserPermission" />
 	<element name="Expense" type="et:Expense" />
+	<element name="ExpenseType" type="et:ExpenseType" />
 
 
 	<complexType name="UserInfo">
@@ -91,9 +92,29 @@
 			<element name="expdate" type="date" />
 			<element name="username" type="string" />
 			<element name="category" type="string" />
-			<element name="price" type="float" />
-			<element name="qty" type="float" />
-			<element name="pricePerUnit" type="float" />
+			<element name="exptype" type="string" />
+			<element name="price" type="float" minOccurs="0" />
+			<element name="qty" type="float" minOccurs="0" />
+			<element name="pricePerUnit" type="float" minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ExpenseType">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: EXPENSETYPE
+				ExpenseType will hold the data for table EXPENSETYPE
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="exptype" type="string" />
+			<element name="description" type="string" />
 		</sequence>
 	</complexType>
 

@@ -5,16 +5,46 @@
 <mapper namespace="com.slabs.expense.tracker.database.mapper.ExpenseMapper">
 
 	<insert id="insertExpense" parameterType="java.util.List">
-		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,QTY,PRICE,EXPDATE,USERNAME) values
+		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.itemName},
 			#{record.category},
+			#{record.exptype},
 			#{record.qty},
 			#{record.price},
 			#{record.expdate},
-			#{record.username}
+			#{record.username},
+			#{record.pricePerUnit}
 		</foreach>
 	</insert>
+
+	<update id="updateExpense">
+		update EXPENSETRACKER.EXPENSE
+		<set>
+			<if test="record.itemName != null">
+				itemName = #{record.itemName},
+			</if>
+			<if test="record.category != null">
+				category=#{record.category},
+			</if>
+			<if test="record.exptype != null">
+				exptype=#{record.exptype},
+			</if>
+			<if test="record.expdate != null">
+				expdate=#{record.expdate},
+			</if>
+			<if test="record.price != null">
+				price=#{record.price},
+			</if>
+			<if test="record.qty != null">
+				qty=#{record.qty},
+			</if>
+			<if test="record.pricePerUnit != null">
+				pricePerUnit=#{record.pricePerUnit}
+			</if>
+		</set>
+		where id=#{record.id}
+	</update>
 
 	<select id="getExpense" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
@@ -53,13 +83,15 @@
 
 	<update id="updateExpenseCategory" parameterType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
 
-		update EXPENSETRACKER.EXPENSE_CATEGORY set
-		<if test="record.category != null">
-			category=#{record.category},
-		</if>
-		<if test="record.description != null">
-			description=#{record.description}
-		</if>
+		update EXPENSETRACKER.EXPENSE_CATEGORY
+		<set>
+			<if test="record.category != null">
+				category=#{record.category},
+			</if>
+			<if test="record.description != null">
+				description=#{record.description}
+			</if>
+		</set>
 		where categoryId=#{record.categoryId}
 
 	</update>
@@ -76,6 +108,34 @@
 		<if test="categoryId != null">
 			where categoryId=#{categoryId}
 		</if>
+	</delete>
+
+	<select id="getExpenseTypes" resultType="com.slabs.expense.tracker.common.db.entity.ExpenseType">
+		select * from EXPENSETRACKER.EXPENSETYPE
+	</select>
+
+	<insert id="insertExpenseType" parameterType="java.util.List">
+		insert into EXPENSETRACKER.EXPENSETYPE(EXPTYPE, DESCRIPTION) values
+		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.exptype},
+			#{record.description}
+		</foreach>
+	</insert>
+
+	<update id="updateExpenseType" parameterType="com.slabs.expense.tracker.common.db.entity.ExpenseType">
+		update EXPENSETRACKER.EXPENSETYPE
+		<set>
+			<if test="record.exptype != null">
+				exptype=#{record.exptype},
+			</if>
+			<if test="record.description != null">
+				description=#{record.description}
+			</if>
+		</set>
+	</update>
+
+	<delete id="deleteExpenseType" parameterType="int">
+		delete from EXPENSETRACKER.EXPENSETYPE where id=#{id}
 	</delete>
 
 </mapper>

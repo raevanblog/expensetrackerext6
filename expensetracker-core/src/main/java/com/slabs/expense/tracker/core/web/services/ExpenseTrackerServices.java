@@ -2,6 +2,7 @@ package com.slabs.expense.tracker.core.web.services;
 
 import java.util.Set;
 
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.slabs.expense.tracker.core.JAXBContextResolver;
@@ -14,6 +15,7 @@ public class ExpenseTrackerServices extends ResourceConfig {
 		packages("com.slabs.expense.tracker.core.web");
 		register(JAXBContextResolver.class);
 		register(ObjectMapperResolver.class);
+		register(JacksonFeature.class);
 		register(com.slabs.expense.tracker.core.exception.ExpenseTrackerException.class);
 	}
 
