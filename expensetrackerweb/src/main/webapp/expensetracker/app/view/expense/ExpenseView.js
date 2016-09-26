@@ -30,13 +30,14 @@ Ext.define('expensetracker.view.expense.ExpenseView', {
 			}, {
 				xtype : 'sliderfield',
 				fieldLabel : 'Select Year',
-				labelSeparator : '',
-				value : 2016,
+				labelSeparator : '',				
+				value : new Date().getFullYear(),
 				padding : '20 10 0 10',
 				increment : 1,
 				minValue : 1990,
 				maxValue : 2016,
 				flex : 0.80,
+				reference: 'yearslider',
 				platformConfig : {
 					'!desktop' : {
 						width : '100%'
@@ -46,15 +47,12 @@ Ext.define('expensetracker.view.expense.ExpenseView', {
 					changecomplete : 'onYearSelection',
 					afterrender : 'onRenderSlider'
 				}
-			}, {
-				xtype : 'button',
-				flex : 0.10,
-				margin : '20 0 0 0',
-				text : 'Open Book'
 			} ]
 		} ]
 	}, {
 		xtype : 'expensedock',
+		reference: 'expensedock',
+		afterrender: 'onRenderExpenseDock',
 		border : 1
 	} ]
 });

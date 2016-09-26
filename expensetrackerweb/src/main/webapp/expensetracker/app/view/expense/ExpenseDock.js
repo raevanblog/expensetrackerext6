@@ -9,7 +9,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 		align : 'stretch',
 		padding : '10 3 10 3'
 	},
-	title : 'Expense Book - 2016',
+	title : new Date().getFullYear(),
 	items : [ {
 		xtype : 'thumnailcontainer',
 		store : Ext.create('expensetracker.store.ExpenseDock'),

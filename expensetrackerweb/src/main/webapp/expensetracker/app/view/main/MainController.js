@@ -180,9 +180,16 @@ Ext.define('expensetracker.view.main.MainController', {
 			selection[0].set('pricePerUnit', pricePerUnit);
 		}
 	},
-	onSaveOrUpdate : function(saveBtn) {
+	onSaveOrUpdateExpense : function(saveBtn) {
 		var grid = this.lookup('expensegrid');
-		console.log(grid.getStore().getUpdatedRecords());
-		grid.getStore().sync();
+		grid.setLoading("Saving...")
+		grid.getStore().sync({
+			success: function(batch) {
+				grid.setLoading(false)
+			}
+		});
+	},
+	onDeleteExpense : function(deleteBtn) {
+		var grig = this.lookup('expensegrid');
 	}
 });
