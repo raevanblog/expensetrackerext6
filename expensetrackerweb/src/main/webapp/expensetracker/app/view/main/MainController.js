@@ -181,15 +181,23 @@ Ext.define('expensetracker.view.main.MainController', {
 		}
 	},
 	onSaveOrUpdateExpense : function(saveBtn) {
-		var grid = this.lookup('expensegrid');
+		var me = this;
+		var grid = me.lookup('expensegrid');
 		grid.setLoading("Saving...")
 		grid.getStore().sync({
 			success: function(batch) {
 				grid.setLoading(false)
+			},
+			failure: function(batch) {
+				grid.setLoading(false);				
+				grid.getStore().rejectChanges();
 			}
 		});
 	},
-	onDeleteExpense : function(deleteBtn) {
-		var grig = this.lookup('expensegrid');
+	onDeleteExpense : function(view, rowIndex, colIndex, item, e, record, row) {
+		var me = this;
+		var grid = me.lookup('expensegrid');
+		var store = grid.getStore();
+		store.remove(record);		
 	}
 });

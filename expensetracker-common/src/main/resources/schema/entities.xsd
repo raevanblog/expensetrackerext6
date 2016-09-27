@@ -8,6 +8,7 @@
 	<element name="UserPermission" type="et:UserPermission" />
 	<element name="Expense" type="et:Expense" />
 	<element name="ExpenseType" type="et:ExpenseType" />
+	<element name="Dictionary" type="et:Dictionary" />
 
 
 	<complexType name="UserInfo">
@@ -96,6 +97,22 @@
 			<element name="price" type="float" minOccurs="0" />
 			<element name="qty" type="float" minOccurs="0" />
 			<element name="pricePerUnit" type="float" minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Dictionary">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Dictionary will hold dictionary data.
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="itemName" type="string" />
 		</sequence>
 	</complexType>
 

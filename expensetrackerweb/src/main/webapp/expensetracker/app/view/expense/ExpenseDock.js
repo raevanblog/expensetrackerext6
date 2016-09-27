@@ -8,8 +8,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 		type : 'vbox',
 		align : 'stretch',
 		padding : '10 3 10 3'
-	},
-	title : new Date().getFullYear(),
+	},	
 	items : [ {
 		xtype : 'thumnailcontainer',
 		store : Ext.create('expensetracker.store.ExpenseDock'),

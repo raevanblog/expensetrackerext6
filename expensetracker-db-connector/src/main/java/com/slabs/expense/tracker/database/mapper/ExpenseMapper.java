@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Flush;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.executor.BatchResult;
 
+import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.common.db.entity.ExpenseType;
@@ -20,9 +21,9 @@ public interface ExpenseMapper {
 
 	public List<Expense> getExpenseById(@Param("id") Integer id) throws Exception;
 
-	public Integer deleteExpense(@Param("username") String username, @Param("id") Integer id) throws Exception;
+	public Integer deleteExpense(@Param("record") Expense record) throws Exception;
 
-	public List<String> selectExpenseTypes(@Param("username") String username) throws Exception;
+	public List<Dictionary> selectExpenseNames() throws Exception;
 
 	public Integer insertExpenseCategory(@Param("records") List<ExpenseCategory> records) throws Exception;
 

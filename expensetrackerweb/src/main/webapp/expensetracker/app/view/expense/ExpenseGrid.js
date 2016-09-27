@@ -2,7 +2,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	requires : [ 'Ext.form.field.ComboBox' ],
-	reference : 'expensegrid',	
+	reference : 'expensegrid',
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1
@@ -35,7 +35,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		text : 'Category',
 		iconCls : 'x-fa  fa-plus-square',
 		handler : 'onAddCategory',
-		tooltip : 'Add Expense'
+		tooltip : 'Add Category'
 	} ],
 	bbar : [ {
 		xtype : 'button',
@@ -49,8 +49,15 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		text : 'Item Name',
 		dataIndex : 'itemName',
 		editor : {
-			field : 'textfield',
-			allowBlank : false
+			xtype : 'combobox',
+			allowBlank : false,
+			store : 'ExpenseName',
+			displayField : 'itemName',
+			valueField : 'itemName',
+			typeAhead : true,			
+			queryMode : 'local',
+			triggerAction : 'query',
+			hideTrigger : true
 		},
 		flex : 1
 	}, {
@@ -60,8 +67,10 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			displayField : 'category',
 			valueField : 'category',
 			store : 'ExpenseCategory',
+			forceSelection : true,
 			typeAhead : true,
-			triggerAction : 'all'
+			queryMode : 'local',			
+			triggerAction : 'query'
 		},
 		dataIndex : 'category',
 		flex : 1
@@ -72,6 +81,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			displayField : 'exptype',
 			valueField : 'exptype',
 			store : 'ExpenseType',
+			forceSelection : true,
 			typeAhead : true,
 			triggerAction : 'all'
 		},
@@ -84,7 +94,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		editor : {
 			xtype : 'datefield',
 			format : 'd/m/Y',
-			itemId : 'expDateCol' 
+			itemId : 'expDateCol'
 		},
 		dataIndex : 'expdate',
 		flex : 1
@@ -122,7 +132,6 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		},
 		summaryType : 'sum',
 		summaryRenderer : function(value, summaryData, dataIndex) {
-			console.log(summaryData);
 			return Ext.util.Format.currency(value, '₹', 2);
 		},
 		flex : 1
@@ -137,7 +146,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		xtype : 'actioncolumn',
 		align : 'center',
 		tooltip : 'Delete',
-		handler: 'onDeleteExpense',
+		handler : 'onDeleteExpense',
 		iconCls : 'x-fa  fa-minus-circle'
 	} ]
 });

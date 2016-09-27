@@ -44,11 +44,15 @@ public class ExpenseService {
 		return ResponseGenerator.getSucessResponse(mapper.getExpenseById(id), Operation.SELECT);
 	}
 
-	public Response delete(String username, Integer id) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.deleteExpense(username, id), Operation.DELETE);
+	public Response delete(List<Expense> records) throws Exception {
+		int noOfRecords = 0;
+		for (Expense record : records) {
+			noOfRecords = noOfRecords + mapper.deleteExpense(record);
+		}
+		return ResponseGenerator.getSucessResponse(noOfRecords, Operation.DELETE);
 	}
 
-	public Response selectExpenseTypes(String username) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.selectExpenseTypes(username), Operation.SELECT);
+	public Response selectExpenseNames() throws Exception {
+		return ResponseGenerator.getSucessResponse(mapper.selectExpenseNames(), Operation.SELECT);
 	}
 }

@@ -89,13 +89,13 @@ public class ExpenseWebService {
 
 	}
 
-	@Path("expense/itemnames/")
+	@Path("expense/expensenames/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getItemNames(@QueryParam("username") String username) throws ExpenseTrackerException {
+	public Response getItemNames() throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-			return service.selectExpenseTypes(username);
+			return service.selectExpenseNames();
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -164,15 +164,10 @@ public class ExpenseWebService {
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteExpense(@QueryParam("username") String username, @QueryParam("id") Integer id) throws ExpenseTrackerException {
+	public Response deleteExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {
-			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-			if (username == null) {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Parameter {username} is required");
-			} else if (id == null) {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Parameter {id} is required");
-			}
-			return service.delete(username, id);
+			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);			
+			return service.delete(records);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);

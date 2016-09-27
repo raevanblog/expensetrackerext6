@@ -64,13 +64,13 @@
 		id=#{id}
 	</select>
 
-	<select id="selectExpenseTypes" resultType="String">
-		select distinct itemname from EXPENSETRACKER.EXPENSE where username=#{username}
+	<select id="selectExpenseNames" resultType="com.slabs.expense.tracker.common.db.entity.Dictionary">
+		select distinct itemname from EXPENSETRACKER.EXPENSE
 	</select>
 
 	<delete id="deleteExpense">
 		delete from EXPENSETRACKER.EXPENSE
-		where id=#{id} and username=#{username}
+		where id=#{record.id}
 	</delete>
 
 	<insert id="insertExpenseCategory" parameterType="java.util.List">
