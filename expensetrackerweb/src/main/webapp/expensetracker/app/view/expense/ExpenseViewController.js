@@ -15,7 +15,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 		if (year === currentYear && monthNo > currentMonth) {
 			Ext.Msg.show({
 				title : 'Expense Tracker',
-				message : 'Cannot create expense for future date',
+				message : 'Expense for future date cannot be created',
 				buttons : Ext.Msg.OK,
 				icon : Ext.Msg.INFO,
 			});
