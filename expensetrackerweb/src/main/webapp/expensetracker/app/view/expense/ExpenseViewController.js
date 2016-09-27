@@ -11,7 +11,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 		var month = record.get('month');
 
 		var date = new Date(year, monthNo - 1);
-
+		
 		if (year === currentYear && monthNo > currentMonth) {
 			Ext.Msg.show({
 				title : 'Expense Tracker',
@@ -21,23 +21,30 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 			});
 		} else {
 
-			var store = Ext.getStore('Expense');
+			var store = Ext.create('expensetracker.store.Expense');
 			store.load({
 				params : {
 					username : 'shyamcse07',
 					month : monthNo,
 					year : year
-
 				}
 			});
 			store.getProxy().setExtraParam({});
 
 			var expenseGrid = Ext.create('expensetracker.view.expense.ExpenseGrid', {
 				height : this.getView().getHeight() - 100,
-				width : this.getView().getWidth() - 100,
+				width : this.getView().getWidth() - 100,				
 				store : store
 			});
-
+			
+			console.log(refs);
+			
+			var columns= expenseGrid.getColumns();
+			columns[4].editor.value = Ext.Date.getFirstDateOfMonth(date);
+			columns[4].editor.minValue = Ext.Date.getFirstDateOfMonth(date);
+			columns[4].editor.maxValue = Ext.Date.getLastDateOfMonth(date);
+			
+			
 			var window = Ext.create('Ext.window.Window', {
 				layout : 'fit',
 				modal : true,
@@ -97,5 +104,5 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 	onRenderExpenseDock : function(expensedock) {
 		var me = this;
 		expensedock.setTitle('' + new Date().getFullYear());		
-	}
+	}	
 });

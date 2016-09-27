@@ -1,12 +1,13 @@
 Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
-	requires : [ 'Ext.form.field.ComboBox' ],
+	requires : [ 'expensetracker.view.expense.ExpenseGridController','Ext.form.field.ComboBox' ],
 	reference : 'expensegrid',
+	controller: 'expensegridcontroller',
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1
-	},
+	},	
 	features : [ {
 		ftype : 'summary',
 		dock : 'bottom'
@@ -94,7 +95,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		editor : {
 			xtype : 'datefield',
 			format : 'd/m/Y',
-			itemId : 'expDateCol'
+			value: new Date(),
 		},
 		dataIndex : 'expdate',
 		flex : 1
@@ -148,5 +149,5 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		tooltip : 'Delete',
 		handler : 'onDeleteExpense',
 		iconCls : 'x-fa  fa-minus-circle'
-	} ]
+	} ]	
 });
