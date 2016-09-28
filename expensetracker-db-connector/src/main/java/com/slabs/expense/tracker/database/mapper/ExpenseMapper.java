@@ -31,7 +31,7 @@ public interface ExpenseMapper {
 
 	public List<ExpenseCategory> retrieveExpenseCategory(@Param("categoryId") Integer categoryId) throws Exception;
 
-	public Integer deleteExpenseCategory(@Param("categoryId") Integer categoryId) throws Exception;
+	public Integer deleteExpenseCategory(@Param("record") ExpenseCategory record) throws Exception;
 
 	public List<ExpenseType> getExpenseTypes() throws Exception;
 

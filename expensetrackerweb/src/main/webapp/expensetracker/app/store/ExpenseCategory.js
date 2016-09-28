@@ -7,14 +7,28 @@ Ext.define('expensetracker.store.ExpenseCategory', {
 		type : 'rest',
 		useDefaultXhrHeader : false,
 		batchActions : false,
-		url: expensetracker.util.Url.getCategoryService(),
+		api : {
+			create : expensetracker.util.Url.getCategoryService(),
+			read : expensetracker.util.Url.getCategoryService(),
+			update : expensetracker.util.Url.getCategoryService(),
+			destroy : expensetracker.util.Url.getCategoryService()
+		},
+		batchActions : true,
+		actionMethods : {
+			create : 'POST',
+			read : 'GET',
+			update : 'PUT',
+			destroy : 'DELETE'
+		},		
 		reader : {
 			type : 'json',
 			rootProperty : 'result.any'
 		},
 		writer : {
-			type: 'json'			
-		}
+			type : 'json',
+			allowSingle : false
+		},
+		appendId : false
 	},
 	autoLoad : true
 });

@@ -22,14 +22,16 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 		} else {
 
 			var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
-				height : this.getView().getHeight() - 100,
-				width : this.getView().getWidth() - 100,
+				height : this.getView().getHeight(),
+				width : this.getView().getWidth(),
 				x : me.getView().getX(),
-				y : me.getView().getY()				
+				y : me.getView().getY(),
+				modal: true				
 			});
 
 			var model = expenseWindow.getViewModel();			
 			model.set('expenseStartDate', Ext.Date.getFirstDateOfMonth(date));
+			model.set('expenseDate', Ext.Date.getFirstDateOfMonth(date));
 			model.set('expenseEndDate', Ext.Date.getLastDateOfMonth(date));
 			model.set('username', 'shyamcse07');
 			model.set('month', monthNo);

@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
 	requires : [ 'Ext.form.field.ComboBox' ],
-	reference : 'expensegrid',
+	reference : 'expensegrid',	
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1
@@ -34,8 +34,8 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	}, {
 		xtype : 'button',
 		text : 'Category',
-		iconCls : 'x-fa  fa-plus-square',
-		handler : 'onAddCategory',
+		iconCls : 'x-fa fa-book',
+		handler : 'onShowCategory',
 		tooltip : 'Add Category'
 	} ],
 	bbar : [ {
@@ -71,7 +71,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			forceSelection : true,
 			typeAhead : true,
 			queryMode : 'local',
-			triggerAction : 'query'
+			triggerAction : 'all'
 		},
 		dataIndex : 'category',
 		flex : 1
@@ -84,6 +84,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			store : 'ExpenseType',
 			forceSelection : true,
 			typeAhead : true,
+			queryMode : 'local',
 			triggerAction : 'all'
 		},
 		dataIndex : 'exptype',
@@ -96,7 +97,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'datefield',
 			format : 'd/m/Y',
 			bind : {
-				value : '{expenseStartDate}',
+				value : '{expenseDate}',
 				minValue : '{expenseStartDate}',
 				maxValue : '{expenseEndDate}'
 			}

@@ -103,10 +103,10 @@
 		</if>
 	</select>
 
-	<delete id="deleteExpenseCategory" parameterType="int">
+	<delete id="deleteExpenseCategory">
 		delete from EXPENSETRACKER.EXPENSE_CATEGORY
-		<if test="categoryId != null">
-			where categoryId=#{categoryId}
+		<if test="record.categoryId != null">
+			where categoryId=#{record.categoryId}
 		</if>
 	</delete>
 

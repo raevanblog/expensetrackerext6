@@ -5,18 +5,19 @@ Ext.define('expensetracker.store.Expense', {
 	model : 'expensetracker.model.Expense',
 	proxy : {
 		type : 'rest',
-		useDefaultXhrHeader : false,
-		url : expensetracker.util.Url.getExpenseService(),
+		useDefaultXhrHeader : false,		
 		api : {
 			create : expensetracker.util.Url.getExpenseService(),
 			read : expensetracker.util.Url.getExpenseService(),
-			update : expensetracker.util.Url.getExpenseService()
+			update : expensetracker.util.Url.getExpenseService(),
+			destroy : expensetracker.util.Url.getExpenseService()
 		},
 		batchActions : true,
 		actionMethods : {
 			create : 'POST',
 			read : 'GET',
-			update : 'PUT'
+			update : 'PUT',
+			destroy : 'DELETE'
 		},
 		reader : {
 			type : 'json',

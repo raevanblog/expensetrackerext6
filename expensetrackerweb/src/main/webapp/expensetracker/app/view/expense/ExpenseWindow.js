@@ -28,11 +28,16 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	}, {
 		xtype : 'expensecategory',
 		reference : 'expensecategory',
-		tbar : [ '->', {
+		tbar : [{
 			xtype : 'button',
 			text : 'Back',
 			iconCls : 'x-fa fa-backward',
 			handler : 'onBackCategory'
-		} ]
+		},'->',{
+			xtype: 'button',
+			text : 'Category',
+			iconCls: 'x-fa fa-plus-square',
+			handler : 'onAddCategory'
+		}]
 	} ]
 });

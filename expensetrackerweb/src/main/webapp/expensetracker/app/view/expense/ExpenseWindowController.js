@@ -8,14 +8,28 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
 			Ext.Msg.show({
 				title : 'Expense Tracker',
-				message : 'You have unsaved changes. Do you want close and discard your changes?',
+				message : 'Do you want to save your changes?',
 				buttons : Ext.Msg.YESNO,
 				icon : Ext.Msg.QUESTION,
 				fn : function(button) {
 					if (button === 'yes') {
-						store.clearFilter();
-						window.purgeListeners();
-						window.close();
+						expenseGrid.setLoading('Saving...');
+						if(store.isFiltered()){
+							store.clearFilter();							
+						}
+						store.sync({
+							success: function(batch) {
+								expenseGrid.setLoading(false);
+								window.purgeListeners();
+								window.close();
+							},
+							failure: function(batch) {
+								expenseGrid.setLoading(false);								
+								store.rejectChanges();
+								me.refreshGridView(expenseGrid);
+							}
+						})
+						
 					}
 					if (button === 'no') {
 						return false;
@@ -23,7 +37,9 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 			});
 		} else {
-			store.clearFilter();
+			if(store.isFiltered()){
+				store.clearFilter();							
+			}
 			return true;
 		}
 		return false;
@@ -58,7 +74,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			username : 'shyamcse07'
 		});
 		store.insert(0, model);
-		grid.getView().refresh();
+		me.refreshGridView(grid);
 	},
 	onQtyChange : function(gridqtytext, newValue, oldValue, options) {
 		var me = this;
@@ -85,55 +101,35 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	onSaveOrUpdateExpense : function(saveBtn) {
 		var me = this;
 		var grid = me.lookup('expensegrid');
-		grid.setLoading("Saving...")
-		grid.getStore().sync({
-			success : function(batch) {
-				grid.setLoading(false)
-			},
-			failure : function(batch) {
-				grid.setLoading(false);
-				grid.getStore().rejectChanges();
-			}
-		});
+		var store = grid.getStore();
+		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
+			grid.setLoading("Saving...");
+			store.sync({
+				success : function(batch) {
+					grid.setLoading(false);
+					me.refreshGridView(grid);
+				},
+				failure : function(batch) {
+					grid.setLoading(false);					
+					store.rejectChanges();
+					me.refreshGridView(grid);
+				}
+			});
+		}
 	},
 	onDeleteExpense : function(view, rowIndex, colIndex, item, e, record, row) {
 		var me = this;
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
 		store.remove(record);
+		me.refreshGridView(grid);
 	},
-	onAddCategory : function(addCategBtn) {
+	onShowCategory : function(addCategBtn) {
 		var me = this;
 		var view = me.getView();
 		view.getLayout().next();
 	},
-	onBackCategory : function(backCategBtn) {
-		var me = this;
-		var view = me.getView();
-		var store = Ext.getStore('ExpenseCategory');
-		
-		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
-			Ext.Msg.show({
-				title : 'Expense Tracker',
-				message : 'You have unsaved changes. Do you want close and discard your changes?',
-				buttons : Ext.Msg.YESNO,
-				icon : Ext.Msg.QUESTION,
-				fn : function(button) {
-					if (button === 'yes') {
-						store.clearFilter();
-						window.purgeListeners();
-						window.close();
-					}
-					if (button === 'no') {
-						return false;
-					}
-				}
-			});
-		} else {
-			store.clearFilter();
-			return true;
-		}
-		
-		view.getLayout().prev();
-	},
+	refreshGridView(grid) {
+		grid.getView().refresh();
+	}
 });
