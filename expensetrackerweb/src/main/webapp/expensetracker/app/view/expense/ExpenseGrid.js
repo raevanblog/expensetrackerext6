@@ -1,13 +1,13 @@
 Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
-	requires : [ 'expensetracker.view.expense.ExpenseGridController','Ext.form.field.ComboBox' ],
+	xtype : 'expensegrid',
+	requires : [ 'Ext.form.field.ComboBox' ],
 	reference : 'expensegrid',
-	controller: 'expensegridcontroller',
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1
-	},	
+	},
 	features : [ {
 		ftype : 'summary',
 		dock : 'bottom'
@@ -55,7 +55,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			store : 'ExpenseName',
 			displayField : 'itemName',
 			valueField : 'itemName',
-			typeAhead : true,			
+			typeAhead : true,
 			queryMode : 'local',
 			triggerAction : 'query',
 			hideTrigger : true
@@ -70,7 +70,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			store : 'ExpenseCategory',
 			forceSelection : true,
 			typeAhead : true,
-			queryMode : 'local',			
+			queryMode : 'local',
 			triggerAction : 'query'
 		},
 		dataIndex : 'category',
@@ -95,7 +95,11 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		editor : {
 			xtype : 'datefield',
 			format : 'd/m/Y',
-			value: new Date(),
+			bind : {
+				value : '{expenseStartDate}',
+				minValue : '{expenseStartDate}',
+				maxValue : '{expenseEndDate}'
+			}
 		},
 		dataIndex : 'expdate',
 		flex : 1
@@ -103,7 +107,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	}, {
 		xtype : 'numbercolumn',
 		align : 'center',
-		header : 'Quantity',
+		text : 'Quantity',
 		format : '0.00',
 		dataIndex : 'qty',
 		editor : {
@@ -117,7 +121,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		flex : 1
 	}, {
 		xtype : 'numbercolumn',
-		header : 'Price',
+		text : 'Price',
 		format : '0.00',
 		currencySymbol : '₹',
 		dataIndex : 'price',
@@ -149,5 +153,5 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		tooltip : 'Delete',
 		handler : 'onDeleteExpense',
 		iconCls : 'x-fa  fa-minus-circle'
-	} ]	
+	} ]
 });
