@@ -3,8 +3,9 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	alias : 'controller.expensewindowcontroller',
 	onCloseExpenseWindow : function(window) {
 		var me = this;
-		var expenseGrid = me.lookup('expensegrid');
-		var store = expenseGrid.getStore();
+		var view = me.getView();
+		var component = view.getLayout().getActiveItem();
+		var store = component.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
 			Ext.Msg.show({
 				title : 'Expense Tracker',
@@ -13,25 +14,26 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				icon : Ext.Msg.QUESTION,
 				fn : function(button) {
 					if (button === 'yes') {
-						expenseGrid.setLoading('Saving...');
+						component.setLoading('Saving...');
 						if(store.isFiltered()){
 							store.clearFilter();							
 						}
 						store.sync({
-							success: function(batch) {
-								expenseGrid.setLoading(false);
+							success: function(batch) {								
+								component.setLoading(false);
 								window.purgeListeners();
 								window.close();
 							},
-							failure: function(batch) {
-								expenseGrid.setLoading(false);								
+							failure: function(batch) {								
+								component.setLoading(false);								
 								store.rejectChanges();
-								me.refreshGridView(expenseGrid);
+								me.refreshGridView(component);
 							}
 						})
 						
 					}
 					if (button === 'no') {
+						store.rejectChanges();
 						return false;
 					}
 				}
@@ -135,7 +137,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var component = view.getLayout().getActiveItem();
 		component.getStore().reload();				
 	},
-	refreshGridView(grid) {
+	refreshGridView: function(grid) {
 		grid.getView().refresh();
 	}
 });

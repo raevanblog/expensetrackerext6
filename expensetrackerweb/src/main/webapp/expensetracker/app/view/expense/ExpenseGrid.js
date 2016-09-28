@@ -96,8 +96,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		editor : {
 			xtype : 'datefield',
 			format : 'd/m/Y',
-			bind : {
-				value : '{expenseDate}',
+			bind : {				
 				minValue : '{expenseStartDate}',
 				maxValue : '{expenseEndDate}'
 			}

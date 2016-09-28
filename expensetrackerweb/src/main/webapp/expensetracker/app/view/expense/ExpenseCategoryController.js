@@ -84,7 +84,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 		store.remove(record);
 		me.refreshGridView(grid);
 	},
-	refreshGridView(grid) {
+	refreshGridView: function(grid) {
 		grid.getView().refresh();
 	}
 });
