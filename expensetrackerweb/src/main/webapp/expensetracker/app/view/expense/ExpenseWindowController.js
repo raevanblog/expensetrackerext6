@@ -129,6 +129,12 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var view = me.getView();
 		view.getLayout().next();
 	},
+	onReload: function(event) {
+		var me = this;
+		var view = me.getView();
+		var component = view.getLayout().getActiveItem();
+		component.getStore().reload();				
+	},
 	refreshGridView(grid) {
 		grid.getView().refresh();
 	}
