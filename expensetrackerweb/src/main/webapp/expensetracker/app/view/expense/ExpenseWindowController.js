@@ -34,7 +34,8 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 					}
 					if (button === 'no') {
 						store.rejectChanges();
-						return false;
+						window.purgeListeners();
+						window.close();						
 					}
 				}
 			});
