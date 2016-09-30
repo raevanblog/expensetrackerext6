@@ -70,9 +70,12 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var me = this;
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
+		var view  = me.getView();
+		var model = view.getViewModel();
 		var model = new expensetracker.model.Expense({
 			itemName : '',
 			price : 0.0,
+			expdate: model.get('expenseDate'),
 			qty : 0.0,
 			username : 'shyamcse07'
 		});
@@ -137,7 +140,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var view = me.getView();
 		var component = view.getLayout().getActiveItem();
 		component.getStore().reload();				
-	},
+	},	
 	refreshGridView: function(grid) {
 		grid.getView().refresh();
 	}

@@ -36,6 +36,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 			model.set('username', 'shyamcse07');
 			model.set('month', monthNo);
 			model.set('year', year);
+			model.set('title', month + '-' + year);
 
 			expenseWindow.show();
 		}

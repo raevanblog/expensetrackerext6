@@ -1,8 +1,9 @@
 Ext.define('expensetracker.view.login.Login', {
-	extend : 'Ext.container.Viewport',
+	extend : 'Ext.container.Container',
 	xtype : 'login',
 	alias : 'view.login',
-	requires : ['expensetracker.view.login.LoginController', 'expensetracker.view.main.Main'],
+	layout : 'fit',
+	requires : ['expensetracker.view.login.LoginController'],
 	controller: 'login',	
 	items : [ {
 		xtype: 'container',

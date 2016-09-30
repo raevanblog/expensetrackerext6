@@ -6,6 +6,9 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	viewModel : 'expensewindowmodel',
 	requires : [ 'expensetracker.view.expense.ExpenseWindowController', 'expensetracker.view.expense.ExpenseWindowModel',
 			'expensetracker.view.expense.ExpenseGrid', 'expensetracker.view.expense.ExpenseCategory' ],
+	bind: {
+		title: '{title}'
+	},
 	layout : {
 		type : 'card',
 		animate : true,

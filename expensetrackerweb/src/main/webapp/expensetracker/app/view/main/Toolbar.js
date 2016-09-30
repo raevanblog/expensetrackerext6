@@ -20,7 +20,8 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		xtype : 'button',
 		iconCls : 'x-fa fa-user'
 	}, {
-		xtype : 'button',
-		iconCls : 'x-fa fa-sign-out'
+		xtype : 'button',		
+		iconCls : 'x-fa fa-sign-out',
+		handler : 'onSignOut'
 	} ]
 });

@@ -7,6 +7,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowModel', {
 		expenseEndDate : '',
 		username : '',
 		month : '',
-		year : ''
+		year : '',
+		title: ''
 	} ]
 })

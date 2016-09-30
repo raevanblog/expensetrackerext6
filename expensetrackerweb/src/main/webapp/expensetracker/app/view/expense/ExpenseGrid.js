@@ -6,7 +6,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	reference : 'expensegrid',	
 	plugins : {
 		ptype : 'cellediting',
-		clicksToEdit : 1
+		clicksToEdit : 1		
 	},
 	features : [ {
 		ftype : 'summary',
@@ -97,7 +97,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'datefield',
 			format : 'd/m/Y',
 			bind : {				
-				minValue : '{expenseStartDate}',
+				minValue : '{expenseStartDate}',				
 				maxValue : '{expenseEndDate}'
 			}
 		},

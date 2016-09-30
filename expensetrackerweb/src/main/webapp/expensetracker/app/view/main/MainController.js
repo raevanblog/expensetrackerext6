@@ -142,5 +142,9 @@ Ext.define('expensetracker.view.main.MainController', {
 				});
 			}
 		}
-	}	
+	},
+	onSignOut : function(signOutBtn) {
+		var view = expensetracker.app.getMainView();
+		view.getLayout().setActiveItem(0);
+	}
 });
