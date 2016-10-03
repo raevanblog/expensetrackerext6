@@ -8,7 +8,5 @@ Ext.define('expensetracker.view.ExpenseTracker', {
 	},
 	items: [{
 		xtype: 'login'
-	}, {
-		xtype: 'app-main'
 	}]
 });

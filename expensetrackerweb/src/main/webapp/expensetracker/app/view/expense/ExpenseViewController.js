@@ -17,7 +17,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 				title : 'Expense Tracker',
 				message : 'Expense for future date cannot be created',
 				buttons : Ext.Msg.OK,
-				icon : Ext.Msg.INFO,
+				icon : Ext.Msg.INFO
 			});
 		} else {
 

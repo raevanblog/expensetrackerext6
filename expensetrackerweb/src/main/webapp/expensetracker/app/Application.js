@@ -12,10 +12,10 @@ Ext.define('expensetracker.Application', {
 
 	requires : [ 'expensetracker.util.Url' ],
 
-	defaultToken : 'expensedashboard',
+	defaultToken : 'login',
 
 	launch : function() {
-		// TODO - Launch the application
+		this.redirectTo('login');
 	},
 
 	onAppUpdate : function() {

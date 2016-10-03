@@ -1,10 +1,10 @@
 Ext.define('expensetracker.util.Url', {
 	singleton : true,
 	config : {
-		categoryService : 'http://localhost:9998/exptr-web-api/expensecategory',
-		expenseService : 'http://localhost:9998/exptr-web-api/expense',
-		expenseTypeService : 'http://localhost:9998/exptr-web-api/expensetype',
-		expenseNameService : 'http://localhost:9998/exptr-web-api/expense/expensenames'
+		categoryService : '/expensetrackerweb/api/exptr-web/expensecategory',
+		expenseService : '/expensetrackerweb/api/exptr-web/expense',
+		expenseTypeService : '/expensetrackerweb/api/exptr-web/expensetype',
+		expenseNameService : '/expensetrackerweb/api/exptr-web/expense/expensenames'
 	},
 	constructor : function(config) {
 		var me = this;

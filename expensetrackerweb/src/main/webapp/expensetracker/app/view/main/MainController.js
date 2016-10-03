@@ -11,12 +11,14 @@ Ext.define('expensetracker.view.main.MainController', {
 	listen : {
 		controller : {
 			'#' : {
-				unmatchedroute : 'onRouteChange'
+				unmatchedroute : function(hash) {
+					
+				}
 			}
 		}
 	},
 	routes : {
-		':node' : 'onRouteChange'
+		'main/:node' : 'onRouteChange'
 	},
 	onRouteChange : function(id) {
 		this.setCurrentView(id);
@@ -76,13 +78,11 @@ Ext.define('expensetracker.view.main.MainController', {
 		var toNode = node && (node.get('routeId') || node.get('viewType'));
 
 		if (toNode) {
-			this.redirectTo(toNode);
+			this.redirectTo('main/' + toNode);
 		}
 	},
 	onMainViewRender : function() {
-		if (!window.location.hash || window.location.hash === '#login') {
-			this.redirectTo("expensedashboard");
-		}
+		this.redirectTo('main/expensedashboard');
 	},
 	onToggleNavigation : function(button) {
 		var me = this;
@@ -144,7 +144,6 @@ Ext.define('expensetracker.view.main.MainController', {
 		}
 	},
 	onSignOut : function(signOutBtn) {
-		var view = expensetracker.app.getMainView();
-		view.getLayout().setActiveItem(0);
+		this.redirectTo('login');
 	}
 });

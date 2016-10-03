@@ -28,7 +28,7 @@ import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 
-@Path("exptr-web-api")
+@Path("exptr-web")
 public class ExpenseWebService {
 
 	private static final Logger L = LoggerFactory.getLogger(ExpenseWebService.class);
