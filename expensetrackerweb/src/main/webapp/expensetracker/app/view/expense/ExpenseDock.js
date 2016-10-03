@@ -11,7 +11,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 	},	
 	items : [ {
 		xtype : 'thumnailcontainer',
-		store : Ext.create('expensetracker.store.ExpenseDock'),
+		store : 'ExpenseDock',
 		listeners : {
 			itemclick : 'onThumbnailClick'
 		}

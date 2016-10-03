@@ -21,20 +21,18 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 						store.sync({
 							success: function(batch) {								
 								component.setLoading(false);
-								window.purgeListeners();
+								window.clearListeners();
 								window.close();
 							},
 							failure: function(batch) {								
-								component.setLoading(false);								
-								store.rejectChanges();
+								component.setLoading(false);
 								me.refreshGridView(component);
 							}
 						})
 						
 					}
-					if (button === 'no') {
-						store.rejectChanges();
-						window.purgeListeners();
+					if (button === 'no') {						
+						window.clearListeners();
 						window.close();						
 					}
 				}
@@ -116,8 +114,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 					me.refreshGridView(grid);
 				},
 				failure : function(batch) {
-					grid.setLoading(false);					
-					store.rejectChanges();
+					grid.setLoading(false);
 					me.refreshGridView(grid);
 				}
 			});

@@ -2,12 +2,13 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
-	requires : [ 'Ext.form.field.ComboBox' ],
+	requires : [ 'Ext.form.field.ComboBox', 'expensetracker.store.Expense' ],
 	reference : 'expensegrid',	
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1		
 	},
+	store : Ext.create('expensetracker.store.Expense'),
 	features : [ {
 		ftype : 'summary',
 		dock : 'bottom'

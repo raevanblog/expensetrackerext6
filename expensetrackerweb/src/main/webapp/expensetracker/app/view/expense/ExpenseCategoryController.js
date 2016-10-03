@@ -13,8 +13,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 					me.refreshGridView(categorygrid);
 				},
 				failure : function(batch) {
-					categorygrid.setLoading(false);
-					store.rejectChanges();
+					categorygrid.setLoading(false);					
 					me.refreshGridView(categorygrid);
 				}
 			});

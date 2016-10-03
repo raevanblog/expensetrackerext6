@@ -28,8 +28,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	}],
 	items : [ {
 		xtype : 'expensegrid',
-		reference : 'expensegrid',
-		store : Ext.create('expensetracker.store.Expense'),
+		reference : 'expensegrid',		
 		listeners : {
 			afterrender : 'onRenderExpenseGrid'
 		}
