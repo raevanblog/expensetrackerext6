@@ -2,7 +2,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
-	requires : [ 'Ext.form.field.ComboBox', 'expensetracker.store.Expense' ],
+	requires : ['expensetracker.store.Expense' ],
 	reference : 'expensegrid',	
 	plugins : {
 		ptype : 'cellediting',
@@ -15,7 +15,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	} ],
 	tbar : [ {
 		xtype : 'textfield',
-		reference : 'gridsearch',
+		reference : 'expensegridsearch',
 		submitEmptyText : false,
 		emptyText : 'Search...',
 		listeners : {

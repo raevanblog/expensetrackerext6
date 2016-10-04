@@ -10,7 +10,8 @@ Ext.define('expensetracker.Application', {
 
 	stores : [ 'ExpenseDock', 'ExpenseCategory', 'ExpenseType', 'ExpenseName', 'Expense' ],
 
-	requires : [ 'expensetracker.util.Url' ],
+	requires : [ 'expensetracker.util.Url', 'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox',
+			'Ext.form.Panel', 'Ext.form.field.Text', 'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar' ],
 
 	defaultToken : 'login',
 

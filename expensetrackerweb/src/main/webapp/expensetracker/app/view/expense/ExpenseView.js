@@ -2,8 +2,8 @@ Ext.define('expensetracker.view.expense.ExpenseView', {
 	extend : 'Ext.container.Container',
 	xtype : 'expenseview',
 	alias : 'view.expenseview',
-	requires : [ 'expensetracker.view.expense.ExpenseDock', 'expensetracker.view.expense.ExpenseViewController', 'Ext.form.FieldSet',
-			'Ext.form.FieldContainer', 'Ext.form.SliderField', 'expensetracker.view.expense.ExpenseWindow' ],
+	requires : [ 'expensetracker.view.expense.ExpenseDock', 'expensetracker.view.expense.ExpenseViewController',
+			'expensetracker.view.expense.ExpenseWindow' ],
 	controller : 'expenseviewcontroller',
 	layout : {
 		type : 'vbox',

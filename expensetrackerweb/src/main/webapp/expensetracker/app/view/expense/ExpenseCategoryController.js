@@ -6,7 +6,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 		var categorygrid = me.getView();
 		var store = categorygrid.getStore();		
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
-			categorygrid.setLoading('Saving...');
+			categorygrid.setLoading('Saving...');			
 			store.sync({
 				success: function(batch) {
 					categorygrid.setLoading(false);	
@@ -19,6 +19,14 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 			});
 		}
 		
+	},
+	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
+		var me = this;		
+		var grid = me.getView();
+		var store = grid.getStore();
+		if (gridsearchtext.reference === 'categorygridsearch') {
+			store.filter('category', newValue);
+		}
 	},
 	onBackCategory : function(backCategBtn) {
 		var me = this;

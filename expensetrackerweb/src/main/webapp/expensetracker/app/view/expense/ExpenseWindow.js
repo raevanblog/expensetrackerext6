@@ -4,47 +4,53 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	xtype : 'expensewindow',
 	controller : 'expensewindowcontroller',
 	viewModel : 'expensewindowmodel',
-	requires : [ 'expensetracker.view.expense.ExpenseWindowController', 'expensetracker.view.expense.ExpenseWindowModel',
-			'expensetracker.view.expense.ExpenseGrid', 'expensetracker.view.expense.ExpenseCategory' ],
-	bind: {
-		title: '{title}'
+	requires : [ 'expensetracker.view.expense.ExpenseWindowController', 'expensetracker.view.expense.ExpenseWindowModel', 'expensetracker.view.expense.ExpenseGrid',
+			'expensetracker.view.expense.ExpenseCategory' ],
+	bind : {
+		title : '{title}'
 	},
 	layout : {
 		type : 'card',
 		animate : true,
 		animation : {
 			type : 'pop',
-			easing : 'ease-in',			
+			easing : 'ease-in',
 			direction : 'left'
 		}
 	},
 	listeners : {
 		beforeclose : 'onCloseExpenseWindow'
 	},
-	tools: [{
-		type: 'refresh',
-		tooltip: 'Reload',
-		handler: 'onReload'
-	}],
+	tools : [ {
+		type : 'refresh',
+		tooltip : 'Reload',
+		handler : 'onReload'
+	} ],
 	items : [ {
 		xtype : 'expensegrid',
-		reference : 'expensegrid',		
+		reference : 'expensegrid',
 		listeners : {
 			afterrender : 'onRenderExpenseGrid'
 		}
 	}, {
 		xtype : 'expensecategory',
 		reference : 'expensecategory',
-		tbar : [{
+		tbar : [ {
 			xtype : 'button',
-			text : 'Back',
 			iconCls : 'x-fa fa-backward',
 			handler : 'onBackCategory'
-		},'->',{
-			xtype: 'button',
+		}, '-', {
+			xtype : 'textfield',
+			emptyText : 'Search...',
+			reference : 'categorygridsearch',
+			listeners : {
+				change : 'filterGrid'
+			}
+		}, '->', {
+			xtype : 'button',
 			text : 'Category',
-			iconCls: 'x-fa fa-plus-square',
+			iconCls : 'x-fa fa-plus-square',
 			handler : 'onAddCategory'
-		}]
+		} ]
 	} ]
 });

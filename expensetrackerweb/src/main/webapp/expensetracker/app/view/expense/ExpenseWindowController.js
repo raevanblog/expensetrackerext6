@@ -15,31 +15,31 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				fn : function(button) {
 					if (button === 'yes') {
 						component.setLoading('Saving...');
-						if(store.isFiltered()){
-							store.clearFilter();							
+						if (store.isFiltered()) {
+							store.clearFilter();
 						}
 						store.sync({
-							success: function(batch) {								
+							success : function(batch) {
 								component.setLoading(false);
 								window.clearListeners();
 								window.close();
 							},
-							failure: function(batch) {								
+							failure : function(batch) {
 								component.setLoading(false);
 								me.refreshGridView(component);
 							}
 						})
-						
+
 					}
-					if (button === 'no') {						
+					if (button === 'no') {
 						window.clearListeners();
-						window.close();						
+						window.close();
 					}
 				}
 			});
 		} else {
-			if(store.isFiltered()){
-				store.clearFilter();							
+			if (store.isFiltered()) {
+				store.clearFilter();
 			}
 			return true;
 		}
@@ -61,19 +61,23 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	},
 	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
 		var me = this;
-		var grid = me.lookup('expensegrid');
-		grid.getStore().filter('itemName', newValue);
+		var view = me.getView();
+		var grid = view.getLayout().getActiveItem();
+		var store = grid.getStore();
+		if (gridsearchtext.reference === 'expensegridsearch') {
+			store.filter('itemName', newValue);
+		}
 	},
 	onAddExpenseRecord : function(addexpenseBtn) {
 		var me = this;
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
-		var view  = me.getView();
+		var view = me.getView();
 		var model = view.getViewModel();
 		var model = new expensetracker.model.Expense({
 			itemName : '',
 			price : 0.0,
-			expdate: model.get('expenseDate'),
+			expdate : model.get('expenseDate'),
 			qty : 0.0,
 			username : 'shyamcse07'
 		});
@@ -132,13 +136,13 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var view = me.getView();
 		view.getLayout().next();
 	},
-	onReload: function(event) {
+	onReload : function(event) {
 		var me = this;
 		var view = me.getView();
 		var component = view.getLayout().getActiveItem();
-		component.getStore().reload();				
-	},	
-	refreshGridView: function(grid) {
+		component.getStore().reload();
+	},
+	refreshGridView : function(grid) {
 		grid.getView().refresh();
 	}
 });

@@ -17,24 +17,24 @@ public class ExpenseTypeService {
 	@Autowired
 	private ExpenseMapper mapper;
 
-	public Response select() throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.getExpenseTypes(), Operation.SELECT);
+	public List<ExpenseType> select() throws Exception {
+		return mapper.getExpenseTypes();
 	}
 
-	public Response update(List<ExpenseType> records) throws Exception {
+	public Integer update(List<ExpenseType> records) throws Exception {
 		int noOfRecords = 0;
 		for (ExpenseType record : records) {
 			noOfRecords = noOfRecords + mapper.updateExpenseType(record);
 		}
-		return ResponseGenerator.getSucessResponse(noOfRecords, Operation.UPDATE);
+		return noOfRecords;
 	}
 
-	public Response insert(List<ExpenseType> records) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.insertExpenseType(records), Operation.INSERT);
+	public Integer insert(List<ExpenseType> records) throws Exception {
+		return mapper.insertExpenseType(records);
 	}
 
-	public Response delete(Integer id) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.deleteExpenseType(id), Operation.DELETE);
+	public Integer delete(Integer id) throws Exception {
+		return mapper.deleteExpenseType(id);
 	}
 
 }
