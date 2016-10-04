@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.core.ResponseGenerator;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
@@ -22,37 +23,37 @@ public class ExpenseService {
 	private static final Logger L = LoggerFactory.getLogger(ExpenseService.class);
 
 	@Autowired
-	ExpenseMapper mapper;
+	private ExpenseMapper mapper;
 
-	public Response insert(List<Expense> records) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.insertExpense(records), Operation.INSERT);
+	public Integer insert(List<Expense> records) throws Exception {
+		return mapper.insertExpense(records);
 	}
 
-	public Response update(List<Expense> records) throws Exception {
+	public Integer update(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
 		for (Expense record : records) {
 			noOfRecords = noOfRecords + mapper.updateExpense(record);
 		}
-		return ResponseGenerator.getSucessResponse(noOfRecords, Operation.UPDATE);
+		return noOfRecords;
 	}
 
-	public Response select(String username, Integer month, Integer year) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.getExpense(username, month, year), Operation.SELECT);
+	public List<Expense> select(String username, Integer month, Integer year) throws Exception {
+		return mapper.getExpense(username, month, year);
 	}
 
-	public Response selectById(Integer id) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.getExpenseById(id), Operation.SELECT);
+	public List<Expense> selectById(Integer id) throws Exception {
+		return mapper.getExpenseById(id);
 	}
 
-	public Response delete(List<Expense> records) throws Exception {
+	public Integer delete(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
 		for (Expense record : records) {
 			noOfRecords = noOfRecords + mapper.deleteExpense(record);
 		}
-		return ResponseGenerator.getSucessResponse(noOfRecords, Operation.DELETE);
+		return noOfRecords;
 	}
 
-	public Response selectExpenseNames() throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.selectExpenseNames(), Operation.SELECT);
+	public List<Dictionary> selectExpenseNames() throws Exception {
+		return mapper.selectExpenseNames();
 	}
 }

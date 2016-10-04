@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slabs.expense.tracker.database.mapper.UserMapper">
+
+	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
+		insert into EXPENSETRACKER.EXPENSE(USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS) values(
+		#{record.username},
+		#{record.password},
+		#{record.email},
+		#{record.mobile},
+		#{record.address}
+		)
+	</insert>
+
+	<update id="updateUser">
+		update EXPENSETRACKER.USERINFO
+		<set>
+			<if test="record.password != null">
+				password=#{record.password},
+			</if>
+			<if test="record.email != null">
+				email=#{record.email},
+			</if>
+			<if test="record.mobile != null">
+				mobile=#{record.mobile},
+			</if>
+			<if test="record.address != null">
+				address=#{record.address}
+			</if>
+		</set>
+		where username=#{record.username}
+	</update>
+
+	<select id="getUser" resultType="com.slabs.expense.tracker.common.db.entity.UserInfo">
+		select * from EXPENSETRACKER.USERINFO where username=#{username}
+	</select>
+
+	<delete id="deleteUser">
+		delete from EXPENSETRACKER.USERINFO where username=#{record.username}
+	</delete>
+
+</mapper>

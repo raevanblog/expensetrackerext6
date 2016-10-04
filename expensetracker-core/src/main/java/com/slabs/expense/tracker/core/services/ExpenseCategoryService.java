@@ -28,29 +28,29 @@ public class ExpenseCategoryService {
 	@Autowired
 	private SqlSessionFactory factory;
 
-	public Response insert(List<ExpenseCategory> records) throws Exception {
+	public Integer insert(List<ExpenseCategory> records) throws Exception {
 
-		return ResponseGenerator.getSucessResponse(mapper.insertExpenseCategory(records), Operation.INSERT);
+		return mapper.insertExpenseCategory(records);
 	}
 
-	public Response update(List<ExpenseCategory> records) throws Exception {
+	public Integer update(List<ExpenseCategory> records) throws Exception {
 		Integer noOfRecords = 0;
 		for (ExpenseCategory record : records) {
 			noOfRecords = noOfRecords + mapper.updateExpenseCategory(record);
 		}
-		return ResponseGenerator.getSucessResponse(noOfRecords, Operation.UPDATE);
+		return noOfRecords;
 	}
 
-	public Response select(Integer categoryId) throws Exception {
-		return ResponseGenerator.getSucessResponse(mapper.retrieveExpenseCategory(categoryId), Operation.SELECT);
+	public List<ExpenseCategory> select(Integer categoryId) throws Exception {
+		return mapper.retrieveExpenseCategory(categoryId);
 	}
 
-	public Response delete(List<ExpenseCategory> records) throws Exception {
+	public Integer delete(List<ExpenseCategory> records) throws Exception {
 		Integer noOfRecords = 0;
 		for (ExpenseCategory record : records) {
 			noOfRecords = noOfRecords + mapper.deleteExpenseCategory(record);
 		}
-		return ResponseGenerator.getSucessResponse(noOfRecords, Operation.DELETE);
+		return noOfRecords;
 	}
 
 }

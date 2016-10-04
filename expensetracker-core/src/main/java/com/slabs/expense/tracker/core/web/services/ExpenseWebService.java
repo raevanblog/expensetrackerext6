@@ -41,7 +41,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
 					ExpenseCategoryService.class);
-			return service.insert(records);
+			return ResponseGenerator.getSucessResponse(service.insert(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -56,7 +56,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
 					ExpenseCategoryService.class);
-			return service.update(records);
+			return ResponseGenerator.getSucessResponse(service.update(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -70,7 +70,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
 					ExpenseCategoryService.class);
-			return service.select(categoryId);
+			return ResponseGenerator.getSucessResponse(service.select(categoryId), Operation.SELECT);
 
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -85,7 +85,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE,
 					ExpenseCategoryService.class);
-			return service.delete(records);
+			return ResponseGenerator.getSucessResponse(service.delete(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -100,7 +100,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
-			return service.selectExpenseNames();
+			return ResponseGenerator.getSucessResponse(service.selectExpenseNames(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -114,7 +114,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseTypeService service = ServiceFactory.getInstance().getService(Services.EXPENSE_TYPE_SERVICE,
 					ExpenseTypeService.class);
-			return service.select();
+			return ResponseGenerator.getSucessResponse(service.select(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -133,7 +133,7 @@ public class ExpenseWebService {
 				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST,
 						"Parameter {username} is required");
 			}
-			return service.select(username, month, year);
+			return ResponseGenerator.getSucessResponse(service.select(username, month, year), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -148,7 +148,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
-			return service.insert(records);
+			return ResponseGenerator.getSucessResponse(service.insert(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -163,7 +163,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
-			return service.update(records);
+			return ResponseGenerator.getSucessResponse(service.update(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -178,7 +178,7 @@ public class ExpenseWebService {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
-			return service.delete(records);
+			return ResponseGenerator.getSucessResponse(service.delete(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
