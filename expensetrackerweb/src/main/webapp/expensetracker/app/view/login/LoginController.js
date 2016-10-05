@@ -1,39 +1,29 @@
 Ext.define('expensetracker.view.login.LoginController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.login',
-	listen : {
-		controller : {
-			'#' : {
-				unmatchedroute : function(hash) {
-					
+	onLogin : function(button) {
+		var me = this;
+		var loginform = me.lookup('loginform');
+		var username = me.lookup('username');
+		var password = me.lookup('password');
+		if (loginform.isValid()) {
+			loginform.setLoading('Logging in...');
+			loginform.submit({
+				params : {
+					credential : Ext.util.Base64.encode(username.getValue() + ':' + password.getValue())
+				},
+				success : function(form, action) {
+					loginform.setLoading(false);
+					loginform.reset();
+					me.redirectTo('main');
+				},
+				failure : function(form, action) {
+					loginform.setLoading(false);
+					var errorlbl = me.lookup('errorlbl');
+					var message = action.result.message;
+					errorlbl.setText(message);
 				}
-			}
+			})
 		}
-	},
-	routes : {
-		'login' : 'onLoginRoute',
-		'main' : 'onMainRoute'
-	},
-	onLoginRoute : function(id) {
-		var view = expensetracker.app.getMainView();
-		var existing = view.child('component[xtype=app-main]');
-		if(existing) {
-			view.getLayout().setActiveItem(0);
-			view.remove(existing);
-		}		
-	},
-	onMainRoute : function(id) {
-		var view = expensetracker.app.getMainView();
-		var existing = view.child('component[xtype=app-main]');
-		if(!existing) {
-			var mainView = Ext.create({
-				xtype: 'app-main'
-			});
-			view.add(mainView);
-		}
-		view.getLayout().setActiveItem(1);
-	},
-	onLogin: function(button) {
-		this.redirectTo('main');
 	}
 });

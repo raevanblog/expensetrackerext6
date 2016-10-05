@@ -10,13 +10,30 @@ Ext.define('expensetracker.Application', {
 
 	stores : [ 'ExpenseDock', 'ExpenseCategory', 'ExpenseType', 'ExpenseName', 'Expense' ],
 
-	requires : [ 'expensetracker.util.Url', 'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox',
-			'Ext.form.Panel', 'Ext.form.field.Text', 'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar' ],
+	requires : [ 'expensetracker.util.Url', 'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField',
+			'Ext.form.field.ComboBox', 'Ext.form.Panel', 'Ext.form.field.Text', 'Ext.layout.container.HBox', 'Ext.layout.container.VBox',
+			'Ext.list.Tree', 'Ext.toolbar.Toolbar' ],
 
 	defaultToken : 'login',
 
 	launch : function() {
-		this.redirectTo('login');
+		var me = this;
+		Ext.Ajax.request({
+			url : expensetracker.util.Url.getSessionService(),
+
+			success : function(response, opts) {
+				var response = Ext.decode(response.responseText);
+				if (response.success) {
+					me.redirectTo('main');
+				} else {
+					me.redirectTo('login');
+				}
+
+			},
+			failure : function(response, opts) {
+
+			}
+		});
 	},
 
 	onAppUpdate : function() {
