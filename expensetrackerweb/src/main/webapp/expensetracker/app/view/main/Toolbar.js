@@ -18,9 +18,12 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		iconCls : 'x-fa fa-info-circle'
 	}, {
 		xtype : 'button',
-		iconCls : 'x-fa fa-user'
+		tooltip: 'Profile',
+		iconCls : 'x-fa fa-user',
+		handler : 'onUserProfile'
 	}, {
-		xtype : 'button',		
+		xtype : 'button',
+		tooltip: 'Sign Out',
 		iconCls : 'x-fa fa-sign-out',
 		handler : 'onSignOut'
 	} ]

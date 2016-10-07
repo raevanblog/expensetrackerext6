@@ -1,6 +1,5 @@
 package com.slabs.expense.tracker.web.controller;
 
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
@@ -24,7 +24,7 @@ import com.slabs.expense.tracker.web.WebConstants;
 @RequestMapping("request")
 public class AccessController {
 
-	@RequestMapping("login")
+	@RequestMapping(value = "login", method = { RequestMethod.POST })
 	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
@@ -38,50 +38,63 @@ public class AccessController {
 					info.setPassword("");
 					session.setAttribute(WebConstants.LOGGED_IN_USER, info);
 					session.setMaxInactiveInterval(600);
-					output.put("success", true);
-					output.put("message", "Login Successful");
-					output.put("user", info);
+					output.put(WebConstants.SUCCESS, true);
+					output.put(WebConstants.MESSAGE, "Login Successful");
+					output.put(WebConstants.USER, info);
 				} else {
-					output.put("success", false);
-					output.put("message", "* Please check your password");
-					output.put("user", null);
+					output.put(WebConstants.SUCCESS, false);
+					output.put(WebConstants.MESSAGE, "* Please check your password");
+					output.put(WebConstants.USER, null);
 				}
 
 			} else {
-				output.put("success", false);
-				output.put("message", "* Please check your username/password");
-				output.put("user", null);
+				output.put(WebConstants.SUCCESS, false);
+				output.put(WebConstants.MESSAGE, "* Please check your username/password");
+				output.put(WebConstants.USER, null);
 			}
 			return new ModelAndView("json", output);
 		} catch (Exception e) {
-			output.put("success", false);
-			output.put("message", "* Exception occurred, please contact customer support");
-			output.put("user", null);
-			return new ModelAndView("json", output);
+			output.put(WebConstants.SUCCESS, false);
+			output.put(WebConstants.MESSAGE, "* Exception occurred, please contact customer support");
+			output.put(WebConstants.USER, null);
+			return new ModelAndView(WebConstants.JSON, output);
 		}
 	}
 
-	@RequestMapping("session")
+	@RequestMapping(value = "logout", method = { RequestMethod.POST })
+	public ModelAndView doLogout(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> output = new HashMap<String, Object>();
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.removeAttribute(WebConstants.LOGGED_IN_USER);
+			session.invalidate();
+		}
+		output.put(WebConstants.SUCCESS, true);
+		output.put(WebConstants.MESSAGE, "Logged Off");
+		return new ModelAndView(WebConstants.JSON, output);
+	}
+
+	@RequestMapping(value = "session", method = { RequestMethod.GET })
 	public ModelAndView getSession(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
 			HttpSession session = request.getSession(false);
 			if (session != null) {
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
-				output.put("success", true);
-				output.put("message", "Session Active");
-				output.put("user", user);
+				output.put(WebConstants.SUCCESS, true);
+				output.put(WebConstants.MESSAGE, "Session Active");
+				output.put(WebConstants.USER, user);
 			} else {
-				output.put("success", false);
-				output.put("message", "Session Invalid");
-				output.put("user", null);
+				output.put(WebConstants.SUCCESS, false);
+				output.put(WebConstants.MESSAGE, "Session Invalid");
+				output.put(WebConstants.USER, null);
 
 			}
 			return new ModelAndView("json", output);
 		} catch (Exception e) {
-			output.put("success", false);
-			output.put("message", "* Exception occurred, please contact customer support");
-			output.put("user", null);
+			output.put(WebConstants.SUCCESS, false);
+			output.put(WebConstants.MESSAGE, "* Exception occurred, please contact customer support");
+			output.put(WebConstants.USER, null);
 			return new ModelAndView("json", output);
 		}
 	}

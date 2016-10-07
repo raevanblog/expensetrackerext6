@@ -1,65 +1,61 @@
 Ext.define('expensetracker.view.login.Login', {
-	extend : 'Ext.container.Container',
+	extend : 'Ext.window.Window',
 	xtype : 'login',
 	alias : 'view.login',
 	layout : 'fit',
 	requires : [ 'expensetracker.view.login.LoginController' ],
 	controller : 'login',
+	title : 'Login',
+	bodyPadding: 10,
+	closable : false,
+	autoShow : true,
 	items : [ {
-		xtype : 'container',
+		xtype : 'form',
+		width : 350,
+		method : 'POST',
+		jsonSubmit : true,
+		url : expensetracker.util.Url.getLogin(),
+		reference : 'loginform',		
 		layout : {
-			type : 'hbox',
-			pack : 'middle'
+			type : 'vbox',
+			align : 'stretch'
 		},
 		items : [ {
-			xtype : 'form',
-			width : 350,
-			method : 'POST',
-			jsonSubmit : true,
-			url : expensetracker.util.Url.getLoginService(),
-			reference : 'loginform',
-			title : 'Login',
-			bodyPadding : '5	5 0 5',
-			layout : {
-				type : 'vbox',
-				align : 'stretch'
-			},
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : 'Username',
-				labelSeparator : '',
-				reference : 'username',
-				submitValue : false,
-				validateBlank : true,
-				name : 'username',
-				allowBlank : false,
-				maxLength : 25,
-				flex : 1
-			}, {
-				xtype : 'textfield',
-				fieldLabel : 'Password',
-				submitValue : false,
-				reference : 'password',
-				allowBlank : false,
-				name : 'password',
-				validateBlank : true,
-				labelSeparator : '',
-				maxLength : 25,
-				inputType : 'password',
-				flex : 1
-			}, {
-				xtype : 'label',
-				padding : '10 10 10 10',
-				reference : 'errorlbl',
-				text : '  ',
-				style : {
-					color : 'red'
-				}
-			} ],
-			buttons : [ {
-				text : 'Login',
-				handler : 'onLogin'
-			} ]
+			xtype : 'textfield',
+			fieldLabel : 'Username',
+			labelSeparator : '',
+			reference : 'username',
+			submitValue : false,
+			validateBlank : true,
+			name : 'username',
+			allowBlank : false,
+			maxLength : 25,
+			flex : 1
+		}, {
+			xtype : 'textfield',
+			fieldLabel : 'Password',
+			submitValue : false,
+			reference : 'password',
+			allowBlank : false,
+			name : 'password',
+			validateBlank : true,
+			labelSeparator : '',
+			maxLength : 25,
+			inputType : 'password',
+			flex : 1
+		}, {
+			xtype : 'label',
+			padding : '10 10 10 10',
+			reference : 'errorlbl',
+			text : '  ',
+			style : {
+				color : 'red'
+			}
+		} ],
+		buttons : [ {
+			text : 'Login',
+			formBind: true,
+			handler : 'onLogin'
 		} ]
 	} ]
 

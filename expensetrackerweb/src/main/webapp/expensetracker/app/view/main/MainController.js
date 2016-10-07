@@ -11,8 +11,8 @@ Ext.define('expensetracker.view.main.MainController', {
 	listen : {
 		controller : {
 			'#' : {
-				unmatchedroute : function(hash) {
-					
+				unmatchedroute : function(hash) {					
+					console.log(hash);
 				}
 			}
 		}
@@ -21,6 +21,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		'main/:node' : 'onRouteChange'
 	},
 	onRouteChange : function(id) {
+		console.log("asdasdds");
 		this.setCurrentView(id);
 	},
 	lastView : null,
@@ -81,10 +82,11 @@ Ext.define('expensetracker.view.main.MainController', {
 			this.redirectTo('main/' + toNode);
 		}
 	},
-	onMainViewRender : function() {
-		this.redirectTo('main/expensedashboard');
+	onMainViewRender : function() {	
+		var me = this;
+		me.setCurrentView('expensedashboard');
 	},
-	onToggleNavigation : function(button) {
+	onToggleNavigation : function(button) {		
 		var me = this;
 		var refs = me.getReferences();
 		var navMenu = refs.navigationMenu;
@@ -143,7 +145,29 @@ Ext.define('expensetracker.view.main.MainController', {
 			}
 		}
 	},
+	onUserProfile : function(profileBtn) {
+		var me = this;
+		var profileWindow = Ext.create('expensetracker.view.profile.User',{
+			modal: true,
+			height: me.getView().getHeight()-100,
+			width: me.getView().getWidth()-400
+		});
+		profileWindow.show();
+	},
 	onSignOut : function(signOutBtn) {
-		this.redirectTo('login');
+		var me = this;		
+		Ext.Ajax.request({
+			url : expensetracker.util.Url.getLogout(),
+			method : 'POST',
+			success : function(response, opts) {
+				var response = Ext.decode(response.responseText);
+				me.getView().destroy();
+				Ext.widget('login');
+			},
+			failure : function(response, opts) {
+
+			}
+		});
+						
 	}
 });

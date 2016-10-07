@@ -10,23 +10,22 @@ Ext.define('expensetracker.Application', {
 
 	stores : [ 'ExpenseDock', 'ExpenseCategory', 'ExpenseType', 'ExpenseName', 'Expense' ],
 
-	requires : [ 'expensetracker.util.Url', 'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField',
+	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Session', 'expensetracker.view.login.Login', 'expensetracker.view.main.Main', 'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField',
 			'Ext.form.field.ComboBox', 'Ext.form.Panel', 'Ext.form.field.Text', 'Ext.layout.container.HBox', 'Ext.layout.container.VBox',
 			'Ext.list.Tree', 'Ext.toolbar.Toolbar' ],
-
-	defaultToken : 'login',
-
+	defaultToken: 'login',
 	launch : function() {
 		var me = this;
 		Ext.Ajax.request({
-			url : expensetracker.util.Url.getSessionService(),
+			url : expensetracker.util.Url.getSession(),
 
 			success : function(response, opts) {
-				var response = Ext.decode(response.responseText);
+				var response = Ext.decode(response.responseText);				
 				if (response.success) {
-					me.redirectTo('main');
+					expensetracker.util.Session.setUser(response.user);
+					Ext.widget('app-main');
 				} else {
-					me.redirectTo('login');
+					Ext.widget('login');
 				}
 
 			},
