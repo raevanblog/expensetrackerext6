@@ -7,6 +7,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 	bbar : [ {
 		xtype : 'button',
 		text : 'Save/Update',
+		iconCls : 'x-fa fa-save',
 		handler : 'onCategorySaveOrUpdate'
 	} ],
 	store : 'ExpenseCategory',

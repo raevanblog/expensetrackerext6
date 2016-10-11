@@ -11,7 +11,7 @@ Ext.define('expensetracker.view.main.MainController', {
 	listen : {
 		controller : {
 			'#' : {
-				unmatchedroute : function(hash) {					
+				unmatchedroute : function(hash) {
 					console.log(hash);
 				}
 			}
@@ -82,11 +82,11 @@ Ext.define('expensetracker.view.main.MainController', {
 			this.redirectTo('main/' + toNode);
 		}
 	},
-	onMainViewRender : function() {	
+	onMainViewRender : function() {
 		var me = this;
 		me.setCurrentView('expensedashboard');
 	},
-	onToggleNavigation : function(button) {		
+	onToggleNavigation : function(button) {
 		var me = this;
 		var refs = me.getReferences();
 		var navMenu = refs.navigationMenu;
@@ -147,15 +147,17 @@ Ext.define('expensetracker.view.main.MainController', {
 	},
 	onUserProfile : function(profileBtn) {
 		var me = this;
-		var profileWindow = Ext.create('expensetracker.view.profile.User',{
-			modal: true,
-			height: me.getView().getHeight()-100,
-			width: me.getView().getWidth()-400
+		var profileWindow = Ext.create('expensetracker.view.profile.User', {
+			modal : true,
+			height : me.getView().getHeight() - 70,
+			width : (me.getView().getWidth() - 250)/2,
+			x : 250,
+			y : 70
 		});
 		profileWindow.show();
 	},
 	onSignOut : function(signOutBtn) {
-		var me = this;		
+		var me = this;
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getLogout(),
 			method : 'POST',
@@ -168,6 +170,6 @@ Ext.define('expensetracker.view.main.MainController', {
 
 			}
 		});
-						
+
 	}
 });

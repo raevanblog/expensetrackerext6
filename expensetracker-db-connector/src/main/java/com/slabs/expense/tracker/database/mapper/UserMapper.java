@@ -8,9 +8,7 @@ import com.slabs.expense.tracker.common.db.entity.UserInfo;
 
 public interface UserMapper {
 
-	public UserInfo getUser(@Param("username") String username) throws Exception;
-
-	public List<UserInfo> getAllUsers() throws Exception;
+	public List<UserInfo> getUser(@Param("username") String username, @Param("includePassword") boolean includePassword) throws Exception;
 
 	public Integer createUser(@Param("record") UserInfo record) throws Exception;
 

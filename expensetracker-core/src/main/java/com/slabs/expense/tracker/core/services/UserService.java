@@ -17,20 +17,20 @@ public class UserService {
 	@Autowired
 	private UserMapper mapper;
 
-	public UserInfo select(String username) throws Exception {
-		return mapper.getUser(username);
+	public List<UserInfo> select(String username, boolean includePassword) throws Exception {
+		return mapper.getUser(username, includePassword);
 	}
 
-	public List<UserInfo> selectAll() throws Exception {
-		return mapper.getAllUsers();
+	public List<UserInfo> selectAll(boolean includePassword) throws Exception {
+		return mapper.getUser(null, includePassword);
 	}
 
-	public Integer update(List<UserInfo> records) throws Exception {
-		int noOfRecords = 0;
-		for (UserInfo record : records) {
-			noOfRecords = noOfRecords + mapper.updateUser(record);
-		}
-		return noOfRecords;
+	public Integer update(UserInfo record) throws Exception {
+		return mapper.updateUser(record);
+	}
+
+	public Integer create(UserInfo record) throws Exception {
+		return mapper.createUser(record);
 	}
 
 	public Integer delete(List<UserInfo> records) throws Exception {

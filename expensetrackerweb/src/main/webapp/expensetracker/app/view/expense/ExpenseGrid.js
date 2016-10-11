@@ -2,11 +2,11 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
-	requires : ['expensetracker.store.Expense' ],
-	reference : 'expensegrid',	
+	requires : [ 'expensetracker.store.Expense' ],
+	reference : 'expensegrid',
 	plugins : {
 		ptype : 'cellediting',
-		clicksToEdit : 1		
+		clicksToEdit : 1
 	},
 	store : Ext.create('expensetracker.store.Expense'),
 	features : [ {
@@ -42,6 +42,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	bbar : [ {
 		xtype : 'button',
 		text : 'Save/Update',
+		iconCls : 'x-fa fa-save',
 		handler : 'onSaveOrUpdateExpense'
 	} ],
 	columns : [ {
@@ -97,8 +98,8 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		editor : {
 			xtype : 'datefield',
 			format : 'd/m/Y',
-			bind : {				
-				minValue : '{expenseStartDate}',				
+			bind : {
+				minValue : '{expenseStartDate}',
 				maxValue : '{expenseEndDate}'
 			}
 		},

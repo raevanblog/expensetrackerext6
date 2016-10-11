@@ -5,7 +5,8 @@
 <mapper namespace="com.slabs.expense.tracker.database.mapper.UserMapper">
 
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
-		insert into EXPENSETRACKER.EXPENSE(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS) values(
+		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
+		values(
 		#{record.firstName},
 		#{record.lastName},
 		#{record.sex},
@@ -46,7 +47,14 @@
 	</update>
 
 	<select id="getUser" resultType="com.slabs.expense.tracker.common.db.entity.UserInfo">
-		select * from EXPENSETRACKER.USERINFO where username=#{username}
+		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE,ADDRESS
+		<if test="includePassword">
+			,PASSWORD
+		</if>
+		from EXPENSETRACKER.USERINFO
+		<if test="username != null">
+			where username=#{username}
+		</if>
 	</select>
 
 	<delete id="deleteUser">
