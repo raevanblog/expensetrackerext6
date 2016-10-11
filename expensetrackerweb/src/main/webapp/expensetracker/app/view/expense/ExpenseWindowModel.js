@@ -3,11 +3,11 @@ Ext.define('expensetracker.view.expense.ExpenseWindowModel', {
 	alias : 'viewmodel.expensewindowmodel',
 	data : [ {
 		expenseStartDate : '',
-		expenseDate: '',
+		expenseDate : '',
 		expenseEndDate : '',
 		username : '',
 		month : '',
 		year : '',
-		title: ''
+		title : ''
 	} ]
 })

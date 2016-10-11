@@ -1,7 +1,7 @@
 Ext.define('expensetracker.store.NavigationMenu', {
 	extend : 'Ext.data.TreeStore',
 	storeId : 'NavigationMenu',
-	alias: 'store.navigationmenu',	
+	alias : 'store.navigationmenu',
 	fields : [ {
 		name : 'text'
 	} ],

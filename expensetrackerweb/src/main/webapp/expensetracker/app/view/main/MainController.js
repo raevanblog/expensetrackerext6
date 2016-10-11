@@ -150,7 +150,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var profileWindow = Ext.create('expensetracker.view.profile.User', {
 			modal : true,
 			height : me.getView().getHeight() - 70,
-			width : (me.getView().getWidth() - 250)/2,
+			width : (me.getView().getWidth() - 250) / 2,
 			x : 250,
 			y : 70
 		});

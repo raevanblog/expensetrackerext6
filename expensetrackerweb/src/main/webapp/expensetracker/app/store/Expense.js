@@ -11,7 +11,7 @@ Ext.define('expensetracker.store.Expense', {
 			read : expensetracker.util.Url.getExpenseService(),
 			update : expensetracker.util.Url.getExpenseService(),
 			destroy : expensetracker.util.Url.getExpenseService()
-		},		
+		},
 		actionMethods : {
 			create : 'POST',
 			read : 'GET',
@@ -25,7 +25,7 @@ Ext.define('expensetracker.store.Expense', {
 		},
 		listeners : {
 			exception : function(proxy, response, operation) {
-				var response = Ext.JSON.decode(operation.getError().response.responseText);				
+				var response = Ext.JSON.decode(operation.getError().response.responseText);
 				Ext.MessageBox.show({
 					title : 'ExpenseTracker',
 					msg : response.status_Message,

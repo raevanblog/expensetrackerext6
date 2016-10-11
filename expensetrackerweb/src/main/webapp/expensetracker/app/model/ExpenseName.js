@@ -3,6 +3,6 @@ Ext.define('expensetracker.model.ExpenseName', {
 	alias : 'model.expensename',
 	fields : [ {
 		name : 'itemName',
-		type : 'string'		
+		type : 'string'
 	} ]
 });

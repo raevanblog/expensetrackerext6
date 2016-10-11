@@ -15,10 +15,10 @@ Ext.define('expensetracker.view.login.LoginController', {
 				},
 				success : function(form, action) {
 					var response = Ext.decode(action.response.responseText);
-					if(response.user !== null) {
+					if (response.user !== null) {
 						expensetracker.util.Session.setUser(response.user);
 					}
-					me.getView().destroy();					
+					me.getView().destroy();
 					Ext.widget('app-main');
 				},
 				failure : function(form, action) {

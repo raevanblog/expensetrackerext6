@@ -6,7 +6,7 @@ Ext.define('expensetracker.view.login.Login', {
 	requires : [ 'expensetracker.view.login.LoginController' ],
 	controller : 'login',
 	title : 'Login',
-	bodyPadding: 10,
+	bodyPadding : 10,
 	closable : false,
 	autoShow : true,
 	items : [ {
@@ -15,7 +15,7 @@ Ext.define('expensetracker.view.login.Login', {
 		method : 'POST',
 		jsonSubmit : true,
 		url : expensetracker.util.Url.getLogin(),
-		reference : 'loginform',		
+		reference : 'loginform',
 		layout : {
 			type : 'vbox',
 			align : 'stretch'
@@ -54,7 +54,7 @@ Ext.define('expensetracker.view.login.Login', {
 		} ],
 		buttons : [ {
 			text : 'Login',
-			formBind: true,
+			formBind : true,
 			handler : 'onLogin'
 		} ]
 	} ]
