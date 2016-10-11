@@ -1,6 +1,7 @@
 package com.slabs.expense.tracker.web.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +32,9 @@ public class AccessController {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			Map<String, String> parameters = JSONUtil.getMapFromInputStream(request.getInputStream());
 			String[] credentials = Base64Encoder.decode(parameters.get("credential"), ":");
-			UserInfo info = service.select(credentials[0]);
-			if (info != null) {
+			List<UserInfo> users = service.select(credentials[0], true);
+			if (users != null && !users.isEmpty()) {
+				UserInfo info = users.get(0);
 				if (info.getPassword().equals(credentials[1])) {
 					HttpSession session = request.getSession(true);
 					info.setPassword("");
