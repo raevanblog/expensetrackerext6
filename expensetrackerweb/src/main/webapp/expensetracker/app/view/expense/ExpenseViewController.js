@@ -4,8 +4,8 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 	onThumbnailClick : function(thumbnailcont, record, item, index, e) {
 		var me = this;
 		var refs = me.getReferences();
-		var currentYear = new Date().getFullYear();
-		var currentMonth = new Date().getMonth() + 1;
+		var currentYear = expensetracker.util.Calendar.getCurrentYear();
+		var currentMonth = expensetracker.util.Calendar.getCurrentMonthNo();
 		var year = parseInt(refs.expensedock.getTitle());
 		var monthNo = record.get('monthNo');
 		var month = record.get('month');

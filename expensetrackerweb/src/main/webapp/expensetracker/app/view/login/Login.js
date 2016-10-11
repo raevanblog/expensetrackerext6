@@ -29,6 +29,10 @@ Ext.define('expensetracker.view.login.Login', {
 			validateBlank : true,
 			name : 'username',
 			allowBlank : false,
+			enableKeyEvents: true,
+			listeners: {
+				keypress: 'onEnter'
+			},
 			maxLength : 25,
 			flex : 1
 		}, {
@@ -38,9 +42,13 @@ Ext.define('expensetracker.view.login.Login', {
 			reference : 'password',
 			allowBlank : false,
 			name : 'password',
+			enableKeyEvents: true,
 			validateBlank : true,
 			labelSeparator : '',
 			maxLength : 25,
+			listeners: {
+				keypress: 'onEnter'
+			},
 			inputType : 'password',
 			flex : 1
 		}, {
@@ -55,6 +63,7 @@ Ext.define('expensetracker.view.login.Login', {
 		buttons : [ {
 			text : 'Login',
 			formBind : true,
+			reference: 'loginBtn',
 			handler : 'onLogin'
 		} ]
 	} ]

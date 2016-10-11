@@ -29,5 +29,12 @@ Ext.define('expensetracker.view.login.LoginController', {
 				}
 			})
 		}
+	},
+	onEnter: function(textfield, e) {
+		var me = this;
+		var loginBtn = me.lookup('loginBtn');
+		if(Ext.event.Event.ENTER === e.keyCode) {
+			me.onLogin(loginBtn);
+		}
 	}
 });

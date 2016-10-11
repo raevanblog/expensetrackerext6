@@ -14,10 +14,11 @@ Ext.define('expensetracker.Application', {
 			'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox',
 			'Ext.form.Panel', 'Ext.form.field.Text', 'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree',
 			'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.form.field.Display', 'Ext.plugin.Viewport', 'Ext.form.field.TextArea',
-			'Ext.form.FieldContainer' ],
+			'Ext.form.FieldContainer', 'expensetracker.util.Calendar' ],
 	defaultToken : 'login',
 	launch : function() {
 		var me = this;
+		expensetracker.util.Calendar.init();
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getSession(),
 
