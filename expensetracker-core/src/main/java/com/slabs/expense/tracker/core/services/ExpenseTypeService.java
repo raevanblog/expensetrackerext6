@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.slabs.expense.tracker.common.db.entity.ExpenseType;
-import com.slabs.expense.tracker.core.ResponseGenerator;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
-import com.slabs.expense.tracker.webservice.response.Operation;
-import com.slabs.expense.tracker.webservice.response.Response;
 
 @Service(value = "expensetype")
 public class ExpenseTypeService {

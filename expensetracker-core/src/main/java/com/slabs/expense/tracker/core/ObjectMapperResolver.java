@@ -2,7 +2,6 @@ package com.slabs.expense.tracker.core;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 import javax.ws.rs.ext.ContextResolver;
 

@@ -23,6 +23,7 @@ public class ServiceFactory {
 		if (factory == null) {
 			synchronized (ServiceFactory.class) {
 				if (factory == null) {
+					L.info("Initializing Service Factory...");
 					factory = new ServiceFactory();
 				}
 			}
