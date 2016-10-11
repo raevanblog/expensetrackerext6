@@ -1,5 +1,6 @@
 package com.slabs.expense.tracker.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.slabs.expense.tracker.webservice.response.Operation;
@@ -40,6 +41,12 @@ public class ResponseGenerator {
 		response.setStatus_Message(ResponseStatus.OK.name());
 		response.setSuccess(true);
 		return response;
+	}
+
+	public static Response getSucessResponse(Object o, Operation operation) {
+		List<Object> list = new ArrayList<Object>();
+		list.add(o);
+		return getSucessResponse(list, operation);
 	}
 
 	public static Response getSucessResponse(List<? extends Object> list, Operation operation) {
