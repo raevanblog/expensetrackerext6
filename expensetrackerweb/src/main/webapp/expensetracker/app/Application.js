@@ -14,7 +14,7 @@ Ext.define('expensetracker.Application', {
 			'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox',
 			'Ext.form.Panel', 'Ext.form.field.Text', 'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree',
 			'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.form.field.Display', 'Ext.plugin.Viewport', 'Ext.form.field.TextArea',
-			'Ext.form.FieldContainer', 'expensetracker.util.Calendar' ],
+			'Ext.form.FieldContainer', 'expensetracker.util.Calendar','Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category', 'Ext.chart.series.Bar', 'Ext.chart.interactions.ItemHighlight' ],
 	defaultToken : 'login',
 	launch : function() {
 		var me = this;
@@ -33,7 +33,7 @@ Ext.define('expensetracker.Application', {
 
 			},
 			failure : function(response, opts) {
-
+				
 			}
 		});
 	},

@@ -3,7 +3,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	alias : 'controller.expensedashboardcontroller',
 	onRender: function(dashboard) {
 		var me = this;
-		var topExpense = me.lookup('topexpensechart');
+		var topExpense = me.lookup('expensechart');
+		var summary = me.lookup('expensesummary');
 		 var store = Ext.create('expensetracker.store.Expense');
 		 store.load({
 			params : {
@@ -12,6 +13,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				year : 2016
 			}
 		});
+		summary.bindStore(store);
 		topExpense.bindStore(store);
 	}
 	
