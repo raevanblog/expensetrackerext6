@@ -16,6 +16,8 @@ public interface ExpenseMapper {
 	public Integer insertExpense(@Param("records") List<Expense> records) throws Exception;
 
 	public List<Expense> getExpense(@Param("username") String username, @Param("month") Integer month, @Param("year") Integer year) throws Exception;
+	
+	public List<Expense> getTopExpense(@Param("username") String username, @Param("month") Integer month, @Param("year") Integer year) throws Exception;
 
 	public Integer updateExpense(@Param("record") Expense expense) throws Exception;
 
