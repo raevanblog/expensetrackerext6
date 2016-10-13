@@ -1,11 +1,11 @@
-Ext.define('expensetracker.view.dashboard.TopExpense', {
+Ext.define('expensetracker.view.charts.Expense', {
 	extend: 'Ext.panel.Panel',
-	xtype: 'topexpense',
-	alias: 'view.topexpense',
+	xtype: 'expensechart',
+	alias: 'view.expensechart',
 	layout: 'fit',
 	items: [{
 		xtype: 'cartesian',
-		reference: 'topexpensechart',		
+		reference: 'expensechart',		
 		insetPadding: {
             top: 30,
             bottom: 10,
