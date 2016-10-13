@@ -10,7 +10,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			params : {
 				username : 'shyamcse07',
 				month : 9,
-				year : 2016
+				year : 2016,
+				fetchTopExpense: true
 			}
 		});
 		summary.bindStore(store);

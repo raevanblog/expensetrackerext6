@@ -8,21 +8,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	listeners: {
 		afterrender: 'onRender'
 	},
-	items : [ {
-		xtype : 'panel',
-		title : 'Expense Summary',
-		cls : 'big-60 small-100',
-		items: [{
-			xtype: 'expensesummary',
-			reference: 'expensesummary',
-			height: 400
-		}]
-	}, {
+	items : [{
 		xtype : 'expensechart',
 		reference: 'expensechartpanel',
 		title : 'Top Expense',
 		height: 300,
-		cls : 'big-40 small-50'
+		cls : 'big-60 small-100'
+	} ,{
+		xtype: 'expensesummary',
+		reference: 'expensesummary',
+		height: 400,
+		cls : 'big-40 small-50'		 		
 	}, {
 		xtype : 'panel',
 		title : 'Expense - Previous Month',
