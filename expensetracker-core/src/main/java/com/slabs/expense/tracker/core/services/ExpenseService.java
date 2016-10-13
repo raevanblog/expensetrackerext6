@@ -30,8 +30,13 @@ public class ExpenseService {
 		return noOfRecords;
 	}
 
-	public List<Expense> select(String username, Integer month, Integer year) throws Exception {
-		return mapper.getExpense(username, month, year);
+	public List<Expense> select(String username, Integer month, Integer year, boolean fetchTopExpense)
+			throws Exception {
+		if (fetchTopExpense) {
+			return mapper.getTopExpense(username, month, year);
+		} else {
+			return mapper.getExpense(username, month, year);
+		}
 	}
 
 	public List<Expense> selectById(Integer id) throws Exception {

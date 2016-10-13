@@ -60,15 +60,15 @@
 	<select id="getTopExpense" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where price in (
 		select max(price) from expense where username=#{username}
-		and year(expdate) = #{year}
+		and YEAR(expdate) = #{year}
 		<if test="month != null">
-			and month(expdate) = #{month}
+			and MONTH(expdate) = #{month}
 		</if>
 		group by category)
-		and username=#{username} and year(expdate)=#{year}
-		and
+		and username=#{username} 
+		and YEAR(expdate)=#{year}		
 		<if test="month != null">
-			and month(expdate) = #{month}
+			and MONTH(expdate) = #{month}
 		</if>
 	</select>
 

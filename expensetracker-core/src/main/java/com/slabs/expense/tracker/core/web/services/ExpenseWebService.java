@@ -125,7 +125,8 @@ public class ExpenseWebService {
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getExpense(@QueryParam("username") String username, @QueryParam("month") Integer month,
-			@QueryParam("year") Integer year) throws ExpenseTrackerException {
+			@QueryParam("year") Integer year, @QueryParam("fetchTopExpense") boolean fetchTopExpense)
+			throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
 					ExpenseService.class);
@@ -133,7 +134,8 @@ public class ExpenseWebService {
 				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST,
 						"Parameter {username} is required");
 			}
-			return ResponseGenerator.getSucessResponse(service.select(username, month, year), Operation.SELECT);
+			return ResponseGenerator.getSucessResponse(service.select(username, month, year, fetchTopExpense),
+					Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
