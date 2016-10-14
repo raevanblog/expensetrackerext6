@@ -8,7 +8,10 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		ptype : 'cellediting',
 		clicksToEdit : 1
 	},
-	store : Ext.create('expensetracker.store.Expense'),
+	initComponent: function() {
+		this.store = Ext.create('expensetracker.store.Expense');
+		this.callParent();
+	},
 	features : [ {
 		ftype : 'summary',
 		dock : 'bottom'
