@@ -9,7 +9,9 @@
 		background: -moz-linear-gradient(-90deg, $panel-header-background-color, #7AB7EB);
 		background: linear-gradient(-90deg, $panel-header-background-color, #7AB7EB);
 		color: #FFF;
-		text-align: center;  
+		text-align: center;
+		font-size: 11px;
+		overflow: hidden;
 		vertical-align: middle;
 		height: 90px;
 		width: 25%; 

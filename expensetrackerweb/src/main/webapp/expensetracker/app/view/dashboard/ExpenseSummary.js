@@ -43,7 +43,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseSummary', {
 			 }else if('CREDIT CARD' === value || 'DEBIT CARD' === value) {
 				 return '<span class="x-fa fa-credit-card tooltip"><span class="tooltiptext">'+ value +'</span></span>';
 			 }else{
-				 return '<span class="x-fa fa-internet-explorer tooltip"><span class="tooltiptext">'+ value +'</span></span>';
+				 return '<span class="x-fa fa-desktop tooltip"><span class="tooltiptext">'+ value +'</span></span>';
 			 }
 		  }	
 	   }

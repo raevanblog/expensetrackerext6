@@ -1,0 +1,25 @@
+.dash-panel {
+    .x-panel-header {
+        padding-left: 22px;
+    }
+
+    .x-title-icon {
+        position: relative;
+
+        &:before {
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            top: -7px;
+            left: -7px;
+            border-radius: 15px;
+            background-color: #f1f1f1;
+            line-height: 30px;
+            text-align: center;
+        }
+    }
+
+    .x-title-text {
+        padding-left: 8px;
+    }
+}

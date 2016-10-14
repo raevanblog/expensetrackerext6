@@ -80,7 +80,7 @@ Ext.define('expensetracker.util.Calendar', {
 	getName : function(monthNo) {
 		var length = this.calendar.length;
 		for(var i=0; i<length; i++) {
-			var cal = calendar[i];
+			var cal = this.calendar[i];
 			if(cal.monthNo === monthNo) {
 				return cal.name;
 			}
@@ -89,7 +89,7 @@ Ext.define('expensetracker.util.Calendar', {
 	getShortName : function(monthNo) {
 		var length = this.calendar.length;
 		for(var i=0; i<length; i++) {
-			var cal = calendar[i];
+			var cal = this.calendar[i];
 			if(cal.monthNo === monthNo) {
 				return cal.shortName;
 			}
@@ -103,7 +103,7 @@ Ext.define('expensetracker.util.Calendar', {
 		}		
 	},	
 	getCurrentMonthNo : function() {		
-		return this.currentDate.getMonth+1;
+		return this.currentDate.getMonth()+1;
 	},
 	getCurrentYear : function() {
 		return this.currentDate.getFullYear();

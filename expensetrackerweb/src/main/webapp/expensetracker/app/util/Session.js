@@ -6,5 +6,8 @@ Ext.define('expensetracker.util.Session', {
 	},
 	getUser : function() {
 		return expensetracker.util.Storage.get("user");
+	},
+	getUsername: function() {
+		return this.getUser().username;
 	}
 });

@@ -53,7 +53,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 
 		store.load({
 			params : {
-				username : model.get('username'),
+				username : expensetracker.util.Session.getUsername(),
 				month : model.get('month'),
 				year : model.get('year')
 			}
@@ -79,7 +79,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			price : 0.0,
 			expdate : model.get('expenseDate'),
 			qty : 0.0,
-			username : 'shyamcse07'
+			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);
 		me.refreshGridView(grid);

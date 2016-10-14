@@ -33,7 +33,7 @@ Ext.define('expensetracker.Application', {
 
 			},
 			failure : function(response, opts) {
-				
+				Ext.widget('app-main');
 			}
 		});
 	},

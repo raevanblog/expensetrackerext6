@@ -53,7 +53,7 @@ Ext.define('expensetracker.view.profile.UserController', {
 					profileForm.setLoading(false);
 					var response = Ext.decode(action.response.responseText);
 					if (response.success) {
-						expensetracker.util.Session.update();
+						
 					}
 				},
 				failure : function(form, action) {

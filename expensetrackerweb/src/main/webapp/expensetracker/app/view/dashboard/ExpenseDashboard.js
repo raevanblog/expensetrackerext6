@@ -9,19 +9,38 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		afterrender: 'onRender'
 	},
 	items : [{
+		xtype: 'panel',
+		title: 'Expense Sheet',
+		height: 180,
+		layout : {
+			type: 'hbox',
+			pack: 'middle'
+		},
+		cls: 'big-20 small-50 dash-panel shadow',
+		iconCls: 'x-fa fa-file-text-o',
+		items: [{
+			xtype: 'thumnailcontainer',
+			reference: 'expsheetdash',
+			listeners: {
+				itemclick: 'onOpenExpenseSheet'
+			}
+		}]
+	},{
 		xtype : 'expensechart',
 		reference: 'expensechartpanel',
 		title : 'Top Expense',
-		height: 300,
-		cls : 'big-60 small-100'
+		height: 300,		
+		cls : 'big-60 small-100 dash-panel'
 	} ,{
-		xtype: 'expensesummary',
-		reference: 'expensesummary',
+		xtype: 'panel',
+		layout: 'fit',
+		iconCls: 'x-fa  fa-rupee',
+		title: 'Top Expense',
 		height: 400,
-		cls : 'big-40 small-50'		 		
-	}, {
-		xtype : 'panel',
-		title : 'Expense - Previous Month',
-		cls : 'big-100 small-100'
+		items: [{
+			xtype: 'expensesummary',
+			reference: 'expensesummary'
+		}],
+		cls : 'big-40 small-50 dash-panel'		 		
 	} ]
 });
