@@ -4,7 +4,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseSummary', {
 	alias: 'view.expensesummary',
 	itemSelector: 'div.summary',
 	border: false,
-	scrollable: true,
+	scrollable: 'y',
 	itemTpl: [
 	   '<tpl for="."> ' +
 	      '<div class="summary">'+
@@ -18,17 +18,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseSummary', {
 					 '<td>Item Name</td>'+
 					 '<td>:</td>'+
 					 '<td>{itemName}</td>'+
-				   '<tr>'+
+				   '</tr>'+
 				   '<tr>'+
 					 '<td>Price</td>'+
 					 '<td>:</td>'+
 					 '<td>{price}&nbsp{exptype:this.renderExpType(values)}</td>'+
-				   '<tr>'+
+				   '</tr>'+
 				   '<tr>'+
 					 '<td>Quantity</td>'+
 					 '<td>:</td>'+
 					 '<td>{qty}</td>'+
-				   '<tr>'+
+				   '</tr>'+
 				 '</table>'+
 			   '</section>'+
 		  '</div>'
