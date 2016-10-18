@@ -3,10 +3,16 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	alias : 'controller.expensedashboardcontroller',
 	onRender: function(dashboard) {
 		var me = this;
-		var summary = me.lookup('expensesummary');
+		var topexpense = me.lookup('topexpense');
 		var sheet = me.lookup('expsheetdash');
+		var piePanel = me.lookup('spie');
+		var pie= piePanel.down('[itemId=summaryPolar]');
 		var expSheetStore = Ext.create('expensetracker.store.ExpenseDock');
 		expSheetStore.removeAll();
+		
+		var pieStore = Ext.create('Ext.data.Store');
+		pieStore.add({item: 'Cash in Hand', value: 50000}, {item: 'Expense', value: 25000});
+		pie.bindStore(pieStore);
 		expSheetStore.add({
 			month: expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo: expensetracker.util.Calendar.getCurrentMonthNo()
@@ -23,7 +29,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				fetchTopExpense: true
 			}
 		});
-		summary.bindStore(store);		
+		topexpense.bindStore(store);		
 	},
 	
 	onOpenExpenseSheet: function(thumbnailcont, record, item, index, e) {
@@ -50,6 +56,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			model.set('title', record.get('month') + '-' + currentYear);
 
 			expenseWindow.show();
-	}
-	
+	},
+	onIncomeEditClick: function() {
+		console.log('click');
+	}	
 });

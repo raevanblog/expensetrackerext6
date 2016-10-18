@@ -1,7 +1,7 @@
-Ext.define('expensetracker.view.dashboard.ExpenseSummary', {
+Ext.define('expensetracker.view.dashboard.TopExpense', {
 	extend: 'Ext.view.View',
-	xtype: 'expensesummary',
-	alias: 'view.expensesummary',
+	xtype: 'topexpense',
+	alias: 'view.topexpense',
 	itemSelector: 'div.summary',
 	border: false,
 	scrollable: 'y',

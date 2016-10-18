@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slabs.expense.tracker.database.mapper.IncomeMapper">
+
+	<insert id="insertIncome" parameterType="java.util.List">
+		insert into EXPENSETRACKER.INCOME(INCOME, YR, MTH, USERNAME)
+		values
+		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.income},
+			#{record.yr},
+			#{record.mth},
+			#{record.username}
+		</foreach>
+	</insert>
+
+	<update id="updateIncome">
+		update EXPENSETRACKER.INCOME set income=#{record.income} where yr=#{record.yr} and mth=#{record.mth}
+		and username=#{record.username}
+	</update>
+
+	<select id="getIncome" resultType="com.slabs.expense.tracker.common.db.entity.Income">
+		select * from EXPENSETRACKER.INCOME where username=#{username}
+		<if test="month != null">
+			and mth=#{month}
+		</if>
+		<if test="year != null">
+			and yr=#{year}
+		</if>
+	</select>
+
+	<delete id="deleteIncome">
+		delete from EXPENSETRACKER.INCOME where mth=#{record.mth} and yr=#{record.yr}
+		and username=#{record.username}
+	</delete>
+
+</mapper>

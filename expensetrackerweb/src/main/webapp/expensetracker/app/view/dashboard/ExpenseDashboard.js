@@ -2,13 +2,33 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	extend : 'Ext.container.Container',
 	xtype : 'expensedashboard',
 	alias : 'view.expensedashboard',
-	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController', 'expensetracker.view.dashboard.ExpenseSummary'],
+	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController', 'expensetracker.view.dashboard.TopExpense', 'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie'],
 	layout : 'responsivecolumn',
 	controller: 'expensedashboardcontroller',
 	listeners: {
 		afterrender: 'onRender'
 	},
 	items : [{
+		xtype: 'panel',
+		title: 'Summary',
+		height: 200,		
+		iconCls: 'x-fa fa-sticky-note-o',
+		cls: 'big-40 small-100 dash-panel shadow',
+		layout: {
+			type: 'hbox'
+		},
+		items: [{
+			xtype: 'summary',
+			bodyPadding : '10 0 0 10',
+			flex: 0.8
+		}, {
+			xtype: 'summarypie',
+			reference: 'spie',			
+			height: '100%',			
+			padding: '0 0 0 20',
+			flex: 1.2
+		}]
+	},{
 		xtype: 'panel',
 		title: 'Expense Sheet',
 		height: 200,
@@ -29,11 +49,11 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		xtype: 'panel',
 		layout: 'fit',
 		iconCls: 'x-fa  fa-rupee',
-		title: 'Top Expense',
+		title: 'Top Expense',		
 		height: 200,
 		items: [{
-			xtype: 'expensesummary',
-			reference: 'expensesummary'
+			xtype: 'topexpense',
+			reference: 'topexpense'
 		}],
 		cls : 'big-33 small-100 dash-panel'		 		
 	} ]

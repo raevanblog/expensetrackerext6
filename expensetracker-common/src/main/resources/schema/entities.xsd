@@ -8,6 +8,7 @@
 	<element name="UserPermission" type="et:UserPermission" />
 	<element name="Expense" type="et:Expense" />
 	<element name="ExpenseType" type="et:ExpenseType" />
+	<element name="Income" type="et:Income" />
 	<element name="Dictionary" type="et:Dictionary" />
 
 
@@ -135,6 +136,28 @@
 		<sequence>
 			<element name="exptype" type="string" />
 			<element name="description" type="string" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Income">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: INCOME
+				Income will hold the data for table INCOME
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="id" type="int" />
+			<element name="yr" type="integer" />
+			<element name="mth" type="integer" />
+			<element name="username" type="string" />
+			<element name="income" type="float" />
 		</sequence>
 	</complexType>
 
