@@ -138,7 +138,7 @@
 			<element name="description" type="string" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="Income">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
@@ -157,7 +157,28 @@
 			<element name="yr" type="integer" />
 			<element name="mth" type="integer" />
 			<element name="username" type="string" />
+			<element name="incometype" type="string" />
 			<element name="income" type="float" />
+		</sequence>
+	</complexType>
+
+	<complexType name="IncomeType">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: INCOMETYPE
+				IncomeType will hold the data for table INCOMETYPE
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="id" type="int" />
+			<element name="incometype" type="string" />
+			<element name="description" type="string" />
 		</sequence>
 	</complexType>
 
