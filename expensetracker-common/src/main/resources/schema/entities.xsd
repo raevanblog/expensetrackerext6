@@ -9,6 +9,7 @@
 	<element name="Expense" type="et:Expense" />
 	<element name="ExpenseType" type="et:ExpenseType" />
 	<element name="Income" type="et:Income" />
+	<element name="IncomeType" type="et:IncomeType" />
 	<element name="Dictionary" type="et:Dictionary" />
 
 
