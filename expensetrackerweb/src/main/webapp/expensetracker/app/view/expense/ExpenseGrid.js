@@ -2,8 +2,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
-	requires : [ 'expensetracker.store.Expense' ],
-	reference : 'expensegrid',
+	requires : [ 'expensetracker.store.Expense' ],	
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1

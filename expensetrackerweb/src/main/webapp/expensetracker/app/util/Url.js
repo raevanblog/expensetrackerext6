@@ -7,6 +7,7 @@ Ext.define('expensetracker.util.Url', {
 		userService : '/expensetrackerweb/api/exptr-web/user',
 		categoryService : '/expensetrackerweb/api/exptr-web/expensecategory',
 		expenseService : '/expensetrackerweb/api/exptr-web/expense',
+		incomeService : '/expensetrackerweb/api/exptr-web/income',
 		expenseTypeService : '/expensetrackerweb/api/exptr-web/expensetype',
 		expenseNameService : '/expensetrackerweb/api/exptr-web/expense/expensenames'
 	},

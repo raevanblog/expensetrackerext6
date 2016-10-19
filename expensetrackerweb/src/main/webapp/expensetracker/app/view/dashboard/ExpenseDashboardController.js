@@ -58,6 +58,14 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			expenseWindow.show();
 	},
 	onIncomeEditClick: function() {
-		console.log('click');
+		var me = this;
+		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
+				height : this.getView().getHeight(),
+				width : this.getView().getWidth(),
+				x : me.getView().getX(),
+				y : me.getView().getY(),
+				modal : true
+		});
+		incomeWindow.show();
 	}	
 });

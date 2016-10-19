@@ -16,11 +16,11 @@ Ext.define('expensetracker.view.dashboard.Summary',{
 			value: '50000'
 		}, {
 			xtype: 'component',
-			padding: '0 0 0 2',
-			html: '<a href="javascript:void(0);"><span class="x-fa fa-edit"/></a>',
+			padding: '5 0 0 2',
+			html: '<a href="javascript:void(0);"><img src="resources/images/edit.png"/></a>',
 			listeners: {
 				 el : {
-					delegate : 'span',
+					delegate : 'img',
 					click : 'onIncomeEditClick'
 				},
 				render: function(comp) {
