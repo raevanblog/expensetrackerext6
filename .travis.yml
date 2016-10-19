@@ -1,2 +1,2 @@
 language: java
-mvn clean site -X
+install: mvn clean site -X
