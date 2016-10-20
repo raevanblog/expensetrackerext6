@@ -96,4 +96,18 @@ public class IncomeWebService {
 
 	}
 
+	@Path("incometype/")
+	@GET
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getIncomeType() throws ExpenseTrackerException {
+		try {
+			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
+					IncomeService.class);
+			return ResponseGenerator.getSucessResponse(service.selectIncomeType(), Operation.SELECT);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
 }

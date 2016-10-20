@@ -5,10 +5,11 @@
 <mapper namespace="com.slabs.expense.tracker.database.mapper.IncomeMapper">
 
 	<insert id="insertIncome" parameterType="java.util.List">
-		insert into EXPENSETRACKER.INCOME(INCOME, YR, MTH, USERNAME)
+		insert into EXPENSETRACKER.INCOME(INCOME,INCOMETYPE, YR, MTH, USERNAME)
 		values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.income},
+			#{record.incometype},
 			#{record.yr},
 			#{record.mth},
 			#{record.username}
@@ -17,7 +18,7 @@
 
 	<update id="updateIncome">
 		update EXPENSETRACKER.INCOME set income=#{record.income} where yr=#{record.yr} and mth=#{record.mth}
-		and username=#{record.username}
+		and username=#{record.username} and incometype=#{record.incometype}
 	</update>
 
 	<select id="getIncome" resultType="com.slabs.expense.tracker.common.db.entity.Income">
@@ -34,5 +35,9 @@
 		delete from EXPENSETRACKER.INCOME where mth=#{record.mth} and yr=#{record.yr}
 		and username=#{record.username}
 	</delete>
+	
+	<select id="getIncomeType" resultType="com.slabs.expense.tracker.common.db.entity.IncomeType">
+	     select * from EXPENSETRACKER.INCOMETYPE
+	</select>
 
 </mapper>

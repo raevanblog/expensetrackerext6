@@ -12,8 +12,18 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 				username : expensetracker.util.Session.getUsername(),
 				month : expensetracker.util.Calendar.getCurrentMonthNo(),				
 				year : expensetracker.util.Calendar.getCurrentYear()
+			},
+			callback: function(records, operation, success) {    
+				if(success) {
+					if(records.length === 0) {
+						var typeStore = Ext.getStore('IncomeType');
+						
+					}
+				}
 			}
 		});
+		
+		
 	},
     onReload : function() {
 		

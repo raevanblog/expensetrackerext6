@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.slabs.expense.tracker.common.db.entity.Income;
+import com.slabs.expense.tracker.common.db.entity.IncomeType;
 
 public interface IncomeMapper {
 
@@ -16,5 +17,7 @@ public interface IncomeMapper {
 
 	public List<Income> getIncome(@Param("username") String username, @Param("month") Integer month,
 			@Param("year") Integer year) throws Exception;
+	
+	public List<IncomeType> getIncomeType() throws Exception;
 
 }

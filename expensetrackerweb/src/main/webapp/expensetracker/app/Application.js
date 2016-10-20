@@ -8,7 +8,7 @@ Ext.define('expensetracker.Application', {
 
 	name : 'expensetracker',
 
-	stores : [ 'ExpenseDock', 'ExpenseCategory', 'ExpenseType', 'ExpenseName', 'Expense' ],
+	stores : [ 'ExpenseDock', 'ExpenseCategory', 'ExpenseType', 'ExpenseName', 'Expense', 'IncomeType' ],
 
 	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Session', 'expensetracker.view.login.Login', 'expensetracker.view.main.Main',
 			'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox',

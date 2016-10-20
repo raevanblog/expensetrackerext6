@@ -24,12 +24,13 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 	}, {
 		xtype : 'numbercolumn',
 		text : 'Year'
-		
+		flex : 1		
 	},{
 		xtype : 'numbercolumn',
 		align : 'center',
 		text : 'Income',
 		format : '0.00',
+		flex : 1
 		dataIndex : 'qty',
 		editor : {
 			field : 'numberfield',

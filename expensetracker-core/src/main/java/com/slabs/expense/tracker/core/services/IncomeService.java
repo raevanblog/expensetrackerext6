@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.Income;
+import com.slabs.expense.tracker.common.db.entity.IncomeType;
 import com.slabs.expense.tracker.database.mapper.IncomeMapper;
 
 @Service(value = "income")
@@ -19,6 +20,10 @@ public class IncomeService {
 
 	public List<Income> select(String username, Integer month, Integer year) throws Exception {
 		return mapper.getIncome(username, month, year);
+	}
+	
+	public List<IncomeType> selectIncomeType() throws Exception {
+		return mapper.getIncomeType();
 	}
 
 	public Integer insert(List<Income> records) throws Exception {
