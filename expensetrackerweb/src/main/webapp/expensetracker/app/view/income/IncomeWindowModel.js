@@ -2,8 +2,9 @@ Ext.define('expensetracker.view.income.IncomeWindowModel', {
 	extend : 'Ext.app.ViewModel',
 	alias : 'viewmodel.incomewindowmodel',
 	data : [ {
-		month : '',
+		month : '',	
 		year : '',
-		title : ''
+		title : '',
+		isLatestIncome: false
 	} ]
 })

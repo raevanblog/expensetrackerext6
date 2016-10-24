@@ -110,6 +110,12 @@ Ext.define('expensetracker.util.Calendar', {
 	},
 	getCurrentDate : function() {
 		return this.currentDate;
+	},
+	isCurrentMonth(month) {
+		return this.getCurrentMonthNo() === month;
+	},
+	isCurrentYear(year) {
+		return this.getCurrentYear() === year;
 	}
 	
 });

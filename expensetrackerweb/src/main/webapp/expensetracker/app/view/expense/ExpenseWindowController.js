@@ -1,9 +1,18 @@
 Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.expensewindowcontroller',
+	onRender : function(window) {
+		var me = this;
+		var view = me.getView();
+		var model = view.getViewModel();
+		if(expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
+			model.set('isLatestExpense', true);
+		}
+	},
 	onCloseExpenseWindow : function(window) {
 		var me = this;
 		var view = me.getView();
+		var model = view.getViewModel();
 		var component = view.getLayout().getActiveItem();
 		var store = component.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
@@ -21,7 +30,10 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 						store.sync({
 							success : function(batch) {
 								component.setLoading(false);
-								window.clearListeners();
+								if(model.get('isLatestExpense')) {
+									me.fireEvent('updatesummary');
+								}
+								window.clearListeners();								
 								window.close();
 							},
 							failure : function(batch) {
@@ -108,13 +120,17 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	},
 	onSaveOrUpdateExpense : function(saveBtn) {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
 			grid.setLoading("Saving...");
 			store.sync({
 				success : function(batch) {
-					grid.setLoading(false);
+					grid.setLoading(false);	
+					if(model.get('isLatestExpense')){
+						me.fireEvent('updatesummary');
+					}
 					me.refreshGridView(grid);
 				},
 				failure : function(batch) {

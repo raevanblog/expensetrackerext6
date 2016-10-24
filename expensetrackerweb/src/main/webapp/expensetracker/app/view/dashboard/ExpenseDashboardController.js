@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	alias : 'controller.expensedashboardcontroller',
 	listen: {
 		controller: {
-			'#incomewindowcontroller' : {
+			'*' : {
 				updatesummary: 'updateDashBoardSummary'
 			}
 		}
@@ -71,13 +71,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			width : 400,
 			x :  me.getView().getX(),
 			y : me.getView().getY(),
-			modal : true,
-			listeners: {
-				incomeupdate: 'updateDashBoardSummary'
-			}
+			modal : true			
 		});
 		var model = incomeWindow.getViewModel();
-		model.set('month', expensetracker.util.Calendar.getCurrentMonth());
+		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());		
 		model.set('year', expensetracker.util.Calendar.getCurrentYear());
 		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
 		incomeWindow.show();

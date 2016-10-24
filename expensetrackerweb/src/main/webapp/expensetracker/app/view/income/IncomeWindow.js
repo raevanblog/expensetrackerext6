@@ -20,7 +20,8 @@ Ext.define('expensetracker.view.income.IncomeWindow', {
 		}
 	},
 	listeners : {
-		beforeclose : 'onCloseIncomeWindow'
+		beforeclose : 'onCloseIncomeWindow',
+		beforerender: 'onRender'
 	},
 	tools : [ {
 		type : 'refresh',

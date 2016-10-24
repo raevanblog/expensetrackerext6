@@ -2,10 +2,18 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.incomewindowcontroller',
 	id: 'incomewindowcontroller',
-	onCloseIncomeWindow : function(window) {
+	onRender : function(window) {
 		var me = this;
-		console.log(me);
 		var view = me.getView();
+		var model = view.getViewModel();
+		if(expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
+			model.set('isLatestIncome', true);
+		}
+	},
+	onCloseIncomeWindow : function(window) {
+		var me = this;		
+		var view = me.getView();
+		var model = me.getViewModel();
 		var component = view.getLayout().getActiveItem();
 		var store = component.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
@@ -24,7 +32,9 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 							success : function(batch) {
 								component.setLoading(false);
 								window.clearListeners();
-								me.fireEvent('updatesummary');
+								if(model.get('isLatestIncome')) {
+									me.fireEvent('updatesummary');
+								}
 								window.close();
 							},
 							failure : function(batch) {
@@ -81,6 +91,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 	},
 	onSaveIncome : function(saveBtn) {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var grid = me.lookup('incomegrid');
 		var store = grid.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
@@ -88,7 +99,9 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 			store.sync({
 				success : function(batch) {
 					grid.setLoading(false);
-					me.fireEvent('updatesummary');					
+					if(model.get('isLatestIncome')) {
+						me.fireEvent('updatesummary');
+					}					
 					me.refreshGridView(grid);
 				},
 				failure : function(batch) {
