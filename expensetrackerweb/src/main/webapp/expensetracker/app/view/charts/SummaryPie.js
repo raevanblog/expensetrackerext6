@@ -15,14 +15,17 @@ Ext.define('expensetracker.view.charts.SummaryPie', {
             angleField: 'value',
             label: {
                 field: 'item',
-				fontSize: '12px',
+				fontSize: '10px',
 				display: 'vertical',
 				calloutLine: {
                     length: 35,
                     width: 3                
                 }				
             },
-            highlight: true            
+			tooltip: {
+				trackMouse: true,
+				renderer: 'renderToolTip'
+            }			
         }]
 	}]
 });

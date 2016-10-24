@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.slabs.expense.tracker.common.db.entity.ExpenseType;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 
-@Service(value = "expensetype")
+@Service(value = "ExpenseTypeService")
 public class ExpenseTypeService {
 
 	@Autowired

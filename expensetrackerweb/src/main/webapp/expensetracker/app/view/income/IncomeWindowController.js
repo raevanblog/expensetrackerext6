@@ -1,8 +1,10 @@
 Ext.define('expensetracker.view.income.IncomeWindowController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.incomewindowcontroller',
+	id: 'incomewindowcontroller',
 	onCloseIncomeWindow : function(window) {
 		var me = this;
+		console.log(me);
 		var view = me.getView();
 		var component = view.getLayout().getActiveItem();
 		var store = component.getStore();
@@ -22,6 +24,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 							success : function(batch) {
 								component.setLoading(false);
 								window.clearListeners();
+								me.fireEvent('updatesummary');
 								window.close();
 							},
 							failure : function(batch) {
@@ -85,6 +88,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 			store.sync({
 				success : function(batch) {
 					grid.setLoading(false);
+					me.fireEvent('updatesummary');					
 					me.refreshGridView(grid);
 				},
 				failure : function(batch) {

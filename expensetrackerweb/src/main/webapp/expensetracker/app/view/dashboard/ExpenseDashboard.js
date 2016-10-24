@@ -25,7 +25,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			flex : 0.8
 		}, {
 			xtype : 'summarypie',
-			reference : 'spie',
+			reference : 'summarypiepanel',
 			height : '100%',
 			padding : '0 0 0 20',
 			flex : 1.2

@@ -15,9 +15,10 @@ public interface IncomeMapper {
 
 	public Integer deleteIncome(@Param("record") Income record) throws Exception;
 
-	public List<Income> getIncome(@Param("username") String username, @Param("month") Integer month,
-			@Param("year") Integer year) throws Exception;
-	
+	public List<Income> getIncome(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
+
+	public Float getTotalIncome(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
+
 	public List<IncomeType> getIncomeType() throws Exception;
 
 }

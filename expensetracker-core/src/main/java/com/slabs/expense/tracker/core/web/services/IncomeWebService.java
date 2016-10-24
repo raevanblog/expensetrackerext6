@@ -32,8 +32,7 @@ public class IncomeWebService {
 	@Path("income/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getIncome(@QueryParam("username") String username, @QueryParam("year") Integer year,
-			@QueryParam("month") Integer month) throws ExpenseTrackerException {
+	public Response getIncome(@QueryParam("username") String username, @QueryParam("year") Integer year, @QueryParam("month") Integer month) throws ExpenseTrackerException {
 
 		try {
 			if (username == null) {
@@ -41,10 +40,9 @@ public class IncomeWebService {
 				throw new ExpenseTrackerException("username is required", ResponseStatus.BAD_REQUEST);
 			}
 
-			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
-					IncomeService.class);
+			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
 
-			return ResponseGenerator.getSucessResponse(service.select(username, month, year), Operation.SELECT);
+			return ResponseGenerator.getSucessResponse(service.select(username, year, month), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -56,8 +54,7 @@ public class IncomeWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response addIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
-			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
-					IncomeService.class);
+			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
 			return ResponseGenerator.getSucessResponse(service.insert(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -71,8 +68,7 @@ public class IncomeWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response updateIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
-			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
-					IncomeService.class);
+			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
 			return ResponseGenerator.getSucessResponse(service.update(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -86,8 +82,7 @@ public class IncomeWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
-			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
-					IncomeService.class);
+			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
 			return ResponseGenerator.getSucessResponse(service.delete(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -101,8 +96,7 @@ public class IncomeWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getIncomeType() throws ExpenseTrackerException {
 		try {
-			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
-					IncomeService.class);
+			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
 			return ResponseGenerator.getSucessResponse(service.selectIncomeType(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);

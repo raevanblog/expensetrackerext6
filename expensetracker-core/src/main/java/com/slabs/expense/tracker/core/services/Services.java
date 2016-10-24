@@ -1,8 +1,9 @@
 package com.slabs.expense.tracker.core.services;
 
 public enum Services {
-	EXPENSE_CATEGORY_SERVICE("expensecategory"), EXPENSE_TYPE_SERVICE("expensetype"), EXPENSE_SERVICE(
-			"expense"), USER_SERVICE("user"), INCOME_SERVICE("income");
+	EXPENSE_CATEGORY_SERVICE("ExpenseCategoryService"), EXPENSE_TYPE_SERVICE("ExpenseTypeService"), EXPENSE_SERVICE(
+			"ExpenseService"), USER_SERVICE(
+					"UserService"), INCOME_SERVICE("IncomeService"), DASHBOARD_SERVICE("DashboardService");
 
 	private String name;
 

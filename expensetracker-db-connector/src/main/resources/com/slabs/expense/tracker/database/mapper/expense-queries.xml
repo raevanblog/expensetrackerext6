@@ -49,11 +49,11 @@
 	<select id="getExpense" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
 		username=#{username}
-		<if test="month != null">
-			and MONTH(expdate) = #{month}
-		</if>
 		<if test="year != null">
 			and YEAR(expdate)=#{year}
+		</if>
+		<if test="month != null">
+			and MONTH(expdate) = #{month}
 		</if>
 	</select>
 
@@ -65,8 +65,19 @@
 			and MONTH(expdate) = #{month}
 		</if>
 		group by category)
-		and username=#{username} 
-		and YEAR(expdate)=#{year}		
+		and username=#{username}
+		and YEAR(expdate)=#{year}
+		<if test="month != null">
+			and MONTH(expdate) = #{month}
+		</if>
+	</select>
+
+	<select id="getTotalExpense" resultType="java.lang.Float">
+		select sum(price) from EXPENSETRACKER.EXPENSE where
+		username=#{username}
+		<if test="year != null">
+			and YEAR(expdate)=#{year}
+		</if>
 		<if test="month != null">
 			and MONTH(expdate) = #{month}
 		</if>

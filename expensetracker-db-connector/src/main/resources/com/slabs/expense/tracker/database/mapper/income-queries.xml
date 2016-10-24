@@ -17,17 +17,27 @@
 	</insert>
 
 	<update id="updateIncome">
-		update EXPENSETRACKER.INCOME set income=#{record.income} where yr=#{record.yr} and mth=#{record.mth}
-		and username=#{record.username} and incometype=#{record.incometype}
+		update EXPENSETRACKER.INCOME set income=#{record.income} where id=#{record.id}
 	</update>
 
 	<select id="getIncome" resultType="com.slabs.expense.tracker.common.db.entity.Income">
 		select * from EXPENSETRACKER.INCOME where username=#{username}
+		<if test="year != null">
+			and yr=#{year}
+		</if>
 		<if test="month != null">
 			and mth=#{month}
 		</if>
+	</select>
+
+	<select id="getTotalIncome" resultType="java.lang.Float">
+		select SUM(income) from EXPENSETRACKER.INCOME where
+		username=#{username}
 		<if test="year != null">
 			and yr=#{year}
+		</if>
+		<if test="month != null">
+			and mth=#{month}
 		</if>
 	</select>
 
@@ -35,9 +45,9 @@
 		delete from EXPENSETRACKER.INCOME where mth=#{record.mth} and yr=#{record.yr}
 		and username=#{record.username}
 	</delete>
-	
+
 	<select id="getIncomeType" resultType="com.slabs.expense.tracker.common.db.entity.IncomeType">
-	     select * from EXPENSETRACKER.INCOMETYPE
+		select * from EXPENSETRACKER.INCOMETYPE
 	</select>
 
 </mapper>

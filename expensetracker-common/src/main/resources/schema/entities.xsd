@@ -11,7 +11,39 @@
 	<element name="Income" type="et:Income" />
 	<element name="IncomeType" type="et:IncomeType" />
 	<element name="Dictionary" type="et:Dictionary" />
+	<element name="Dashboard" type="et:Dashboard" />
 
+
+	<complexType name="Dashboard">
+		<annotation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="summary" type="et:Summary" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Summary">
+		<annotation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="month" type="int" />
+			<element name="year" type="int" />
+			<element name="totalIncome" type="float" />
+			<element name="totalExpense" type="float" />
+			<element name="cashInHand" type="float" />
+			<element name="username" type="string" />
+		</sequence>
+	</complexType>
 
 	<complexType name="UserInfo">
 		<annotation>

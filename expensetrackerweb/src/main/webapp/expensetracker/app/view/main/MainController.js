@@ -20,7 +20,7 @@ Ext.define('expensetracker.view.main.MainController', {
 	routes : {
 		'main/:node' : 'onRouteChange'
 	},
-	onRouteChange : function(id) {		
+	onRouteChange : function(id) {
 		this.setCurrentView(id);
 	},
 	lastView : null,

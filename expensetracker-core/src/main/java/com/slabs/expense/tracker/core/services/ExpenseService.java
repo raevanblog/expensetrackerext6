@@ -11,7 +11,7 @@ import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 
-@Service(value = "expense")
+@Service(value = "ExpenseService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
 public class ExpenseService {
 
@@ -30,13 +30,16 @@ public class ExpenseService {
 		return noOfRecords;
 	}
 
-	public List<Expense> select(String username, Integer month, Integer year, boolean fetchTopExpense)
-			throws Exception {
+	public List<Expense> select(String username, Integer year, Integer month, boolean fetchTopExpense) throws Exception {
 		if (fetchTopExpense) {
-			return mapper.getTopExpense(username, month, year);
+			return mapper.getTopExpense(username, year, month);
 		} else {
-			return mapper.getExpense(username, month, year);
+			return mapper.getExpense(username, year, month);
 		}
+	}
+
+	public Float selectTotalExpense(String username, Integer year, Integer month) throws Exception {
+		return mapper.getTotalExpense(username, year, month);
 	}
 
 	public List<Expense> selectById(Integer id) throws Exception {

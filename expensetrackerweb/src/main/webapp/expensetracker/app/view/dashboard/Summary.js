@@ -25,14 +25,17 @@ Ext.define('expensetracker.view.dashboard.Summary', {
 	}, {
 		xtype : 'displayfield',
 		fieldLabel : 'Total Income',
+		reference: 'totIncome',
 		labelSeparator : '',
 	}, {
 		xtype : 'displayfield',
 		fieldLabel : 'Total Expense',
+		reference: 'totExpense',
 		labelSeparator : ''
 	}, {
 		xtype : 'displayfield',
 		fieldLabel : 'Cash in Hand',
+		reference: 'cashInHand',
 		labelSeparator : ''
 	} ]
 });

@@ -11,17 +11,21 @@ import com.slabs.expense.tracker.common.db.entity.Income;
 import com.slabs.expense.tracker.common.db.entity.IncomeType;
 import com.slabs.expense.tracker.database.mapper.IncomeMapper;
 
-@Service(value = "income")
+@Service(value = "IncomeService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
 public class IncomeService {
 
 	@Autowired
 	private IncomeMapper mapper;
 
-	public List<Income> select(String username, Integer month, Integer year) throws Exception {
-		return mapper.getIncome(username, month, year);
+	public List<Income> select(String username, Integer year, Integer month) throws Exception {
+		return mapper.getIncome(username, year, month);
 	}
-	
+
+	public Float selecTotalIncome(String username, Integer year, Integer month) throws Exception {
+		return mapper.getTotalIncome(username, year, month);
+	}
+
 	public List<IncomeType> selectIncomeType() throws Exception {
 		return mapper.getIncomeType();
 	}

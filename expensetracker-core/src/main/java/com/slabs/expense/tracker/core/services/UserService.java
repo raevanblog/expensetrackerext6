@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.database.mapper.UserMapper;
 
-@Service(value = "user")
+@Service(value = "UserService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
 public class UserService {
 

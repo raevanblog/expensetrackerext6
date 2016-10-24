@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 
-@Service(value = "expensecategory")
+@Service(value = "ExpenseCategoryService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
 public class ExpenseCategoryService {
 
