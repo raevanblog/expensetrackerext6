@@ -2,12 +2,12 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
-	requires : [ 'expensetracker.store.Expense' ],	
+	requires : [ 'expensetracker.store.Expense' ],
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1
 	},
-	initComponent: function() {
+	initComponent : function() {
 		this.store = Ext.create('expensetracker.store.Expense');
 		this.callParent();
 	},
@@ -41,9 +41,9 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		handler : 'onShowCategory',
 		tooltip : 'Add Category'
 	} ],
-	bbar : [ {
+	bbar : [ '->', {
 		xtype : 'button',
-		text : 'Save/Update',
+		text : 'Save',
 		iconCls : 'x-fa fa-save',
 		handler : 'onSaveOrUpdateExpense'
 	} ],
@@ -141,7 +141,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		},
 		summaryType : 'sum',
 		summaryRenderer : function(value, summaryData, dataIndex) {
-			return Ext.util.Format.currency(value, '₹', 2);
+			return 'Total  :' + Ext.util.Format.currency(value, '₹ ', 2);
 		},
 		flex : 1
 	}, {

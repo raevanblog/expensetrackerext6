@@ -32,10 +32,10 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 			var model = expenseWindow.getViewModel();
 			model.set('expenseStartDate', Ext.Date.getFirstDateOfMonth(date));
 			model.set('expenseDate', Ext.Date.getFirstDateOfMonth(date));
-			model.set('expenseEndDate', Ext.Date.getLastDateOfMonth(date));			
+			model.set('expenseEndDate', Ext.Date.getLastDateOfMonth(date));
 			model.set('month', monthNo);
 			model.set('year', year);
-			model.set('title', month + '-' + year);
+			model.set('title', month + ' - ' + year);
 
 			expenseWindow.show();
 		}

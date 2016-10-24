@@ -4,6 +4,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	xtype : 'expensewindow',
 	controller : 'expensewindowcontroller',
 	viewModel : 'expensewindowmodel',
+	iconCls : 'x-fa fa-file-text-o',
 	requires : [ 'expensetracker.view.expense.ExpenseWindowController', 'expensetracker.view.expense.ExpenseWindowModel',
 			'expensetracker.view.expense.ExpenseGrid', 'expensetracker.view.expense.ExpenseCategory' ],
 	bind : {
