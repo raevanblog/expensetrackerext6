@@ -127,10 +127,10 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		xtype : 'numbercolumn',
 		text : 'Price',
 		format : '0.00',
-		currencySymbol : '₹',
+		currencySymbol : expensetracker.util.Session.getCurrencySymbol(),
 		dataIndex : 'price',
 		renderer : function(value) {
-			return Ext.util.Format.currency(value, '₹', 2);
+			return Ext.util.Format.currency(value, expensetracker.util.Session.getCurrencySymbol() + ' ', 2);
 		},
 		editor : {
 			field : 'numberfield',
@@ -141,7 +141,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		},
 		summaryType : 'sum',
 		summaryRenderer : function(value, summaryData, dataIndex) {
-			return 'Total  :' + Ext.util.Format.currency(value, '₹ ', 2);
+			return 'Total  :' + Ext.util.Format.currency(value, expensetracker.util.Session.getCurrencySymbol() + ' ', 2);
 		},
 		flex : 1
 	}, {

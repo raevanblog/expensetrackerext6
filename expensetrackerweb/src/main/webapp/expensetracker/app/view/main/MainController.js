@@ -14,6 +14,9 @@ Ext.define('expensetracker.view.main.MainController', {
 				unmatchedroute : function(hash) {
 					console.log(hash);
 				}
+			},
+			'*' : {
+				navigatelogin : 'navigateToLogin'
 			}
 		}
 	},
@@ -83,6 +86,9 @@ Ext.define('expensetracker.view.main.MainController', {
 	},
 	onMainViewRender : function() {
 		var me = this;
+		var model = me.getView().getViewModel();
+		model.set('currency', expensetracker.util.Session.getCurrencyName());
+		model.set('currencySymbol', expensetracker.util.Session.getCurrencySymbol());
 		me.setCurrentView('expensedashboard');
 	},
 	onToggleNavigation : function(button) {
@@ -170,5 +176,10 @@ Ext.define('expensetracker.view.main.MainController', {
 			}
 		});
 
+	},
+	navigateToLogin : function() {
+		var me = this;
+		me.getView().destroy();
+		Ext.widget('login');
 	}
 });

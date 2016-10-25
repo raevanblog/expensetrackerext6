@@ -5,8 +5,7 @@ Ext.define('expensetracker.view.income.IncomeWindow', {
 	controller : 'incomewindowcontroller',
 	iconCls : 'x-fa fa-file-text-o',
 	viewModel : 'incomewindowmodel',
-	requires : [ 'expensetracker.view.income.IncomeGrid', 'expensetracker.view.income.IncomeWindowController',
-			'expensetracker.view.income.IncomeWindowModel' ],
+	requires : [ 'expensetracker.view.income.IncomeGrid', 'expensetracker.view.income.IncomeWindowController', 'expensetracker.view.income.IncomeWindowModel' ],
 	bind : {
 		title : '{title}'
 	},
@@ -21,7 +20,7 @@ Ext.define('expensetracker.view.income.IncomeWindow', {
 	},
 	listeners : {
 		beforeclose : 'onCloseIncomeWindow',
-		beforerender: 'onRender'
+		beforerender : 'onRender'
 	},
 	tools : [ {
 		type : 'refresh',

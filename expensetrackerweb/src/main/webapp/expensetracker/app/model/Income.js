@@ -10,14 +10,14 @@ Ext.define('expensetracker.model.Income', {
 		type : 'string'
 	}, {
 		name : 'mth',
-		type : 'int'		
+		type : 'int'
 	}, {
 		name : 'yr',
 		type : 'int'
 	}, {
 		name : 'income',
 		type : 'float'
-	},{
+	}, {
 		name : 'username',
 		type : 'string'
 	} ],

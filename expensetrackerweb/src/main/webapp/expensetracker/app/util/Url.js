@@ -4,7 +4,7 @@ Ext.define('expensetracker.util.Url', {
 		login : '/expensetrackerweb/web/request/login',
 		logout : '/expensetrackerweb/web/request/logout',
 		session : '/expensetrackerweb/web/request/session',
-		dashboardService: '/expensetrackerweb/api/exptr-web/dashboard',
+		dashboardService : '/expensetrackerweb/api/exptr-web/dashboard',
 		userService : '/expensetrackerweb/api/exptr-web/user',
 		categoryService : '/expensetrackerweb/api/exptr-web/expensecategory',
 		expenseService : '/expensetrackerweb/api/exptr-web/expense',

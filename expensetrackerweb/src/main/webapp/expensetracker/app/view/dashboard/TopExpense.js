@@ -21,8 +21,7 @@ Ext.define('expensetracker.view.dashboard.TopExpense', {
 				   '</tr>'+
 				   '<tr>'+
 					 '<td>Price</td>'+
-					 '<td>:</td>'+
-					 '<td>{price}&nbsp{exptype:this.renderExpType(values)}</td>'+
+					 '<td>:</td>'+					 '<td>{[this.currencySymbol()]}&nbsp{price}&nbsp{exptype:this.renderExpType(values)}</td>'+
 				   '</tr>'+
 				   '<tr>'+
 					 '<td>Quantity</td>'+
@@ -45,7 +44,10 @@ Ext.define('expensetracker.view.dashboard.TopExpense', {
 			 }else{
 				 return '<span class="x-fa fa-desktop tooltip"><span class="tooltiptext">'+ value +'</span></span>';
 			 }
-		  }	
+		  },
+		  currencySymbol : function() {
+			  return expensetracker.util.Session.getCurrencySymbol();
+		  }
 	   }
 	]	
 });

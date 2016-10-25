@@ -16,5 +16,5 @@ Ext.define('expensetracker.store.ExpenseType', {
 			type : 'json'
 		}
 	},
-	autoLoad : true
+	autoLoad : false
 });

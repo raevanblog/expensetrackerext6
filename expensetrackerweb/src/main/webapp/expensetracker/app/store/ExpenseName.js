@@ -12,5 +12,5 @@ Ext.define('expensetracker.store.ExpenseName', {
 			rootProperty : 'result.any'
 		}
 	},
-	autoLoad : true
+	autoLoad : false
 });

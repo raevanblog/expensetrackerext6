@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 	xtype : 'expensedock',
 	storeId : 'ExpenseDock',
 	alias : 'view.expensedock',
-	iconCls: 'x-fa fa-file-text-o',
+	iconCls : 'x-fa fa-file-text-o',
 	requires : [ 'expensetracker.store.ExpenseDock', 'expensetracker.view.expense.ThumbnailContainer' ],
 	layout : {
 		type : 'vbox',

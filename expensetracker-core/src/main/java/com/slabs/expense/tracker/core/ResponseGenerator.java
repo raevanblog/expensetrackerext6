@@ -20,7 +20,7 @@ public class ResponseGenerator {
 	public static Response getExceptionResponse(ResponseStatus status, Throwable cause) {
 		Response resp = new Response();
 		resp.setStatus_Code(status.getStatusCode());
-		resp.setStatus_Message(status.name());
+		resp.setStatus_Message(status.getMessage());
 		resp.setSuccess(false);
 		resp.setException(cause.getMessage());
 		return resp;
@@ -29,7 +29,7 @@ public class ResponseGenerator {
 	public static Response getExceptionResponse(ResponseStatus status, String message) {
 		Response resp = new Response();
 		resp.setStatus_Code(status.getStatusCode());
-		resp.setStatus_Message(status.name());
+		resp.setStatus_Message(status.getMessage());
 		resp.setSuccess(false);
 		resp.setException(message);
 		return resp;
@@ -38,7 +38,7 @@ public class ResponseGenerator {
 	private static Response getSucessResponse() {
 		Response response = new Response();
 		response.setStatus_Code(ResponseStatus.OK.getStatusCode());
-		response.setStatus_Message(ResponseStatus.OK.name());
+		response.setStatus_Message(ResponseStatus.OK.getMessage());
 		response.setSuccess(true);
 		return response;
 	}

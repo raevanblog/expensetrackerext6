@@ -23,17 +23,6 @@ Ext.define('expensetracker.store.Income', {
 			messageProperty : 'exception',
 			rootProperty : 'result.any'
 		},
-		listeners : {
-			exception : function(proxy, response, operation) {
-				var response = Ext.JSON.decode(operation.getError().response.responseText);
-				Ext.MessageBox.show({
-					title : 'ExpenseTracker',
-					msg : response.status_Message,
-					icon : Ext.MessageBox.ERROR,
-					buttons : Ext.Msg.OK
-				});
-			}
-		},
 		writer : {
 			type : 'json',
 			allowSingle : false

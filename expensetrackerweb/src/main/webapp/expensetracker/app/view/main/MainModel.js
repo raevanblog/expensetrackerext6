@@ -7,7 +7,9 @@ Ext.define('expensetracker.view.main.MainModel', {
 	alias : 'viewmodel.main',
 
 	data : {
-		name : 'expensetracker'
+		name : 'expensetracker',
+		currency : '',
+		currencySymbol : ''
 	}
 
 });

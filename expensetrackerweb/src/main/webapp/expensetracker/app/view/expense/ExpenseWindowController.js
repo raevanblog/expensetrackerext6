@@ -5,7 +5,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var me = this;
 		var view = me.getView();
 		var model = view.getViewModel();
-		if(expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
+		if (expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
 			model.set('isLatestExpense', true);
 		}
 	},
@@ -23,25 +23,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				icon : Ext.Msg.QUESTION,
 				fn : function(button) {
 					if (button === 'yes') {
-						component.setLoading('Saving...');
-						if (store.isFiltered()) {
-							store.clearFilter();
-						}
-						store.sync({
-							success : function(batch) {
-								component.setLoading(false);
-								if(model.get('isLatestExpense')) {
-									me.fireEvent('updatesummary');
-								}
-								window.clearListeners();								
-								window.close();
-							},
-							failure : function(batch) {
-								component.setLoading(false);
-								me.refreshGridView(component);
-							}
-						})
-
+						me.syncData(component, true);
 					}
 					if (button === 'no') {
 						window.clearListeners();
@@ -68,6 +50,16 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				username : expensetracker.util.Session.getUsername(),
 				month : model.get('month'),
 				year : model.get('year')
+			},
+			callback : function(records, operation, success) {
+				if (!success) {
+					var response = Ext.JSON.decode(operation.getError().response.responseText);
+					expensetracker.util.Message.toast(response.status_Message);
+					if (401 === response.status_Code) {
+						me.getView().close();
+						me.fireEvent('navigatelogin');
+					}
+				}
 			}
 		});
 	},
@@ -124,20 +116,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
-			grid.setLoading("Saving...");
-			store.sync({
-				success : function(batch) {
-					grid.setLoading(false);	
-					if(model.get('isLatestExpense')){
-						me.fireEvent('updatesummary');
-					}
-					me.refreshGridView(grid);
-				},
-				failure : function(batch) {
-					grid.setLoading(false);
-					me.refreshGridView(grid);
-				}
-			});
+			me.syncData(grid, false);
 		}
 	},
 	onDeleteExpense : function(view, rowIndex, colIndex, item, e, record, row) {
@@ -157,6 +136,48 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var view = me.getView();
 		var component = view.getLayout().getActiveItem();
 		component.getStore().reload();
+	},
+	syncData : function(grid, closeWindow) {
+		var me = this;
+		var model = me.getView().getViewModel();
+		grid.setLoading("Saving...");
+		grid.getStore().sync({
+			success : function(batch) {
+				grid.setLoading(false);
+				if (model.get('isLatestExpense')) {
+					me.fireEvent('updatesummary');
+				}
+				if (closeWindow) {
+					me.getView().close();
+				} else {
+					me.refreshGridView(grid);
+				}
+			},
+			failure : function(batch) {
+				var isUnauthorizedAccess = false;
+				var operations = batch.getOperations();
+
+				grid.setLoading(false);
+				me.refreshGridView(grid);
+
+				for (var i = 0; i < operations.length; i++) {
+					var operation = operations[i];
+					var response = Ext.JSON.decode(operation.getError().response.responseText);
+					if (401 === response.status_Code) {
+						isUnauthorizedAccess = true;
+						break;
+					}
+				}
+				if (isUnauthorizedAccess) {
+					expensetracker.util.Message.toast('Unauthorized Access');
+					me.getView().clearListeners();
+					me.getView().close();
+					me.fireEvent('navigatelogin');
+				} else {
+					expensetracker.util.Message.toast('Server Error');
+				}
+			}
+		});
 	},
 	refreshGridView : function(grid) {
 		grid.getView().refresh();

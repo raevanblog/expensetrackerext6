@@ -44,5 +44,6 @@ Ext.define('expensetracker.store.ExpenseDock', {
 	}, {
 		month : 'December',
 		monthNo : 12
-	} ]
+	} ],
+	autoLoad : false
 });

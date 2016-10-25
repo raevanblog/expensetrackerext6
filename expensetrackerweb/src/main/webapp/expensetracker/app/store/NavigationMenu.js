@@ -29,5 +29,6 @@ Ext.define('expensetracker.store.NavigationMenu', {
 			viewType : 'charts',
 			leaf : true
 		} ]
-	}
+	},
+	autoLoad : false
 });

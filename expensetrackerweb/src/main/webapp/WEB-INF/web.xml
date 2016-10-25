@@ -17,9 +17,22 @@
 	<servlet>
 		<servlet-name>ExpenseTrackerWebService</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>			
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>               
+                com.slabs.expense.tracker.web.filter;
+                org.glassfish.jersey.filter;
+            </param-value>
+		</init-param>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
 			<param-value>com.slabs.expense.tracker.core.web.services.ExpenseTrackerServices</param-value>
+		</init-param>
+		<init-param>
+			<param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
+			<param-value>
+               com.slabs.expense.tracker.web.filter.WebServiceRequestFilter                
+            </param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

@@ -1,21 +1,21 @@
 Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.expensedashboardcontroller',
-	listen: {
-		controller: {
+	listen : {
+		controller : {
 			'*' : {
-				updatesummary: 'updateDashBoardSummary'
+				updatesummary : 'updateDashBoardSummary'
 			}
 		}
 	},
 	onRender : function(dashboard) {
 		var me = this;
 		var topexpense = me.lookup('topexpense');
-		
-		var sheet = me.lookup('expsheetdash');		
-		
+
+		var sheet = me.lookup('expsheetdash');
+
 		var expSheetStore = Ext.create('expensetracker.store.ExpenseDock');
-		expSheetStore.removeAll();		
+		expSheetStore.removeAll();
 		expSheetStore.add({
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
@@ -32,9 +32,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				fetchTopExpense : true
 			}
 		});
-		
+
 		topexpense.bindStore(expenseStore);
-		
+
 		me.updateDashBoardSummary();
 	},
 
@@ -65,54 +65,54 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		expenseWindow.show();
 	},
 	onIncomeEditClick : function() {
-		var me = this;	
+		var me = this;
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
 			height : 500,
 			width : 400,
-			x :  me.getView().getX(),
+			x : me.getView().getX(),
 			y : me.getView().getY(),
-			modal : true			
+			modal : true
 		});
 		var model = incomeWindow.getViewModel();
-		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());		
+		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());
 		model.set('year', expensetracker.util.Calendar.getCurrentYear());
 		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
 		incomeWindow.show();
 	},
-	renderToolTip: function(tooltip, record, item) {
+	renderToolTip : function(tooltip, record, item) {
 		var value = Ext.util.Format.number(record.get('value'), '0.00');
 		tooltip.setHtml(value + ' %');
 	},
-	updateDashBoardSummary: function() {
+	updateDashBoardSummary : function() {
 		var me = this;
 		var totInc = me.lookup('totIncome');
 		var totExp = me.lookup('totExpense');
 		var cih = me.lookup('cashInHand');
-		
+
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getDashboardService(),
-			method: 'GET',
-			params: {
-				username: expensetracker.util.Session.getUsername(),
-				month: expensetracker.util.Calendar.getCurrentMonthNo(),
-				year: expensetracker.util.Calendar.getCurrentYear()
+			method : 'GET',
+			params : {
+				username : expensetracker.util.Session.getUsername(),
+				month : expensetracker.util.Calendar.getCurrentMonthNo(),
+				year : expensetracker.util.Calendar.getCurrentYear()
 			},
 			success : function(response, opts) {
 				var response = Ext.decode(response.responseText);
 				var dashData = response.result.any[0];
-				if(dashData != null || dashData != undefined) {
-					var summary = dashData.summary;					
-				    var piePanel = me.lookup('summarypiepanel');
+				if (dashData != null || dashData != undefined) {
+					var summary = dashData.summary;
+					var piePanel = me.lookup('summarypiepanel');
 					var pie = piePanel.down('[itemId=summaryPolar]');
-					
+
 					totInc.setValue(summary.totalIncome);
 					totExp.setValue(summary.totalExpense);
 					cih.setValue(summary.cashInHand);
-					if(summary.totalIncome !== 0.0) {
-						var pieStore = Ext.create('Ext.data.Store');						
-						var expPercentage = (summary.totalExpense/summary.totalIncome)*100;
-						var cihPercentage = (summary.cashInHand/summary.totalIncome)*100;
-															
+					if (summary.totalIncome !== 0.0) {
+						var pieStore = Ext.create('Ext.data.Store');
+						var expPercentage = (summary.totalExpense / summary.totalIncome) * 100;
+						var cihPercentage = (summary.cashInHand / summary.totalIncome) * 100;
+
 						pieStore.add({
 							item : 'CASH-IN-HAND',
 							value : cihPercentage
@@ -121,9 +121,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 							value : expPercentage
 						});
 						pie.bindStore(pieStore);
-					} else{
+					} else {
 						var pieStore = pie.getStore();
-						if(pieStore !== null || pieStore !== undefined) {
+						if (pieStore !== null || pieStore !== undefined) {
 							pieStore.removeAll();
 						}
 					}
@@ -133,6 +133,6 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				console.log(response);
 			}
 		});
-		
+
 	}
 });

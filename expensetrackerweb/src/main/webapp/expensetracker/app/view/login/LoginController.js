@@ -17,6 +17,11 @@ Ext.define('expensetracker.view.login.LoginController', {
 					var response = Ext.decode(action.response.responseText);
 					if (response.user !== null) {
 						expensetracker.util.Session.setUser(response.user);
+						expensetracker.util.Session.setCurrency({
+							name : 'IND',
+							symbol : '₹'
+						});
+						me.loadApplicationStore();
 					}
 					me.getView().destroy();
 					Ext.widget('app-main');
@@ -30,11 +35,18 @@ Ext.define('expensetracker.view.login.LoginController', {
 			})
 		}
 	},
-	onEnter: function(textfield, e) {
+	onEnter : function(textfield, e) {
 		var me = this;
 		var loginBtn = me.lookup('loginBtn');
-		if(Ext.event.Event.ENTER === e.keyCode) {
+		if (Ext.event.Event.ENTER === e.keyCode) {
 			me.onLogin(loginBtn);
 		}
+	},
+	loadApplicationStore : function() {
+		Ext.getStore('ExpenseDock').load();
+		Ext.getStore('ExpenseCategory').load();
+		Ext.getStore('ExpenseType').load();
+		Ext.getStore('ExpenseName').load();
+		Ext.getStore('IncomeType').load();
 	}
 });

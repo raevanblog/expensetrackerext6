@@ -2,9 +2,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	extend : 'Ext.container.Container',
 	xtype : 'expensedashboard',
 	alias : 'view.expensedashboard',
-	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController',
-			'expensetracker.view.dashboard.TopExpense', 'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie',
-			'expensetracker.view.income.IncomeWindow' ],
+	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController', 'expensetracker.view.dashboard.TopExpense',
+			'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie', 'expensetracker.view.income.IncomeWindow' ],
 	layout : 'responsivecolumn',
 	controller : 'expensedashboardcontroller',
 	listeners : {
