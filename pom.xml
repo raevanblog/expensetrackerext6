@@ -47,15 +47,6 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.1</version>
-						<configuration>
-							<source>1.8</source>
-							<target>1.8</target>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
 						<version>2.10</version>
 						<executions>
@@ -176,6 +167,20 @@
 		</dependency>
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<organization>
 		<name>S Labs</name>
 		<url>https://www.slabs.com</url>
@@ -214,6 +219,6 @@
 		<module>expensetracker-util</module>
 		<module>expensetracker-common</module>
 		<module>expensetracker-db-connector</module>
-    <module>expensetracker-reports</module>
-  </modules>
+		<module>expensetracker-reports</module>
+	</modules>
 </project>
