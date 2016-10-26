@@ -214,5 +214,6 @@
 		<module>expensetracker-util</module>
 		<module>expensetracker-common</module>
 		<module>expensetracker-db-connector</module>
-	</modules>
+    <module>expensetracker-reports</module>
+  </modules>
 </project>
