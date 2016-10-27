@@ -19,7 +19,7 @@ public interface ExpenseMapper {
 
 	public List<Expense> getTopExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
 
-	public Float getTotalExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
+	public Double getTotalExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
 
 	public Integer updateExpense(@Param("record") Expense expense) throws Exception;
 

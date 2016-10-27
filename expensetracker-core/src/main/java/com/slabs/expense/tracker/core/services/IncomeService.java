@@ -22,7 +22,7 @@ public class IncomeService {
 		return mapper.getIncome(username, year, month);
 	}
 
-	public Float selecTotalIncome(String username, Integer year, Integer month) throws Exception {
+	public Double selecTotalIncome(String username, Integer year, Integer month) throws Exception {
 		return mapper.getTotalIncome(username, year, month);
 	}
 

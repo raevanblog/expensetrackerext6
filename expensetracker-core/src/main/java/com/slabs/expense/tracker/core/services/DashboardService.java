@@ -18,9 +18,9 @@ public class DashboardService {
 	private IncomeMapper iMapper;
 
 	public Dashboard getDashboardData(String username, int year, int month) throws Exception {
-		Float totalExpense = eMapper.getTotalExpense(username, year, month);
-		Float totalIncome = iMapper.getTotalIncome(username, year, month);
-		Float cashInHand = totalIncome - totalExpense;
+		Double totalExpense = eMapper.getTotalExpense(username, year, month);
+		Double totalIncome = iMapper.getTotalIncome(username, year, month);
+		Double cashInHand = totalIncome - totalExpense;
 
 		Dashboard dashboard = new Dashboard();
 		Summary summary = new Summary();

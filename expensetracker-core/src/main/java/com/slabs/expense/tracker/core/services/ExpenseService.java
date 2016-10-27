@@ -38,7 +38,7 @@ public class ExpenseService {
 		}
 	}
 
-	public Float selectTotalExpense(String username, Integer year, Integer month) throws Exception {
+	public Double selectTotalExpense(String username, Integer year, Integer month) throws Exception {
 		return mapper.getTotalExpense(username, year, month);
 	}
 
