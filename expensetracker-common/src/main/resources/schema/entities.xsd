@@ -38,9 +38,9 @@
 		<sequence>
 			<element name="month" type="int" />
 			<element name="year" type="int" />
-			<element name="totalIncome" type="float" />
-			<element name="totalExpense" type="float" />
-			<element name="cashInHand" type="float" />
+			<element name="totalIncome" type="double" />
+			<element name="totalExpense" type="double" />
+			<element name="cashInHand" type="double" />
 			<element name="username" type="string" />
 		</sequence>
 	</complexType>
@@ -131,9 +131,9 @@
 			<element name="username" type="string" />
 			<element name="category" type="string" />
 			<element name="exptype" type="string" />
-			<element name="price" type="float" minOccurs="0" />
-			<element name="qty" type="float" minOccurs="0" />
-			<element name="pricePerUnit" type="float" minOccurs="0" />
+			<element name="price" type="double" minOccurs="0" />
+			<element name="qty" type="double" minOccurs="0" />
+			<element name="pricePerUnit" type="double" minOccurs="0" />
 		</sequence>
 	</complexType>
 
@@ -167,6 +167,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
+			<element name="id" type="int" />
 			<element name="exptype" type="string" />
 			<element name="description" type="string" />
 		</sequence>
@@ -191,7 +192,7 @@
 			<element name="mth" type="integer" />
 			<element name="username" type="string" />
 			<element name="incometype" type="string" />
-			<element name="income" type="float" />
+			<element name="income" type="double" />
 		</sequence>
 	</complexType>
 
