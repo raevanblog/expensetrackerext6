@@ -20,8 +20,9 @@ public class Main {
 		userInfo.setMobile("9894362480");
 		userInfo.setEmail("shyamcse07@gmail.com");
 
-		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.DECEMBER, 2016);
-		report.setDataSource("select * from EXPENSETRACKER.EXPENSE", connection);
+		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.getMonth(9), 2016);
+		report.setDataSource("select * from EXPENSETRACKER.EXPENSE where username='shyamcse07' and YEAR(expdate)=2016 and MONTH(expdate)=10",
+				connection);
 		report.buildReport().show();
 
 	}

@@ -30,11 +30,11 @@ public class ExpenseTrackerReport {
 	protected StyleBuilders sBuilders = builder.getStyleBuilders();
 
 	protected JasperReportBuilder report;
-	
-	protected static final Color DEFAULT_HEADER_COLOR = new Color(127, 217, 244); 
+
+	protected static final Color DEFAULT_HEADER_COLOR = new Color(127, 217, 244);
 
 	private static final String APPLICATION_NAME = "Expense Tracker";
-	
+
 	protected UserInfo userInfo;
 
 	protected Integer year;
@@ -48,7 +48,7 @@ public class ExpenseTrackerReport {
 		this.report = ReportBuilder.getInstance().createJasperReportBuilder();
 		this.report.setDefaultFont(ReportBuilder.getInstance().getDefaultFont());
 	}
-	
+
 	protected void setDataSource(Collection<? extends Object> dataSource) {
 		report.setDataSource(dataSource);
 	}
@@ -62,14 +62,7 @@ public class ExpenseTrackerReport {
 	}
 
 	public void addTitle() {
-		VerticalListBuilder titleContainer = cBuilders.verticalList();
-		StyleBuilder titleStyle = sProvider.getTitleStyle(true, false, HorizontalTextAlignment.CENTER);
-
-		titleContainer.add(cBuilders.text("Expense Report - " + this.month.getName() + "," + this.year).setStyle(titleStyle), cBuilders.verticalGap(10),
-				sProvider.getFillerLine(DynamicReports.stl.pen1Point(), 10), cBuilders.verticalGap(10));
-
-		report.title(titleContainer);
-		report.titleOnANewPage();
+		
 	}
 
 }

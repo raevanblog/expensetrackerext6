@@ -36,14 +36,15 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		TextFieldBuilder<String> reportTitle = cBuilders.text("Monthly Report").setStyle(sProvider.getBoldStyle());
 
 		VerticalListBuilder userInfoContainer = cBuilders.verticalList();
-		
+
 		TextFieldBuilder<String> owner = cBuilders.text("Owner : " + userInfo.getFirstName() + " " + userInfo.getLastName()).setStyle(userInfoStyle);
 		TextFieldBuilder<String> email = cBuilders.text("Email : " + userInfo.getEmail()).setStyle(userInfoStyle);
 		TextFieldBuilder<String> mobile = cBuilders.text("Mobile : " + userInfo.getMobile()).setStyle(userInfoStyle);
 
 		userInfoContainer.add(owner, email, mobile);
-		
-		TextFieldBuilder<String> monthAnYear = cBuilders.text(month.getName() + "," + year).setStyle(sProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
+
+		TextFieldBuilder<String> monthAnYear = cBuilders.text(month.getName() + "," + year)
+				.setStyle(sProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
 		titleContainer.add(reportTitle, monthAnYear).newRow(2);
 		titleContainer.add(userInfoContainer);
 
