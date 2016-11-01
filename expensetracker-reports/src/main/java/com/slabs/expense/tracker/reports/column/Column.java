@@ -4,38 +4,41 @@ import java.sql.Date;
 
 public enum Column {
 
-	PRICEPERUNIT("PRICEPERUNIT", "pricePerUnit", Double.class), 
-	PRICE("PRICE", "price", Double.class), 
-	QTY("QTY", "qty", Double.class), 
-	EXPTYPE("EXPTYPE", "exptype", String.class), 
-	EXPDATE("EXPDATE", "expdate", Date.class),
-	ITEMNAME("ITEMNAME", "itemName", String.class),
-	CATEGORY("CATEGORY","category", String.class), 
-	USERNAME("USERNAME", "username", String.class), 
-	DESCRIPTION("DESCRIPTION", "description", String.class), 
-	CATEGORYID("CATEGORYID", "categoryId", Integer.class), 
-	ID("ID","id", Integer.class), 
-	INCOME("INCOME", "income", Double.class), 
-	INCOMETYPE("INCOMETYPE", "incometype", String.class), 
-	YR("YR", "yr", Integer.class), 
-	MTH("MTH","mth", Integer.class), 
-	ISVERIFIED("ISVERIFIED", "isVerified", Boolean.class),
-	ISADMIN("ISADMIN", "isAdmin", Boolean.class),
-	ADDRESS("ADDRESS", "address", String.class), 
-	MOBILE("MOBILE", "mobile", String.class), 
-	EMAIL("EMAIL", "email", String.class), 
-	PASSWORD("PASSWORD", "password", String.class), 
-	SEX("SEX", "sex", String.class), 
-	LASTNAME("LASTNAME", "lastName", String.class), 
-	FIRSTNAME("FIRSTNAME", "firstName", String.class);
+	PRICEPERUNIT("Unit Price","PRICEPERUNIT", "pricePerUnit", Double.class), 
+	PRICE("Price", "PRICE", "price", Double.class), 
+	QTY("Qty","QTY", "qty", Double.class), 
+	EXPTYPE("Expense Type", "EXPTYPE", "exptype", String.class), 
+	EXPDATE("Date", "EXPDATE", "expdate", Date.class),
+	ITEMNAME("Commodity", "ITEMNAME", "itemName", String.class),
+	CATEGORY("Category", "CATEGORY","category", String.class), 
+	USERNAME("Username", "USERNAME", "username", String.class), 
+	DESCRIPTION("Description", "DESCRIPTION", "description", String.class), 
+	CATEGORYID("Id", "CATEGORYID", "categoryId", Integer.class), 
+	ID("Id", "ID","id", Integer.class), 
+	INCOME("Income", "INCOME", "income", Double.class), 
+	INCOMETYPE("Income Type", "INCOMETYPE", "incometype", String.class), 
+	YR("Year", "YR", "yr", Integer.class), 
+	MTH("Month", "MTH","mth", Integer.class), 
+	ISVERIFIED("Is Verified?", "ISVERIFIED", "isVerified", Boolean.class),
+	ISADMIN("Is Admin?", "ISADMIN", "isAdmin", Boolean.class),
+	ADDRESS("Address", "ADDRESS", "address", String.class), 
+	MOBILE("Mobile", "MOBILE", "mobile", String.class), 
+	EMAIL("Email", "EMAIL", "email", String.class), 
+	PASSWORD("Password", "PASSWORD", "password", String.class), 
+	SEX("Sex", "SEX", "sex", String.class), 
+	LASTNAME("Last Name", "LASTNAME", "lastName", String.class), 
+	FIRSTNAME("First Name", "FIRSTNAME", "firstName", String.class);
 
-	String columnName;
-
-	String mappingName;
+	public String titleName;
 	
-	Class datatype;
+	public String columnName;
 
-	Column(String columnName, String mappingName, Class datatype) {
+	public String mappingName;
+	
+	public Class datatype;
+
+	Column(String titleName, String columnName, String mappingName, Class datatype) {
+		this.titleName = titleName;
 		this.columnName = columnName;
 		this.mappingName = mappingName;
 		this.datatype = datatype;

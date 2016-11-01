@@ -1,15 +1,21 @@
-package com.slabs.expense.tracker.reports.column;
+package com.slabs.expense.tracker.reports.builder;
+
+import com.slabs.expense.tracker.reports.provider.ColumnProvider;
+import com.slabs.expense.tracker.reports.provider.StyleProvider;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
+import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 
 public class ReportBuilder {
 
-	private static DynamicReports reports = new DynamicReports();
-
 	private static ReportBuilder builder;
+
+	private static final String DEFAULT_FONT = "Cambria";
+
+	private static final int DEFAULT_FONT_SIZE = 12;
 
 	private ReportBuilder() {
 
@@ -28,28 +34,28 @@ public class ReportBuilder {
 		return builder;
 	}
 
-	public DynamicReports getDynamicReports() {
-		return reports;
-	}
-
 	public JasperReportBuilder createJasperReportBuilder() {
-		return reports.report();
+		return DynamicReports.report();
 	}
 
 	public ComponentBuilders getComponentBuilders() {
-		return reports.cmp;
+		return DynamicReports.cmp;
 	}
 
 	public StyleBuilders getStyleBuilders() {
-		return reports.stl;
+		return DynamicReports.stl;
 	}
 
 	public ColumnProvider getColumnProvider() {
-		return new ColumnProvider(reports);
+		return new ColumnProvider();
 	}
 
 	public StyleProvider getStyleProvider() {
-		return new StyleProvider(reports);
+		return new StyleProvider(getDefaultFont());
+	}
+
+	public FontBuilder getDefaultFont() {
+		return DynamicReports.stl.font().setFontName(DEFAULT_FONT).setFontSize(DEFAULT_FONT_SIZE);
 	}
 
 }
