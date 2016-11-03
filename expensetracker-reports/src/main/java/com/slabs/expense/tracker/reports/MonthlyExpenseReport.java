@@ -23,6 +23,10 @@ import net.sf.dynamicreports.report.exception.DRException;
 
 public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
+	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year) throws InstantiationException, IllegalAccessException {
+		this(userInfo, month, year, CurrencyType.DOLLAR);		
+	}
+
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency) throws InstantiationException, IllegalAccessException {
 		super(userInfo, month, year, currency);
 		addColumns();
