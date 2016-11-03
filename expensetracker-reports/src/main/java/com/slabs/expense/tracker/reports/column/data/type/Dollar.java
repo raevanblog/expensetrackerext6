@@ -1,14 +1,19 @@
 package com.slabs.expense.tracker.reports.column.data.type;
 
-import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
-
-public class Dollar extends BigDecimalType {
+public class Dollar extends Currency {
 
 	private static final long serialVersionUID = 1L;
 
+	private static final String CURRENCY_SYMBOL = "$";
+
 	@Override
 	public String getPattern() {
-		return "$ #,###.00";
+		return CURRENCY_SYMBOL + " #,###.00";
+	}
+
+	@Override
+	public String currencySymbol() {
+		return CURRENCY_SYMBOL;
 	}
 
 }

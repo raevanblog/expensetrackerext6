@@ -9,6 +9,8 @@ import java.util.List;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
 import com.slabs.expense.tracker.reports.column.Column;
+import com.slabs.expense.tracker.reports.column.data.type.Currency;
+import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 import com.slabs.expense.tracker.reports.provider.ColumnProvider;
 import com.slabs.expense.tracker.reports.provider.StyleProvider;
 
@@ -51,10 +53,13 @@ public abstract class ExpenseTrackerReport {
 
 	protected Month month;
 
-	public ExpenseTrackerReport(UserInfo userInfo, Month month, Integer year) {
+	protected Currency currency;
+
+	public ExpenseTrackerReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency) throws InstantiationException, IllegalAccessException {
 		this.userInfo = userInfo;
 		this.month = month;
 		this.year = year;
+		this.currency = (Currency) currency.getTypeClass().newInstance();
 		this.report = ReportBuilder.getInstance().createJasperReportBuilder();
 		this.report.setDefaultFont(ReportBuilder.getInstance().getDefaultFont());
 	}
@@ -102,7 +107,7 @@ public abstract class ExpenseTrackerReport {
 		return this.columns.toArray(columns);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AggregationSubtotalBuilder getSubTotalBuilder(final Column column) {
 		AggregationSubtotalBuilder subtotal = DynamicReports.sbt.sum(getColumn(column));
 		subtotal.setLabel("Total : ").setLabelPosition(Position.LEFT);

@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
+import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 
@@ -22,7 +23,7 @@ public class Main {
 		userInfo.setMobile("9894362480");
 		userInfo.setEmail("shyamcse07@gmail.com");
 
-		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.getMonth(9), 2016);
+		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.getMonth(9), 2016, CurrencyType.RUPEES);
 		report.setDataSource("select * from EXPENSETRACKER.EXPENSE where username='shyamcse07' order by CATEGORY ASC", connection);
 		// report.groupBy(Column.EXPTYPE, true);
 		report.groupBy(Column.CATEGORY, true);

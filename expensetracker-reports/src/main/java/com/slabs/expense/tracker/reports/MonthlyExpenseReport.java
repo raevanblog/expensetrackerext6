@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.reports.column.Column;
-import com.slabs.expense.tracker.reports.column.data.type.Rupees;
+import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 import com.slabs.expense.tracker.reports.expression.ExpenseImageResolver;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -19,13 +19,12 @@ import net.sf.dynamicreports.report.builder.group.CustomGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
-import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.exception.DRException;
 
 public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
-	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year) {
-		super(userInfo, month, year);
+	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency) throws InstantiationException, IllegalAccessException {
+		super(userInfo, month, year, currency);
 		addColumns();
 	}
 
@@ -58,8 +57,8 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		;
 		TextColumnBuilder<String> expenseCategory = cProvider.getColumn(Column.CATEGORY, String.class);
 		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class).setStyle(rightAligned).setFixedColumns(5);
-		TextColumnBuilder<BigDecimal> price = cProvider.getColumn(Column.PRICE, BigDecimal.class).setStyle(rightAligned).setDataType(new Rupees());
-		TextColumnBuilder<BigDecimal> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, BigDecimal.class).setStyle(rightAligned);
+		TextColumnBuilder<BigDecimal> price = cProvider.getColumn(Column.PRICE, BigDecimal.class).setStyle(rightAligned).setDataType(this.currency);
+		TextColumnBuilder<BigDecimal> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, BigDecimal.class).setStyle(rightAligned).setDataType(this.currency);
 
 		addColumns(rowNum, expDate, expenseType, expenseCategory, qty, price, pricePerUnit);
 	}

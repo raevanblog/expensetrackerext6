@@ -36,8 +36,10 @@ public enum Column {
 
 	public String mappingName;
 	
+	@SuppressWarnings("rawtypes")
 	public Class datatype;
 
+	@SuppressWarnings("rawtypes")
 	Column(String titleName, String columnName, String mappingName, Class datatype) {
 		this.titleName = titleName;
 		this.columnName = columnName;

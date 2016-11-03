@@ -1,7 +1,5 @@
 package com.slabs.expense.tracker.reports.provider;
 
-import java.util.Date;
-
 import com.slabs.expense.tracker.reports.column.Column;
 import com.slabs.expense.tracker.reports.column.DateFormatter;
 
@@ -26,12 +24,12 @@ public class ColumnProvider {
 		return (TextColumnBuilder<T>) DynamicReports.col.column(column.titleName, column.mappingName, column.datatype);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ValueColumnBuilder getDateColumn(Column column, String dateFormat) {
 		return DynamicReports.col.column(column.titleName, column.mappingName, column.datatype).setValueFormatter(new DateFormatter(dateFormat));
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ValueColumnBuilder getDateColumn(Column column) {
 		return DynamicReports.col.column(column.titleName, column.mappingName, column.datatype).setValueFormatter(new DateFormatter());
 	}
