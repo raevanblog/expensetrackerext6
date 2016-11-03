@@ -2,22 +2,29 @@ package com.slabs.expense.tracker.reports;
 
 import java.awt.Color;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
+import com.slabs.expense.tracker.reports.column.Column;
 import com.slabs.expense.tracker.reports.provider.ColumnProvider;
 import com.slabs.expense.tracker.reports.provider.StyleProvider;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
-import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
+import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
+import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
+import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.Position;
 
-public class ExpenseTrackerReport {
+public abstract class ExpenseTrackerReport {
 
 	protected ReportBuilder builder = ReportBuilder.getInstance();
 
@@ -30,6 +37,9 @@ public class ExpenseTrackerReport {
 	protected StyleBuilders sBuilders = builder.getStyleBuilders();
 
 	protected JasperReportBuilder report;
+
+	@SuppressWarnings("rawtypes")
+	protected List<ValueColumnBuilder> columns = new ArrayList<ValueColumnBuilder>();
 
 	protected static final Color DEFAULT_HEADER_COLOR = new Color(127, 217, 244);
 
@@ -58,11 +68,49 @@ public class ExpenseTrackerReport {
 	}
 
 	public void addPageNumber() {
-		report.pageFooter(cBuilders.pageXofY().setStyle(sProvider.getBoldStyle(HorizontalTextAlignment.CENTER)));
+		HorizontalListBuilder hList = cBuilders.horizontalFlowList();
+		hList.add(getApplicationName(10), cBuilders.pageXslashY().setStyle(sProvider.getStyle(HorizontalTextAlignment.LEFT)));
+		report.pageFooter(sProvider.getDefaultFillerLine(10), hList);
 	}
 
-	public void addTitle() {
-		
+	public TextFieldBuilder<String> getApplicationName(Integer fontSize) {
+		TextFieldBuilder<String> appName = cBuilders.text(APPLICATION_NAME);
+		StyleBuilder appNameStyle = sProvider.getStyle(fontSize).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
+		return appName.setStyle(appNameStyle);
 	}
+
+	@SuppressWarnings("rawtypes")
+	public void addColumns(ValueColumnBuilder... columns) {
+		for (ValueColumnBuilder c : columns) {
+			this.columns.add(c);
+		}
+	}
+
+	@SuppressWarnings("rawtypes")
+	public ValueColumnBuilder getColumn(Column column) {
+		for (ValueColumnBuilder c : columns) {
+			if (c.getColumn().getName().equals(column.getMappingName())) {
+				return c;
+			}
+		}
+		return null;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public ValueColumnBuilder[] getAllColumns() {
+		ValueColumnBuilder[] columns = new ValueColumnBuilder[this.columns.size()];
+		return this.columns.toArray(columns);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
+	public AggregationSubtotalBuilder getSubTotalBuilder(final Column column) {
+		AggregationSubtotalBuilder subtotal = DynamicReports.sbt.sum(getColumn(column));
+		subtotal.setLabel("Total : ").setLabelPosition(Position.LEFT);
+		return subtotal;
+	}
+
+	public abstract void addTitle();
+
+	public abstract void groupBy(Column column, boolean enableSubtotal);
 
 }

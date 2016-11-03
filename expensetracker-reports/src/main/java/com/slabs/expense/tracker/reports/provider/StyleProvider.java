@@ -19,8 +19,8 @@ public class StyleProvider {
 
 	public StyleBuilder getStyle() {
 		return getStyle(defaultFont.getFont().getFontName(), defaultFont.getFont().getFontSize(), false, false);
-	}
-	
+	}	
+
 	public StyleBuilder getStyle(Integer fontSize) {
 		return getStyle().setFontSize(fontSize);
 	}
@@ -70,7 +70,11 @@ public class StyleProvider {
 		return DynamicReports.cmp.filler();
 	}
 
-	public FillerBuilder getFillerLine(PenBuilder pen, Integer height) {
+	public FillerBuilder getDefaultFillerLine(Integer height) {
+		return getFiller().setStyle(getStyle().setTopBorder(DynamicReports.stl.pen1Point())).setFixedHeight(height);
+	}
+
+	public FillerBuilder getFillerLine(PenBuilder pen, Integer height) {		
 		return getFiller().setStyle(getStyle().setTopBorder(pen)).setFixedHeight(height);
 	}
 

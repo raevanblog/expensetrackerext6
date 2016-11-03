@@ -13,9 +13,9 @@ public class ReportBuilder {
 
 	private static ReportBuilder builder;
 
-	private static final String DEFAULT_FONT = "Cambria";
+	private static final String DEFAULT_FONT = "Times New Roman";
 
-	private static final int DEFAULT_FONT_SIZE = 12;
+	private static final int DEFAULT_FONT_SIZE = 10;
 
 	private ReportBuilder() {
 

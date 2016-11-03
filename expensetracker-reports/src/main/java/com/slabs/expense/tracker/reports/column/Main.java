@@ -7,6 +7,8 @@ import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
 
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -21,9 +23,12 @@ public class Main {
 		userInfo.setEmail("shyamcse07@gmail.com");
 
 		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.getMonth(9), 2016);
-		report.setDataSource("select * from EXPENSETRACKER.EXPENSE where username='shyamcse07' and YEAR(expdate)=2016 and MONTH(expdate)=10",
-				connection);
-		report.buildReport().show();
+		report.setDataSource("select * from EXPENSETRACKER.EXPENSE where username='shyamcse07' order by CATEGORY ASC", connection);
+		// report.groupBy(Column.EXPTYPE, true);
+		report.groupBy(Column.CATEGORY, true);
+		report.subTotalPrice();
+		JasperReportBuilder rep = report.buildReport();
+		rep.show();
 
 	}
 
