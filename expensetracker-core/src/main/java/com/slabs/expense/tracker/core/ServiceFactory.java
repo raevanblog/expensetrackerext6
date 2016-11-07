@@ -33,7 +33,7 @@ public class ServiceFactory {
 
 	public void initialize() {
 		if (context == null) {
-			context = new ClassPathXmlApplicationContext("classpath*:*.xml");
+			context = new ClassPathXmlApplicationContext("classpath*:*-spring.xml");
 		}
 	}
 

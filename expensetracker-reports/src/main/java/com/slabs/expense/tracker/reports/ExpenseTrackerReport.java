@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.slabs.expense.tracker.common.db.column.Column;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
-import com.slabs.expense.tracker.reports.column.Column;
 import com.slabs.expense.tracker.reports.column.data.type.Currency;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 import com.slabs.expense.tracker.reports.provider.ColumnProvider;
@@ -25,6 +25,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Position;
+import net.sf.dynamicreports.report.exception.DRException;
 
 public abstract class ExpenseTrackerReport {
 
@@ -64,10 +65,10 @@ public abstract class ExpenseTrackerReport {
 		this.report.setDefaultFont(ReportBuilder.getInstance().getDefaultFont());
 	}
 
-	protected void setDataSource(Collection<? extends Object> dataSource) {
+	public void setDataSource(Collection<? extends Object> dataSource) {
 		report.setDataSource(dataSource);
 	}
-
+	
 	public void setDataSource(String sql, Connection connection) {
 		report.setDataSource(sql, connection);
 	}
@@ -114,7 +115,7 @@ public abstract class ExpenseTrackerReport {
 		return subtotal;
 	}
 
-	public abstract void addTitle();
+	public abstract JasperReportBuilder buildReport() throws DRException;
 
 	public abstract void groupBy(Column column, boolean enableSubtotal);
 

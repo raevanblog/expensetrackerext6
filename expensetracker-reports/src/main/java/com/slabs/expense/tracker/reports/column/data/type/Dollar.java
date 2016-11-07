@@ -8,7 +8,7 @@ public class Dollar extends Currency {
 
 	@Override
 	public String getPattern() {
-		return CURRENCY_SYMBOL + " #,###.00";
+		return CURRENCY_SYMBOL + " #,###.##";
 	}
 
 	@Override

@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.web.services.ExpenseTrackerServices;
 
-import io.netty.channel.Channel;
-
 public class Server {
 
 	private static final Logger L = LoggerFactory.getLogger(Server.class);
@@ -51,7 +49,7 @@ public class Server {
 		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();
 		L.info("Registering Web Services API...");
 		NettyHttpContainerProvider.createHttp2Server(baseUri, new ExpenseTrackerServices(), null);
-		L.info("Server is started and available @ http://localhost:9998/exptr-web-api");
+		L.info("Server is started and available @ http://localhost:9998/exptr-web");
 	}
 
 	public static void main(String args[]) {

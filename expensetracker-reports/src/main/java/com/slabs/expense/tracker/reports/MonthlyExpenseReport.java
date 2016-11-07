@@ -3,8 +3,8 @@ package com.slabs.expense.tracker.reports;
 import java.awt.Color;
 import java.math.BigDecimal;
 
+import com.slabs.expense.tracker.common.db.column.Column;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.reports.column.Column;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 import com.slabs.expense.tracker.reports.expression.ExpenseImageResolver;
 
@@ -24,7 +24,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year) throws InstantiationException, IllegalAccessException {
-		this(userInfo, month, year, CurrencyType.DOLLAR);		
+		this(userInfo, month, year, CurrencyType.DOLLAR);
 	}
 
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency) throws InstantiationException, IllegalAccessException {
@@ -32,15 +32,14 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		addColumns();
 	}
 
+	@Override
 	public JasperReportBuilder buildReport() throws DRException {
 		addTitle();
 		addColumnsToReport();
-		addPageNumber();
 		return report;
 	}
 
-	@Override
-	public void addTitle() {
+	private void addTitle() {
 
 		HorizontalListBuilder titleContainer = cBuilders.horizontalList();
 		TextFieldBuilder<String> reportTitle = cBuilders.text("Monthly Report").setStyle(sProvider.getBoldStyle());
@@ -51,23 +50,22 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void addColumns() {
+	private void addColumns() {
 		StyleBuilder rightAligned = sProvider.getStyle(HorizontalTextAlignment.RIGHT);
 		report.setColumnTitleStyle(sProvider.getColumnHeader(Color.BLACK, DEFAULT_HEADER_COLOR, false));
 
 		TextColumnBuilder<Integer> rowNum = cProvider.getRowNumberColumn("S.No");
-		ValueColumnBuilder expDate = cProvider.getDateColumn(Column.EXPDATE).setFixedColumns(6);
+		ValueColumnBuilder expDate = cProvider.getDateColumn(Column.EXPDATE).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 		TextColumnBuilder<String> expenseType = cProvider.getColumn(Column.EXPTYPE, String.class).setFixedColumns(10);
-		;
 		TextColumnBuilder<String> expenseCategory = cProvider.getColumn(Column.CATEGORY, String.class);
 		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class).setStyle(rightAligned).setFixedColumns(5);
-		TextColumnBuilder<BigDecimal> price = cProvider.getColumn(Column.PRICE, BigDecimal.class).setStyle(rightAligned).setDataType(this.currency);
-		TextColumnBuilder<BigDecimal> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, BigDecimal.class).setStyle(rightAligned).setDataType(this.currency);
+		TextColumnBuilder<Double> price = cProvider.getColumn(Column.PRICE, Double.class).setStyle(rightAligned).setDataType(this.currency);
+		TextColumnBuilder<Double> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, Double.class).setStyle(rightAligned).setDataType(this.currency);
 
 		addColumns(rowNum, expDate, expenseType, expenseCategory, qty, price, pricePerUnit);
 	}
 
-	public void addColumnsToReport() {
+	private void addColumnsToReport() {
 
 		report.columns(getAllColumns());
 		report.highlightDetailOddRows();

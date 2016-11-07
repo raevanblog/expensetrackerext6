@@ -8,7 +8,7 @@ public class Rupees extends Currency {
 
 	@Override
 	public String getPattern() {
-		return "₹ #,###.00";
+		return "₹ #,###.##";
 	}
 
 	@Override

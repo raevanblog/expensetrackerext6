@@ -1,6 +1,6 @@
 package com.slabs.expense.tracker.reports.provider;
 
-import com.slabs.expense.tracker.reports.column.Column;
+import com.slabs.expense.tracker.common.db.column.Column;
 import com.slabs.expense.tracker.reports.column.DateFormatter;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
