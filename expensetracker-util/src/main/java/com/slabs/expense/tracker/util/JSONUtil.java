@@ -15,6 +15,15 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public class JSONUtil {
 
+	/**
+	 * This method will return the JSON string for the given object
+	 * 
+	 * @param object
+	 *            {@link Object} - Object for which JSON string to be generated
+	 * @return {@link String} - JSON string
+	 * @throws IOException
+	 *             throws {@link IOException}
+	 */
 	public static String getJSONString(Object object) throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
