@@ -11,7 +11,9 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slabs.expense.tracker.core.ReportResponse;
+import com.slabs.expense.tracker.core.ContentType;
+import com.slabs.expense.tracker.core.ResponseStream;
+import com.slabs.expense.tracker.core.ResponseGenerator;
 import com.slabs.expense.tracker.core.ResponseStatus;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
@@ -34,7 +36,7 @@ public class ReportingWebService {
 			ReportingService service = ServiceFactory.getInstance().getService(Services.REPORTING_SERVICE, ReportingService.class);
 			JasperReportBuilder report = service.monthlyReport(username, year, month);
 			String fileName = username + "_" + month + "_" + year + ".pdf";
-			return Response.ok(new ReportResponse(report), MediaType.APPLICATION_OCTET_STREAM).header("content-disposition", "attachment; filename = " + fileName).build();
+			return ResponseGenerator.getSuccessResponse(new ResponseStream(report), fileName, ContentType.APPLICATION_PDF_TYPE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);

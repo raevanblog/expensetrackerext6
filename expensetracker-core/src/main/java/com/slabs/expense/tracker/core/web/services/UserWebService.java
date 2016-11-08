@@ -37,7 +37,7 @@ public class UserWebService {
 	public Response createUser(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSucessResponse(service.create(record), Operation.INSERT);
+			return ResponseGenerator.getSuccessResponse(service.create(record), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -51,7 +51,7 @@ public class UserWebService {
 	public Response updateUser(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSucessResponse(service.update(record), Operation.UPDATE);
+			return ResponseGenerator.getSuccessResponse(service.update(record), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -65,7 +65,7 @@ public class UserWebService {
 	public Response deleteUser(List<UserInfo> records) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSucessResponse(service.delete(records), Operation.DELETE);
+			return ResponseGenerator.getSuccessResponse(service.delete(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -79,7 +79,7 @@ public class UserWebService {
 	public Response getUser(@QueryParam("username") String username) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSucessResponse(service.select(username, false), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.select(username, false), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -92,7 +92,7 @@ public class UserWebService {
 	public Response getUsers() throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSucessResponse(service.selectAll(false), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.selectAll(false), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);

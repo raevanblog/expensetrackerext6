@@ -29,7 +29,7 @@ public class DashboardWebService {
 	public Response getSummary(@QueryParam("username") String username, @QueryParam("year") int year, @QueryParam("month") int month) throws ExpenseTrackerException {
 		try {
 			DashboardService service = ServiceFactory.getInstance().getService(Services.DASHBOARD_SERVICE, DashboardService.class);
-			return ResponseGenerator.getSucessResponse(service.getDashboardData(username, year, month), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.getDashboardData(username, year, month), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);

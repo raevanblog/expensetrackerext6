@@ -3,9 +3,14 @@ package com.slabs.expense.tracker.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.StreamingOutput;
+
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservice.response.Result;
+
+import net.sf.jasperreports.web.util.ContentTypeMapping;
 
 public class ResponseGenerator {
 
@@ -35,7 +40,7 @@ public class ResponseGenerator {
 		return resp;
 	}
 
-	private static Response getSucessResponse() {
+	private static Response getSuccessResponse() {
 		Response response = new Response();
 		response.setStatus_Code(ResponseStatus.OK.getStatusCode());
 		response.setStatus_Message(ResponseStatus.OK.getMessage());
@@ -43,14 +48,14 @@ public class ResponseGenerator {
 		return response;
 	}
 
-	public static Response getSucessResponse(Object o, Operation operation) {
+	public static Response getSuccessResponse(Object o, Operation operation) {
 		List<Object> list = new ArrayList<Object>();
 		list.add(o);
-		return getSucessResponse(list, operation);
+		return getSuccessResponse(list, operation);
 	}
 
-	public static Response getSucessResponse(List<? extends Object> list, Operation operation) {
-		Response response = getSucessResponse();
+	public static Response getSuccessResponse(List<? extends Object> list, Operation operation) {
+		Response response = getSuccessResponse();
 		Result result = new Result();
 		result.setOperation(operation);
 		if (list != null && !list.isEmpty()) {
@@ -73,8 +78,8 @@ public class ResponseGenerator {
 		return response;
 	}
 
-	public static Response getSucessResponse(int noOfRecords, Operation operation) {
-		Response response = getSucessResponse();
+	public static Response getSuccessResponse(int noOfRecords, Operation operation) {
+		Response response = getSuccessResponse();
 
 		Result result = new Result();
 		result.setNoOfRecords(noOfRecords);
@@ -96,6 +101,10 @@ public class ResponseGenerator {
 
 		response.setResult(result);
 		return response;
+	}
+
+	public static javax.ws.rs.core.Response getSuccessResponse(StreamingOutput output, String fileName, ContentType type) {
+		return javax.ws.rs.core.Response.ok(output, type).header("content-disposition", "attachment; filename = " + fileName).build();
 	}
 
 }

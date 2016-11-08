@@ -42,7 +42,7 @@ public class IncomeWebService {
 
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
 
-			return ResponseGenerator.getSucessResponse(service.select(username, year, month), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.select(username, year, month), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -55,7 +55,7 @@ public class IncomeWebService {
 	public Response addIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
-			return ResponseGenerator.getSucessResponse(service.insert(records), Operation.INSERT);
+			return ResponseGenerator.getSuccessResponse(service.insert(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -69,7 +69,7 @@ public class IncomeWebService {
 	public Response updateIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
-			return ResponseGenerator.getSucessResponse(service.update(records), Operation.UPDATE);
+			return ResponseGenerator.getSuccessResponse(service.update(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -83,7 +83,7 @@ public class IncomeWebService {
 	public Response deleteIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
-			return ResponseGenerator.getSucessResponse(service.delete(records), Operation.DELETE);
+			return ResponseGenerator.getSuccessResponse(service.delete(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
@@ -97,7 +97,7 @@ public class IncomeWebService {
 	public Response getIncomeType() throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
-			return ResponseGenerator.getSucessResponse(service.selectIncomeType(), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.selectIncomeType(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);

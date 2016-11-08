@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.reports.column;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.slabs.expense.tracker.common.db.column.Column;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
@@ -25,7 +26,6 @@ public class Main {
 
 		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.getMonth(9), 2016, CurrencyType.RUPEES);
 		report.setDataSource("select * from EXPENSETRACKER.EXPENSE where username='shyamcse07' order by CATEGORY ASC", connection);
-		// report.groupBy(Column.EXPTYPE, true);
 		report.groupBy(Column.CATEGORY, true);
 		report.subTotalPrice();
 		JasperReportBuilder rep = report.buildReport();
