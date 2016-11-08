@@ -11,6 +11,13 @@ import org.slf4j.LoggerFactory;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.web.services.ExpenseTrackerServices;
 
+/**
+ * {@link Server} is a singleton class, which will initialize the core of
+ * Expense Tracker application.
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class Server {
 
 	private static final Logger L = LoggerFactory.getLogger(Server.class);
@@ -54,7 +61,7 @@ public class Server {
 
 	public static void main(String args[]) {
 		L.info("Initializing Expense Tracker Server...");
-		Server.getInstance().initialize();		
+		Server.getInstance().initialize();
 		Server.getInstance().start();
 	}
 

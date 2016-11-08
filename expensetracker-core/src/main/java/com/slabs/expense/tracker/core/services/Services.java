@@ -1,13 +1,16 @@
 package com.slabs.expense.tracker.core.services;
 
+/**
+ * {@link Services} is an {@link Enum} listing the Expense Tracker services
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public enum Services {
-	EXPENSE_CATEGORY_SERVICE("ExpenseCategoryService"), 
-	EXPENSE_TYPE_SERVICE("ExpenseTypeService"),
-	EXPENSE_SERVICE("ExpenseService"), 
-	USER_SERVICE("UserService"), 
-	INCOME_SERVICE("IncomeService"), 
-	DASHBOARD_SERVICE("DashboardService"),
-	REPORTING_SERVICE("ReportingService");
+	EXPENSE_CATEGORY_SERVICE("ExpenseCategoryService"), EXPENSE_TYPE_SERVICE(
+			"ExpenseTypeService"), EXPENSE_SERVICE("ExpenseService"), USER_SERVICE(
+					"UserService"), INCOME_SERVICE("IncomeService"), DASHBOARD_SERVICE(
+							"DashboardService"), REPORTING_SERVICE("ReportingService");
 
 	private String name;
 

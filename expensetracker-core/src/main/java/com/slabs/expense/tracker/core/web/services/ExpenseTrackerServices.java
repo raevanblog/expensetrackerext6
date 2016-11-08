@@ -8,6 +8,13 @@ import org.glassfish.jersey.server.ResourceConfig;
 import com.slabs.expense.tracker.core.JAXBContextResolver;
 import com.slabs.expense.tracker.core.ObjectMapperResolver;
 
+/**
+ * {@link ExpenseTrackerServices} is the resource configuration for Expense
+ * Tracker Web Service
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class ExpenseTrackerServices extends ResourceConfig {
 
 	public ExpenseTrackerServices() {

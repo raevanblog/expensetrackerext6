@@ -7,6 +7,12 @@ import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+/**
+ * {@link JSONUtil} - Utility to work with JSON
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class JSONUtil {
 
 	public static String getJSONString(Object object) throws IOException {
@@ -33,10 +39,12 @@ public class JSONUtil {
 		return mapper.readValue(getJSONString(is), Map.class);
 	}
 
-	public static <T extends Object> List<T> getListFromJSON(String json, Class<T> cls) throws IOException {
+	public static <T extends Object> List<T> getListFromJSON(String json, Class<T> cls)
+			throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, cls));
+		return mapper.readValue(json,
+				mapper.getTypeFactory().constructCollectionType(List.class, cls));
 	}
 
 }

@@ -11,6 +11,13 @@ import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 
+/**
+ * {@link ExpenseService} provides API for INSERT,SELECT,UPDATE, DELETE on
+ * EXPENSE table
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 @Service(value = "ExpenseService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
 public class ExpenseService {
@@ -18,10 +25,26 @@ public class ExpenseService {
 	@Autowired
 	private ExpenseMapper mapper;
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link Expense} - List of records to INSERT
+	 * @return {@link Integer} - No of records inserted
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
 	public Integer insert(List<Expense> records) throws Exception {
 		return mapper.insertExpense(records);
 	}
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link Expense} - List of records to UPDATE
+	 * @return {@link Integer} - No of records updated
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
 	public Integer update(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
 		for (Expense record : records) {
@@ -30,7 +53,25 @@ public class ExpenseService {
 		return noOfRecords;
 	}
 
-	public List<Expense> select(String username, Integer year, Integer month, boolean fetchTopExpense) throws Exception {
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @param year
+	 *            {@link Integer} - Year for which the expense need to be
+	 *            retrieved
+	 * @param month
+	 *            {@link Integer} - Month for which the expense need to be
+	 *            retrieved
+	 * @param fetchTopExpense
+	 *            {@link Boolean} - True to fetch only the top expense for the
+	 *            month and year specified, in each category.
+	 * @return {@link Expense} - List of expense records
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public List<Expense> select(String username, Integer year, Integer month,
+			boolean fetchTopExpense) throws Exception {
 		if (fetchTopExpense) {
 			return mapper.getTopExpense(username, year, month);
 		} else {
@@ -38,14 +79,45 @@ public class ExpenseService {
 		}
 	}
 
-	public Double selectTotalExpense(String username, Integer year, Integer month) throws Exception {
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @param year
+	 *            {@link Integer} - Year for which the expense need to be
+	 *            retrieved
+	 * @param month
+	 *            {@link Integer} - Month for which the expense need to be
+	 *            retrieved
+	 * @return {@link Double} - Total expense for the month and year specified
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public Double selectTotalExpense(String username, Integer year, Integer month)
+			throws Exception {
 		return mapper.getTotalExpense(username, year, month);
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            {@link Integer} - Expense record id in EXPENSE table.
+	 * @return {@link Expense} - Expense record matching the id
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
 	public List<Expense> selectById(Integer id) throws Exception {
 		return mapper.getExpenseById(id);
 	}
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link Expense} - List of expense records to DELETE
+	 * @return {@link Integer} - No of records deleted
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
 	public Integer delete(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
 		for (Expense record : records) {
@@ -54,6 +126,13 @@ public class ExpenseService {
 		return noOfRecords;
 	}
 
+	/**
+	 * 
+	 * @return {@link Dictionary} - List of Item Name recorded in the EXPENSE
+	 *         table
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
 	public List<Dictionary> selectExpenseNames() throws Exception {
 		return mapper.selectExpenseNames();
 	}

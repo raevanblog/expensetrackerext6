@@ -9,8 +9,16 @@ import javax.ws.rs.ext.Provider;
 import com.slabs.expense.tracker.core.ResponseGenerator;
 import com.slabs.expense.tracker.core.ResponseStatus;
 
+/**
+ * {@link ExpenseTrackerException} is a custom exception class implementing
+ * {@link ExceptionMapper} of Jersey implementation.
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 @Provider
-public class ExpenseTrackerException extends Exception implements ExceptionMapper<ExpenseTrackerException> {
+public class ExpenseTrackerException extends Exception
+		implements ExceptionMapper<ExpenseTrackerException> {
 
 	private static final long serialVersionUID = -9175347861593491223L;
 
@@ -23,8 +31,8 @@ public class ExpenseTrackerException extends Exception implements ExceptionMappe
 		super();
 	}
 
-	public ExpenseTrackerException(String message, ResponseStatus status, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
+	public ExpenseTrackerException(String message, ResponseStatus status, Throwable cause,
+			boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		this.status = status;
 	}
@@ -44,9 +52,20 @@ public class ExpenseTrackerException extends Exception implements ExceptionMappe
 		this.status = status;
 	}
 
+	/**
+	 * This method will return {@link Response} for the exception that is passed
+	 * to this method.
+	 * 
+	 * @param ex
+	 *            - {@link ExpenseTrackerException}
+	 * @return - {@link Response}
+	 * 
+	 */
+	@Override
 	public Response toResponse(ExpenseTrackerException ex) {
 
-		return Response.status(ex.status.getStatusCode()).entity(ResponseGenerator.getExceptionResponse(ex.status, ex))
+		return Response.status(ex.status.getStatusCode())
+				.entity(ResponseGenerator.getExceptionResponse(ex.status, ex))
 				.type(headers.getMediaType()).build();
 	}
 

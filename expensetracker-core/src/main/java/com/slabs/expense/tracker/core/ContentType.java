@@ -2,11 +2,18 @@ package com.slabs.expense.tracker.core;
 
 import javax.ws.rs.core.MediaType;
 
+/**
+ * {@link ContentType}
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class ContentType extends MediaType {
 
 	public static final String APPLICATION_WORD = "application/msword";
 
-	public static final ContentType APPLICATION_WORD_TYPE = new ContentType("application", "msword");
+	public static final ContentType APPLICATION_WORD_TYPE = new ContentType("application",
+			"msword");
 
 	public static final String APPLICATION_PDF = "application/pdf";
 
@@ -14,11 +21,13 @@ public class ContentType extends MediaType {
 
 	public static final String APPLICATION_GZIP = "application/x-gzip";
 
-	public static final ContentType APPLICATION_GZIP_TYPE = new ContentType("application", "x-gzip");
+	public static final ContentType APPLICATION_GZIP_TYPE = new ContentType("application",
+			"x-gzip");
 
 	public static final String APPLICATION_JAVASCRIPT = "application/javascript";
 
-	public static final ContentType APPLICATION_JAVASCRIPT_TYPE = new ContentType("application", "javascript");
+	public static final ContentType APPLICATION_JAVASCRIPT_TYPE = new ContentType("application",
+			"javascript");
 
 	public static final String IMAGE_BMP = "image/bmp";
 

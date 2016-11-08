@@ -8,6 +8,13 @@ import com.slabs.expense.tracker.common.db.entity.Summary;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 import com.slabs.expense.tracker.database.mapper.IncomeMapper;
 
+/**
+ * {@link DashboardService} provides API's for retrieving data for Expense
+ * Tracker dashboard.
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 @Service(value = "DashboardService")
 public class DashboardService {
 
@@ -17,7 +24,21 @@ public class DashboardService {
 	@Autowired
 	private IncomeMapper iMapper;
 
-	public Dashboard getDashboardData(String username, int year, int month) throws Exception {
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @param year
+	 *            {@link Integer} - Year for which the data is to be retrieved
+	 * @param month
+	 *            {@link Integer} - Month for which the data is to be retrieved
+	 * 
+	 * @return {@link com.slabs.expense.tracker.common.db.entity.Dashboard}
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public Dashboard getDashboardData(String username, Integer year, Integer month)
+			throws Exception {
 		Double totalExpense = eMapper.getTotalExpense(username, year, month);
 		Double totalIncome = iMapper.getTotalIncome(username, year, month);
 		Double cashInHand = totalIncome - totalExpense;

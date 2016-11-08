@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * {@link FileExtensionIncludeFilter} is a file extension filter implementing
+ * {@link FilenameFilter}
  *
- * @author shyam
+ * @author Shyam Natarajan
  */
 public class FileExtensionIncludeFilter implements FilenameFilter {
 

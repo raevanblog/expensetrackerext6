@@ -16,8 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * {@link FileUtil} - Utility to work on files and directory
  *
- * @author shyam
+ * @author Shyam Natarajan
  */
 public class FileUtil {
 
@@ -28,11 +29,15 @@ public class FileUtil {
 	 * directory if it is not available based on the create flag.
 	 * 
 	 * @param directoryPath
+	 *            {@link String} - Directory path
 	 * @param create
-	 * @return
+	 *            {@link Boolean} - True to create directory if not present
+	 * @return {@link Boolean} - True if the directory is present else false
 	 * @throws FileNotFoundException
+	 *             - throws {@link FileNotFoundException}
 	 */
-	public static synchronized boolean isDirectoryAvailable(String directoryPath, boolean... create) throws FileNotFoundException {
+	public static synchronized boolean isDirectoryAvailable(String directoryPath, boolean... create)
+			throws FileNotFoundException {
 
 		File f = new File(directoryPath);
 		if (f.exists() && !f.isDirectory()) {
@@ -56,13 +61,35 @@ public class FileUtil {
 		return true;
 	}
 
+	/**
+	 * This method will return an arry of {@link File} inside the directory
+	 * 
+	 * @param directory
+	 *            {@link File} - Directory from which files need to be loaded
+	 * @return {@link File} - Array of files
+	 * @throws FileNotFoundException
+	 *             - throws {@link FileNotFoundException}
+	 */
 	public static synchronized File[] loadFiles(File directory) throws FileNotFoundException {
 
 		return loadFiles(directory, true);
 
 	}
 
-	public static synchronized File[] loadFiles(File directory, boolean includeDirectory) throws FileNotFoundException {
+	/**
+	 * This method will load the files/directory inside a directory
+	 * 
+	 * @param directory
+	 *            {@link File} - Directory from which files/directory need to be
+	 *            loaded
+	 * @param includeDirectory
+	 *            {@link Boolean} - True to include the directory while loading
+	 * @return {@link File} - Array of files
+	 * @throws FileNotFoundException
+	 *             - throws {@link FileNotFoundException}
+	 */
+	public static synchronized File[] loadFiles(File directory, boolean includeDirectory)
+			throws FileNotFoundException {
 
 		if (directory.exists() && directory.isDirectory()) {
 			return directory.listFiles(new DirectoryIncludeFilter(includeDirectory));
@@ -81,14 +108,17 @@ public class FileUtil {
 	 * @param extension
 	 *            - Extension of the file inside the directory
 	 * @return - Array of file objects.
-	 * @exception - <code>{@link FileNotFoundException}</code> if the specified
-	 *            parameter "directory" is not a directory
+	 * @throws FileNotFoundException
+	 *             - throws {@link FileNotFoundException}
+	 * 
 	 */
-	public static synchronized File[] loadFilesWithExtension(File directory, boolean includeExtension, String... extension) throws FileNotFoundException {
+	public static synchronized File[] loadFilesWithExtension(File directory,
+			boolean includeExtension, String... extension) throws FileNotFoundException {
 
 		if (directory.exists() && directory.isDirectory()) {
 			if (extension != null && extension.length > 0) {
-				return directory.listFiles(new FileExtensionIncludeFilter(includeExtension, extension));
+				return directory
+						.listFiles(new FileExtensionIncludeFilter(includeExtension, extension));
 			} else {
 				return directory.listFiles();
 			}
@@ -96,7 +126,19 @@ public class FileUtil {
 		throw new FileNotFoundException(directory.getPath() + "is not a directory");
 	}
 
-	public static synchronized File loadFile(File directory, String fileName) throws FileNotFoundException {
+	/**
+	 * This method will load the specified file inside the directory
+	 * 
+	 * @param directory
+	 *            {@link File} - Directory from which the file need to be loaded
+	 * @param fileName
+	 *            {@link String} - Name of the file
+	 * @return {@link File} - File
+	 * @throws FileNotFoundException
+	 *             - throws {@link FileNotFoundException}
+	 */
+	public static synchronized File loadFile(File directory, String fileName)
+			throws FileNotFoundException {
 
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = loadFilesWithExtension(directory, true);
@@ -109,16 +151,19 @@ public class FileUtil {
 		return null;
 	}
 
-	/***
+	/**
 	 * This method returns a file object creating a file under the specified
 	 * directory if file does not exist.
-	 *
+	 * 
 	 * @param directory
-	 *            - Directory in which the file is to be created.
+	 *            {@link File} - Directory, inside which the file need to be
+	 *            created
 	 * @param fileName
-	 *            - File name.
-	 * @return File object.
-	 * @see <code>File</code>
+	 *            - {@link String} - File name
+	 * @return {@link File} - File that is created
+	 * @throws IOException
+	 *             - throws {@link IOException}
+	 * 
 	 */
 	public static synchronized File createFile(File directory, String fileName) throws IOException {
 
@@ -130,7 +175,20 @@ public class FileUtil {
 		return null;
 	}
 
-	public static synchronized boolean createDirectory(File directory, String directoryName) throws IOException {
+	/**
+	 * This method will create a directory inside the specified directory
+	 * 
+	 * @param directory
+	 *            {@link File} - Directory inside which the new directory need
+	 *            to be created
+	 * @param directoryName
+	 *            {@link String} - Directory name
+	 * @return {@link Boolean} - True if the directory is created else False
+	 * @throws IOException
+	 *             - throws {@link IOException}
+	 */
+	public static synchronized boolean createDirectory(File directory, String directoryName)
+			throws IOException {
 
 		File f = new File(directory, directoryName);
 		if (!f.exists()) {
@@ -141,6 +199,15 @@ public class FileUtil {
 
 	}
 
+	/**
+	 * This method will delete the specified {@link File}
+	 * 
+	 * @param file
+	 *            {@link File} - File to delete
+	 * @return {@link Boolean} - True if the file is deleted else False
+	 * @throws IOException
+	 *             - throws {@link IOException}
+	 */
 	public static synchronized boolean deleteFile(File file) throws IOException {
 
 		if (file.exists()) {
@@ -162,6 +229,18 @@ public class FileUtil {
 		return false;
 	}
 
+	/**
+	 * This method will move the specified directory/file to the target
+	 * directory
+	 * 
+	 * @param srcFile
+	 *            {@link File} - Source file/directory
+	 * @param destFile
+	 *            {@link File} - Destination directory
+	 * @return {@link Boolean} - True if the directory is moved else false
+	 * @throws IOException
+	 *             - throws {@link IOException}
+	 */
 	public static synchronized boolean moveFile(File srcFile, File destFile) throws IOException {
 
 		if (srcFile.exists() && destFile.exists()) {
@@ -184,10 +263,12 @@ public class FileUtil {
 	 *            - Directory path in which the file is to be created
 	 * @param fileName
 	 *            - File name;
-	 * @return File Object
+	 * @return {@link File} - File that is created
 	 * @throws IOException
+	 *             - throws {@link IOException}
 	 */
-	public static synchronized File createFile(String directoryPath, String fileName) throws IOException {
+	public static synchronized File createFile(String directoryPath, String fileName)
+			throws IOException {
 
 		File dir = new File(directoryPath);
 		if (!dir.exists()) {
@@ -200,6 +281,13 @@ public class FileUtil {
 		return file;
 	}
 
+	/**
+	 * This methos will read the specified file
+	 * 
+	 * @param file
+	 *            {@link File} - File to read
+	 * @return {@link String} - File content as String
+	 */
 	public static synchronized String readFile(File file) {
 
 		BufferedReader reader = null;
@@ -229,6 +317,14 @@ public class FileUtil {
 		return "";
 	}
 
+	/**
+	 * This method will read the specified files and return the response as list
+	 * of lines
+	 * 
+	 * @param file
+	 *            {@link File} - File to read
+	 * @return {@link String} - List of lines from the file
+	 */
 	public static synchronized List<String> readLines(File file) {
 
 		BufferedReader reader = null;
@@ -255,9 +351,16 @@ public class FileUtil {
 				}
 			}
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
+	/**
+	 * This method will read the file from classpath
+	 * 
+	 * @param fileName
+	 *            {@link String} - File name to read from classpath
+	 * @return {@link String} - File content as String
+	 */
 	public static synchronized String readFileFromClassPath(String fileName) {
 
 		BufferedReader reader = null;

@@ -9,6 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.ObjectFactory;
 
+/**
+ * {@link JAXBContextResolver}
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
 	private static final Logger L = LoggerFactory.getLogger(JAXBContextResolver.class);
@@ -16,7 +22,8 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 	public JAXBContext getContext(Class<?> type) {
 		JAXBContext context = null;
 		try {
-			context = JAXBContext.newInstance(ObjectFactory.class, com.slabs.expense.tracker.webservice.response.ObjectFactory.class);
+			context = JAXBContext.newInstance(ObjectFactory.class,
+					com.slabs.expense.tracker.webservice.response.ObjectFactory.class);
 		} catch (JAXBException e) {
 			L.error("Exception occurred, { }", e);
 		}

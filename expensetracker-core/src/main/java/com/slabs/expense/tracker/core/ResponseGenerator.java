@@ -9,6 +9,13 @@ import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservice.response.Result;
 
+/**
+ * {@link ResponseGenerator} will generate a {@link Response} or
+ * {@link javax.ws.rs.core.Response}.
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class ResponseGenerator {
 
 	private static final String NO_DATA_FOUND = "NO_DATA_FOUND";
@@ -19,6 +26,16 @@ public class ResponseGenerator {
 
 	private static final String NO_DATA_INSERTED = "NO_DATA_INSERTED";
 
+	/**
+	 * 
+	 * @param status
+	 *            - {@link ResponseStatus}
+	 * @param cause
+	 *            - {@link Throwable}
+	 * @return {@link Response}
+	 * 
+	 * 
+	 */
 	public static Response getExceptionResponse(ResponseStatus status, Throwable cause) {
 		Response resp = new Response();
 		resp.setStatus_Code(status.getStatusCode());
@@ -28,6 +45,14 @@ public class ResponseGenerator {
 		return resp;
 	}
 
+	/**
+	 * 
+	 * @param status
+	 *            - {@link ResponseStatus}
+	 * @param message
+	 *            - Message to be added to the response.
+	 * @return {@link Response}
+	 */
 	public static Response getExceptionResponse(ResponseStatus status, String message) {
 		Response resp = new Response();
 		resp.setStatus_Code(status.getStatusCode());
@@ -45,12 +70,28 @@ public class ResponseGenerator {
 		return response;
 	}
 
+	/**
+	 * 
+	 * @param o
+	 *            - {@link Object}
+	 * @param operation
+	 *            - {@link Operation}
+	 * @return {@link Response}
+	 */
 	public static Response getSuccessResponse(Object o, Operation operation) {
 		List<Object> list = new ArrayList<Object>();
 		list.add(o);
 		return getSuccessResponse(list, operation);
 	}
 
+	/**
+	 * 
+	 * @param list
+	 *            - List of entities.
+	 * @param operation
+	 *            - {@link Operation}
+	 * @return {@link Response}
+	 */
 	public static Response getSuccessResponse(List<? extends Object> list, Operation operation) {
 		Response response = getSuccessResponse();
 		Result result = new Result();
@@ -75,6 +116,16 @@ public class ResponseGenerator {
 		return response;
 	}
 
+	/**
+	 * This method will build a response for INSERT, DELETE, UPDATE operations
+	 * based on the noOfRecords affected.
+	 * 
+	 * @param noOfRecords
+	 *            - No of Records.
+	 * @param operation
+	 *            - {@link Operation}
+	 * @return {@link Response}
+	 */
 	public static Response getSuccessResponse(int noOfRecords, Operation operation) {
 		Response response = getSuccessResponse();
 
@@ -100,8 +151,24 @@ public class ResponseGenerator {
 		return response;
 	}
 
-	public static javax.ws.rs.core.Response getSuccessResponse(StreamingOutput output, String fileName, ContentType type) {
-		return javax.ws.rs.core.Response.ok(output, type).header("content-disposition", "attachment; filename = " + fileName).build();
+	/**
+	 * This method will create {@link javax.ws.rs.core.Response} for the stream
+	 * output. For example, return attachment as response.
+	 * 
+	 * @param output
+	 *            {@link StreamingOutput} - Output stream containing the
+	 *            file. @see {@link ResponseStream}
+	 * 
+	 * @param fileName
+	 *            - Name of the file.
+	 * @param type
+	 *            - Content Type @see {@link ContentType}
+	 * @return {@link javax.ws.rs.core.Response}
+	 */
+	public static javax.ws.rs.core.Response getSuccessResponse(StreamingOutput output,
+			String fileName, ContentType type) {
+		return javax.ws.rs.core.Response.ok(output, type)
+				.header("content-disposition", "attachment; filename = " + fileName).build();
 	}
 
 }

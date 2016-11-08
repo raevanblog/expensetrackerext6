@@ -28,18 +28,34 @@ import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 
+/**
+ * {@link ExpenseWebService} - Web Service for retrieving/updating Expense
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 @Path("exptr-web")
 public class ExpenseWebService {
 
 	private static final Logger L = LoggerFactory.getLogger(ExpenseWebService.class);
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link ExpenseCategory} - List of records to INSERT
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expensecategory/")
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response insertExpenseCategory(List<ExpenseCategory> records) throws ExpenseTrackerException {
+	public Response insertExpenseCategory(List<ExpenseCategory> records)
+			throws ExpenseTrackerException {
 		try {
-			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
+			ExpenseCategoryService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
 			return ResponseGenerator.getSuccessResponse(service.insert(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -47,13 +63,23 @@ public class ExpenseWebService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link ExpenseCategory} - List of records to UPDATE
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expensecategory/")
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateExpenseCategory(List<ExpenseCategory> records) throws ExpenseTrackerException {
+	public Response updateExpenseCategory(List<ExpenseCategory> records)
+			throws ExpenseTrackerException {
 		try {
-			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
+			ExpenseCategoryService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
 			return ResponseGenerator.getSuccessResponse(service.update(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -61,13 +87,24 @@ public class ExpenseWebService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param categoryId
+	 *            {@link Integer} - Category Id
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expensecategory/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseCategory(@QueryParam("categoryId") Integer categoryId) throws ExpenseTrackerException {
+	public Response getExpenseCategory(@QueryParam("categoryId") Integer categoryId)
+			throws ExpenseTrackerException {
 		try {
-			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
-			return ResponseGenerator.getSuccessResponse(service.select(categoryId), Operation.SELECT);
+			ExpenseCategoryService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
+			return ResponseGenerator.getSuccessResponse(service.select(categoryId),
+					Operation.SELECT);
 
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -75,12 +112,22 @@ public class ExpenseWebService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link ExpenseCategory} - List of records to DELETE
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expensecategory/")
 	@DELETE
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteExpenseCategory(List<ExpenseCategory> records) throws ExpenseTrackerException {
+	public Response deleteExpenseCategory(List<ExpenseCategory> records)
+			throws ExpenseTrackerException {
 		try {
-			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
+			ExpenseCategoryService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
 			return ResponseGenerator.getSuccessResponse(service.delete(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -89,25 +136,45 @@ public class ExpenseWebService {
 
 	}
 
+	/**
+	 * This method will return a list of item names for which expenses have been
+	 * recorded, in the
+	 * {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * 
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expense/expensenames/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getItemNames() throws ExpenseTrackerException {
 		try {
-			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-			return ResponseGenerator.getSuccessResponse(service.selectExpenseNames(), Operation.SELECT);
+			ExpenseService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
+			return ResponseGenerator.getSuccessResponse(service.selectExpenseNames(),
+					Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
+	/**
+	 * This method will return a list of expense type in the
+	 * {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * 
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expensetype/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getExpenseType() throws ExpenseTrackerException {
 		try {
-			ExpenseTypeService service = ServiceFactory.getInstance().getService(Services.EXPENSE_TYPE_SERVICE, ExpenseTypeService.class);
+			ExpenseTypeService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_TYPE_SERVICE, ExpenseTypeService.class);
 			return ResponseGenerator.getSuccessResponse(service.select(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -115,30 +182,58 @@ public class ExpenseWebService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @param year
+	 *            {@link Integer} - Year for which expense need to be retrieved
+	 * @param month
+	 *            {@link Integer} - Month for which expense need to be retrieved
+	 * @param fetchTopExpense
+	 *            {@link Boolean} - True to fetch top expense for the given
+	 *            <code>year</code> and <code>month</code>
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expense/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpense(@QueryParam("username") String username, @QueryParam("year") Integer year, @QueryParam("month") Integer month, @QueryParam("fetchTopExpense") boolean fetchTopExpense)
-			throws ExpenseTrackerException {
+	public Response getExpense(@QueryParam("username") String username,
+			@QueryParam("year") Integer year, @QueryParam("month") Integer month,
+			@QueryParam("fetchTopExpense") boolean fetchTopExpense) throws ExpenseTrackerException {
 		try {
-			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
+			ExpenseService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
 			if (username == null) {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Parameter {username} is required");
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST,
+						"Parameter {username} is required");
 			}
-			return ResponseGenerator.getSuccessResponse(service.select(username, year, month, fetchTopExpense), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(
+					service.select(username, year, month, fetchTopExpense), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link Expense} - List of records to INSERT
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expense/")
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response insertExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {
-			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
+			ExpenseService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
 			return ResponseGenerator.getSuccessResponse(service.insert(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -146,13 +241,22 @@ public class ExpenseWebService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link Expense} - List of records to UPDATE
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expense")
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response updateExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {
-			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
+			ExpenseService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
 			return ResponseGenerator.getSuccessResponse(service.update(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -160,13 +264,22 @@ public class ExpenseWebService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param records
+	 *            {@link Expense} - List of records to DELETE
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
 	@Path("expense/")
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {
-			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
+			ExpenseService service = ServiceFactory.getInstance()
+					.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
 			return ResponseGenerator.getSuccessResponse(service.delete(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
