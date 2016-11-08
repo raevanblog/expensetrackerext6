@@ -21,18 +21,21 @@ public class JSONUtil {
 		return mapper.writeValueAsString(object);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Map<String, String> getMapFromInputStream(InputStream is) throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.readValue(is, Map.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Map<String, String> getMapFromString(String is) throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.readValue(is, Map.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Map<String, String> getMapFromObject(Object is) throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
