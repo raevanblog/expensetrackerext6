@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports.column;
+package com.slabs.expense.tracker.common.db.column;
 
 import java.math.BigDecimal;
 import java.sql.Date;
