@@ -1,13 +1,12 @@
 package com.slabs.expense.tracker.common.db.column;
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 public enum Column {
 
-	PRICEPERUNIT("Unit Price","PRICEPERUNIT", "pricePerUnit",  BigDecimal.class), 
-	PRICE("Price", "PRICE", "price", BigDecimal.class), 
-	QTY("Qty","QTY", "qty",  BigDecimal.class), 
+	PRICEPERUNIT("Unit Price","PRICEPERUNIT", "pricePerUnit",  Double.class), 
+	PRICE("Price", "PRICE", "price", Double.class), 
+	QTY("Qty","QTY", "qty",  Double.class), 
 	EXPTYPE("Expense Type", "EXPTYPE", "exptype", String.class), 
 	EXPDATE("Date", "EXPDATE", "expdate", Date.class),
 	ITEMNAME("Commodity", "ITEMNAME", "itemName", String.class),
@@ -16,7 +15,7 @@ public enum Column {
 	DESCRIPTION("Description", "DESCRIPTION", "description", String.class), 
 	CATEGORYID("Id", "CATEGORYID", "categoryId", Integer.class), 
 	ID("Id", "ID","id", Integer.class), 
-	INCOME("Income", "INCOME", "income",  BigDecimal.class), 
+	INCOME("Income", "INCOME", "income",  Double.class), 
 	INCOMETYPE("Income Type", "INCOMETYPE", "incometype", String.class), 
 	YR("Year", "YR", "yr", Integer.class), 
 	MTH("Month", "MTH","mth", Integer.class), 
