@@ -12,13 +12,13 @@ import org.slf4j.LoggerFactory;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 
-public class ReportResponse implements StreamingOutput {
+public class ResponseStream implements StreamingOutput {
 
-	private static final Logger L = LoggerFactory.getLogger(ReportResponse.class);
+	private static final Logger L = LoggerFactory.getLogger(ResponseStream.class);
 
 	private JasperReportBuilder builder;
 
-	public ReportResponse(JasperReportBuilder builder) {
+	public ResponseStream(JasperReportBuilder builder) {
 		this.builder = builder;
 	}
 
