@@ -3,14 +3,11 @@ package com.slabs.expense.tracker.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.StreamingOutput;
 
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservice.response.Result;
-
-import net.sf.jasperreports.web.util.ContentTypeMapping;
 
 public class ResponseGenerator {
 
