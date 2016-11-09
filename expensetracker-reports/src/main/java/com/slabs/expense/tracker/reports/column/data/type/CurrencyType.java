@@ -1,8 +1,14 @@
 package com.slabs.expense.tracker.reports.column.data.type;
 
+/**
+ * {@link CurrencyType} is an {@link Enum} for curreny types
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public enum CurrencyType {
 
-	DOLLAR(Dollar.class), RUPEES(Rupees.class);
+	DOLLAR(Dollar.class), RUPEES(Rupee.class);
 
 	private Class<?> className;
 

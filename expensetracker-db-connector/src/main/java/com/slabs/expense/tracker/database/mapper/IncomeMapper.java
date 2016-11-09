@@ -7,6 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import com.slabs.expense.tracker.common.db.entity.Income;
 import com.slabs.expense.tracker.common.db.entity.IncomeType;
 
+/**
+ * {@link IncomeMapper} is an interface providing mapper methods for executing
+ * query using MyBatis
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public interface IncomeMapper {
 
 	public Integer insertIncome(@Param("records") List<Income> records) throws Exception;

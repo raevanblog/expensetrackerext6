@@ -1,5 +1,12 @@
 package com.slabs.expense.tracker.reports;
 
+/**
+ * 
+ * {@link Month} is an {@link Enum} for Calendar months
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public enum Month {
 
 	JANUARY("January", "Jan", 1), FEBRUARY("February", "Feb", 2), MARCH("March", "Mar", 3), APRIL("April", "Apr", 4), MAY("May", "May", 5), JUNE(
@@ -30,6 +37,14 @@ public enum Month {
 		return number;
 	}
 
+	/**
+	 * This method will return {@link Month} for the given month index
+	 * 
+	 * @param monthNo
+	 *            {@link Integer} - Month index in the calendar. For example,
+	 *            JANUARY-1, FEBRUARY-2 etc.
+	 * @return {@link Month}
+	 */
 	public static Month getMonth(int monthNo) {
 		if (JANUARY.number == monthNo) {
 			return Month.JANUARY;

@@ -7,6 +7,13 @@ import java.util.Date;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
+/**
+ * {@link DateFormatter} implements {@link DRIValueFormatter}, providing format
+ * for {@link Date}
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class DateFormatter implements DRIValueFormatter<String, Date> {
 
 	private static final long serialVersionUID = 1L;

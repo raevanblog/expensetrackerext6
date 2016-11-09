@@ -2,6 +2,12 @@ package com.slabs.expense.tracker.common.db.column;
 
 import java.util.Date;
 
+/**
+ * {@link Column} is an {@link Enum} for columns in the table
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public enum Column {
 
 	PRICEPERUNIT("Unit Price","PRICEPERUNIT", "pricePerUnit",  Double.class), 

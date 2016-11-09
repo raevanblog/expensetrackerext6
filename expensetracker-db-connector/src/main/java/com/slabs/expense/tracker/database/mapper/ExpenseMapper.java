@@ -11,13 +11,21 @@ import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.common.db.entity.ExpenseType;
 
+/**
+ * {@link ExpenseMapper} is an interface providing mapper methods for executing
+ * query using MyBatis
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public interface ExpenseMapper {
 
 	public Integer insertExpense(@Param("records") List<Expense> records) throws Exception;
 
 	public List<Expense> getExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
 
-	public List<Expense> getTopExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
+	public List<Expense> getTopExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month)
+			throws Exception;
 
 	public Double getTotalExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
 

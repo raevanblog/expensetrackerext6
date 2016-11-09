@@ -21,13 +21,22 @@ import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
+/**
+ * {@link MonthlyExpenseReport} is the report class extending
+ * {@link ExpenseTrackerReport}. This builds the monthly report for Expense
+ * Tracker application
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year) throws InstantiationException, IllegalAccessException {
 		this(userInfo, month, year, CurrencyType.DOLLAR);
 	}
 
-	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency) throws InstantiationException, IllegalAccessException {
+	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency)
+			throws InstantiationException, IllegalAccessException {
 		super(userInfo, month, year, currency);
 		addColumns();
 	}
@@ -43,7 +52,8 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
 		HorizontalListBuilder titleContainer = cBuilders.horizontalList();
 		TextFieldBuilder<String> reportTitle = cBuilders.text("Monthly Report").setStyle(sProvider.getBoldStyle());
-		TextFieldBuilder<String> monthAnYear = cBuilders.text(month.getName() + "," + year).setStyle(sProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
+		TextFieldBuilder<String> monthAnYear = cBuilders.text(month.getName() + "," + year)
+				.setStyle(sProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
 		titleContainer.add(reportTitle, monthAnYear).newRow(2);
 
 		report.title(titleContainer, cBuilders.verticalGap(5), sProvider.getDefaultFillerLine(10));
@@ -60,7 +70,8 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		TextColumnBuilder<String> expenseCategory = cProvider.getColumn(Column.CATEGORY, String.class);
 		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class).setStyle(rightAligned).setFixedColumns(5);
 		TextColumnBuilder<Double> price = cProvider.getColumn(Column.PRICE, Double.class).setStyle(rightAligned).setDataType(this.currency);
-		TextColumnBuilder<Double> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, Double.class).setStyle(rightAligned).setDataType(this.currency);
+		TextColumnBuilder<Double> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, Double.class).setStyle(rightAligned)
+				.setDataType(this.currency);
 
 		addColumns(rowNum, expDate, expenseType, expenseCategory, qty, price, pricePerUnit);
 	}
@@ -92,6 +103,9 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		report.groupBy(group);
 	}
 
+	/**
+	 * This method will apply sub total to the column {@code Column.PRICE}
+	 */
 	@SuppressWarnings({ "rawtypes" })
 	public void subTotalPrice() {
 		AggregationSubtotalBuilder subtotal = getSubTotalBuilder(Column.PRICE);

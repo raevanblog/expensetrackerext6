@@ -7,6 +7,13 @@ import com.slabs.expense.tracker.common.db.column.Column;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
+/**
+ * {@link ExpenseImageResolver} will resolve image for the expense type
+ * {@code Column.EXPTYPE}
+ * 
+ * @author Shyam Natarajan
+ *
+ */
 public class ExpenseImageResolver extends AbstractSimpleExpression<InputStream> {
 
 	private static final long serialVersionUID = 1L;
