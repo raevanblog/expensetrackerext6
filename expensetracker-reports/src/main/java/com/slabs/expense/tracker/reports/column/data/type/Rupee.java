@@ -1,6 +1,13 @@
 package com.slabs.expense.tracker.reports.column.data.type;
 
-public class Rupees extends Currency {
+/**
+ * 
+ * {@link Rupee} currency column type
+ * 
+ * @author Shyam Natarajan
+ *
+ */
+public class Rupee extends Currency {
 
 	private static final long serialVersionUID = 1L;
 
