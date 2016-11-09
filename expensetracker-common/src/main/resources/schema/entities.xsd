@@ -188,11 +188,11 @@
 		</annotation>
 		<sequence>
 			<element name="id" type="int" />
-			<element name="yr" type="integer" />
-			<element name="mth" type="integer" />
-			<element name="username" type="string" />
-			<element name="incometype" type="string" />
-			<element name="income" type="double" />
+			<element name="yr" type="int" minOccurs="1"/>
+			<element name="mth" type="int" minOccurs="1"/>
+			<element name="username" type="string" minOccurs="1"/>
+			<element name="incometype" type="string" minOccurs="1"/>
+			<element name="income" type="double" minOccurs="1"/>
 		</sequence>
 	</complexType>
 
