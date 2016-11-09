@@ -72,7 +72,7 @@
 		</if>
 	</select>
 
-	<select id="getTotalExpense" resultType="java.lang.Float">
+	<select id="getTotalExpense" resultType="java.lang.Double">
 		select sum(price) from EXPENSETRACKER.EXPENSE where
 		username=#{username}
 		<if test="year != null">

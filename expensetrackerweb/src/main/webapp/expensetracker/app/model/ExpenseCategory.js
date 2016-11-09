@@ -7,10 +7,7 @@ Ext.define('expensetracker.model.ExpenseCategory', {
 		persist : false
 	}, {
 		name : 'category',
-		type : 'string',
-		convert : function(value, record) {
-			return value.toUpperCase();
-		}
+		type : 'string'		
 	}, {
 		name : 'description',
 		type : 'string'

@@ -12,6 +12,12 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	items : [ {
 		xtype : 'panel',
 		title : 'Summary',
+		reference : 'summarypanel',
+		tools : [ {
+			type : 'refresh',
+			tooltip : 'Reload',
+			handler : 'updateDashBoardSummary'
+		} ],
 		height : 250,
 		iconCls : 'x-fa fa-sticky-note-o',
 		cls : 'big-40 small-100 dash-panel shadow',
@@ -28,7 +34,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			height : '100%',
 			padding : '0 0 0 20',
 			flex : 1.2
-		} ],
+		} ]
 	}, {
 		xtype : 'panel',
 		title : 'Expense Sheet',

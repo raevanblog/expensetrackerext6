@@ -20,13 +20,13 @@ Ext.define('expensetracker.store.NavigationMenu', {
 			leaf : true
 		}, {
 			text : 'Reports',
-			iconCls : 'x-fa fa-search',
+			iconCls : 'x-fa fa-file-pdf-o',
 			viewType : 'reports',
 			leaf : true
 		}, {
-			text : 'Charts',
-			iconCls : 'x-fa fa-pie-chart',
-			viewType : 'charts',
+			text : 'Graph',
+			iconCls : 'x-fa fa-bar-chart',
+			viewType : 'graph',
 			leaf : true
 		} ]
 	},

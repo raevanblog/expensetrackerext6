@@ -23,8 +23,8 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		dataIndex : 'category',
 		editor : {
 			xtype : 'textfield',
-			allowBlank : false,
-			maxLength : 100
+			maxLength: 15,
+			allowBlank : false			
 		},
 		flex : 0.3
 	}, {

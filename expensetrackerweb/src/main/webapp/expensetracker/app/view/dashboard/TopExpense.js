@@ -37,9 +37,9 @@ Ext.define('expensetracker.view.dashboard.TopExpense', {
 			  return Ext.Date.format(value,'d-M-Y');
 		  } ,
 		  renderExpType: function(value) {
-			 if('CASH' === value) {
+			 if('Cash' === value) {
 				 return '<span class="x-fa fa-money tooltip"><span class="tooltiptext">'+ value +'</span></span>';
-			 }else if('CREDIT CARD' === value || 'DEBIT CARD' === value) {
+			 }else if('Credit Card' === value || 'Debit Card' === value) {
 				 return '<span class="x-fa fa-credit-card tooltip"><span class="tooltiptext">'+ value +'</span></span>';
 			 }else{
 				 return '<span class="x-fa fa-desktop tooltip"><span class="tooltiptext">'+ value +'</span></span>';

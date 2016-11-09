@@ -4,7 +4,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	listen : {
 		controller : {
 			'*' : {
-				updatesummary : 'updateDashBoardSummary'
+				updatesummary : 'updateDashBoardSummary',
+				updatetopexpense : 'updateTopExpense'
 			}
 		}
 	},
@@ -74,6 +75,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			modal : true
 		});
 		var model = incomeWindow.getViewModel();
+		model.set('source', me.getView());
 		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());
 		model.set('year', expensetracker.util.Calendar.getCurrentYear());
 		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
@@ -82,13 +84,14 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	renderToolTip : function(tooltip, record, item) {
 		var value = Ext.util.Format.number(record.get('value'), '0.00');
 		tooltip.setHtml(value + ' %');
-	},
+	},	
 	updateDashBoardSummary : function() {
 		var me = this;
 		var totInc = me.lookup('totIncome');
 		var totExp = me.lookup('totExpense');
+		var summaryPanel = me.lookup('summarypanel');
 		var cih = me.lookup('cashInHand');
-
+		summaryPanel.setLoading('Loading...');
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getDashboardService(),
 			method : 'GET',
@@ -98,6 +101,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				year : expensetracker.util.Calendar.getCurrentYear()
 			},
 			success : function(response, opts) {
+				summaryPanel.setLoading(false);
 				var response = Ext.decode(response.responseText);
 				var dashData = response.result.any[0];
 				if (dashData != null || dashData != undefined) {
@@ -127,12 +131,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 							pieStore.removeAll();
 						}
 					}
-				}
+				}				
 			},
 			failure : function(response, opts) {
-				console.log(response);
+				summaryPanel.setLoading(false);				
 			}
 		});
 
+	},
+	updateTopExpense: function() {
+		var me = this;
+		var topexpense = me.lookup('topexpense');
+		topexpense.getStore().reload();		
 	}
 });

@@ -22,12 +22,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	listeners : {
 		beforeclose : 'onCloseExpenseWindow',
 		beforerender : 'onRender'
-	},
-	tools : [ {
-		type : 'refresh',
-		tooltip : 'Reload',
-		handler : 'onReload'
-	} ],
+	},	
 	items : [ {
 		xtype : 'expensegrid',
 		reference : 'expensegrid',

@@ -146,6 +146,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				grid.setLoading(false);
 				if (model.get('isLatestExpense')) {
 					me.fireEvent('updatesummary');
+					me.fireEvent('updatetopexpense');
 				}
 				if (closeWindow) {
 					me.getView().close();
@@ -178,6 +179,25 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 			}
 		});
+	},
+	onUpdateIncome : function() {
+		var me = this;
+		var view = me.getView();
+		var model = view.getViewModel();
+		
+		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
+			height : me.getView().getHeight(),
+			width : me.getView().getWidth(),
+			x : me.getView().getX(),
+			y : me.getView().getY(),			
+			modal : true			
+		});
+		var incomeWindowModel = incomeWindow.getViewModel();
+		incomeWindowModel.set('source', view);
+		incomeWindowModel.set('month', model.get('month'));
+		incomeWindowModel.set('year', model.get('year'));
+		incomeWindowModel.set('title', model.get('title'));
+		incomeWindow.show();
 	},
 	refreshGridView : function(grid) {
 		grid.getView().refresh();

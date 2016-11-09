@@ -25,9 +25,19 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		}
 	}, '-', {
 		xtype : 'numberfield',
+		fieldLabel : 'Income',
+		labelAlign : 'left',
+		labelWidth : 50,
 		emptyText : 'Monthly Income',
-		labelStyle : 'font-weight: bold',
+		labelStyle : 'color: white',
+		readOnly : true,
+		hideTrigger : true,
+		mouseWheelEnabled : false,
 		labelSeparator : ''
+	},{
+		xtype : 'button',
+		text : 'Update',		
+		handler : 'onUpdateIncome'
 	}, '->', {
 		xtype : 'button',
 		text : 'Expense',

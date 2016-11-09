@@ -5,7 +5,7 @@ Ext.define('expensetracker.view.dashboard.Summary', {
 	layout : {
 		type : 'vbox',
 		align : 'stretch'
-	},
+	},	
 	items : [ {
 		xtype : 'component',
 		padding : '5 0 20 0',
@@ -25,21 +25,21 @@ Ext.define('expensetracker.view.dashboard.Summary', {
 	}, {
 		xtype : 'displayfield',
 		bind : {
-			fieldLabel : 'Total Income ({currencySymbol})',
+			fieldLabel : 'Total Income ({currencySymbol})'
 		},
 		reference : 'totIncome',
-		labelSeparator : '',
+		labelSeparator : ''
 	}, {
 		xtype : 'displayfield',
 		bind : {
-			fieldLabel : 'Total Expense ({currencySymbol})',
+			fieldLabel : 'Total Expense ({currencySymbol})'
 		},
 		reference : 'totExpense',
 		labelSeparator : ''
 	}, {
 		xtype : 'displayfield',
 		bind : {
-			fieldLabel : 'Cash in Hand ({currencySymbol})',
+			fieldLabel : 'Cash in Hand ({currencySymbol})'
 		},
 		reference : 'cashInHand',
 		labelSeparator : ''

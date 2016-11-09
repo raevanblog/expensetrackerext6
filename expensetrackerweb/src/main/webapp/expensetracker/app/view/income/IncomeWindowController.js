@@ -126,8 +126,9 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 				}
 				if (isUnauthorizedAccess) {
 					expensetracker.util.Message.toast('Unauthorized Access');
+					model.get('source').destroy();
 					me.getView().clearListeners();
-					me.getView().close();
+					me.getView().close();					
 					me.fireEvent('navigatelogin');
 				} else {
 					expensetracker.util.Message.toast('Server Error');

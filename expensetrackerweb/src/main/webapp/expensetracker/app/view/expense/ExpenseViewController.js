@@ -26,7 +26,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 				width : this.getView().getWidth(),
 				x : me.getView().getX(),
 				y : me.getView().getY(),
-				modal : true
+				modal : true			
 			});
 
 			var model = expenseWindow.getViewModel();
