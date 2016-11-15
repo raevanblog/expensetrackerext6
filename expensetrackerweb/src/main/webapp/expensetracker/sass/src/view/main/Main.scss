@@ -36,6 +36,10 @@
     $row-indicator-over-color: transparent
 );
 
+.shadow {
+    @include box-shadow(0 1px 2px 0 rgba(0,0,0,0.2));
+}
+
 .big-100 {
     @include responsivecolumn-item(100%);
 }

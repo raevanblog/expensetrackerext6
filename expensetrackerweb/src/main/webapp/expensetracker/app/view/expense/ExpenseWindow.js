@@ -6,18 +6,12 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	viewModel : 'expensewindowmodel',
 	iconCls : 'x-fa fa-file-text-o',
 	requires : [ 'expensetracker.view.expense.ExpenseWindowController', 'expensetracker.view.expense.ExpenseWindowModel', 'expensetracker.view.expense.ExpenseGrid',
-			'expensetracker.view.expense.ExpenseCategory' ],
+			'expensetracker.view.expense.ExpenseCategory', 'Ext.fx.animation.Slide' ],
 	bind : {
 		title : '{title}'
 	},
 	layout : {
-		type : 'card',
-		animate : true,
-		animation : {
-			type : 'pop',
-			easing : 'ease-in',
-			direction : 'left'
-		}
+		type: 'card'		
 	},
 	listeners : {
 		beforeclose : 'onCloseExpenseWindow',
@@ -34,7 +28,8 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 		reference : 'expensecategory',
 		tbar : [ {
 			xtype : 'button',
-			iconCls : 'x-fa fa-backward',
+			ui : 'toolbar',
+			iconCls : 'x-fa fa-backward',			
 			handler : 'onBackCategory'
 		}, '-', {
 			xtype : 'textfield',
@@ -45,6 +40,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 			}
 		}, '->', {
 			xtype : 'button',
+			ui : 'toolbar',
 			text : 'Category',
 			iconCls : 'x-fa fa-plus-square',
 			handler : 'onAddCategory'

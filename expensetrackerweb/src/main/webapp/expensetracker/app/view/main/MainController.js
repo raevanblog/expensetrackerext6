@@ -107,12 +107,6 @@ Ext.define('expensetracker.view.main.MainController', {
 			refs.logocomponent.setWidth(new_width);
 			navMenu.setWidth(new_width);
 			navMenu.setMicro(collapsing);
-			if (collapsing) {
-				refs.logocomponent.update('ET');
-			} else {
-				refs.logocomponent.update('Expense Tracker');
-			}
-
 			Ext.resumeLayouts();
 
 			mainDashboard.layout.animatePolicy = mainDashboard.layout.animate = null;

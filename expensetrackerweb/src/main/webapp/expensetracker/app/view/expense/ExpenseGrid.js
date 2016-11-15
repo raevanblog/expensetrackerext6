@@ -36,23 +36,26 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		labelSeparator : ''
 	},{
 		xtype : 'button',
+		ui : 'toolbar',
 		text : 'Update',		
 		handler : 'onUpdateIncome'
 	}, '->', {
 		xtype : 'button',
+		ui : 'toolbar',
 		text : 'Expense',
 		iconCls : 'x-fa  fa-plus-square',
 		handler : 'onAddExpenseRecord',
 		tooltip : 'Add Expense'
 	}, {
 		xtype : 'button',
+		ui : 'toolbar',
 		text : 'Category',
 		iconCls : 'x-fa fa-book',
 		handler : 'onShowCategory',
 		tooltip : 'Add Category'
 	} ],
 	bbar : [ '->', {
-		xtype : 'button',
+		xtype : 'button',		
 		text : 'Save',
 		iconCls : 'x-fa fa-save',
 		handler : 'onSaveOrUpdateExpense'
