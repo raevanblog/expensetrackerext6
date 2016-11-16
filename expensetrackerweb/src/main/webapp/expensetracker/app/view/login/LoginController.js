@@ -62,5 +62,11 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var registerform = me.lookup('registerform');
 		registerform.reset();
 		card.getLayout().setActiveItem(0);
+	},
+	onFocusOutUserName : function(textfield, event) {
+		var me = this;
+		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');
+		usrNmeAvailInd.update('<img src="resources/images/check.ico"/> Available');
+		
 	}
 });

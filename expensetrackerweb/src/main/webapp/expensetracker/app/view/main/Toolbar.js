@@ -6,7 +6,7 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		xtype : 'component',
 		html: '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
 		reference : 'logocomponent',
-		width : 250,
+		width : 64,
 		cls : 'logo-component'
 	}, {
 		xtype : 'button',
