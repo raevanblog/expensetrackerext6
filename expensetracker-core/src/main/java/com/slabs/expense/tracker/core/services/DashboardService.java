@@ -41,6 +41,15 @@ public class DashboardService {
 			throws Exception {
 		Double totalExpense = eMapper.getTotalExpense(username, year, month);
 		Double totalIncome = iMapper.getTotalIncome(username, year, month);
+
+		if (totalExpense == null) {
+			totalExpense = 0.0;
+		}
+
+		if (totalIncome == null) {
+			totalIncome = 0.0;
+		}
+
 		Double cashInHand = totalIncome - totalExpense;
 
 		Dashboard dashboard = new Dashboard();
