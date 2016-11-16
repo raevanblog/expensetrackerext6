@@ -32,7 +32,8 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 		store : {
 			type : 'navigationmenu'
 		},
-		width : 250,
+		width : 64,
+		micro : true,
 		expanderFirst : false,
 		expanderOnly : false,
 		listeners : {
