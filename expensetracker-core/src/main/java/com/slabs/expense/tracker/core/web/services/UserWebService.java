@@ -152,4 +152,27 @@ public class UserWebService {
 		}
 	}
 
+	/**
+	 * This method will check for the username availability
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 */
+	@Path("user/username")
+	@GET
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response isUserNameAvailable(@QueryParam("checkAvailable") String username)
+			throws ExpenseTrackerException {
+		try {
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			return ResponseGenerator.getSuccessResponse(service.isUserNameAvailable(username), Operation.CHECK);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
 }

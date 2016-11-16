@@ -97,10 +97,29 @@ public class JSONUtil {
 	 * @throws IOException
 	 *             throws {@link IOException}
 	 */
-	public static <T extends Object> List<T> getListFromJSON(String json, Class<T> cls) throws IOException {
+	public static <T extends Object> List<T> getListFromJSON(String json, Class<T> cls)
+			throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, cls));
+		return mapper.readValue(json,
+				mapper.getTypeFactory().constructCollectionType(List.class, cls));
+	}
+
+	/**
+	 * This method will read the JSON from InputStream and return the Object
+	 * 
+	 * @param json
+	 *            {@link InputStream} - InputStream containing the JSON String
+	 * @param cls
+	 *            {@link Class} - Class type to which the result should be bound
+	 * @return {@link Object} - Object of type cls
+	 * @throws IOException
+	 *             throws {@link IOException}
+	 */
+	public static <T extends Object> T getObjectFromJSON(InputStream json, Class<T> cls)
+			throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.readValue(json, cls);
 	}
 
 }

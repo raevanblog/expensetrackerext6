@@ -10,7 +10,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 		xtype: 'form',
 		platformConfig: {
 			 desktop: {
-				 width: 350
+				 width: 350				 
 			 },
 
 			 '!desktop': {

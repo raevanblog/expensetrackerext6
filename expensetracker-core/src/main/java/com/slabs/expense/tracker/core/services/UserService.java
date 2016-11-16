@@ -41,6 +41,22 @@ public class UserService {
 
 	/**
 	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @return {@link Boolean} - True if username is available else false false
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public Boolean isUserNameAvailable(String username) throws Exception {
+		List<UserInfo> list = mapper.getUser(username, Boolean.FALSE);
+		if (list != null && list.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 
 	 * @param includePassword
 	 *            {@link Boolean} - True to include password in the response
 	 *            entity

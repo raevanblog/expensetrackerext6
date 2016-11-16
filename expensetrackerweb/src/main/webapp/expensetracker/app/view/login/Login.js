@@ -29,8 +29,7 @@ Ext.define('expensetracker.view.login.Login', {
 	}, {
 		xtype: 'container',
 		reference : 'formcard',
-		region: 'center',
-		scrollable : 'y',
+		region: 'center',		
 		layout : {
 			type : 'card'		
 		},

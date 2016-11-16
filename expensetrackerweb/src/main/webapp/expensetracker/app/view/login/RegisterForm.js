@@ -2,6 +2,8 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 	extend : 'Ext.container.Container',
 	xtype : 'registercontainer',
 	alias : 'view.registercontainer',
+	requires : ['expensetracker.util.Validation'], 
+	scrollable: true,
 	layout : {
 		type : 'hbox',
 		pack : 'middle'
@@ -11,7 +13,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 		reference : 'registerform',
 		platformConfig : {
 			desktop : {
-				width : 600
+				width : 600				
 			},
 
 			'!desktop' : {
@@ -22,7 +24,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 		method : 'POST',
 		jsonSubmit : true,
 		padding : '30 0 0 0',
-		url : expensetracker.util.Url.getLogin(),
+		url : expensetracker.util.Url.getCreateUser(),
 		bodyPadding : 10,
 		layout : {
 			type : 'vbox',
@@ -96,7 +98,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			hideTrigger : true,
 			reference : 'mobile',
 			validator : function(value) {
-				return value.length == 10 ? true : "please enter a valid mobile number";
+				return value.length == 10 ? true : "Please enter a valid mobile number";
 			},
 			labelSeparator : ''
 		}, {
@@ -123,9 +125,11 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				validateBlank : true,
 				labelSeparator : '',
 				maxLength : 30,
+				vtype: 'username',
 				flex : 0.8,
 				listeners : {
-					blur : 'onFocusOutUserName'
+					blur : 'onFocusOutUserName',
+					change : 'onUserNameChage'
 				}
 			}, {
 				xtype : 'component',
@@ -148,6 +152,8 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				enableKeyEvents : true,
 				validateBlank : true,
 				labelSeparator : '',
+				vtype: 'password',
+				id : 'regpassword',
 				inputType : 'password',
 				maxLength : 25,
 				flex : 1
@@ -162,8 +168,15 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				validateBlank : true,
 				labelSeparator : '',
 				inputType : 'password',
+				submitValue : false,
 				maxLength : 25,
 				padding : '0 0 0 10',
+				vtype: 'match',
+				vtypeText : 'Password does not match',
+				matchfield: 'regpassword',				
+				listeners : {
+					change : 'onPasswordReType'
+				},
 				flex : 1
 			} ]
 		} ],
@@ -172,7 +185,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			formBind : true,
 			iconCls : 'x-fa  fa-user-plus',
 			reference : 'registerBtn',
-			handler : 'onRegister'
+			handler : 'onRegisterUser'
 		}, {
 			text : 'Cancel',
 			iconCls : 'x-fa  fa-close',
