@@ -27,7 +27,7 @@ import com.slabs.expense.tracker.web.WebConstants;
 @Controller
 @RequestMapping("request")
 public class AccessController {
-	
+
 	private static final Logger L = LoggerFactory.getLogger(AccessController.class);
 
 	@RequestMapping(value = "login", method = { RequestMethod.POST })
@@ -91,6 +91,41 @@ public class AccessController {
 			HttpSession session = request.getSession(Boolean.FALSE);
 			if (session != null) {
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
+				output.put(WebConstants.SUCCESS, Boolean.TRUE);
+				output.put(WebConstants.MESSAGE, MessageConstants.SESSION_ACTIVE);
+				output.put(WebConstants.USER, user);
+			} else {
+				output.put(WebConstants.SUCCESS, Boolean.FALSE);
+				output.put(WebConstants.MESSAGE, MessageConstants.INVALID_SESSION);
+				output.put(WebConstants.USER, null);
+
+			}
+			return new ModelAndView("json", output);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			output.put(WebConstants.SUCCESS, Boolean.FALSE);
+			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
+			output.put(WebConstants.USER, null);
+			return new ModelAndView("json", output);
+		}
+	}
+
+	@RequestMapping(value = "session/reload", method = { RequestMethod.GET })
+	public ModelAndView reloadSessionData(HttpServletRequest request,
+			HttpServletResponse response) {
+		Map<String, Object> output = new HashMap<String, Object>();
+		try {
+			HttpSession session = request.getSession(Boolean.FALSE);
+			if (session != null) {
+				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+						UserService.class);				
+				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
+				List<UserInfo> list = service.select(user.getUsername(), Boolean.FALSE);
+				if(list != null && !list.isEmpty()) {
+					user = list.get(0);
+					session.removeAttribute(WebConstants.LOGGED_IN_USER);
+					session.setAttribute(WebConstants.LOGGED_IN_USER, user);					
+				}
 				output.put(WebConstants.SUCCESS, Boolean.TRUE);
 				output.put(WebConstants.MESSAGE, MessageConstants.SESSION_ACTIVE);
 				output.put(WebConstants.USER, user);

@@ -81,14 +81,14 @@ Ext.define('expensetracker.view.login.LoginController', {
 	},
 	onFocusOutUserName : function(textfield, event) {
 		var me = this;
-		var registerform = me.lookup('registerform');
+		var registercontainer = me.lookup('registercontainer');
 		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');
-		var username = textfield.getValue();
+		var username = textfield.getValue();		
 		if(textfield.isValid()) {
 			if(textfield.isChanged) {
 				textfield.isChanged=false;			
 				if(username) {
-					registerform.setLoading('Checking Availability...');
+					registercontainer.setLoading('Checking Availability...');
 					Ext.Ajax.request({
 						url : expensetracker.util.Url.getUserNameAvailability(),
 						method : 'GET',
@@ -96,18 +96,18 @@ Ext.define('expensetracker.view.login.LoginController', {
 							checkAvailable : username
 						},
 						success : function(response, opts) {
-							registerform.setLoading(false);				
+							registercontainer.setLoading(false);				
 							var response = Ext.decode(response.responseText);
 							var isAvailable = response.Available;
+							textfield.isAvailable = isAvailable;
 							if(isAvailable) {
 								usrNmeAvailInd.update('<img src="resources/images/check.ico"/> ' + response.message);								
 							} else {
-								usrNmeAvailInd.update('<img src="resources/images/cross.ico"/> ' + response.message);
-								textfield.setActiveError('Username already taken');
+								usrNmeAvailInd.update('<img src="resources/images/cross.ico"/> ' + response.message);														
 							}
 						},
 						failure : function(response, opts) {
-							registerform.setLoading(false);				
+							registercontainer.setLoading(false);				
 						}
 					});	
 				}
@@ -117,25 +117,33 @@ Ext.define('expensetracker.view.login.LoginController', {
 	onRegisterUser : function(registerBtn) {
 		var me = this;
 		var card = me.lookup('formcard');		
+		var usrName = me.lookup('regUsername');
 		var registerform = me.lookup('registerform');
+		var registercontainer = me.lookup('registercontainer');
+		
+		
 		if(registerform.isValid()) {
-			registerform.setLoading('Registering...');
-			registerform.submit({
-				success : function(form, action) {
-					registerform.setLoading(false);
-					var response = Ext.decode(action.response.responseText);
-					if(response.isUserRegistered) {
-						registerform.reset();
-						card.getLayout().setActiveItem(0);
+			if(usrName.isAvailable) {
+				registercontainer.setLoading('Registering...');
+				registerform.submit({
+					success : function(form, action) {
+						registercontainer.setLoading(false);
+						var response = Ext.decode(action.response.responseText);
+						if(response.isUserRegistered) {
+							registerform.reset();
+							card.getLayout().setActiveItem(0);
+						}
+						expensetracker.util.Message.toast(response.message);
+					},
+					failure : function(form, action) {
+						registercontainer.setLoading(false);
+						var response = Ext.decode(action.response.responseText);
+						expensetracker.util.Message.toast(response.message);
 					}
-					expensetracker.util.Message.toast(response.message);
-				},
-				failure : function(form, action) {
-					registerform.setLoading(false);
-					var response = Ext.decode(action.response.responseText);
-					expensetracker.util.Message.toast(response.message);
-				}
-			});
+				});
+			}else{
+				usrName.markInvalid('Username already taken');
+			}
 		}
 	}
 });

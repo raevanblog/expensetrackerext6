@@ -30,8 +30,8 @@
 			<if test="record.sex != null">
 				sex=#{record.sex},
 			</if>
-			<if test="record.password != null">
-				password=#{record.password},
+			<if test="record.newPassword != null">
+				password=#{record.newPassword},
 			</if>
 			<if test="record.email != null">
 				email=#{record.email},

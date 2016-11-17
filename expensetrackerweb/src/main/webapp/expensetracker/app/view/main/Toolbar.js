@@ -14,6 +14,22 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		iconCls : 'x-fa fa-bars',
 		reference : 'toggleNavigation',
 		handler : 'onToggleNavigation'
+	},{
+		xtype: 'image',
+		height: 35,
+        width: 35,
+		reference : 'tbProfileImage', 
+		alt  : 'Profile Image',
+		bind : {
+			src : '{profileimg}'
+		},
+		cls: 'profile-image'		
+	},{
+		xtype : 'displayfield',
+		bind: {
+			value : '{usrname}',
+		},
+		reference : 'tbUserName'
 	}, '->', {
 		xtype : 'button',
 		ui: 'toolbar',
@@ -23,7 +39,17 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		ui: 'toolbar',
 		tooltip : 'Profile',		
 		iconCls : 'x-fa fa-user',
-		handler : 'onUserProfile'
+		menu : [{
+			text : 'Profile',
+			iconCls : 'x-fa fa-user',
+			tooltip : 'View profile',
+			handler : 'onUserProfile'
+		},{
+			text : 'Change Password',
+			iconCls : 'x-fa fa-key',
+			tooltip : 'Change Password',
+			handler : 'onChangePwd'
+		}]
 	}, {
 		xtype : 'button',
 		ui: 'toolbar',

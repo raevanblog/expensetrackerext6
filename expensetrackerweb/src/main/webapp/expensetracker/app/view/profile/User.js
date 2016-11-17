@@ -10,7 +10,7 @@ Ext.define('expensetracker.view.profile.User', {
 	controller : 'user',
 	listeners : {
 		afterrender : 'onProfileRender'
-	},
+	},	
 	items : [ {
 		xtype : 'form',
 		jsonSubmit : true,

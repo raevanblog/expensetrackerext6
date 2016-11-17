@@ -87,8 +87,17 @@ Ext.define('expensetracker.view.main.MainController', {
 	onMainViewRender : function() {
 		var me = this;
 		var model = me.getView().getViewModel();
+		var name = me.lookup('tbUserName');
+		var profileImg = me.lookup('tbProfileImage');		
 		model.set('currency', expensetracker.util.Session.getCurrencyName());
 		model.set('currencySymbol', expensetracker.util.Session.getCurrencySymbol());
+		model.set('usrname', expensetracker.util.Session.getName());
+		var sex = expensetracker.util.Session.getUserSex();
+		if('M' === sex) {
+			model.set('profileimg', 'resources/images/male-profile.png');			
+		}else{
+			model.set('profileimg', 'resources/images/female-profile.png');						
+		}
 		me.setCurrentView('expensedashboard');
 	},
 	onToggleNavigation : function(button) {
@@ -146,14 +155,28 @@ Ext.define('expensetracker.view.main.MainController', {
 	},
 	onUserProfile : function(profileBtn) {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var profileWindow = Ext.create('expensetracker.view.profile.User', {
 			modal : true,
 			height : me.getView().getHeight() - 70,
 			width : (me.getView().getWidth() - 250) / 2,
 			x : 250,
-			y : 70
+			y : 70,
+			viewModel : model
 		});
 		profileWindow.show();
+	},
+	onChangePwd : function(chgPwdBtn) {
+		var me = this;
+		var mainCard = me.lookup('mainCard');
+		var chgPwdWindow = Ext.create('expensetracker.view.profile.ChangePassword', {
+			modal : true,
+			height : mainCard.getHeight(),
+			width : mainCard.getWidth(),
+			x : mainCard.getX(),
+			y :	mainCard.getY()		
+		});
+		chgPwdWindow.show();
 	},
 	onSignOut : function(signOutBtn) {
 		var me = this;

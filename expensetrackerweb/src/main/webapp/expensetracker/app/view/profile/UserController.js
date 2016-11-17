@@ -34,30 +34,47 @@ Ext.define('expensetracker.view.profile.UserController', {
 			},
 			failure : function(response, opts) {
 				view.setLoading(false);
+				var response = Ext.JSON.decode(response.responseText);
+				expensetracker.util.Message.toast(response.status_Message);
+				if (401 === response.status_Code) {					
+					me.getView().close();
+					me.fireEvent('navigatelogin');
+				}
 			}
 		});
 	},
 	onSaveProfile : function(saveBtn) {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var profileForm = me.lookup('profileform');
 		var refs = me.getReferences();
-
+		
 		if (profileForm.isValid()) {
 			profileForm.setLoading("Saving...");
 			profileForm.submit({
 				method : 'PUT',
 				params : {
-					username : refs.userName.getValue()
+					username : expensetracker.util.Session.getUsername()
 				},
 				success : function(form, action) {
 					profileForm.setLoading(false);
-					var response = Ext.decode(action.response.responseText);
-					if (response.success) {
-
+					var resObj = Ext.decode(action.response.responseText);
+					var response = resObj.result;
+					if (response.noOfRecords > 0) {
+						expensetracker.util.Message.toast('Profile Updated');						
+						expensetracker.util.Session.reload(model);
 					}
 				},
 				failure : function(form, action) {
 					profileForm.setLoading(false);
+					var resObj = Ext.decode(action.response.responseText);
+					if(401 === resObj.status_Code) {
+						me.getView().close();
+						me.fireEvent('navigatelogin');
+						expensetracker.util.Message.toast(resObj.status_Message);
+					} else {
+						expensetracker.util.Message.toast('*' +resObj.status_Message);
+					}
 				}
 			});
 		}

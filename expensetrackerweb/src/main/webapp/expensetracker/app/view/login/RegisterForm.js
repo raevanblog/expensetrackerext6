@@ -123,7 +123,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				name : 'username',
 				enableKeyEvents : true,
 				validateBlank : true,
-				labelSeparator : '',
+				labelSeparator : '',				
 				maxLength : 30,
 				vtype: 'username',
 				flex : 0.8,

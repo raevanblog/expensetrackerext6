@@ -35,6 +35,7 @@ import com.slabs.expense.tracker.webservice.response.Response;
 public class UserWebService {
 
 	private static final Logger L = LoggerFactory.getLogger(UserWebService.class);
+		
 
 	/**
 	 * 
@@ -75,6 +76,34 @@ public class UserWebService {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 					UserService.class);
+			return ResponseGenerator.getSuccessResponse(service.update(record), Operation.UPDATE);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param record
+	 *            {@link UserInfo} - User record to UPDATE
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws ExpenseTrackerException
+	 *             throws {@link ExpenseTrackerException}
+	 */
+	@Path("user/password")
+	@PUT
+	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response changePassword(UserInfo record) throws ExpenseTrackerException {
+		try {
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			List<UserInfo> list = service.select(record.getUsername(), true);
+			UserInfo user = list.get(0);			
+			if(!user.getPassword().equals(record.getPassword())) {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Password is wrong");
+			}
 			return ResponseGenerator.getSuccessResponse(service.update(record), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
