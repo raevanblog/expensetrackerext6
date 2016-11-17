@@ -64,6 +64,7 @@
 			<element name="sex" type="string" />
 			<element name="username" type="string" />
 			<element name="password" type="string" />
+			<element name="newPassword" type="string" />
 			<element name="email" type="string" />
 			<element name="mobile" type="string" />
 			<element name="address" type="string" />
