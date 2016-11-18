@@ -62,7 +62,7 @@ Ext.define('expensetracker.view.profile.UserController', {
 					var response = resObj.result;
 					if (response.noOfRecords > 0) {
 						expensetracker.util.Message.toast('Profile Updated');						
-						expensetracker.util.Session.reload(model);
+						expensetracker.util.Session.reload(me);
 					}
 				},
 				failure : function(form, action) {

@@ -32,7 +32,7 @@ Ext.define('expensetracker.util.Session', {
 	getCurrencySymbol : function() {
 		return expensetracker.util.Storage.get('currencysymbol');
 	},
-	reload : function(model) {
+	reload : function(controller) {
 		var me = this;
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getSessionReload(),
@@ -40,7 +40,7 @@ Ext.define('expensetracker.util.Session', {
 				var response = Ext.decode(response.responseText);
 				if (response.success) {
 					me.setUser(response.user);
-					model.set('usrname', me.getName());
+					controller.fireEvent('updateprofile');
 				} else {					
 					Ext.widget('login');
 				}

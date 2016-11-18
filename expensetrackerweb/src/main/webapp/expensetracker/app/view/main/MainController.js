@@ -16,7 +16,8 @@ Ext.define('expensetracker.view.main.MainController', {
 				}
 			},
 			'*' : {
-				navigatelogin : 'navigateToLogin'
+				navigatelogin : 'navigateToLogin',
+				updateprofile : 'updateProfile'
 			}
 		}
 	},
@@ -91,13 +92,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var profileImg = me.lookup('tbProfileImage');		
 		model.set('currency', expensetracker.util.Session.getCurrencyName());
 		model.set('currencySymbol', expensetracker.util.Session.getCurrencySymbol());
-		model.set('usrname', expensetracker.util.Session.getName());
-		var sex = expensetracker.util.Session.getUserSex();
-		if('M' === sex) {
-			model.set('profileimg', 'resources/images/male-profile.png');			
-		}else{
-			model.set('profileimg', 'resources/images/female-profile.png');						
-		}
+		me.updateProfile();
 		me.setCurrentView('expensedashboard');
 	},
 	onToggleNavigation : function(button) {
@@ -161,8 +156,7 @@ Ext.define('expensetracker.view.main.MainController', {
 			height : me.getView().getHeight() - 70,
 			width : (me.getView().getWidth() - 250) / 2,
 			x : 250,
-			y : 70,
-			viewModel : model
+			y : 70			
 		});
 		profileWindow.show();
 	},
@@ -198,5 +192,17 @@ Ext.define('expensetracker.view.main.MainController', {
 		var me = this;
 		me.getView().destroy();
 		Ext.widget('login');
+	},
+	updateProfile : function() {
+		var me = this;
+		var model = me.getView().getViewModel();
+		model.set('usrname', expensetracker.util.Session.getName());
+		var sex = expensetracker.util.Session.getUserSex();
+		if('M' === sex) {
+			model.set('profileimg', 'resources/images/male-profile.png');			
+		}else{
+			model.set('profileimg', 'resources/images/female-profile.png');						
+		}
 	}
+	
 });

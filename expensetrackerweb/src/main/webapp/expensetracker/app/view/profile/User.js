@@ -6,7 +6,7 @@ Ext.define('expensetracker.view.profile.User', {
 	resizable : false,
 	bodyPadding : 10,
 	title : 'User Profile',
-	layout : 'fit',
+	layout : 'fit',	
 	controller : 'user',
 	listeners : {
 		afterrender : 'onProfileRender'
