@@ -3,6 +3,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 	alias : 'controller.expenseviewcontroller',
 	onThumbnailClick : function(thumbnailcont, record, item, index, e) {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var refs = me.getReferences();
 		var currentYear = expensetracker.util.Calendar.getCurrentYear();
 		var currentMonth = expensetracker.util.Calendar.getCurrentMonthNo();
@@ -22,10 +23,10 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 		} else {
 
 			var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
-				height : this.getView().getHeight(),
-				width : this.getView().getWidth(),
-				x : me.getView().getX(),
-				y : me.getView().getY(),
+				height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
+				width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
+				x :  model.get('navBarWidth'),				
+				resizable : false,
 				modal : true			
 			});
 

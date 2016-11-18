@@ -2,7 +2,9 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
+	scrollable: true,
 	requires : [ 'expensetracker.store.Expense' ],
+	layout : 'fit',	
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1
@@ -15,45 +17,40 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		ftype : 'summary',
 		dock : 'bottom'
 	} ],
-	tbar : [ {
-		xtype : 'textfield',
-		reference : 'expensegridsearch',
-		submitEmptyText : false,
-		emptyText : 'Search...',
-		listeners : {
-			change : 'filterGrid'
-		}
-	}, '-', {
-		xtype : 'numberfield',
-		fieldLabel : 'Income',
-		labelAlign : 'left',
-		labelWidth : 50,
-		emptyText : 'Monthly Income',
-		labelStyle : 'color: white',
-		readOnly : true,
-		hideTrigger : true,
-		mouseWheelEnabled : false,
-		labelSeparator : ''
-	},{
-		xtype : 'button',
-		ui : 'toolbar',
-		text : 'Update',		
-		handler : 'onUpdateIncome'
-	}, '->', {
-		xtype : 'button',
-		ui : 'toolbar',
-		text : 'Expense',
-		iconCls : 'x-fa  fa-plus-square',
-		handler : 'onAddExpenseRecord',
-		tooltip : 'Add Expense'
-	}, {
-		xtype : 'button',
-		ui : 'toolbar',
-		text : 'Category',
-		iconCls : 'x-fa fa-book',
-		handler : 'onShowCategory',
-		tooltip : 'Add Category'
-	} ],
+	dockedItems: [{
+		xtype: 'toolbar',
+		dock: 'top',
+		overflowHandler : 'menu',
+		items: [ {
+			xtype : 'textfield',
+			reference : 'expensegridsearch',
+			submitEmptyText : false,
+			emptyText : 'Search...',
+			listeners : {
+				change : 'filterGrid'
+			}
+		}, '-', {
+			xtype : 'button',
+			ui : 'toolbar',
+			text : 'Income',
+			iconCls : 'x-fa  fa-plus',			
+			handler : 'onUpdateIncome'
+		}, '->', {
+			xtype : 'button',
+			ui : 'toolbar',
+			text : 'Expense',
+			iconCls : 'x-fa  fa-plus',
+			handler : 'onAddExpenseRecord',
+			tooltip : 'Add Expense'
+		}, {
+			xtype : 'button',
+			ui : 'toolbar',
+			text : 'Category',
+			iconCls : 'x-fa fa-book',
+			handler : 'onShowCategory',
+			tooltip : 'Add Category'
+		} ]
+	}],	
 	bbar : [ '->', {
 		xtype : 'button',		
 		text : 'Save',
@@ -77,7 +74,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			triggerAction : 'query',
 			hideTrigger : true
 		},
-		flex : 1
+		width : 150
 	}, {
 		text : 'Category',
 		editor : {
@@ -88,10 +85,10 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			forceSelection : true,
 			typeAhead : true,
 			queryMode : 'local',
-			triggerAction : 'all'
+			triggerAction : 'all'			
 		},
 		dataIndex : 'category',
-		flex : 1
+		width : 150
 	}, {
 		text : 'Expense Type',
 		editor : {
@@ -105,7 +102,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			triggerAction : 'all'
 		},
 		dataIndex : 'exptype',
-		flex : 1
+		width : 150
 	}, {
 		xtype : 'datecolumn',
 		text : 'Expense Date',
@@ -119,7 +116,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			}
 		},
 		dataIndex : 'expdate',
-		flex : 1
+		width : 150
 
 	}, {
 		xtype : 'numbercolumn',
@@ -135,7 +132,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 				change : 'onQtyChange'
 			}
 		},
-		flex : 1
+		width : 100
 	}, {
 		xtype : 'numbercolumn',
 		text : 'Price',
@@ -156,19 +153,20 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		summaryRenderer : function(value, summaryData, dataIndex) {
 			return 'Total  :' + Ext.util.Format.currency(value, expensetracker.util.Session.getCurrencySymbol() + ' ', 2);
 		},
-		flex : 1
+		width : 200
 	}, {
 		xtype : 'numbercolumn',
 		text : 'Price/Unit',
 		align : 'center',
 		format : '0.00',
 		dataIndex : 'pricePerUnit',
-		flex : 1
+		width : 100
 	}, {
 		xtype : 'actioncolumn',
 		align : 'center',
 		tooltip : 'Delete',
 		handler : 'onDeleteExpense',
-		iconCls : 'x-fa  fa-minus-circle'
+		iconCls : 'x-fa  fa-minus-circle',
+		flex : 1
 	} ]
 });

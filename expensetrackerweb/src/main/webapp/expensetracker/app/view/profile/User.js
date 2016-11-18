@@ -1,6 +1,6 @@
 Ext.define('expensetracker.view.profile.User', {
 	extend : 'Ext.window.Window',
-	alias : 'view.profile',
+	alias : 'view.profile',	
 	requires : [ 'expensetracker.view.profile.UserController', 'Ext.form.field.VTypes' ],
 	xtype : 'profile',
 	resizable : false,
@@ -13,6 +13,7 @@ Ext.define('expensetracker.view.profile.User', {
 	},	
 	items : [ {
 		xtype : 'form',
+		scrollable : 'y',
 		jsonSubmit : true,
 		url : expensetracker.util.Url.getUserService(),
 		reference : 'profileform',

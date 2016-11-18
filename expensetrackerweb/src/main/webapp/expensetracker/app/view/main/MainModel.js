@@ -11,7 +11,8 @@ Ext.define('expensetracker.view.main.MainModel', {
 		usrname : '',
 		profileimg : '',
 		currency : '',
-		currencySymbol : ''
+		currencySymbol : '',
+		navBarWidth : expensetracker.util.Constants.getNavBarWidth()
 	}
 
 });

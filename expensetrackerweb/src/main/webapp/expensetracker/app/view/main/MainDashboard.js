@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 	alias : 'view.maindashboard',
 	xtype : 'maindashboard',
 	requires : [ 'expensetracker.store.NavigationMenu', 'expensetracker.view.dashboard.ExpenseDashboard', 'expensetracker.view.expense.ExpenseView' ],
-	scrollable : 'y',
+	scrollable : true,
 	layout : {
 		type : 'hbox',
 		align : 'stretchmax',
@@ -15,7 +15,7 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 	},
 	beforeLayout : function() {
 		var me = this;
-		var height = Ext.Element.getViewportHeight() - 70;
+		var height = Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight();
 		var navMenu = me.getComponent('navigationMenu');
 		me.minHeight = height;
 
@@ -32,7 +32,7 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 		store : {
 			type : 'navigationmenu'
 		},
-		width : 64,
+		width : expensetracker.util.Constants.getNavBarWidth(),
 		micro : true,
 		expanderFirst : false,
 		expanderOnly : false,

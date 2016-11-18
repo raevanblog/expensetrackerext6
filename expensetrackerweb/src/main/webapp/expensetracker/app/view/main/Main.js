@@ -24,8 +24,8 @@ Ext.define('expensetracker.view.main.Main', {
 	},
 	items : [ {
 		xtype : 'maintoolbar',
-		cls : 'maintoolbar shadow',
-		height : 64
+		cls : 'maintoolbar shadow',		
+		height : expensetracker.util.Constants.getToolbarHeight()
 	}, {
 		xtype : 'maindashboard',
 		reference : 'mainDashboard',

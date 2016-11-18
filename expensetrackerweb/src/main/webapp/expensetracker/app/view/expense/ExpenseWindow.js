@@ -2,6 +2,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	extend : 'Ext.window.Window',
 	alias : 'view.expensewindow',
 	xtype : 'expensewindow',
+	scrollable : true,
 	controller : 'expensewindowcontroller',
 	viewModel : 'expensewindowmodel',
 	iconCls : 'x-fa fa-file-text-o',

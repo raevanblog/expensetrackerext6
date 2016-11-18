@@ -2,11 +2,12 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	extend : 'Ext.toolbar.Toolbar',
 	alias : 'view.maintoolbar',
 	xtype : 'maintoolbar',
+	overflowHandler : 'menu',	
 	items : [ {
 		xtype : 'component',
 		html: '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
 		reference : 'logocomponent',
-		width : 64,
+		width : expensetracker.util.Constants.getNavBarWidth(),
 		cls : 'logo-component'
 	}, {
 		xtype : 'button',
@@ -27,20 +28,21 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	},{
 		xtype : 'displayfield',
 		bind: {
-			value : '{usrname}',
+			value : '{usrname}'
 		},
 		reference : 'tbUserName'
 	}, '->', {
-		xtype : 'button',
-		ui: 'toolbar',
-		iconCls : 'x-fa fa-info-circle'
+		xtype : 'button',		
+		ui: 'toolbar',		
+		iconCls : 'x-fa fa-envelope'
 	}, {
 		xtype : 'button',
 		ui: 'toolbar',
+		text : 'Profile',
 		tooltip : 'Profile',		
 		iconCls : 'x-fa fa-user',
 		menu : [{
-			text : 'Profile',
+			text : 'View Profile',
 			iconCls : 'x-fa fa-user',
 			tooltip : 'View profile',
 			handler : 'onUserProfile'
@@ -52,7 +54,8 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		}]
 	}, {
 		xtype : 'button',
-		ui: 'toolbar',
+		text : 'Sign Out',
+		ui: 'toolbar',		
 		tooltip : 'Sign Out',
 		iconCls : 'x-fa fa-sign-out',
 		handler : 'onSignOut'

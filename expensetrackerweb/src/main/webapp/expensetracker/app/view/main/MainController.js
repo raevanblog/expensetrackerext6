@@ -97,14 +97,17 @@ Ext.define('expensetracker.view.main.MainController', {
 	},
 	onToggleNavigation : function(button) {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var refs = me.getReferences();
 		var navMenu = refs.navigationMenu;
 		var mainDashboard = refs.mainDashboard;
 
 		var collapsing = !navMenu.getMicro();
 
-		var new_width = collapsing ? 64 : 250;
-
+		var new_width = collapsing ? expensetracker.util.Constants.getNavBarWidth() : expensetracker.util.Constants.getNavBarExpandedWidth();
+	
+		model.set('navBarWidth', new_width);
+	
 		if (Ext.isIE9m || !Ext.os.is.Desktop) {
 			Ext.suspendLayouts();
 
@@ -153,22 +156,21 @@ Ext.define('expensetracker.view.main.MainController', {
 		var model = me.getView().getViewModel();
 		var profileWindow = Ext.create('expensetracker.view.profile.User', {
 			modal : true,
-			height : me.getView().getHeight() - 70,
-			width : (me.getView().getWidth() - 250) / 2,
-			x : 250,
-			y : 70			
+			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
+			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
+			x :  model.get('navBarWidth')
 		});
 		profileWindow.show();
 	},
 	onChangePwd : function(chgPwdBtn) {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var mainCard = me.lookup('mainCard');
 		var chgPwdWindow = Ext.create('expensetracker.view.profile.ChangePassword', {
 			modal : true,
-			height : mainCard.getHeight(),
-			width : mainCard.getWidth(),
-			x : mainCard.getX(),
-			y :	mainCard.getY()		
+			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
+			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
+			x :  model.get('navBarWidth')
 		});
 		chgPwdWindow.show();
 	},

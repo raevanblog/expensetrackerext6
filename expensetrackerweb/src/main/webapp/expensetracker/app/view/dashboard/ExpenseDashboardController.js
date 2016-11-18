@@ -42,16 +42,16 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	onOpenExpenseSheet : function(thumbnailcont, record, item, index, e) {
 
 		var me = this;
+		var model = me.getView().getViewModel();
 		var currentYear = expensetracker.util.Calendar.getCurrentYear();
 		var currentMonth = expensetracker.util.Calendar.getCurrentMonthNo();
 		var date = new Date(currentYear, currentMonth - 1);
 
 		var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
-			height : Ext.getBody().getViewSize().height - 70,
-			width : Ext.getBody().getViewSize().width - 250,
-			x : me.getView().getX(),
-			y : me.getView().getY(),
+			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
+			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),			
 			resizable : false,
+			x :  model.get('navBarWidth'),
 			modal : true
 		});
 
@@ -67,11 +67,11 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	},
 	onIncomeEditClick : function() {
 		var me = this;
+		var model = me.getView().getViewModel();
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
-			height : 500,
-			width : 400,
-			x : me.getView().getX(),
-			y : me.getView().getY(),
+			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
+			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
+			x :  model.get('navBarWidth'),
 			modal : true
 		});
 		var model = incomeWindow.getViewModel();
