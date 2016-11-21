@@ -4,6 +4,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	alias : 'view.expensedashboard',
 	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController',
 			'expensetracker.view.dashboard.TopExpense', 'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie',
+			'expensetracker.view.charts.LineChart',
 			'expensetracker.view.income.IncomeWindow', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
 	layout : 'responsivecolumn',
 	controller : 'expensedashboardcontroller',
@@ -22,7 +23,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			handler : 'updateDashBoardSummary'
 		} ],
 		height : 250,
-		iconCls : 'x-fa fa-sticky-note-o',
+		iconCls : 'x-fa fa-th',
 		cls : 'big-40 small-100 dash-panel shadow',
 		layout : {
 			type : 'hbox',
@@ -67,5 +68,15 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			reference : 'topexpense'
 		} ],
 		cls : 'big-33 small-100 dash-panel'
+	}, {
+		xtype : 'linechart',
+		reference : 'expensevsincome',
+		title : 'Expense vs Income',
+		height : 400,
+		iconCls : 'x-fa fa-line-chart',
+		listeners : {
+			afterrender : 'onRenderExpenseVsIncome'
+		},
+		cls : 'big-100 small-100 dash-panel'
 	} ]
 });

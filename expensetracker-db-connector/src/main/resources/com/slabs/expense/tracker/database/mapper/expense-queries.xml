@@ -83,6 +83,13 @@
 		</if>
 	</select>
 
+	<select id="getMonthWiseTotalExpense" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
+		select month(expdate) as MONTH, sum(price) as EXPENSE, 'Expense' as TYPE from EXPENSE where
+		username = #{username} and		
+		year(expdate) = #{year} 
+		group by month(expdate)
+	</select>
+
 
 	<select id="getExpenseById" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where

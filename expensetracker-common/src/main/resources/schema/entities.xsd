@@ -12,6 +12,7 @@
 	<element name="IncomeType" type="et:IncomeType" />
 	<element name="Dictionary" type="et:Dictionary" />
 	<element name="Dashboard" type="et:Dashboard" />
+	<element name="Graph" type="et:Graph" />
 
 
 	<complexType name="Dashboard">
@@ -189,11 +190,11 @@
 		</annotation>
 		<sequence>
 			<element name="id" type="int" />
-			<element name="yr" type="int" minOccurs="1"/>
-			<element name="mth" type="int" minOccurs="1"/>
-			<element name="username" type="string" minOccurs="1"/>
-			<element name="incometype" type="string" minOccurs="1"/>
-			<element name="income" type="double" minOccurs="1"/>
+			<element name="yr" type="int" minOccurs="1" />
+			<element name="mth" type="int" minOccurs="1" />
+			<element name="username" type="string" minOccurs="1" />
+			<element name="incometype" type="string" minOccurs="1" />
+			<element name="income" type="double" minOccurs="1" />
 		</sequence>
 	</complexType>
 
@@ -214,6 +215,26 @@
 			<element name="id" type="int" />
 			<element name="incometype" type="string" />
 			<element name="description" type="string" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Graph">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Graph will hold data for drawing charts
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="month" type="int" />
+			<element name="year" type="int" />
+			<element name="income" type="double" />
+			<element name="expense" type="double" />
+			<element name="type" type="string"/>			
 		</sequence>
 	</complexType>
 

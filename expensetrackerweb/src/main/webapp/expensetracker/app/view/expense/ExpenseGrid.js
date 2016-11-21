@@ -29,13 +29,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			listeners : {
 				change : 'filterGrid'
 			}
-		}, '-', {
-			xtype : 'button',
-			ui : 'toolbar',
-			text : 'Income',
-			iconCls : 'x-fa  fa-plus',			
-			handler : 'onUpdateIncome'
-		}, '->', {
+		}, '-',{
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Expense',
@@ -46,9 +40,15 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Category',
-			iconCls : 'x-fa fa-book',
+			iconCls : 'x-fa fa-plus',
 			handler : 'onShowCategory',
 			tooltip : 'Add Category'
+		}, {
+			xtype : 'button',
+			ui : 'toolbar',
+			text : 'Income',
+			iconCls : 'x-fa  fa-plus',			
+			handler : 'onUpdateIncome'
 		} ]
 	}],	
 	bbar : [ '->', {

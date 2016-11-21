@@ -9,13 +9,13 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		reference : 'logocomponent',
 		width : expensetracker.util.Constants.getNavBarWidth(),
 		cls : 'logo-component'
-	}, {
+	}, /*{
 		xtype : 'button',
 		ui: 'toolbar',
 		iconCls : 'x-fa fa-bars',
 		reference : 'toggleNavigation',
 		handler : 'onToggleNavigation'
-	},{
+	},*/{
 		xtype: 'image',
 		height: 35,
         width: 35,
@@ -33,7 +33,8 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		reference : 'tbUserName'
 	}, '->', {
 		xtype : 'button',		
-		ui: 'toolbar',		
+		ui: 'toolbar',
+		text : 'Message',
 		iconCls : 'x-fa fa-envelope'
 	}, {
 		xtype : 'button',

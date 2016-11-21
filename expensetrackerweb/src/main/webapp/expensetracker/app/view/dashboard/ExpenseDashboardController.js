@@ -31,7 +31,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				month : expensetracker.util.Calendar.getCurrentMonthNo(),
 				year : expensetracker.util.Calendar.getCurrentYear(),
 				fetchTopExpense : true
-			}
+			}			
 		});
 
 		topexpense.bindStore(expenseStore);
@@ -82,7 +82,11 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	renderToolTip : function(tooltip, record, item) {
 		var value = Ext.util.Format.number(record.get('value'), '0.00');
 		tooltip.setHtml(value + ' %');
-	},	
+	},
+	onXAxisRenderer	: function(axis, label, context) {
+		var month = expensetracker.util.Calendar.getShortName(label);
+		return context.renderer(month);
+	},
 	updateDashBoardSummary : function() {
 		var me = this;
 		var totInc = me.lookup('totIncome');
@@ -141,5 +145,31 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var me = this;
 		var topexpense = me.lookup('topexpense');
 		topexpense.getStore().reload();		
+	},
+	onRenderExpenseVsIncome : function(panel) {
+		var me = this;
+		var expvsincome = me.lookup('expensevsincome');
+		var linechart = expvsincome.down('[itemId=lineChart]');		
+		
+		var graphStore = Ext.create('expensetracker.store.Graph');
+		graphStore.load({
+			params : {
+				username : expensetracker.util.Session.getUsername(),
+				year : expensetracker.util.Calendar.getCurrentYear(),
+				type : 'EXPENSE_VS_INCOME_MONTHLY'
+			},
+			callback : function(records, operation, success) {
+				if (!success) {
+					var response = Ext.JSON.decode(operation.getError().response.responseText);
+					expensetracker.util.Message.toast(response.status_Message);
+					if (401 === response.status_Code) {
+						me.getView().close();
+						me.fireEvent('navigatelogin');
+					}
+				}
+			}
+		});
+		
+		linechart.bindStore(graphStore);
 	}
 });

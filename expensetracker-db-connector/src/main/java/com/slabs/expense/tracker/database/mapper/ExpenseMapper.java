@@ -10,6 +10,7 @@ import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
 import com.slabs.expense.tracker.common.db.entity.ExpenseType;
+import com.slabs.expense.tracker.common.db.entity.Graph;
 
 /**
  * {@link ExpenseMapper} is an interface providing mapper methods for executing
@@ -22,12 +23,17 @@ public interface ExpenseMapper {
 
 	public Integer insertExpense(@Param("records") List<Expense> records) throws Exception;
 
-	public List<Expense> getExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
+	public List<Expense> getExpense(@Param("username") String username, @Param("year") Integer year,
+			@Param("month") Integer month) throws Exception;
 
-	public List<Expense> getTopExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month)
-			throws Exception;
+	public List<Expense> getTopExpense(@Param("username") String username,
+			@Param("year") Integer year, @Param("month") Integer month) throws Exception;
 
-	public Double getTotalExpense(@Param("username") String username, @Param("year") Integer year, @Param("month") Integer month) throws Exception;
+	public Double getTotalExpense(@Param("username") String username, @Param("year") Integer year,
+			@Param("month") Integer month) throws Exception;
+
+	public List<Graph> getMonthWiseTotalExpense(@Param("username") String username,
+			@Param("year") Integer year) throws Exception;
 
 	public Integer updateExpense(@Param("record") Expense expense) throws Exception;
 
@@ -37,11 +43,13 @@ public interface ExpenseMapper {
 
 	public List<Dictionary> selectExpenseNames() throws Exception;
 
-	public Integer insertExpenseCategory(@Param("records") List<ExpenseCategory> records) throws Exception;
+	public Integer insertExpenseCategory(@Param("records") List<ExpenseCategory> records)
+			throws Exception;
 
 	public Integer updateExpenseCategory(@Param("record") ExpenseCategory record) throws Exception;
 
-	public List<ExpenseCategory> retrieveExpenseCategory(@Param("categoryId") Integer categoryId) throws Exception;
+	public List<ExpenseCategory> retrieveExpenseCategory(@Param("categoryId") Integer categoryId)
+			throws Exception;
 
 	public Integer deleteExpenseCategory(@Param("record") ExpenseCategory record) throws Exception;
 

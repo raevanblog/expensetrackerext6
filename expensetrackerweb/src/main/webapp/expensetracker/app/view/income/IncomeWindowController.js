@@ -42,12 +42,13 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 	},
 	onRenderIncomeGrid : function(incomegrid, options) {
 		var me = this;
+		var viewmodel = me.getView().getViewModel();
 		var store = incomegrid.getStore();
 		store.load({
 			params : {
 				username : expensetracker.util.Session.getUsername(),
-				month : expensetracker.util.Calendar.getCurrentMonthNo(),
-				year : expensetracker.util.Calendar.getCurrentYear()
+				month : viewmodel.get('month'),
+				year : viewmodel.get('year')
 			},
 			callback : function(records, operation, success) {
 				if (success) {
@@ -57,8 +58,8 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 							var incomeType = record.get('incometype');
 							var model = new expensetracker.model.Income({
 								incometype : incomeType,
-								mth : expensetracker.util.Calendar.getCurrentMonthNo(),
-								yr : expensetracker.util.Calendar.getCurrentYear(),
+								mth : viewmodel.get('month'),
+								yr : viewmodel.get('year'),
 								income : 0.0,
 								username : expensetracker.util.Session.getUsername()
 							});

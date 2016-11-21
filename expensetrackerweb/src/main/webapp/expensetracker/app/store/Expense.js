@@ -5,6 +5,7 @@ Ext.define('expensetracker.store.Expense', {
 	model : 'expensetracker.model.Expense',
 	proxy : {
 		type : 'rest',
+		batchActions : true,
 		useDefaultXhrHeader : false,
 		api : {
 			create : expensetracker.util.Url.getExpenseService(),

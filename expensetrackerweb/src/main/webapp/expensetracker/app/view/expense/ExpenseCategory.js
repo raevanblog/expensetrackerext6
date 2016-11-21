@@ -26,7 +26,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 			maxLength: 15,
 			allowBlank : false			
 		},
-		flex : 0.3
+		width : 150
 	}, {
 		text : 'Description',
 		dataIndex : 'description',
@@ -35,12 +35,13 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 			allowBlank : true,
 			maxLength : 100
 		},
-		flex : 0.7
+		width : 150
 	}, {
 		xtype : 'actioncolumn',
 		align : 'center',
 		tooltip : 'Delete',
 		handler : 'onDeleteCategory',
-		iconCls : 'x-fa  fa-minus-circle'
+		iconCls : 'x-fa  fa-minus-circle',
+		flex :1 
 	} ]
 });

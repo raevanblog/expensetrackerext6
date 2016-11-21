@@ -27,24 +27,29 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	}, {
 		xtype : 'expensecategory',
 		reference : 'expensecategory',
-		tbar : [ {
-			xtype : 'button',
-			ui : 'toolbar',
-			iconCls : 'x-fa fa-backward',			
-			handler : 'onBackCategory'
-		}, '-', {
-			xtype : 'textfield',
-			emptyText : 'Search...',
-			reference : 'categorygridsearch',
-			listeners : {
-				change : 'filterGrid'
-			}
-		}, '->', {
-			xtype : 'button',
-			ui : 'toolbar',
-			text : 'Category',
-			iconCls : 'x-fa fa-plus-square',
-			handler : 'onAddCategory'
-		} ]
+		dockedItems: [{
+		xtype: 'toolbar',
+		dock: 'top',
+		overflowHandler : 'menu',
+		items : [{
+				xtype : 'button',
+				ui : 'toolbar',
+				iconCls : 'x-fa fa-backward',			
+				handler : 'onBackCategory'
+			}, '-', {
+				xtype : 'textfield',
+				emptyText : 'Search...',
+				reference : 'categorygridsearch',
+				listeners : {
+					change : 'filterGrid'
+				}
+			}, '->', {
+				xtype : 'button',
+				ui : 'toolbar',
+				text : 'Category',
+				iconCls : 'x-fa fa-plus-square',
+				handler : 'onAddCategory'
+			} ]
+		}],		
 	} ]
 });

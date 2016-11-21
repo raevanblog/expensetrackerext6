@@ -20,19 +20,25 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 			submitEmptyText : false,
 			emptyText : 'Search...',
 			listeners : {
-				change : 'filterGrid'
+				change : 'filterDock'
 			}
 		}, '-', {
 			xtype : 'numberfield',
+			reference : 'expenseyear',
 			fieldLabel : 'Select Year',
 			minValue : 2008,
+			editable : false,
 			maxValue : expensetracker.util.Calendar.getCurrentYear(),
-			value : expensetracker.util.Calendar.getCurrentYear()
+			value : expensetracker.util.Calendar.getCurrentYear(),
+			listeners : {
+				change : 'onYearSelection'
+			}
 		} ]
 	} ],
 	items : [ {
 		xtype : 'thumnailcontainer',
 		store : 'ExpenseDock',
+		reference : 'thumbnaildocker',
 		listeners : {
 			itemclick : 'onThumbnailClick'
 		}

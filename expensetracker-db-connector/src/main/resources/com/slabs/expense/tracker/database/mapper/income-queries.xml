@@ -41,6 +41,14 @@
 		</if>
 	</select>
 
+	<select id="getMonthWiseTotalIncome" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
+		select mth as MONTH, sum(income) as INCOME, 'Income' as TYPE from INCOME
+		where 
+		username = #{username}
+		and yr = #{year}
+		group by mth
+	</select>
+
 	<delete id="deleteIncome">
 		delete from EXPENSETRACKER.INCOME where mth=#{record.mth} and yr=#{record.yr}
 		and username=#{record.username}

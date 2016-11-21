@@ -7,7 +7,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 		var refs = me.getReferences();
 		var currentYear = expensetracker.util.Calendar.getCurrentYear();
 		var currentMonth = expensetracker.util.Calendar.getCurrentMonthNo();
-		var year = parseInt(refs.expensedock.getTitle());
+		var year = refs.expenseyear.getValue();
 		var monthNo = record.get('monthNo');
 		var month = record.get('month');
 
@@ -23,9 +23,8 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 		} else {
 
 			var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
-				height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
-				width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
-				x :  model.get('navBarWidth'),				
+				height : Ext.Element.getViewportHeight(),
+				width : Ext.Element.getViewportWidth(),					
 				resizable : false,
 				modal : true			
 			});
@@ -41,18 +40,17 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 			expenseWindow.show();
 		}
 	},
-	onYearSelection : function(slider, newValue, thumb, eOpts) {
+	filterDock : function(textfield,  newValue, oldValue, options) {
 		var me = this;
-		var refs = me.getReferences();
-		refs.expensedock.setTitle('' + newValue);
-		refs.expviewselyear.update(newValue);
+		var docker = me.lookup('thumbnaildocker');
+		var store = docker.getStore();
+		store.filter('month', newValue);
 	},
-	onRenderSlider : function(slider) {
+	onYearSelection : function(numberfield, newValue, oldValue, options) {
 		var me = this;
-		var value = slider.getValue();
-		var refs = me.getReferences();
-		refs.expviewselyear.update(value);
-	},
+		var expensedock = me.lookup('expensedock');
+		expensedock.setTitle('' + newValue);		
+	},	
 	onRenderExpenseDock : function(expensedock) {
 		var me = this;
 		expensedock.setTitle('' + new Date().getFullYear());
