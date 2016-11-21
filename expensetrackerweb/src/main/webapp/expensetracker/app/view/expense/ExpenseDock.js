@@ -10,6 +10,26 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 		align : 'stretch',
 		padding : '10 3 10 3'
 	},
+	dockedItems : [ {
+		xtype : 'toolbar',
+		dock : 'top',
+		overflowHandler : 'menu',
+		items : [ {
+			xtype : 'textfield',
+			reference : 'expensedocksearch',
+			submitEmptyText : false,
+			emptyText : 'Search...',
+			listeners : {
+				change : 'filterGrid'
+			}
+		}, '-', {
+			xtype : 'numberfield',
+			fieldLabel : 'Select Year',
+			minValue : 2008,
+			maxValue : expensetracker.util.Calendar.getCurrentYear(),
+			value : expensetracker.util.Calendar.getCurrentYear()
+		} ]
+	} ],
 	items : [ {
 		xtype : 'thumnailcontainer',
 		store : 'ExpenseDock',

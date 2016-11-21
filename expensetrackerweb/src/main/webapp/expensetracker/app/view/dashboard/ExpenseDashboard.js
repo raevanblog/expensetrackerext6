@@ -2,8 +2,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	extend : 'Ext.container.Container',
 	xtype : 'expensedashboard',
 	alias : 'view.expensedashboard',
-	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController', 'expensetracker.view.dashboard.TopExpense',
-			'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie', 'expensetracker.view.income.IncomeWindow', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
+	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController',
+			'expensetracker.view.dashboard.TopExpense', 'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie',
+			'expensetracker.view.income.IncomeWindow', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
 	layout : 'responsivecolumn',
 	controller : 'expensedashboardcontroller',
 	viewModel : 'expensedashboard',
@@ -13,6 +14,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	items : [ {
 		xtype : 'panel',
 		title : 'Summary',
+		scrollable : true,
 		reference : 'summarypanel',
 		tools : [ {
 			type : 'refresh',
@@ -23,18 +25,19 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		iconCls : 'x-fa fa-sticky-note-o',
 		cls : 'big-40 small-100 dash-panel shadow',
 		layout : {
-			type : 'responsivecolumn'			
+			type : 'hbox',
+			align : 'stretch'
 		},
 		items : [ {
 			xtype : 'summary',
 			bodyPadding : '10 0 0 10',
-			cls : 'big-50 small-100'
+			flex : 0.5
 		}, {
 			xtype : 'summarypie',
 			reference : 'summarypiepanel',
 			height : '100%',
-			cls : 'big-50 small-100',
-			padding : '0 0 0 20'			
+			flex : 0.5,
+			padding : '0 0 0 20'
 		} ]
 	}, {
 		xtype : 'panel',

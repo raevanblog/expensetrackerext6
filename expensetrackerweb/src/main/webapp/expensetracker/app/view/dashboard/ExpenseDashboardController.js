@@ -48,10 +48,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var date = new Date(currentYear, currentMonth - 1);
 
 		var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
-			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
-			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),			
-			resizable : false,
-			x :  model.get('navBarWidth'),
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth(),			
+			resizable : false,			
 			modal : true
 		});
 
@@ -69,9 +68,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var me = this;
 		var model = me.getView().getViewModel();
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
-			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
-			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
-			x :  model.get('navBarWidth'),
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth(),		
 			modal : true
 		});
 		var model = incomeWindow.getViewModel();

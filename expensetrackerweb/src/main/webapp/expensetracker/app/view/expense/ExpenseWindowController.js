@@ -186,10 +186,8 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var model = view.getViewModel();
 		
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
-			height : me.getView().getHeight(),
-			width : me.getView().getWidth(),
-			x : me.getView().getX(),
-			y : me.getView().getY(),			
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth(),					
 			modal : true			
 		});
 		var incomeWindowModel = incomeWindow.getViewModel();

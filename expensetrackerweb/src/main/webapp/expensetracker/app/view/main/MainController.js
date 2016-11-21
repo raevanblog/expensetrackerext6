@@ -156,9 +156,8 @@ Ext.define('expensetracker.view.main.MainController', {
 		var model = me.getView().getViewModel();
 		var profileWindow = Ext.create('expensetracker.view.profile.User', {
 			modal : true,
-			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
-			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
-			x :  model.get('navBarWidth')
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth()			
 		});
 		profileWindow.show();
 	},
@@ -168,9 +167,8 @@ Ext.define('expensetracker.view.main.MainController', {
 		var mainCard = me.lookup('mainCard');
 		var chgPwdWindow = Ext.create('expensetracker.view.profile.ChangePassword', {
 			modal : true,
-			height : Ext.Element.getViewportHeight() - expensetracker.util.Constants.getToolbarHeight(),
-			width : Ext.Element.getViewportWidth() - model.get('navBarWidth'),
-			x :  model.get('navBarWidth')
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth()			
 		});
 		chgPwdWindow.show();
 	},
