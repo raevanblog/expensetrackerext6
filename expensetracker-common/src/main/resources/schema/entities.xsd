@@ -231,10 +231,10 @@
 		</annotation>
 		<sequence>
 			<element name="month" type="int" />
+			<element name="category" type="string" />
 			<element name="year" type="int" />
 			<element name="income" type="double" />
-			<element name="expense" type="double" />
-			<element name="type" type="string"/>			
+			<element name="expense" type="double" />			
 		</sequence>
 	</complexType>
 

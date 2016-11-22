@@ -4,6 +4,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	listen : {
 		controller : {
 			'*' : {
+				updatedashboard : 'updateDashBoard',
 				updatesummary : 'updateDashBoardSummary',
 				updatetopexpense : 'updateTopExpense'
 			}
@@ -109,13 +110,14 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				if (dashData != null || dashData != undefined) {
 					var summary = dashData.summary;
 					var piePanel = me.lookup('summarypiepanel');
-					var pie = piePanel.down('[itemId=summaryPolar]');
-
+					var pie = piePanel.down('[itemId=summaryPolar]');				
+					
 					totInc.setValue(summary.totalIncome);
 					totExp.setValue(summary.totalExpense);
 					cih.setValue(summary.cashInHand);
 					if (summary.totalIncome !== 0.0) {
-						var pieStore = Ext.create('Ext.data.Store');
+						
+						var pieStore = Ext.create('Ext.data.Store');						
 						var expPercentage = (summary.totalExpense / summary.totalIncome) * 100;
 						var cihPercentage = (summary.cashInHand / summary.totalIncome) * 100;
 
@@ -146,12 +148,24 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var topexpense = me.lookup('topexpense');
 		topexpense.getStore().reload();		
 	},
+	updateExpVsIncomeChart : function() {
+		var me = this;
+		var expvsincome = me.lookup('expensevsincome');
+		var linechart = expvsincome.down('[itemId=lineChart]');
+		linechart.getStore().reload();
+	},
+	updateDashBoard : function() {
+		var me = this; 
+		me.updateTopExpense();
+		me.updateDashBoardSummary();
+		me.updateExpVsIncomeChart();
+	},
 	onRenderExpenseVsIncome : function(panel) {
 		var me = this;
 		var expvsincome = me.lookup('expensevsincome');
-		var linechart = expvsincome.down('[itemId=lineChart]');		
-		
+		var linechart = expvsincome.down('[itemId=linechart]');				
 		var graphStore = Ext.create('expensetracker.store.Graph');
+		expvsincome.setLoading('Loading...');
 		graphStore.load({
 			params : {
 				username : expensetracker.util.Session.getUsername(),
@@ -159,6 +173,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				type : 'EXPENSE_VS_INCOME_MONTHLY'
 			},
 			callback : function(records, operation, success) {
+				expvsincome.setLoading(false);
 				if (!success) {
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
 					expensetracker.util.Message.toast(response.status_Message);
@@ -171,5 +186,50 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		});
 		
 		linechart.bindStore(graphStore);
-	}
+	},
+	
+	onRenderCategoryExpense : function(panel) {
+		var me = this;
+		var categorychartpanel = me.lookup('categorychartpanel');
+		var expensechart = categorychartpanel.down('[itemId=expensechart]');				
+		var graphStore = Ext.create('expensetracker.store.Graph');
+		categorychartpanel.setLoading('Loading...');
+		graphStore.load({
+			params : {
+				username : expensetracker.util.Session.getUsername(),
+				year : expensetracker.util.Calendar.getCurrentYear(),
+				month : expensetracker.util.Calendar.getCurrentMonthNo(),
+				type : 'CATEGORY_EXPENSE_TOTAL'
+			},
+			callback : function(records, operation, success) {
+				categorychartpanel.setLoading(false);
+				if (!success) {
+					var response = Ext.JSON.decode(operation.getError().response.responseText);
+					expensetracker.util.Message.toast(response.status_Message);
+					if (401 === response.status_Code) {
+						me.getView().close();
+						me.fireEvent('navigatelogin');
+					}
+				}
+			}
+		});
+		
+		expensechart.bindStore(graphStore);
+	},
+	onLCPreview : function(button) {
+		var me = this;
+		var expensevsincome = me.lookup('expensevsincome');
+		var linechart = expensevsincome.down('[itemId=linechart]');	
+		linechart.preview();
+	},
+	onCCPreview : function(button) {
+		var me = this;
+		var categorychartpanel = me.lookup('categorychartpanel');
+		var cchart = categorychartpanel.down('[itemId=expensechart]');	
+		cchart.preview();
+	},
+	renderLineChartTooltip : function(tooltip, record, item) {
+		var title = item.series.getTitle();
+		tooltip.setHtml(title + ' : ' + expensetracker.util.Session.getCurrencySymbol() + ' ' + record.get(item.series.getYField()));
+	}	
 });

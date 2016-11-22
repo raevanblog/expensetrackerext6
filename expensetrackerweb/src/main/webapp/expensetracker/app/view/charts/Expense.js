@@ -3,9 +3,19 @@ Ext.define('expensetracker.view.charts.Expense', {
 	xtype : 'expensechart',
 	alias : 'view.expensechart',
 	layout : 'fit',
+	tbar: ['->', {
+		iconCls : 'x-fa fa-eye',
+		tooltip : 'Preview',
+		ui : 'toolbar',
+		handler : 'onCCPreview'
+	}],
 	items : [ {
 		xtype : 'cartesian',
+		itemId : 'expensechart',
 		reference : 'expensechart',
+		legend : {
+			docked : 'top'
+		},
 		insetPadding : {
 			top : 30,
 			bottom : 10,
@@ -18,7 +28,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 			position : 'left',
 			titleMargin : 20,
 			title : {
-				text : 'Price'
+				text : 'Expense'
 			}
 		}, {
 			type : 'category',
@@ -29,8 +39,9 @@ Ext.define('expensetracker.view.charts.Expense', {
 		} ],
 		series : {
 			type : 'bar',
-			xField : 'itemName',
-			yField : 'price',
+			title: 'Expense',
+			xField : 'category',
+			yField : 'expense',
 			style : {
 				minGapWidth : 20
 			},
@@ -39,7 +50,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 				fillStyle : 'gold'
 			},
 			label : {
-				field : 'price',
+				field : 'expense',
 				display : 'insideEnd',
 				renderer : function(value) {
 					return value.toFixed(2);
@@ -48,7 +59,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 			tooltip : {
 				trackMouse : true,
 				renderer : function(tooltip, record) {
-					var tip = 'CATEGORY : ' + record.get('category') + '</br>ITEM NAME : ' + record.get('itemName') + '</br>PRICE : ' + record.get('price');
+					var tip = expensetracker.util.Session.getCurrencySymbol() + ' '+ record.get('expense');
 					tooltip.setHtml(tip);
 				}
 			}

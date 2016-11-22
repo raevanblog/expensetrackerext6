@@ -48,9 +48,8 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 		layout : {
 			type : 'card',
 			anchor : '100%',
-			animation: {
-				xtype: 'animation.slide',
-				direction: 'left'
+			fx: {
+				duration : 200			
 			}
 		}
 	} ]

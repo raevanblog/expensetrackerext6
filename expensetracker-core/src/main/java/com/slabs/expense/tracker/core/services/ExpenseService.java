@@ -1,5 +1,6 @@
 package com.slabs.expense.tracker.core.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
+import com.slabs.expense.tracker.common.db.entity.Graph;
 import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 
 /**
@@ -93,9 +95,65 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Double selectTotalExpense(String username, Integer year, Integer month)
-			throws Exception {
+	public Double getTotalExpense(String username, Integer year, Integer month) throws Exception {
 		return mapper.getTotalExpense(username, year, month);
+	}
+
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @param year
+	 *            {@link Integer} - Year for which the expense need to be
+	 *            retrieved
+	 * @return {@link Graph} - list of graph records
+	 * 
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public List<Graph> getMonthWiseTotalExpense(String username, Integer year) throws Exception {
+		List<Graph> list = mapper.getMonthWiseTotalExpense(username, year);
+		List<Graph> newList = new ArrayList<Graph>();
+		for (int i = 1; i <= 12; i++) {
+			boolean isFound = false;
+			for (Graph g : list) {
+				g.setYear(year);
+				if (i == g.getMonth()) {
+					isFound = true;
+					break;
+				}
+			}
+			if (!isFound) {
+				Graph graph = new Graph();
+				graph.setExpense(0);
+				graph.setYear(year);
+				graph.setMonth(i);
+				newList.add(graph);
+			}
+		}
+		if (newList.size() > 0) {
+			list.addAll(newList);
+		}
+		return list;
+	}
+
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @param year
+	 *            {@link Integer} - Year for which the expense need to be
+	 *            retrieved
+	 * @param month
+	 *            {@link Integer} - Month for which the expense need to be
+	 *            retrieved
+	 * @return {@link Graph} - list of graph records
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public List<Graph> getCategoryWiseTotalExpense(String username, Integer year, Integer month)
+			throws Exception {
+		return mapper.getCategoryWiseTotalExpense(username, year, month);
 	}
 
 	/**

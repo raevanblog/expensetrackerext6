@@ -42,7 +42,7 @@
 	</select>
 
 	<select id="getMonthWiseTotalIncome" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
-		select mth as MONTH, sum(income) as INCOME, 'Income' as TYPE from INCOME
+		select mth as MONTH, sum(income) as INCOME from INCOME
 		where 
 		username = #{username}
 		and yr = #{year}

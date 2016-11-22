@@ -1,15 +1,25 @@
 Ext.define('expensetracker.view.charts.LineChart', {
 	extend : 'Ext.panel.Panel',
 	xtype : 'linechart',
-	alias : 'view.linechart',
+	alias : 'view.linechart',	
 	layout : 'fit',	
+	tbar: ['->', {
+		iconCls : 'x-fa fa-eye',
+		tooltip : 'Preview',
+		ui : 'toolbar',
+		handler : 'onLCPreview'
+	}],
 	items: [{
 		xtype: 'cartesian',
-		itemId : 'lineChart',
+		itemId : 'linechart',
+		colors : ['green', 'red'],
 		interactions: {
             type: 'panzoom',
             zoomOnPanGesture: true
         },
+		legend : {
+			docked : 'top'
+		},
 		animation: {
             duration: 200
         },
@@ -19,6 +29,9 @@ Ext.define('expensetracker.view.charts.LineChart', {
             type: 'numeric',
 			fields: ['income', 'expense'],
             position: 'left',
+			title : {
+				text : 'Expense'
+			},
             grid: true             
         }, {
             type: 'category',
@@ -33,10 +46,11 @@ Ext.define('expensetracker.view.charts.LineChart', {
         }],
 		series: [{
             type: 'line',
+			title: 'Income',
             xField: 'month',
             yField: 'income',
             style: {
-                lineWidth: 2
+                lineWidth: 1
             },
             marker: {
                 radius: 4,
@@ -45,11 +59,7 @@ Ext.define('expensetracker.view.charts.LineChart', {
                     duration: 200,
                     easing: 'backOut'
                 }
-            },
-            label: {
-                field: 'income',
-                display: 'over'
-            },
+            },            
             highlightCfg: {
                 scaling: 2
             },
@@ -57,14 +67,16 @@ Ext.define('expensetracker.view.charts.LineChart', {
                 trackMouse: true,
                 showDelay: 0,
                 dismissDelay: 0,
-                hideDelay: 0                
+                hideDelay: 0,
+				renderer : 'renderLineChartTooltip'                
             }
         }, {
             type: 'line',
+			title: 'Expense',
             xField: 'month',
             yField: 'expense',
             style: {
-                lineWidth: 2
+                lineWidth: 1
             },
 			marker: {
                 type: 'triangle',
@@ -72,11 +84,7 @@ Ext.define('expensetracker.view.charts.LineChart', {
                     duration: 200,
                     easing: 'backOut'
                 }
-            },
-            label: {
-                field: 'expense',
-                display: 'over'
-            },
+            },            
             highlightCfg: {
                 scaling: 2
             },
@@ -84,8 +92,9 @@ Ext.define('expensetracker.view.charts.LineChart', {
                 trackMouse: true,
                 showDelay: 0,
                 dismissDelay: 0,
-                hideDelay: 0                
+                hideDelay: 0,
+                renderer : 'renderLineChartTooltip'
             }
-        }],
+        }]
 	}]
 });

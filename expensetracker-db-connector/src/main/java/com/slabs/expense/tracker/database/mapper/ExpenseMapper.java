@@ -35,6 +35,9 @@ public interface ExpenseMapper {
 	public List<Graph> getMonthWiseTotalExpense(@Param("username") String username,
 			@Param("year") Integer year) throws Exception;
 
+	public List<Graph> getCategoryWiseTotalExpense(@Param("username") String username,
+			@Param("year") Integer year, @Param("month") Integer month) throws Exception;
+
 	public Integer updateExpense(@Param("record") Expense expense) throws Exception;
 
 	public List<Expense> getExpenseById(@Param("id") Integer id) throws Exception;

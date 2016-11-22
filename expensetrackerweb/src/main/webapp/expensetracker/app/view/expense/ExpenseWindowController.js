@@ -145,8 +145,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			success : function(batch) {
 				grid.setLoading(false);
 				if (model.get('isLatestExpense')) {
-					me.fireEvent('updatesummary');
-					me.fireEvent('updatetopexpense');
+					me.fireEvent('updatedashboard');					
 				}
 				if (closeWindow) {
 					me.getView().close();

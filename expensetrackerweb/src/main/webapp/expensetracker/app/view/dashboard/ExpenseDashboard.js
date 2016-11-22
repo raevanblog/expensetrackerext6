@@ -5,7 +5,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController',
 			'expensetracker.view.dashboard.TopExpense', 'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie',
 			'expensetracker.view.charts.LineChart',
-			'expensetracker.view.income.IncomeWindow', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
+			'expensetracker.view.income.IncomeWindow',
+			'expensetracker.store.Graph',
+			'expensetracker.view.dashboard.ExpenseDashboardModel' ],
 	layout : 'responsivecolumn',
 	controller : 'expensedashboardcontroller',
 	viewModel : 'expensedashboard',
@@ -67,7 +69,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			xtype : 'topexpense',
 			reference : 'topexpense'
 		} ],
-		cls : 'big-33 small-100 dash-panel'
+		cls : 'big-40 small-100 dash-panel'
 	}, {
 		xtype : 'linechart',
 		reference : 'expensevsincome',
@@ -76,6 +78,16 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		iconCls : 'x-fa fa-line-chart',
 		listeners : {
 			afterrender : 'onRenderExpenseVsIncome'
+		},
+		cls : 'big-100 small-100 dash-panel'
+	},{
+		xtype : 'expensechart',
+		reference : 'categorychartpanel',
+		title : 'Expense',
+		height : 400,
+		iconCls : 'x-fa fa-line-chart',
+		listeners : {
+			afterrender : 'onRenderCategoryExpense'
 		},
 		cls : 'big-100 small-100 dash-panel'
 	} ]

@@ -102,7 +102,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 			success : function(batch) {
 				grid.setLoading(false);
 				if (model.get('isLatestIncome')) {
-					me.fireEvent('updatesummary');
+					me.fireEvent('updatedashboard');
 				}
 				if (closeWindow) {
 					me.getView().close();

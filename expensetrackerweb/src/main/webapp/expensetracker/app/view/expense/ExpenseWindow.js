@@ -50,6 +50,6 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 				iconCls : 'x-fa fa-plus-square',
 				handler : 'onAddCategory'
 			} ]
-		}],		
+		}]	
 	} ]
 });
