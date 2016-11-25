@@ -14,15 +14,19 @@ Ext.define('expensetracker.Application', {
 			'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox', 'Ext.form.Panel', 'Ext.form.field.Text',
 			'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.form.field.Display', 'Ext.plugin.Viewport',
 			'Ext.form.field.TextArea', 'Ext.form.FieldContainer', 'expensetracker.util.Calendar', 'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category',
-			'Ext.chart.series.Bar', 'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line', 'Ext.chart.interactions.PanZoom'],
+			'Ext.chart.series.Bar', 'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line', 'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border'],
 	defaultToken : 'login',
-	launch : function() {
+	init : function() {
+		Ext.getBody().mask('Loading Expense Tracker....');
+	},
+	launch : function() {		
 		var me = this;	
 		expensetracker.util.Calendar.init();
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getSession(),
 
 			success : function(response, opts) {
+				Ext.getBody().unmask();
 				var response = Ext.decode(response.responseText);
 				if (response.success) {
 					expensetracker.util.Session.setUser(response.user);
@@ -38,7 +42,7 @@ Ext.define('expensetracker.Application', {
 
 			},
 			failure : function(response, opts) {
-				Ext.widget('app-main');
+				expensetracker.util.Message.toast('Server Error. Please contact customer support...');
 			}
 		});
 	},
