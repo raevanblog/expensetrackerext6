@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import com.slabs.expense.tracker.common.db.column.Column;
 import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
-import com.slabs.expense.tracker.database.mapper.IncomeMapper;
-import com.slabs.expense.tracker.database.mapper.UserMapper;
+import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.database.mapper.IncomeDAO;
+import com.slabs.expense.tracker.database.mapper.UserDAO;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
@@ -29,13 +29,13 @@ import net.sf.dynamicreports.report.builder.DynamicReports;
 public class ReportingService {
 
 	@Autowired
-	private ExpenseMapper eMapper;
+	private ExpenseDAO eDao;
 
 	@Autowired
-	private IncomeMapper iMapper;
+	private IncomeDAO iDao;
 
 	@Autowired
-	private UserMapper uMapper;
+	private UserDAO uMapper;
 
 	/**
 	 * This method will return {@link JasperReportBuilder} if the User exists
@@ -57,7 +57,7 @@ public class ReportingService {
 			throws Exception {
 		List<UserInfo> info = uMapper.getUser(username, Boolean.FALSE);
 		if (info != null && !info.isEmpty()) {
-			List<Expense> expenses = eMapper.getExpense(username, year, month);
+			List<Expense> expenses = eDao.getExpense(username, year, month);
 
 			MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0),
 					Month.getMonth(month), year, CurrencyType.DOLLAR);

@@ -10,7 +10,9 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		iconCls : 'x-fa fa-save',
 		handler : 'onCategorySaveOrUpdate'
 	} ],
-	store : 'ExpenseCategory',
+	listeners : {
+		afterrender : 'onRenderCategoryGrid'
+	},
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1

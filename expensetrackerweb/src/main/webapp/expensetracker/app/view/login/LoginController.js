@@ -45,8 +45,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		}
 	},
 	loadApplicationStore : function() {
-		Ext.getStore('ExpenseDock').load();
-		Ext.getStore('ExpenseCategory').load();
+		Ext.getStore('ExpenseDock').load();		
 		Ext.getStore('ExpenseType').load();
 		Ext.getStore('ExpenseName').load();
 		Ext.getStore('IncomeType').load();

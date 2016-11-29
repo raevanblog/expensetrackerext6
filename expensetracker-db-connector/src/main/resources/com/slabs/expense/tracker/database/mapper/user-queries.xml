@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.slabs.expense.tracker.database.mapper.UserMapper">
+<mapper namespace="com.slabs.expense.tracker.database.mapper.UserDAO">
 
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
@@ -60,5 +60,85 @@
 	<delete id="deleteUser">
 		delete from EXPENSETRACKER.USERINFO where username=#{record.username}
 	</delete>
+
+	<insert id="insertUserFeature" parameterType="com.slabs.expense.tracker.common.db.entity.UserFeature">
+		insert into EXPENSETRACKER.USER_FEATURE(USERNAME, ISADMIN, ISVERIFIED, ISFTLOGIN, ISLOCKED)
+		values(
+		#{record.username},
+		#{record.isAdmin},
+		#{record.isVerified},
+		#{record.isFtLogin},
+		#{record.isLocked}
+		)
+	</insert>
+
+	<update id="updateUserFeature" parameterType="com.slabs.expense.tracker.common.db.entity.UserFeature">
+		update EXPENSETRACKER.USER_FEATURE
+		<set>
+			<if test="record.isAdmin != null">
+				isAdmin=#{record.isAdmin},
+			</if>
+			<if test="record.isVerified != null">
+				isVerified=#{record.isVerified},
+			</if>
+			<if test="record.isFtLogin != null">
+				isFtLogin=#{record.isFtLogin},
+			</if>
+			<if test="record.isLocked != null">
+				isLocked=#{record.isLocked},
+			</if>
+		</set>
+		where username=#{record.username}
+	</update>
+
+	<delete id="deleteUserFeature">
+		delete from EXPENSETRACKER.USER_FEATURE where username=#{username}
+	</delete>
+
+	<select id="getUserFeature" resultType="com.slabs.expense.tracker.common.db.entity.UserFeature">
+		select * from EXPENSETRACKER.USER_FEATURE where username=#{username}
+	</select>
+
+	<insert id="insertMessage" parameterType="java.util.List">
+		insert into EXPENSETRACKER.MESSAGE(USERNAME, MSGFROM, SUBJECT, MESSAGE, ISNEW) values
+		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.username},
+			#{record.msgfrom},
+			#{record.subject},
+			#{record.message},
+			#{record.isNew}
+		</foreach>
+	</insert>
+
+	<update id="updateMessage" parameterType="com.slabs.expense.tracker.common.db.entity.Message">
+		update EXPENSETRACKER.MESSAGE
+		<set>
+			<if test="record.subject != null">
+				subject=#{record.subject},
+			</if>
+			<if test="record.message != null">
+				message=#{record.message},
+			</if>
+			<if test="record.msgfrom != null">
+				msgfrom=#{record.msgfrom},
+			</if>
+			<if test="record.msgfrom != null">
+				isnew=#{record.isNew},
+			</if>
+		</set>
+		where username=#{record.username}
+	</update>
+
+	<delete id="deleteMessage">
+		delete from EXPENSETRACKER.MESSAGE
+		where id=#{record.id}
+		<if test="isDeleteOldMsg">
+			and isNew = 'N'
+		</if>
+	</delete>
+
+	<select id="getMessage" resultType="com.slabs.expense.tracker.common.db.entity.Message">
+		select * from EXPENSETRACKER.MESSAGE where username=#{username}
+	</select>
 
 </mapper>

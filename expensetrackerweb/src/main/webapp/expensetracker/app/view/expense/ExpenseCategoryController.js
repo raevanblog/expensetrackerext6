@@ -1,6 +1,28 @@
 Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.expensecategorycontroller',
+	onRenderCategoryGrid : function(grid) {
+		var me = this;
+		var store = Ext.create('expensetracker.store.ExpenseCategory');
+		grid.setLoading('Loading...');
+		store.load({
+			params : {
+				username : expensetracker.util.Session.getUsername()
+			},
+			callback : function(records, operation, success) {
+				grid.setLoading(false);
+				if (!success) {
+					var response = Ext.JSON.decode(operation.getError().response.responseText);
+					expensetracker.util.Message.toast(response.status_Message);
+					if (401 === response.status_Code) {
+						me.getView().close();
+						me.fireEvent('navigatelogin');
+					}
+				}
+			}
+		});
+		grid.bindStore(store);
+	},
 	onCategorySaveOrUpdate : function(saveCategoryBtn) {
 		var me = this;
 		var categorygrid = me.getView();
@@ -79,7 +101,8 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 		var store = categoryGrid.getStore();
 		var model = new expensetracker.model.ExpenseCategory({
 			category : 'New Category',
-			description : ''
+			description : '',
+			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);
 		me.refreshGridView(categoryGrid);

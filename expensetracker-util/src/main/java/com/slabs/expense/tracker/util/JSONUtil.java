@@ -25,7 +25,6 @@ public class JSONUtil {
 	 * @throws IOException
 	 *             throws {@link IOException}
 	 */
-	@SuppressWarnings("unchecked")
 	public static String getJSONString(Object object) throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();

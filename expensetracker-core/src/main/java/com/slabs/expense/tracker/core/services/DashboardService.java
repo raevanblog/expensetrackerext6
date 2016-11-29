@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.slabs.expense.tracker.common.db.entity.Dashboard;
 import com.slabs.expense.tracker.common.db.entity.Summary;
-import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
-import com.slabs.expense.tracker.database.mapper.IncomeMapper;
+import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.database.mapper.IncomeDAO;
 
 /**
  * {@link DashboardService} provides API's for retrieving data for Expense
@@ -19,10 +19,10 @@ import com.slabs.expense.tracker.database.mapper.IncomeMapper;
 public class DashboardService {
 
 	@Autowired
-	private ExpenseMapper eMapper;
+	private ExpenseDAO eMapper;
 
 	@Autowired
-	private IncomeMapper iMapper;
+	private IncomeDAO iMapper;
 
 	/**
 	 * 

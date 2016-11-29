@@ -20,6 +20,7 @@ import com.slabs.expense.tracker.core.ResponseGenerator;
 import com.slabs.expense.tracker.core.ResponseStatus;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
+import com.slabs.expense.tracker.core.services.AdminService;
 import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.core.services.UserService;
 import com.slabs.expense.tracker.webservice.response.Operation;
@@ -125,9 +126,9 @@ public class UserWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteUser(List<UserInfo> records) throws ExpenseTrackerException {
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
-			return ResponseGenerator.getSuccessResponse(service.delete(records), Operation.DELETE);
+			AdminService service = ServiceFactory.getInstance().getService(Services.ADMIN_SERVICE,
+					AdminService.class);
+			return ResponseGenerator.getSuccessResponse(service.deleteUser(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);

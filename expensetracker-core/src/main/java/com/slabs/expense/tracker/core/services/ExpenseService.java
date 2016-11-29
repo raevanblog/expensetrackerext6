@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
 import com.slabs.expense.tracker.common.db.entity.Graph;
-import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
+import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
 
 /**
  * {@link ExpenseService} provides API for INSERT,SELECT,UPDATE, DELETE on
@@ -25,7 +25,7 @@ import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 public class ExpenseService {
 
 	@Autowired
-	private ExpenseMapper mapper;
+	private ExpenseDAO mapper;
 
 	/**
 	 * 

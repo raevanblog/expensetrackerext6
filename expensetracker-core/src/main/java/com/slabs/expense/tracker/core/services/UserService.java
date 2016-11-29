@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.slabs.expense.tracker.common.db.entity.Message;
+import com.slabs.expense.tracker.common.db.entity.UserFeature;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.database.mapper.UserMapper;
+import com.slabs.expense.tracker.database.mapper.UserDAO;
 
 /**
  * {@link UserService} provides API for INSERT, DELETE, UPDATE, SELECT on
@@ -22,7 +24,7 @@ import com.slabs.expense.tracker.database.mapper.UserMapper;
 public class UserService {
 
 	@Autowired
-	private UserMapper mapper;
+	private UserDAO dao;
 
 	/**
 	 * 
@@ -36,7 +38,7 @@ public class UserService {
 	 *             throws {@link Exception}
 	 */
 	public List<UserInfo> select(String username, boolean includePassword) throws Exception {
-		return mapper.getUser(username, includePassword);
+		return dao.getUser(username, includePassword);
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class UserService {
 	 *             throws {@link Exception}
 	 */
 	public Boolean isUserNameAvailable(String username) throws Exception {
-		List<UserInfo> list = mapper.getUser(username, Boolean.FALSE);
+		List<UserInfo> list = dao.getUser(username, Boolean.FALSE);
 		if (list != null && list.isEmpty()) {
 			return true;
 		}
@@ -65,7 +67,7 @@ public class UserService {
 	 *             throws {@link Exception}
 	 */
 	public List<UserInfo> selectAll(boolean includePassword) throws Exception {
-		return mapper.getUser(null, includePassword);
+		return dao.getUser(null, includePassword);
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class UserService {
 	 *             throws {@link Exception}
 	 */
 	public Integer update(UserInfo record) throws Exception {
-		return mapper.updateUser(record);
+		return dao.updateUser(record);
 	}
 
 	/**
@@ -89,23 +91,55 @@ public class UserService {
 	 *             throws {@link Exception}
 	 */
 	public Integer create(UserInfo record) throws Exception {
-		return mapper.createUser(record);
+		return dao.createUser(record);
 	}
 
 	/**
 	 * 
-	 * @param records
-	 *            {@link UserInfo} - List of user records to DELETE
-	 * @return {@link Integer} - No of records deleted
+	 * @param feature
+	 *            {@link UserFeature} - Record to insert
+	 * @return {@link Integer} - No of records inserted
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer delete(List<UserInfo> records) throws Exception {
-		int noOfRecords = 0;
-		for (UserInfo record : records) {
-			noOfRecords = noOfRecords + mapper.deleteUser(record);
-		}
-		return noOfRecords;
+	public Integer insertFeature(UserFeature feature) throws Exception {
+		return dao.insertUserFeature(feature);
+	}
+
+	/**
+	 * 
+	 * @param feature
+	 *            {@link UserFeature} - Record to update
+	 * @return {@link Integer} - No of records updated
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public Integer updateFeature(UserFeature feature) throws Exception {
+		return dao.updateUserFeature(feature);
+	}
+
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @return {@link UserFeature} - Feature record for the user
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public UserFeature getFeature(String username) throws Exception {
+		return dao.getUserFeature(username);
+	}
+
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @return {@link Message} - List of Message records
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public List<Message> getMessages(String username) throws Exception {
+		return dao.getMessage(username);
 	}
 
 }

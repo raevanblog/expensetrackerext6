@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.slabs.expense.tracker.common.db.entity.ExpenseType;
-import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
+import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
 
 /**
  * {@link ExpenseTypeService} provides API for INSERT, DELETE, UPDATE, SELECT on
@@ -19,7 +19,7 @@ import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 public class ExpenseTypeService {
 
 	@Autowired
-	private ExpenseMapper mapper;
+	private ExpenseDAO mapper;
 
 	/**
 	 * 

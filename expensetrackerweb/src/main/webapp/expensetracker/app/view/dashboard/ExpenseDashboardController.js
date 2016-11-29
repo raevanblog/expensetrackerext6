@@ -85,7 +85,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		tooltip.setHtml(value + ' %');
 	},
 	onXAxisRenderer	: function(axis, label, context) {
-		var month = expensetracker.util.Calendar.getShortName(label);
+		var month = expensetracker.util.Calendar.getName(label);
 		return context.renderer(month);
 	},
 	updateDashBoardSummary : function() {
@@ -151,14 +151,21 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	updateExpVsIncomeChart : function() {
 		var me = this;
 		var expvsincome = me.lookup('expensevsincome');
-		var linechart = expvsincome.down('[itemId=lineChart]');
+		var linechart = expvsincome.down('[itemId=linechart]');
 		linechart.getStore().reload();
+	},
+	updateExpenseChart : function() {
+		var me = this;
+		var categoryexpense = me.lookup('categorychartpanel');
+		var expensechart = categoryexpense.down('[itemId=expensechart]');
+		expensechart.getStore().reload();
 	},
 	updateDashBoard : function() {
 		var me = this; 
 		me.updateTopExpense();
 		me.updateDashBoardSummary();
 		me.updateExpVsIncomeChart();
+		me.updateExpenseChart();
 	},
 	onRenderExpenseVsIncome : function(panel) {
 		var me = this;

@@ -89,8 +89,8 @@ public class ExpenseWebService {
 
 	/**
 	 * 
-	 * @param categoryId
-	 *            {@link Integer} - Category Id
+	 * @param username
+	 *            {@link String} - Username of the User
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
 	 * @throws ExpenseTrackerException
 	 *             throws {@link ExpenseTrackerException}
@@ -98,13 +98,12 @@ public class ExpenseWebService {
 	@Path("expensecategory/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseCategory(@QueryParam("categoryId") Integer categoryId)
+	public Response getExpenseCategory(@QueryParam("username") String username)
 			throws ExpenseTrackerException {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance()
 					.getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
-			return ResponseGenerator.getSuccessResponse(service.select(categoryId),
-					Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.select(username), Operation.SELECT);
 
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);

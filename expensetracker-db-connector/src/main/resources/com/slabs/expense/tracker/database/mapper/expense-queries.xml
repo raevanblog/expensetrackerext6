@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.slabs.expense.tracker.database.mapper.ExpenseMapper">
+<mapper namespace="com.slabs.expense.tracker.database.mapper.ExpenseDAO">
 
 	<insert id="insertExpense" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
@@ -115,10 +115,11 @@
 	</delete>
 
 	<insert id="insertExpenseCategory" parameterType="java.util.List">
-		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION) values
+		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION,USERNAME) values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.category},
-			#{record.description}
+			#{record.description},
+			#{record.username}
 		</foreach>
 	</insert>
 
@@ -137,11 +138,8 @@
 
 	</update>
 
-	<select id="retrieveExpenseCategory" parameterType="int" resultType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
-		select * from EXPENSETRACKER.EXPENSE_CATEGORY
-		<if test="categoryId != null">
-			where categoryId = #{categoryId}
-		</if>
+	<select id="retrieveExpenseCategory" resultType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
+		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username=#{username}		
 	</select>
 
 	<delete id="deleteExpenseCategory">

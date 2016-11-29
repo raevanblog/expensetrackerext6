@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
-import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
+import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
 
 /**
  * {@link ExpenseCategory} provides API for INSERT, UPDATE, DELETE, SELECT on
@@ -22,7 +22,7 @@ import com.slabs.expense.tracker.database.mapper.ExpenseMapper;
 public class ExpenseCategoryService {
 
 	@Autowired
-	private ExpenseMapper mapper;
+	private ExpenseDAO mapper;
 
 	/**
 	 * 
@@ -56,14 +56,14 @@ public class ExpenseCategoryService {
 
 	/**
 	 * 
-	 * @param categoryId
-	 *            {@link Integer} - Category Id to SELECT
+	 * @param username
+	 *            {@link String} - Username of the user
 	 * @return {@link ExpenseCategory} - List of Expense Category records
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<ExpenseCategory> select(Integer categoryId) throws Exception {
-		return mapper.retrieveExpenseCategory(categoryId);
+	public List<ExpenseCategory> select(String username) throws Exception {
+		return mapper.retrieveExpenseCategory(username);
 	}
 
 	/**

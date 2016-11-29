@@ -8,7 +8,7 @@ Ext.define('expensetracker.Application', {
 
 	name : 'expensetracker',
 
-	stores : [ 'ExpenseDock', 'ExpenseCategory', 'ExpenseType', 'ExpenseName', 'Expense', 'IncomeType' ],
+	stores : [ 'ExpenseDock', 'ExpenseType', 'ExpenseName', 'Expense', 'IncomeType' ],
 
 	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Constants', 'expensetracker.util.Session', 'expensetracker.view.login.Login', 'expensetracker.util.Message', 'expensetracker.view.main.Main',
 			'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox', 'Ext.form.Panel', 'Ext.form.field.Text',
@@ -56,8 +56,7 @@ Ext.define('expensetracker.Application', {
 	},
 
 	loadApplicationStore : function() {
-		Ext.getStore('ExpenseDock').load();
-		Ext.getStore('ExpenseCategory').load();
+		Ext.getStore('ExpenseDock').load();		
 		Ext.getStore('ExpenseType').load();
 		Ext.getStore('ExpenseName').load();
 		Ext.getStore('IncomeType').load();

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.db.entity.Graph;
 import com.slabs.expense.tracker.common.db.entity.Income;
 import com.slabs.expense.tracker.common.db.entity.IncomeType;
-import com.slabs.expense.tracker.database.mapper.IncomeMapper;
+import com.slabs.expense.tracker.database.mapper.IncomeDAO;
 
 /**
  * {@link IncomeService} provides API for INSERT, DELETE, UPDATE, SELECT on
@@ -25,7 +25,7 @@ import com.slabs.expense.tracker.database.mapper.IncomeMapper;
 public class IncomeService {
 
 	@Autowired
-	private IncomeMapper mapper;
+	private IncomeDAO mapper;
 
 	/**
 	 * 

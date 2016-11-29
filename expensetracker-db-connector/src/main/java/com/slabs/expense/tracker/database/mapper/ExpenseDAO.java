@@ -13,13 +13,13 @@ import com.slabs.expense.tracker.common.db.entity.ExpenseType;
 import com.slabs.expense.tracker.common.db.entity.Graph;
 
 /**
- * {@link ExpenseMapper} is an interface providing mapper methods for executing
+ * {@link ExpenseDAO} is an interface providing mapper methods for executing
  * query using MyBatis
  * 
  * @author Shyam Natarajan
  *
  */
-public interface ExpenseMapper {
+public interface ExpenseDAO {
 
 	public Integer insertExpense(@Param("records") List<Expense> records) throws Exception;
 
@@ -51,7 +51,7 @@ public interface ExpenseMapper {
 
 	public Integer updateExpenseCategory(@Param("record") ExpenseCategory record) throws Exception;
 
-	public List<ExpenseCategory> retrieveExpenseCategory(@Param("categoryId") Integer categoryId)
+	public List<ExpenseCategory> retrieveExpenseCategory(@Param("username") String username)
 			throws Exception;
 
 	public Integer deleteExpenseCategory(@Param("record") ExpenseCategory record) throws Exception;

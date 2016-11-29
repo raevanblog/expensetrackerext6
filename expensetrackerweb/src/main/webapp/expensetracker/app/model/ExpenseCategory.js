@@ -11,6 +11,9 @@ Ext.define('expensetracker.model.ExpenseCategory', {
 	}, {
 		name : 'description',
 		type : 'string'
+	}, {
+		name : 'username',
+		type : 'string'		
 	} ],
 	validators : {
 		category : {
