@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.slabs.expense.tracker.common.db.entity.Feature;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.services.EmailService;
@@ -210,9 +209,8 @@ public class AccessController {
 			List<UserInfo> info = service.select(username, false);
 
 			if (info != null && !info.isEmpty()) {
-				UserInfo user = info.get(0);
-				Feature f = user.getFeature();
-				if (f.getActivationKey().equals(activationKey)) {
+				UserInfo user = info.get(0);				
+				if (user.getActivationKey().equals(activationKey)) {
 					output.put(WebConstants.SUCCESS, Boolean.TRUE);
 					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_SUCCESSFUL);
 					emailService.sendRegSuccessMail(user);

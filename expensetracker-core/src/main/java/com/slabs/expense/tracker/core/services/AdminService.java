@@ -18,17 +18,6 @@ public class AdminService {
 	@Autowired
 	private UserDAO dao;
 
-	/**
-	 * 
-	 * @param username
-	 *            {@link String} - Username of the user
-	 * @return {@link Integer} - No of records deleted
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	public Integer deleteFeature(String username) throws Exception {
-		return dao.deleteUserFeature(username);
-	}
 
 	/**
 	 * 

@@ -24,12 +24,7 @@ Ext.define('expensetracker.view.profile.UserController', {
 					refs.sex.setValue(user.sex);
 					refs.email.setValue(user.email);
 					refs.mobile.setValue(user.mobile);
-					refs.address.setValue(user.address);
-					if ('M' === user.sex) {
-						refs.profileimage.setSrc('resources/images/male-profile.png');
-					} else if ('F' === user.sex) {
-						refs.profileimage.setSrc('resources/images/female-profile.png');
-					}
+					refs.address.setValue(user.address);					
 				}
 			},
 			failure : function(response, opts) {

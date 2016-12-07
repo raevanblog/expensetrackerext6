@@ -4,8 +4,7 @@
 	elementFormDefault="qualified">
 
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
-	<element name="UserInfo" type="et:UserInfo" />
-	<element name="Feature" type="et:Feature" />
+	<element name="UserInfo" type="et:UserInfo" />	
 	<element name="Expense" type="et:Expense" />
 	<element name="ExpenseType" type="et:ExpenseType" />
 	<element name="Income" type="et:Income" />
@@ -73,25 +72,6 @@
 			<element name="email" type="string" />
 			<element name="mobile" type="string" />
 			<element name="address" type="string" />
-			<element name="feature" type="et:Feature" maxOccurs="1" />
-		</sequence>
-	</complexType>
-
-	<complexType name="Feature">
-		<annotation>
-			<documentation source="https://raevanblog.blogspot.in/">
-				Schema: EXPENSETRACKER
-				Table: FEATURE
-				UserPermission will hold the data for table FEATURE
-			</documentation>
-			<appinfo>
-				<annox:annotate>
-					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
-				</annox:annotate>
-			</appinfo>
-		</annotation>
-		<sequence>
-			<element name="username" type="string" />
 			<element name="isAdmin" type="string" default="N" />
 			<element name="isVerified" type="string" default="N" />
 			<element name="isFtLogin" type="string" default="Y" />
@@ -99,8 +79,7 @@
 			<element name="activationKey" type="string" />
 		</sequence>
 	</complexType>
-
-
+	
 	<complexType name="ExpenseCategory">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">

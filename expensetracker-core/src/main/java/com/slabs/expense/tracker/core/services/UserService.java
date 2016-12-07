@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.Message;
-import com.slabs.expense.tracker.common.db.entity.Feature;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.database.mapper.UserDAO;
 
@@ -92,54 +91,7 @@ public class UserService {
 	 */
 	public Integer create(UserInfo record) throws Exception {
 		int noOfRecords = dao.createUser(record);
-
-		if (noOfRecords != 0) {
-			Feature f = new Feature();
-			f.setUsername(record.getUsername());
-			f.setIsFtLogin("Y");
-			f.setIsAdmin("N");
-			f.setIsVerified("N");
-			f.setIsLocked("N");
-			insertFeature(f);
-		}
-
 		return noOfRecords;
-	}
-
-	/**
-	 * 
-	 * @param feature
-	 *            {@link UserFeature} - Record to insert
-	 * @return {@link Integer} - No of records inserted
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	public Integer insertFeature(Feature feature) throws Exception {
-		return dao.insertUserFeature(feature);
-	}
-
-	/**
-	 * 
-	 * @param feature
-	 *            {@link UserFeature} - Record to update
-	 * @return {@link Integer} - No of records updated
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	public Integer updateFeature(Feature feature) throws Exception {
-		return dao.updateUserFeature(feature);
-	}
-
-	/**
-	 * 
-	 * @param username
-	 *            {@link String} - Username of the user
-	 * @return {@link UserFeature} - Feature record for the user
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	public Feature getFeature(String username) throws Exception {
-		return dao.getUserFeature(username);
 	}
 
 	/**

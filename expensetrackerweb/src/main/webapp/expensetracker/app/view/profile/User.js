@@ -1,16 +1,16 @@
 Ext.define('expensetracker.view.profile.User', {
 	extend : 'Ext.window.Window',
-	alias : 'view.profile',	
+	alias : 'view.profile',
 	requires : [ 'expensetracker.view.profile.UserController', 'Ext.form.field.VTypes' ],
 	xtype : 'profile',
 	resizable : false,
 	bodyPadding : 10,
 	title : 'User Profile',
-	layout : 'fit',	
+	layout : 'fit',
 	controller : 'user',
 	listeners : {
 		afterrender : 'onProfileRender'
-	},	
+	},
 	items : [ {
 		xtype : 'form',
 		scrollable : 'y',
@@ -19,52 +19,56 @@ Ext.define('expensetracker.view.profile.User', {
 		reference : 'profileform',
 		layout : 'anchor',
 		items : [ {
-			xtype : 'fieldcontainer',
-			layout : {
-				type : 'hbox'
-			},
-			items : [ {
-				xtype : 'image',
-				reference : 'profileimage',
-				alt : 'Profile Image',
-				height : 100,
-				width : 100
-			}, {
-				xtype : 'fieldcontainer',
-				padding : '0 0 0 10',
-				flex : 1,
-				layout : {
-					type : 'vbox',
-					align : 'stretch'
-				},
-				items : [ {
-					xtype : 'displayfield',
-					fieldLabel : 'Username',
-					reference : 'userName',
-					name : 'username',
-					labelSeparator : ''
-				}, {
-					xtype : 'textfield',
-					fieldLabel : 'First Name',
-					reference : 'firstName',
-					allowBlank : false,
-					allowBlank : false,
-					name : 'firstName',
-					emptyText : 'First Name',
-					maxLength : 30,
-					labelSeparator : ''
-				}, {
-					xtype : 'textfield',
-					fieldLabel : 'Last Name',
-					emptyText : 'Last Name',
-					reference : 'lastName',
-					name : 'lastName',
-					allowBlank : false,
-					allowBlank : false,
-					maxLength : 30,
-					labelSeparator : ''
-				} ]
-			} ]
+			xtype: 'image',
+			id: 'profImg',
+			height : 100,
+			width : 100
+		},{
+			xtype: 'fileuploadfield',
+			buttonText : 'Select',
+			fieldLabel : 'Photo',
+			anchor : '100%',
+			listeners : {
+				change : function(field) {
+					var value = field.getEl().down('input[type=file]').dom.files[0];;
+					var reader = new FileReader();
+					reader.addEventListener("load", function () {
+						Ext.getCmp('profImg').setSrc(reader.result);
+					}, false);
+					
+					reader.readAsDataURL(value);
+
+				}
+			}
+		},{
+			xtype : 'displayfield',
+			fieldLabel : 'Username',
+			reference : 'userName',
+			name : 'username',
+			anchor : '100%',
+			labelSeparator : ''
+		}, {
+			xtype : 'textfield',
+			fieldLabel : 'First Name',
+			reference : 'firstName',
+			allowBlank : false,
+			allowBlank : false,
+			name : 'firstName',
+			emptyText : 'First Name',
+			maxLength : 30,
+			anchor : '100%',
+			labelSeparator : ''
+		}, {
+			xtype : 'textfield',
+			fieldLabel : 'Last Name',
+			emptyText : 'Last Name',
+			reference : 'lastName',
+			name : 'lastName',
+			allowBlank : false,
+			allowBlank : false,
+			maxLength : 30,
+			anchor : '100%',
+			labelSeparator : ''
 		}, {
 			xtype : 'combobox',
 			fieldLabel : 'Sex',
