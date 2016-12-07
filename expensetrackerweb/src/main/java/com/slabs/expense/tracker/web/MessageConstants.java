@@ -2,7 +2,9 @@ package com.slabs.expense.tracker.web;
 
 public class MessageConstants {
 
-	public static final String EXCEPTION = "* Exception occurred, please contact customer support";
+	public static final String CONTACT_SUPPORT = "Please contact customer support, mail to : raevanblog@gmail.com";
+
+	public static final String EXCEPTION = "* Exception occurred." + CONTACT_SUPPORT;
 
 	public static final String CHECK_USRNME_PWD = "* Please check your username/password";
 
@@ -24,5 +26,11 @@ public class MessageConstants {
 
 	public static final String USER_REGISTERED = "User registered successfully";
 
-	public static final String USER_NOT_REGISTERED = "User registration failed. Please contact customer support";
+	public static final String USER_NOT_REGISTERED = "User registration failed." + CONTACT_SUPPORT;
+
+	public static final String ACTIVATION_SUCCESSFUL = "Your account is activated sucessfully. Now you can start using Expense Tracker";
+
+	public static final String ACTIVATION_FAILED = "Activation failed." + CONTACT_SUPPORT;
+
+	public static final String USER_NOT_FOUND = "We are unable to verify your username." + CONTACT_SUPPORT;
 }

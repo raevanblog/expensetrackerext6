@@ -8,6 +8,7 @@
 Ext.define('expensetracker.view.main.MainController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.main',
+	lastView : null,
 	listen : {
 		controller : {
 			'#' : {
@@ -27,7 +28,6 @@ Ext.define('expensetracker.view.main.MainController', {
 	onRouteChange : function(id) {
 		this.setCurrentView(id);
 	},
-	lastView : null,
 	setCurrentView : function(hashTag) {
 		var me = this;
 		var hashTag = (hashTag || '').toLowerCase();

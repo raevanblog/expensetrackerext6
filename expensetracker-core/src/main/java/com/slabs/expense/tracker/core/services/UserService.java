@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.Message;
-import com.slabs.expense.tracker.common.db.entity.UserFeature;
+import com.slabs.expense.tracker.common.db.entity.Feature;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.database.mapper.UserDAO;
 
@@ -91,7 +91,19 @@ public class UserService {
 	 *             throws {@link Exception}
 	 */
 	public Integer create(UserInfo record) throws Exception {
-		return dao.createUser(record);
+		int noOfRecords = dao.createUser(record);
+
+		if (noOfRecords != 0) {
+			Feature f = new Feature();
+			f.setUsername(record.getUsername());
+			f.setIsFtLogin("Y");
+			f.setIsAdmin("N");
+			f.setIsVerified("N");
+			f.setIsLocked("N");
+			insertFeature(f);
+		}
+
+		return noOfRecords;
 	}
 
 	/**
@@ -102,7 +114,7 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer insertFeature(UserFeature feature) throws Exception {
+	public Integer insertFeature(Feature feature) throws Exception {
 		return dao.insertUserFeature(feature);
 	}
 
@@ -114,7 +126,7 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer updateFeature(UserFeature feature) throws Exception {
+	public Integer updateFeature(Feature feature) throws Exception {
 		return dao.updateUserFeature(feature);
 	}
 
@@ -126,7 +138,7 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public UserFeature getFeature(String username) throws Exception {
+	public Feature getFeature(String username) throws Exception {
 		return dao.getUserFeature(username);
 	}
 

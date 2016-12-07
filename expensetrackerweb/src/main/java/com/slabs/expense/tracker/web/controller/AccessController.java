@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.slabs.expense.tracker.common.db.entity.Feature;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.core.services.EmailService;
 import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.core.services.UserService;
 import com.slabs.expense.tracker.util.Base64Encoder;
@@ -34,10 +36,8 @@ public class AccessController {
 	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
-			Map<String, String> parameters = JSONUtil
-					.getMapFromInputStream(request.getInputStream());
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			Map<String, String> parameters = JSONUtil.getMapFromInputStream(request.getInputStream());
 			String[] credentials = Base64Encoder.decode(parameters.get("credential"), ":");
 			List<UserInfo> users = service.select(credentials[0], Boolean.TRUE);
 			if (users != null && !users.isEmpty()) {
@@ -111,20 +111,18 @@ public class AccessController {
 	}
 
 	@RequestMapping(value = "session/reload", method = { RequestMethod.GET })
-	public ModelAndView reloadSessionData(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView reloadSessionData(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
 			HttpSession session = request.getSession(Boolean.FALSE);
 			if (session != null) {
-				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-						UserService.class);				
+				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
 				List<UserInfo> list = service.select(user.getUsername(), Boolean.FALSE);
-				if(list != null && !list.isEmpty()) {
+				if (list != null && !list.isEmpty()) {
 					user = list.get(0);
 					session.removeAttribute(WebConstants.LOGGED_IN_USER);
-					session.setAttribute(WebConstants.LOGGED_IN_USER, user);					
+					session.setAttribute(WebConstants.LOGGED_IN_USER, user);
 				}
 				output.put(WebConstants.SUCCESS, Boolean.TRUE);
 				output.put(WebConstants.MESSAGE, MessageConstants.SESSION_ACTIVE);
@@ -146,12 +144,10 @@ public class AccessController {
 	}
 
 	@RequestMapping(value = "username", method = { RequestMethod.GET })
-	public ModelAndView isUserNameAvailable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView isUserNameAvailable(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 
 			String username = request.getParameter("checkAvailable");
 			Boolean availability = service.isUserNameAvailable(username);
@@ -177,17 +173,56 @@ public class AccessController {
 	public ModelAndView register(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
 			UserInfo user = JSONUtil.getObjectFromJSON(request.getInputStream(), UserInfo.class);
 			Integer isCreated = service.create(user);
 			output.put(WebConstants.SUCCESS, Boolean.TRUE);
 			if (isCreated > 0) {
+				emailService.sendActivationEmail(user);
 				output.put(WebConstants.IS_USER_REGISTERED, Boolean.TRUE);
 				output.put(WebConstants.MESSAGE, MessageConstants.USER_REGISTERED);
 			} else {
 				output.put(WebConstants.IS_USER_REGISTERED, Boolean.FALSE);
 				output.put(WebConstants.MESSAGE, MessageConstants.USER_NOT_REGISTERED);
+			}
+
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			output.put(WebConstants.SUCCESS, Boolean.FALSE);
+			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
+			return new ModelAndView(WebConstants.JSON, output);
+		}
+		return new ModelAndView(WebConstants.JSON, output);
+	}
+
+	@RequestMapping(value = "user/activate", method = { RequestMethod.POST })
+	public ModelAndView activateUser(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> output = new HashMap<String, Object>();
+		try {
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
+
+			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
+			String activationKey = map.get("activationkey");
+			String username = map.get("username");
+
+			List<UserInfo> info = service.select(username, false);
+
+			if (info != null && !info.isEmpty()) {
+				UserInfo user = info.get(0);
+				Feature f = user.getFeature();
+				if (f.getActivationKey().equals(activationKey)) {
+					output.put(WebConstants.SUCCESS, Boolean.TRUE);
+					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_SUCCESSFUL);
+					emailService.sendRegSuccessMail(user);
+				} else {
+					output.put(WebConstants.SUCCESS, Boolean.FALSE);
+					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED);
+				}
+			} else {
+				output.put(WebConstants.SUCCESS, Boolean.FALSE);
+				output.put(WebConstants.MESSAGE, MessageConstants.USER_NOT_FOUND);
 			}
 
 		} catch (Exception e) {

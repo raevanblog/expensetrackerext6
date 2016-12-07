@@ -38,15 +38,12 @@ public class AdminWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteUser(List<UserInfo> records) throws ExpenseTrackerException {
 		try {
-			AdminService service = ServiceFactory.getInstance().getService(Services.ADMIN_SERVICE,
-					AdminService.class);
-			return ResponseGenerator.getSuccessResponse(service.deleteUser(records),
-					Operation.DELETE);
+			AdminService service = ServiceFactory.getInstance().getService(Services.ADMIN_SERVICE, AdminService.class);
+			return ResponseGenerator.getSuccessResponse(service.deleteUser(records), Operation.DELETE);
 
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
-
 }

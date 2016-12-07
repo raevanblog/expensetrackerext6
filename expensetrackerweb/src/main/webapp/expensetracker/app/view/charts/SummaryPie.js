@@ -7,9 +7,13 @@ Ext.define('expensetracker.view.charts.SummaryPie', {
 		xtype : 'polar',
 		itemId : 'summaryPolar',
 		theme : 'default-gradients',
-		insetPadding : 20,
-		innerPadding : 10,
+		store : Ext.create('Ext.data.Store'),
+		insetPadding : 10,
+		innerPadding : 20,
 		interactions : [ 'rotate' ],
+		legend : {
+			docked : 'bottom'
+		},
 		series : [ {
 			type : 'pie',
 			angleField : 'value',
@@ -24,7 +28,10 @@ Ext.define('expensetracker.view.charts.SummaryPie', {
 			},
 			tooltip : {
 				trackMouse : true,
-				renderer : 'renderToolTip'
+				renderer : function(tooltip, record, item) {
+					var value = Ext.util.Format.number(record.get('value'), '0.00');
+					tooltip.setHtml(value + ' %');
+				}
 			}
 		} ]
 	} ]

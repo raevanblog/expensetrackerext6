@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.slabs.expense.tracker.database.mapper.UserDAO">
 
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
@@ -46,14 +47,33 @@
 		where username=#{record.username}
 	</update>
 
-	<select id="getUser" resultType="com.slabs.expense.tracker.common.db.entity.UserInfo">
-		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE,ADDRESS
+	<resultMap type="com.slabs.expense.tracker.common.db.entity.UserInfo" id="userMap">
+		<result property="firstName" column="FIRSTNAME" />
+		<result property="lastName" column="LASTNAME" />
+		<result property="sex" column="SEX" />
+		<result property="username" column="USERNAME" />
+		<result property="password" column="PASSWORD" />
+		<result property="email" column="EMAIL" />
+		<result property="mobile" column="MOBILE" />
+		<result property="address" column="ADDRESS" />
+		<association property="feature" javaType="com.slabs.expense.tracker.common.db.entity.Feature">
+			<result property="username" column="USERNAME" />
+			<result property="isAdmin" column="ISADMIN" />
+			<result property="isVerified" column="ISVERIFIED" />
+			<result property="isFtLogin" column="ISFTLOGIN" />
+		</association>
+	</resultMap>
+
+	<select id="getUser" resultMap="userMap">
+		select U.FIRSTNAME, U.LASTNAME, U.SEX, U.USERNAME, U.EMAIL, U.MOBILE, U.ADDRESS, F.ISADMIN, F.ISFTLOGIN, F.ISVERIFIED, F.ISLOCKED
 		<if test="includePassword">
-			,PASSWORD
+			,U.PASSWORD
 		</if>
-		from EXPENSETRACKER.USERINFO
+		from EXPENSETRACKER.USERINFO U
+		LEFT OUTER JOIN EXPENSETRACKER.FEATURE F
+		ON U.USERNAME = F.USERNAME
 		<if test="username != null">
-			where username=#{username}
+			where U.USERNAME=#{username}
 		</if>
 	</select>
 
@@ -61,8 +81,8 @@
 		delete from EXPENSETRACKER.USERINFO where username=#{record.username}
 	</delete>
 
-	<insert id="insertUserFeature" parameterType="com.slabs.expense.tracker.common.db.entity.UserFeature">
-		insert into EXPENSETRACKER.USER_FEATURE(USERNAME, ISADMIN, ISVERIFIED, ISFTLOGIN, ISLOCKED)
+	<insert id="insertUserFeature" parameterType="com.slabs.expense.tracker.common.db.entity.Feature">
+		insert into EXPENSETRACKER.FEATURE(USERNAME, ISADMIN, ISVERIFIED, ISFTLOGIN, ISLOCKED)
 		values(
 		#{record.username},
 		#{record.isAdmin},
@@ -72,8 +92,8 @@
 		)
 	</insert>
 
-	<update id="updateUserFeature" parameterType="com.slabs.expense.tracker.common.db.entity.UserFeature">
-		update EXPENSETRACKER.USER_FEATURE
+	<update id="updateUserFeature" parameterType="com.slabs.expense.tracker.common.db.entity.Feature">
+		update EXPENSETRACKER.FEATURE
 		<set>
 			<if test="record.isAdmin != null">
 				isAdmin=#{record.isAdmin},
@@ -91,12 +111,16 @@
 		where username=#{record.username}
 	</update>
 
+	<update id="setActivationKey">
+		update EXPENSETRACKER.FEATURE set activationKey=#{activationKey} where username=#{username}
+	</update>
+
 	<delete id="deleteUserFeature">
-		delete from EXPENSETRACKER.USER_FEATURE where username=#{username}
+		delete from EXPENSETRACKER.FEATURE where username=#{username}
 	</delete>
 
-	<select id="getUserFeature" resultType="com.slabs.expense.tracker.common.db.entity.UserFeature">
-		select * from EXPENSETRACKER.USER_FEATURE where username=#{username}
+	<select id="getUserFeature" resultType="com.slabs.expense.tracker.common.db.entity.Feature">
+		select * from EXPENSETRACKER.FEATURE where username=#{username}
 	</select>
 
 	<insert id="insertMessage" parameterType="java.util.List">

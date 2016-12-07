@@ -1,6 +1,25 @@
 Ext.define('expensetracker.view.login.LoginController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.login',
+	listen : {
+		controller : {
+			'#' : {
+				unmatchedroute : function(hash) {
+					console.log("Unmatched:" + hash);
+				}
+			}
+		}
+	},
+	routes : {
+		'activate/:vcode' : 'onRouteChange'
+	},
+	onRouteChange : function(id) {
+		console.log('id');
+		this.setCurrentView(id);
+	},
+	setCurrentView : function(hashTag) {
+		console.log(hashTag);
+	},
 	onLogin : function(button) {
 		var me = this;
 		var loginWindow = me.getView();
@@ -45,7 +64,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		}
 	},
 	loadApplicationStore : function() {
-		Ext.getStore('ExpenseDock').load();		
+		Ext.getStore('ExpenseDock').load();
 		Ext.getStore('ExpenseType').load();
 		Ext.getStore('ExpenseName').load();
 		Ext.getStore('IncomeType').load();
@@ -66,15 +85,15 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var pwdTxtField = me.lookup('regPassword');
 		var password = pwdTxtField.getValue();
-		if(newValue !== password) {
-			
+		if (newValue !== password) {
+
 		}
 	},
-	onUserNameChage : function(textfield, newvalue, oldvalue) {	
-		var me = this;		
-		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');	
+	onUserNameChage : function(textfield, newvalue, oldvalue) {
+		var me = this;
+		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');
 		textfield.isChanged = true;
-		if(!newvalue) {
+		if (!newvalue) {
 			usrNmeAvailInd.update('');
 		}
 	},
@@ -82,11 +101,11 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var registercontainer = me.lookup('registercontainer');
 		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');
-		var username = textfield.getValue();		
-		if(textfield.isValid()) {
-			if(textfield.isChanged) {
-				textfield.isChanged=false;			
-				if(username) {
+		var username = textfield.getValue();
+		if (textfield.isValid()) {
+			if (textfield.isChanged) {
+				textfield.isChanged = false;
+				if (username) {
 					registercontainer.setLoading('Checking Availability...');
 					Ext.Ajax.request({
 						url : expensetracker.util.Url.getUserNameAvailability(),
@@ -95,40 +114,39 @@ Ext.define('expensetracker.view.login.LoginController', {
 							checkAvailable : username
 						},
 						success : function(response, opts) {
-							registercontainer.setLoading(false);				
+							registercontainer.setLoading(false);
 							var response = Ext.decode(response.responseText);
 							var isAvailable = response.Available;
 							textfield.isAvailable = isAvailable;
-							if(isAvailable) {
-								usrNmeAvailInd.update('<img src="resources/images/check.ico"/> ' + response.message);								
+							if (isAvailable) {
+								usrNmeAvailInd.update('<img src="resources/images/check.ico"/> ' + response.message);
 							} else {
-								usrNmeAvailInd.update('<img src="resources/images/cross.ico"/> ' + response.message);														
+								usrNmeAvailInd.update('<img src="resources/images/cross.ico"/> ' + response.message);
 							}
 						},
 						failure : function(response, opts) {
-							registercontainer.setLoading(false);				
+							registercontainer.setLoading(false);
 						}
-					});	
+					});
 				}
 			}
-		}		
+		}
 	},
 	onRegisterUser : function(registerBtn) {
 		var me = this;
-		var card = me.lookup('formcard');		
+		var card = me.lookup('formcard');
 		var usrName = me.lookup('regUsername');
 		var registerform = me.lookup('registerform');
 		var registercontainer = me.lookup('registercontainer');
-		
-		
-		if(registerform.isValid()) {
-			if(usrName.isAvailable) {
+
+		if (registerform.isValid()) {
+			if (usrName.isAvailable) {
 				registercontainer.setLoading('Registering...');
 				registerform.submit({
 					success : function(form, action) {
 						registercontainer.setLoading(false);
 						var response = Ext.decode(action.response.responseText);
-						if(response.isUserRegistered) {
+						if (response.isUserRegistered) {
 							registerform.reset();
 							card.getLayout().setActiveItem(0);
 						}
@@ -140,7 +158,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 						expensetracker.util.Message.toast(response.message);
 					}
 				});
-			}else{
+			} else {
 				usrName.markInvalid('Username already taken');
 			}
 		}

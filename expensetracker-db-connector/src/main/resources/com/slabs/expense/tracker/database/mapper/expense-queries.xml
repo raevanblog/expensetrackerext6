@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.slabs.expense.tracker.database.mapper.ExpenseDAO">
 
+
+
 	<insert id="insertExpense" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
@@ -85,14 +87,15 @@
 
 	<select id="getMonthWiseTotalExpense" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
 		select month(expdate) as MONTH, sum(price) as EXPENSE from EXPENSE where
-		username = #{username} and		
-		year(expdate) = #{year} 
+		username =
+		#{username} and
+		year(expdate) = #{year}
 		group by month(expdate)
 	</select>
-	
+
 	<select id="getCategoryWiseTotalExpense" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
-		select category, sum(price) as EXPENSE from EXPENSE 
-		where username=#{username} and year(expdate) = #{year} 
+		select category, sum(price) as EXPENSE from EXPENSE
+		where username=#{username} and year(expdate) = #{year}
 		<if test="month != null">
 			and MONTH(expdate) = #{month}
 		</if>
@@ -139,7 +142,7 @@
 	</update>
 
 	<select id="retrieveExpenseCategory" resultType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
-		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username=#{username}		
+		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username=#{username}
 	</select>
 
 	<delete id="deleteExpenseCategory">

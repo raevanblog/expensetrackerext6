@@ -5,7 +5,7 @@
 
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
 	<element name="UserInfo" type="et:UserInfo" />
-	<element name="UserFeature" type="et:UserFeature" />
+	<element name="Feature" type="et:Feature" />
 	<element name="Expense" type="et:Expense" />
 	<element name="ExpenseType" type="et:ExpenseType" />
 	<element name="Income" type="et:Income" />
@@ -73,15 +73,16 @@
 			<element name="email" type="string" />
 			<element name="mobile" type="string" />
 			<element name="address" type="string" />
+			<element name="feature" type="et:Feature" maxOccurs="1" />
 		</sequence>
 	</complexType>
 
-	<complexType name="UserFeature">
+	<complexType name="Feature">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: USER_PERMISSION
-				UserPermission will hold the data for table USER_PERMISSION
+				Table: FEATURE
+				UserPermission will hold the data for table FEATURE
 			</documentation>
 			<appinfo>
 				<annox:annotate>
@@ -94,6 +95,8 @@
 			<element name="isAdmin" type="string" default="N" />
 			<element name="isVerified" type="string" default="N" />
 			<element name="isFtLogin" type="string" default="Y" />
+			<element name="isLocked" type="string" default="N" />
+			<element name="activationKey" type="string" />
 		</sequence>
 	</complexType>
 
@@ -236,7 +239,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="id" type="long"/>
+			<element name="id" type="long" />
 			<element ref="et:username" />
 			<element name="msgfrom" type="string" />
 			<element name="subject" type="string" />
