@@ -22,6 +22,9 @@ Ext.define('expensetracker.util.Session', {
 	getUserSex : function() {
 		return this.getUser().sex;
 	},
+	getProfilePicture : function() {
+		return this.getUser().profilePic;
+	},
 	setCurrency : function(currency) {
 		expensetracker.util.Storage.put('currency', currency.name);
 		expensetracker.util.Storage.put('currencysymbol', currency.symbol);

@@ -5,6 +5,23 @@
 
 <mapper namespace="com.slabs.expense.tracker.database.mapper.UserDAO">
 
+	<resultMap type="com.slabs.expense.tracker.common.db.entity.UserInfo" id="UserInfo">
+		<result column="FIRSTNAME" property="firstName" />
+		<result column="LASTNAME" property="lastName" />
+		<result column="SEX" property="sex" />
+		<result column="USERNAME" property="username" />
+		<result column="PASSWORD" property="password" />
+		<result column="EMAIl" property="email" />
+		<result column="MOBILE" property="mobile" />
+		<result column="ADDRESS" property="address" />
+		<result column="PROFILEPIC" property="profilePic" typeHandler="org.apache.ibatis.type.ClobTypeHandler" />
+		<result column="ISADMIN" property="isAdmin" />
+		<result column="ISFTLOGIN" property="isFtLogin" />
+		<result column="ISLOCKED" property="isLocked" />
+		<result column="ISVERIFIED" property="isVerified" />
+		<result column="ACTIVATIONKEY" property="activationKey" />
+	</resultMap>
+
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
 		values(
@@ -41,7 +58,10 @@
 				mobile=#{record.mobile},
 			</if>
 			<if test="record.address != null">
-				address=#{record.address}
+				address=#{record.address},
+			</if>
+			<if test="record.profilePic != null">
+				profilePic=#{record.profilePic, typeHandler=org.apache.ibatis.type.ClobTypeHandler},
 			</if>
 			<if test="record.isAdmin != null">
 				isAdmin=#{record.isAdmin}
@@ -61,13 +81,13 @@
 		</set>
 		where username=#{record.username}
 	</update>
-	
-	<select id="getUser" resultType="com.slabs.expense.tracker.common.db.entity.UserInfo">
-		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE, ADDRESS, ISADMIN, ISFTLOGIN, ISVERIFIED, ISLOCKED, ACTIVATIONKEY
+
+	<select id="getUser" resultMap="UserInfo">
+		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE, ADDRESS, PROFILEPIC, ISADMIN, ISFTLOGIN, ISVERIFIED, ISLOCKED, ACTIVATIONKEY
 		<if test="includePassword">
 			,PASSWORD
 		</if>
-		from EXPENSETRACKER.USERINFO		
+		from EXPENSETRACKER.USERINFO
 		<if test="username != null">
 			where USERNAME=#{username}
 		</if>
@@ -75,12 +95,12 @@
 
 	<delete id="deleteUser">
 		delete from EXPENSETRACKER.USERINFO where username=#{record.username}
-	</delete>	
-	
+	</delete>
+
 	<update id="setActivationKey">
 		update EXPENSETRACKER.USERINFO set activationKey=#{activationKey} where username=#{username}
 	</update>
-	
+
 	<insert id="insertMessage" parameterType="java.util.List">
 		insert into EXPENSETRACKER.MESSAGE(USERNAME, MSGFROM, SUBJECT, MESSAGE, ISNEW) values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">

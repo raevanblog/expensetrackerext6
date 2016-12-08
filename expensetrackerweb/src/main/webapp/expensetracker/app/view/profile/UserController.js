@@ -24,7 +24,16 @@ Ext.define('expensetracker.view.profile.UserController', {
 					refs.sex.setValue(user.sex);
 					refs.email.setValue(user.email);
 					refs.mobile.setValue(user.mobile);
-					refs.address.setValue(user.address);					
+					refs.address.setValue(user.address);
+					if(user.profilePic === null) {
+						if ('M' === user.sex) {
+							refs.profileimage.setSrc('resources/images/male-profile.png');
+						} else if ('F' === user.sex) {
+							refs.profileimage.setSrc('resources/images/female-profile.png');
+						}
+					}else{
+						refs.profileimage.setSrc(user.profilePic);
+					}
 				}
 			},
 			failure : function(response, opts) {
@@ -38,21 +47,34 @@ Ext.define('expensetracker.view.profile.UserController', {
 			}
 		});
 	},
+	onImageSelection : function(field) {
+		var me = this;
+		var profileimage = me.lookup('profileimage');
+		var value = field.getEl().down('input[type=file]').dom.files[0];
+		var reader = new FileReader();
+		reader.addEventListener("load", function() {
+			profileimage.setSrc(reader.result);
+		}, false);
+
+		reader.readAsDataURL(value);
+	},
 	onSaveProfile : function(saveBtn) {
 		var me = this;
 		var model = me.getView().getViewModel();
 		var profileForm = me.lookup('profileform');
-		var refs = me.getReferences();
+		var profileimage = me.lookup('profileimage');
 		
 		if (profileForm.isValid()) {
-			profileForm.setLoading("Saving...");
+			me.getView().setLoading("Saving...");
 			profileForm.submit({
 				method : 'PUT',
 				params : {
-					username : expensetracker.util.Session.getUsername()
+					username : expensetracker.util.Session.getUsername(),
+					profilePic : profileimage.getSrc()
+					
 				},
 				success : function(form, action) {
-					profileForm.setLoading(false);
+					me.getView().setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);
 					var response = resObj.result;
 					if (response.noOfRecords > 0) {
@@ -61,7 +83,7 @@ Ext.define('expensetracker.view.profile.UserController', {
 					}
 				},
 				failure : function(form, action) {
-					profileForm.setLoading(false);
+					me.getView().setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);
 					if(401 === resObj.status_Code) {
 						me.getView().close();

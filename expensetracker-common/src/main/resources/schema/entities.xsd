@@ -72,6 +72,7 @@
 			<element name="email" type="string" />
 			<element name="mobile" type="string" />
 			<element name="address" type="string" />
+			<element name="profilePic" type="string" />
 			<element name="isAdmin" type="string" default="N" />
 			<element name="isVerified" type="string" default="N" />
 			<element name="isFtLogin" type="string" default="Y" />

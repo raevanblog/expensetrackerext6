@@ -89,7 +89,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var me = this;
 		var model = me.getView().getViewModel();
 		var name = me.lookup('tbUserName');
-		var profileImg = me.lookup('tbProfileImage');		
+		var profileImg = me.lookup('tbProfileImage');
 		model.set('currency', expensetracker.util.Session.getCurrencyName());
 		model.set('currencySymbol', expensetracker.util.Session.getCurrencySymbol());
 		me.updateProfile();
@@ -105,9 +105,9 @@ Ext.define('expensetracker.view.main.MainController', {
 		var collapsing = !navMenu.getMicro();
 
 		var new_width = collapsing ? expensetracker.util.Constants.getNavBarWidth() : expensetracker.util.Constants.getNavBarExpandedWidth();
-	
+
 		model.set('navBarWidth', new_width);
-	
+
 		if (Ext.isIE9m || !Ext.os.is.Desktop) {
 			Ext.suspendLayouts();
 
@@ -157,7 +157,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var profileWindow = Ext.create('expensetracker.view.profile.User', {
 			modal : true,
 			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth()			
+			width : Ext.Element.getViewportWidth()
 		});
 		profileWindow.show();
 	},
@@ -168,7 +168,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var chgPwdWindow = Ext.create('expensetracker.view.profile.ChangePassword', {
 			modal : true,
 			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth()			
+			width : Ext.Element.getViewportWidth()
 		});
 		chgPwdWindow.show();
 	},
@@ -197,12 +197,18 @@ Ext.define('expensetracker.view.main.MainController', {
 		var me = this;
 		var model = me.getView().getViewModel();
 		model.set('usrname', expensetracker.util.Session.getName());
-		var sex = expensetracker.util.Session.getUserSex();
-		if('M' === sex) {
-			model.set('profileimg', 'resources/images/male-profile.png');			
-		}else{
-			model.set('profileimg', 'resources/images/female-profile.png');						
+		var picture = expensetracker.util.Session.getProfilePicture();
+
+		if (picture === null) {
+			var sex = expensetracker.util.Session.getUserSex();
+			if ('M' === sex) {
+				model.set('profileimg', 'resources/images/male-profile.png');
+			} else {
+				model.set('profileimg', 'resources/images/female-profile.png');
+			}
+		} else {
+			model.set('profileimg', picture);
 		}
 	}
-	
+
 });

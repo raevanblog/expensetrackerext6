@@ -7,11 +7,15 @@ Ext.define('expensetracker.view.profile.ChangePassword', {
 	bodyPadding : 10,
 	requires : ['expensetracker.view.profile.PasswordController'],
 	controller : 'password',
-	layout : 'fit',
+	layout : {
+		type : 'hbox',
+		pack : 'middle'
+	},
 	items: [{
 		xtype : 'form',		
-		method : 'PUT',
+		method : 'PUT',		
 		jsonSubmit : true,
+		padding : '75 0 0 0',
 		url: expensetracker.util.Url.getPasswordService(),
 		reference : 'changepwdform',
 		layout :  {
