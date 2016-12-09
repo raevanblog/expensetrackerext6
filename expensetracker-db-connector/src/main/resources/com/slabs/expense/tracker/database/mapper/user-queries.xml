@@ -82,6 +82,10 @@
 		where username=#{record.username}
 	</update>
 
+	<update id="activateUser">
+		update EXPENSETRACKER.USERINFO set isVerified=#{isActivate} where username=#{username}
+	</update>
+
 	<select id="getUser" resultMap="UserInfo">
 		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE, ADDRESS, PROFILEPIC, ISADMIN, ISFTLOGIN, ISVERIFIED, ISLOCKED, ACTIVATIONKEY
 		<if test="includePassword">

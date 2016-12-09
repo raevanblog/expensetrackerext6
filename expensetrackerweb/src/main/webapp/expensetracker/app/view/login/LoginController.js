@@ -1,25 +1,6 @@
 Ext.define('expensetracker.view.login.LoginController', {
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.login',
-	listen : {
-		controller : {
-			'#' : {
-				unmatchedroute : function(hash) {
-					console.log("Unmatched:" + hash);
-				}
-			}
-		}
-	},
-	routes : {
-		'activate/:vcode' : 'onRouteChange'
-	},
-	onRouteChange : function(id) {
-		console.log('id');
-		this.setCurrentView(id);
-	},
-	setCurrentView : function(hashTag) {
-		console.log(hashTag);
-	},
+	alias : 'controller.login',	
 	onLogin : function(button) {
 		var me = this;
 		var loginWindow = me.getView();
@@ -73,7 +54,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var card = me.lookup('formcard');
 		card.getLayout().setActiveItem(1);
-	},
+	},	
 	onCloseRegister : function(closeRegBtn) {
 		var me = this;
 		var card = me.lookup('formcard');
@@ -96,6 +77,32 @@ Ext.define('expensetracker.view.login.LoginController', {
 		if (!newvalue) {
 			usrNmeAvailInd.update('');
 		}
+	},
+	onActivate : function(activateBtn) {
+		var me = this;
+		var username = me.lookup('activationuser').getValue();
+		var activationKey = me.lookup('activationkey').getValue();
+		Ext.Ajax.request({
+			url : expensetracker.util.Url.getActivateUser(),
+			method : 'POST',
+			jsonData : Ext.JSON.encode({
+				username : username,
+				activationKey : activationKey
+			}),
+			success : function(response, opts) {
+				var errorLbl = me.lookup('activateerrorlbl');				
+				var response = Ext.decode(response.responseText);
+				if(response.success) {
+					expensetracker.util.Message.toast('Activation Successful');
+				}else{					
+					errorLbl.update('<p>* Exception occurred, please contact customer support mail to <a href="mailto:raevanblog@gmail.com?Subject=Activation Failed for ' + username + '" target="_top">raevanblog@gmail.com</a> </p>');
+				}
+			},
+			failure : function(response, opts) {
+				var errorLbl = me.lookup('activateerrorlbl');
+				errorLbl.update('<p>* Exception occurred, please contact customer support mail to <a href="mailto:raevanblog@gmail.com?Subject=Activation Failed for ' + username + '" target="_top">raevanblog@gmail.com</a> </p>');
+			}
+		});
 	},
 	onFocusOutUserName : function(textfield, event) {
 		var me = this;

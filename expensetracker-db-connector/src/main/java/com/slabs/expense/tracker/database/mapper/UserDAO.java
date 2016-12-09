@@ -24,6 +24,8 @@ public interface UserDAO {
 	public Integer deleteUser(@Param("record") UserInfo record) throws Exception;
 
 	public Integer updateUser(@Param("record") UserInfo record) throws Exception;
+	
+	public Integer activateUser(@Param("username")String username, @Param("isActivate") String isActivate) throws Exception;
 
 	public Integer setActivationKey(@Param("username") String username,
 			@Param("activationKey") String activationKey) throws Exception;

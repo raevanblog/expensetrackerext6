@@ -6,7 +6,7 @@ Ext.define('expensetracker.view.login.Login', {
 	layout : {
 		type : 'border'
 	},
-	requires : [ 'expensetracker.view.login.LoginForm', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController' ],
+	requires : [ 'expensetracker.view.login.LoginForm', 'expensetracker.view.login.Activation', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController' ],
 	controller : 'login',
 	items : [ {
 		xtype : 'toolbar',
@@ -26,18 +26,14 @@ Ext.define('expensetracker.view.login.Login', {
 			handler : 'onOpenRegistration',
 			tooltip : 'Register',
 			iconCls : 'x-fa fa-user-plus'
-		}, {
-			xtype : 'button',
-			text : 'Activate Account',
-			ui : 'toolbar',
-			handler : 'onOpenRegistration',
-			tooltip : 'Activate Account',
-			iconCls : 'x-fa fa-check-circle'
-		} ],
+		}],
 		cls : 'maintoolbar'
 	}, {
 		xtype : 'container',
 		reference : 'formcard',
+		bind : {
+			activeItem : '{activeItem}'
+		},
 		style : {
 			backgroundColor : '#FFFFFF'
 		},
@@ -51,6 +47,9 @@ Ext.define('expensetracker.view.login.Login', {
 		}, {
 			xtype : 'registercontainer',
 			reference : 'registercontainer'
+		},{
+			xtype : 'activationcontainer',
+			reference : 'activationcontainer'
 		} ]
 	} ]
 

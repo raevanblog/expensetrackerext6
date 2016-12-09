@@ -47,7 +47,7 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 		reference : 'mainCard',
 		layout : {
 			type : 'card',
-			anchor : '100%',
+			anchor : '100%',			
 			fx: {
 				duration : 200			
 			}

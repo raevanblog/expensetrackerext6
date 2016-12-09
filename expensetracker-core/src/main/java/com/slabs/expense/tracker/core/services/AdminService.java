@@ -18,6 +18,19 @@ public class AdminService {
 	@Autowired
 	private UserDAO dao;
 
+	/**
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * @param isActivate
+	 *            {@link String} - 'Y' to activate and 'N' to de-activate
+	 * @return {@link Boolean} - True if it is activated or deactivate
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public boolean activateUser(String username, String isActivate) throws Exception {
+		return dao.activateUser(username, isActivate) > 0 ? Boolean.TRUE : Boolean.FALSE;
+	}
 
 	/**
 	 * 
