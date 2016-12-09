@@ -10,6 +10,7 @@ Ext.define('expensetracker.view.login.Login', {
 	controller : 'login',
 	items : [ {
 		xtype : 'toolbar',
+		border : 1,
 		height : 64,
 		cls : 'maintoolbar shadow',
 		region : 'north',
@@ -37,6 +38,9 @@ Ext.define('expensetracker.view.login.Login', {
 	}, {
 		xtype : 'container',
 		reference : 'formcard',
+		style : {
+			backgroundColor : '#FFFFFF'
+		},
 		region : 'center',
 		layout : {
 			type : 'card'

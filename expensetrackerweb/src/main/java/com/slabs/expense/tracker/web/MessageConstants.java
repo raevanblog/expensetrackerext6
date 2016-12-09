@@ -12,6 +12,10 @@ public class MessageConstants {
 
 	public static final String LOGIN_SUCCESS = "Login Successful";
 
+	public static final String ACCOUNT_LOCKED = "Your account is locked by the administrator." + CONTACT_SUPPORT;
+
+	public static final String ACCOUNT_NOT_VERIFIED = "Your account is not activated, please check your registered email for activation link. If you do not receive the email go to Activate Account page to resend the link";
+
 	public static final String INVALID_SESSION = "Session Invalid";
 
 	public static final String SERVER_ERROR = "* Server Error";

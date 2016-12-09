@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.services.EmailService;
@@ -42,13 +43,23 @@ public class AccessController {
 			if (users != null && !users.isEmpty()) {
 				UserInfo info = users.get(0);
 				if (info.getPassword().equals(credentials[1])) {
-					HttpSession session = request.getSession(true);
-					info.setPassword("");
-					session.setAttribute(WebConstants.LOGGED_IN_USER, info);
-					session.setMaxInactiveInterval(600);
-					output.put(WebConstants.SUCCESS, Boolean.TRUE);
-					output.put(WebConstants.MESSAGE, MessageConstants.LOGIN_SUCCESS);
-					output.put(WebConstants.USER, info);
+					if (info.getIsLocked().equals(Constants.N) && info.getIsVerified().equals(Constants.Y)) {
+						HttpSession session = request.getSession(true);
+						info.setPassword("");
+						session.setAttribute(WebConstants.LOGGED_IN_USER, info);
+						session.setMaxInactiveInterval(600);
+						output.put(WebConstants.SUCCESS, Boolean.TRUE);
+						output.put(WebConstants.MESSAGE, MessageConstants.LOGIN_SUCCESS);
+						output.put(WebConstants.USER, info);
+					} else if (info.getIsLocked().equals(Constants.Y)) {
+						output.put(WebConstants.SUCCESS, Boolean.FALSE);
+						output.put(WebConstants.MESSAGE, MessageConstants.ACCOUNT_LOCKED);
+						output.put(WebConstants.USER, null);
+					} else if (info.getIsVerified().equals(Constants.N)) {
+						output.put(WebConstants.SUCCESS, Boolean.FALSE);
+						output.put(WebConstants.MESSAGE, MessageConstants.ACCOUNT_NOT_VERIFIED);
+						output.put(WebConstants.USER, null);
+					}
 				} else {
 					output.put(WebConstants.SUCCESS, Boolean.FALSE);
 					output.put(WebConstants.MESSAGE, MessageConstants.CHECK_PWD);
@@ -209,7 +220,7 @@ public class AccessController {
 			List<UserInfo> info = service.select(username, false);
 
 			if (info != null && !info.isEmpty()) {
-				UserInfo user = info.get(0);				
+				UserInfo user = info.get(0);
 				if (user.getActivationKey().equals(activationKey)) {
 					output.put(WebConstants.SUCCESS, Boolean.TRUE);
 					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_SUCCESSFUL);

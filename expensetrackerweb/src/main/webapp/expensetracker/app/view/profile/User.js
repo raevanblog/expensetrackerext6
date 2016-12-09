@@ -5,6 +5,7 @@ Ext.define('expensetracker.view.profile.User', {
 	xtype : 'profile',
 	resizable : false,
 	bodyPadding : 10,
+	scrollable : 'y',
 	title : 'User Profile',
 	layout : {
 		type : 'vbox',
@@ -34,7 +35,7 @@ Ext.define('expensetracker.view.profile.User', {
 	}, {
 		xtype : 'fileuploadfield',
 		buttonText : 'Change Photo',
-		buttonOnly : true,
+		buttonOnly : true,		
 		buttonConfig : {
 			ui : 'toolbar',
 			iconCls : 'x-fa fa-upload'
@@ -44,13 +45,13 @@ Ext.define('expensetracker.view.profile.User', {
 		}
 	}, {
 		xtype : 'container',
+		scrollable : 'y',
 		layout : {
 			type : 'hbox',
 			pack : 'middle'
 		},
 		items : [ {
-			xtype : 'form',
-			scrollable : 'y',
+			xtype : 'form',			
 			jsonSubmit : true,
 			url : expensetracker.util.Url.getUserService(),
 			reference : 'profileform',

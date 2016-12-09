@@ -10,17 +10,36 @@ Ext.define('expensetracker.Application', {
 
 	stores : [ 'ExpenseDock', 'ExpenseType', 'ExpenseName', 'Expense', 'IncomeType' ],
 
-	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Constants', 'expensetracker.util.Session', 'expensetracker.view.login.Login', 'expensetracker.util.Message', 'expensetracker.view.main.Main',
-			'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox', 'Ext.form.Panel', 'Ext.form.field.Text',
-			'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.form.field.Display', 'Ext.plugin.Viewport',
-			'Ext.form.field.TextArea', 'Ext.form.FieldContainer', 'expensetracker.util.Calendar', 'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category',
-			'Ext.chart.series.Bar', 'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line', 'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border', 'Ext.form.field.File'],
+	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Constants', 'expensetracker.util.Session', 'expensetracker.view.login.Login',
+			'expensetracker.util.Message', 'expensetracker.view.main.Main', 'Ext.data.validator.Presence', 'Ext.form.FieldSet',
+			'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox', 'Ext.form.Panel', 'Ext.form.field.Text',
+			'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar', 'Ext.form.Label',
+			'Ext.form.field.Display', 'Ext.plugin.Viewport', 'Ext.form.field.TextArea', 'Ext.form.FieldContainer', 'expensetracker.util.Calendar',
+			'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category', 'Ext.chart.series.Bar',
+			'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie',
+			'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line', 'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border',
+			'Ext.form.field.File' ],
 	defaultToken : 'login',
 	init : function() {
 		Ext.getBody().mask('Loading Expense Tracker....');
 	},
-	launch : function() {		
-		var me = this;	
+	launch : function() {
+		var me = this;
+		var navigateToActivate = false;
+		var vcode = '';
+		var link = document.location.href.split('#');
+
+		if (link.length > 1) {
+			var params = link[1].split('?');
+			if (params.length > 1) {
+				if (params[0] === 'activate') {
+					vcode = Ext.Object.fromQueryString(params[1]).vcode;
+					if (vcode !== undefined) {
+						navigateToActivate = true;
+					}
+				}
+			}
+		}
 		expensetracker.util.Calendar.init();
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getSession(),
@@ -56,7 +75,7 @@ Ext.define('expensetracker.Application', {
 	},
 
 	loadApplicationStore : function() {
-		Ext.getStore('ExpenseDock').load();		
+		Ext.getStore('ExpenseDock').load();
 		Ext.getStore('ExpenseType').load();
 		Ext.getStore('ExpenseName').load();
 		Ext.getStore('IncomeType').load();

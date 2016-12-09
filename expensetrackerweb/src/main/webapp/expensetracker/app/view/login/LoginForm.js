@@ -21,7 +21,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 		title : 'Login',
 		method : 'POST',		
 		jsonSubmit : true,
-		padding: '50 0 0 0',
+		padding: '100 0 0 0',
 		url : expensetracker.util.Url.getLogin(),
 		bodyPadding : 10,
 		layout : {
