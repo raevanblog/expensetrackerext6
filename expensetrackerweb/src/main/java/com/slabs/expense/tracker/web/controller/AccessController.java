@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.core.services.AdminService;
 import com.slabs.expense.tracker.core.services.EmailService;
 import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.core.services.UserService;
@@ -36,14 +37,17 @@ public class AccessController {
 	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			Map<String, String> parameters = JSONUtil.getMapFromInputStream(request.getInputStream());
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			Map<String, String> parameters = JSONUtil
+					.getMapFromInputStream(request.getInputStream());
 			String[] credentials = Base64Encoder.decode(parameters.get("credential"), ":");
 			List<UserInfo> users = service.select(credentials[0], Boolean.TRUE);
 			if (users != null && !users.isEmpty()) {
 				UserInfo info = users.get(0);
 				if (info.getPassword().equals(credentials[1])) {
-					if (info.getIsLocked().equals(Constants.N) && info.getIsVerified().equals(Constants.Y)) {
+					if (info.getIsLocked().equals(Constants.N)
+							&& info.getIsVerified().equals(Constants.Y)) {
 						HttpSession session = request.getSession(true);
 						info.setPassword("");
 						session.setAttribute(WebConstants.LOGGED_IN_USER, info);
@@ -121,12 +125,14 @@ public class AccessController {
 	}
 
 	@RequestMapping(value = "session/reload", method = { RequestMethod.GET })
-	public ModelAndView reloadSessionData(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView reloadSessionData(HttpServletRequest request,
+			HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
 			HttpSession session = request.getSession(Boolean.FALSE);
 			if (session != null) {
-				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+						UserService.class);
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
 				List<UserInfo> list = service.select(user.getUsername(), Boolean.FALSE);
 				if (list != null && !list.isEmpty()) {
@@ -154,10 +160,12 @@ public class AccessController {
 	}
 
 	@RequestMapping(value = "username", method = { RequestMethod.GET })
-	public ModelAndView isUserNameAvailable(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView isUserNameAvailable(HttpServletRequest request,
+			HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
 
 			String username = request.getParameter("checkAvailable");
 			Boolean availability = service.isUserNameAvailable(username);
@@ -183,8 +191,10 @@ public class AccessController {
 	public ModelAndView register(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			EmailService emailService = ServiceFactory.getInstance()
+					.getService(Services.EMAIL_SERVICE, EmailService.class);
 			UserInfo user = JSONUtil.getObjectFromJSON(request.getInputStream(), UserInfo.class);
 			Integer isCreated = service.create(user);
 			output.put(WebConstants.SUCCESS, Boolean.TRUE);
@@ -210,8 +220,12 @@ public class AccessController {
 	public ModelAndView activateUser(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			EmailService emailService = ServiceFactory.getInstance()
+					.getService(Services.EMAIL_SERVICE, EmailService.class);
+			AdminService adminService = ServiceFactory.getInstance()
+					.getService(Services.ADMIN_SERVICE, AdminService.class);
 
 			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
 			String activationKey = map.get("activationkey");
@@ -222,9 +236,14 @@ public class AccessController {
 			if (info != null && !info.isEmpty()) {
 				UserInfo user = info.get(0);
 				if (user.getActivationKey().equals(activationKey)) {
-					output.put(WebConstants.SUCCESS, Boolean.TRUE);
-					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_SUCCESSFUL);
-					emailService.sendRegSuccessMail(user);
+					if (adminService.activateUser(username, Constants.Y)) {
+						output.put(WebConstants.SUCCESS, Boolean.TRUE);
+						output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_SUCCESSFUL);
+						emailService.sendRegSuccessMail(user);
+					} else {
+						output.put(WebConstants.SUCCESS, Boolean.FALSE);
+						output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED);
+					}
 				} else {
 					output.put(WebConstants.SUCCESS, Boolean.FALSE);
 					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED);
