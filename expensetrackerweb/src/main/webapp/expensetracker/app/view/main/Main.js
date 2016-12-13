@@ -11,7 +11,7 @@ Ext.define('expensetracker.view.main.Main', {
 	xtype : 'app-main',
 	layout : 'fit',
 	requires : [ 'expensetracker.view.main.MainDashboard', 'expensetracker.view.main.Toolbar', 'expensetracker.view.main.MainController', 'expensetracker.view.main.MainModel',
-			'expensetracker.view.profile.User', 'expensetracker.view.profile.ChangePassword' ],
+			'expensetracker.view.profile.User', 'expensetracker.view.profile.ChangePassword'],
 	plugins : 'viewport',
 	controller : 'main',
 	viewModel : 'main',

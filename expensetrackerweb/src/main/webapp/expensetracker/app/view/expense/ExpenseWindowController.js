@@ -80,9 +80,9 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var model = view.getViewModel();
 		var model = new expensetracker.model.Expense({
 			itemName : '',
-			price : 0.0,
+			price : 0,
 			expdate : model.get('expenseDate'),
-			qty : 0.0,
+			qty : 0,
 			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);

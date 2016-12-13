@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
 	scrollable: true,
-	requires : [ 'expensetracker.store.Expense' ],
+	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'Ext.grid.column.Number' ],
 	layout : 'fit',	
 	plugins : {
 		ptype : 'cellediting',
@@ -125,7 +125,8 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		format : '0.00',
 		dataIndex : 'qty',
 		editor : {
-			field : 'numberfield',
+			xtype : 'numberfield',
+			hideTrigger : true,
 			allowBlank : false,
 			reference : 'gridQty',
 			listeners : {
@@ -143,7 +144,8 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			return Ext.util.Format.currency(value, expensetracker.util.Session.getCurrencySymbol() + ' ', 2);
 		},
 		editor : {
-			field : 'numberfield',
+			xtype : 'numberfield',
+			hideTrigger : true,
 			allowBlank : false,
 			listeners : {
 				change : 'onPriceChange'
@@ -156,7 +158,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 200
 	}, {
 		xtype : 'numbercolumn',
-		text : 'Price/Unit',
+		text : 'Price/Unit',		
 		align : 'center',
 		format : '0.00',
 		dataIndex : 'pricePerUnit',

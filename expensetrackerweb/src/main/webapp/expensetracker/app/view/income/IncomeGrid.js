@@ -36,7 +36,8 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 		flex : 1,
 		dataIndex : 'income',
 		editor : {
-			field : 'numberfield',
+			xtype : 'numberfield',
+			hideTrigger : true,
 			allowBlank : false
 		},
 		summaryType : 'sum',
