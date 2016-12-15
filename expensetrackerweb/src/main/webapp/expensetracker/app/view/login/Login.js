@@ -30,10 +30,7 @@ Ext.define('expensetracker.view.login.Login', {
 		cls : 'maintoolbar'
 	}, {
 		xtype : 'container',
-		reference : 'formcard',
-		bind : {
-			activeItem : '{activeItem}'
-		},
+		reference : 'formcard',		
 		style : {
 			backgroundColor : '#FFFFFF'
 		},
@@ -47,10 +44,7 @@ Ext.define('expensetracker.view.login.Login', {
 		}, {
 			xtype : 'registercontainer',
 			reference : 'registercontainer'
-		},{
-			xtype : 'activationcontainer',
-			reference : 'activationcontainer'
-		} ]
+		}]
 	} ]
 
 });

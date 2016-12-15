@@ -23,7 +23,7 @@ Ext.define('expensetracker.Application', {
 	launch : function() {
 		var me = this;
 		var navigateToActivate = false;
-		var vcode = '';
+		var key = '';
 		var username = '';
 		var link = document.location.href.split('#');
 
@@ -32,8 +32,8 @@ Ext.define('expensetracker.Application', {
 			if (params.length > 1) {
 				if (params[0] === 'activate') {
 					username = Ext.Object.fromQueryString(params[1]).username;
-					vcode = Ext.Object.fromQueryString(params[1]).vcode;
-					if (vcode !== undefined && username !== undefined) {
+					key = Ext.Object.fromQueryString(params[1]).key;
+					if (key !== undefined && username !== undefined) {
 						navigateToActivate = true;
 					}
 				}
@@ -56,35 +56,22 @@ Ext.define('expensetracker.Application', {
 						me.loadApplicationStore();
 						Ext.widget('app-main');
 					} else {
-						Ext.widget('login', {
-							viewModel : {
-								data : {
-									activeItem : 0
-								}
-							}
-						});
+						Ext.widget('login');
 					}
 
 				},
 				failure : function(response, opts) {
 					expensetracker.util.Message.toast('Server Error. Please contact customer support...');
-					Ext.widget('login', {
-						viewModel : {
-							data : {
-								activeItem : 0
-							}
-						}
-					});
+					Ext.widget('login');
 				}
 			});
 		} else {
 			Ext.getBody().unmask();			
-			Ext.widget('login', {
+			Ext.widget('activation', {
 				viewModel : {
-					data : {
-						activeItem : 2,
+					data : {					
 						username : username,
-						activationKey : vcode
+						key : key
 					}
 				}
 			});

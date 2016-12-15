@@ -190,13 +190,7 @@ Ext.define('expensetracker.view.main.MainController', {
 	navigateToLogin : function() {
 		var me = this;
 		me.getView().destroy();
-		Ext.widget('login',{
-			viewModel : {
-				data : {
-					activeItem : 0
-				}
-			}
-		});
+		Ext.widget('login');
 	},
 	updateProfile : function() {
 		var me = this;
