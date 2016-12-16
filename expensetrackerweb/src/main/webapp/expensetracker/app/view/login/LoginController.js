@@ -31,11 +31,11 @@ Ext.define('expensetracker.view.login.LoginController', {
 					loginWindow.setLoading(false);
 					var errorlbl = me.lookup('errorlbl');
 					var message = action.result.message;
-					errorlbl.setText(message);
+					errorlbl.update('<p>* ' + message);
 				}
 			})
 		}
-	},
+	},	
 	onEnter : function(textfield, e) {
 		var me = this;
 		var loginBtn = me.lookup('loginBtn');
@@ -53,21 +53,21 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var card = me.lookup('formcard');
 		card.getLayout().setActiveItem(1);
-	},	
+	},
 	onCloseRegister : function(closeRegBtn) {
 		var me = this;
 		var card = me.lookup('formcard');
 		var registerform = me.lookup('registerform');
 		registerform.reset();
 		card.getLayout().setActiveItem(0);
-	},
-	onPasswordReType : function(textfield, newValue, oldValue) {
+	},	
+    onActivateUser : function(actUserBtn) {
 		var me = this;
-		var pwdTxtField = me.lookup('regPassword');
-		var password = pwdTxtField.getValue();
-		if (newValue !== password) {
-
-		}
+		var window = Ext.create('expensetracker.view.login.ActivationWindow', {
+			modal : true,
+			reference : 'activationwindow'
+		});
+		window.show();
 	},
 	onUserNameChage : function(textfield, newvalue, oldvalue) {
 		var me = this;
@@ -76,33 +76,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		if (!newvalue) {
 			usrNmeAvailInd.update('');
 		}
-	},
-	onActivate : function(activateBtn) {
-		var me = this;
-		var username = me.lookup('activationuser').getValue();
-		var activationKey = me.lookup('activationkey').getValue();
-		Ext.Ajax.request({
-			url : expensetracker.util.Url.getActivateUser(),
-			method : 'POST',
-			jsonData : Ext.JSON.encode({
-				username : username,
-				activationKey : activationKey
-			}),
-			success : function(response, opts) {
-				var errorLbl = me.lookup('activateerrorlbl');				
-				var response = Ext.decode(response.responseText);
-				if(response.success) {
-					expensetracker.util.Message.toast('Activation Successful');
-				}else{					
-					errorLbl.update('<p>* Exception occurred, please contact customer support mail to <a href="mailto:raevanblog@gmail.com?Subject=Activation Failed for ' + username + '" target="_top">raevanblog@gmail.com</a> </p>');
-				}
-			},
-			failure : function(response, opts) {
-				var errorLbl = me.lookup('activateerrorlbl');
-				errorLbl.update('<p>* Exception occurred, please contact customer support mail to <a href="mailto:raevanblog@gmail.com?Subject=Activation Failed for ' + username + '" target="_top">raevanblog@gmail.com</a> </p>');
-			}
-		});
-	},
+	},	
 	onFocusOutUserName : function(textfield, event) {
 		var me = this;
 		var registercontainer = me.lookup('registercontainer');
@@ -168,5 +142,36 @@ Ext.define('expensetracker.view.login.LoginController', {
 				usrName.markInvalid('Username already taken');
 			}
 		}
+	},
+	onSendActivationMail : function(sendBtn) {
+		var me = this;		
+		var form = me.lookup('activationwindowform');
+		var username = me.lookup('activationwindowuser').getValue();		
+		var errlbl = me.lookup('activationwindowerrlbl');
+		var activationwindow = me.lookup('activationwindow');
+		activationwindow.setLoading('Sending...');
+		Ext.Ajax.request({
+			url : expensetracker.util.Url.getActivationMail(),
+			method : 'POST',
+			jsonData : Ext.JSON.encode({
+				username : username				
+			}),
+			success : function(response, opts) {
+				activationwindow.setLoading(false);				
+				form.reset();
+				var response = Ext.decode(response.responseText);
+				if(response.success) {
+					expensetracker.util.Message.toast(response.message);					
+				}else{
+					var errlbl = me.lookup('activationwindowerrlbl');					
+					errlbl.update('<p>* '+response.message + ' Mail To :' + expensetracker.util.Message.getMailTo(username) + '</p>');
+				}
+			},
+			failure : function(response, opts) {	
+				activationwindow.setLoading(false);			
+				var errlbl = me.lookup('activationwindowerrlbl');
+				errorLbl.update('<p>* '+response.message + ' Mail To :' + expensetracker.util.Message.getMailTo() + '</p>');
+			}
+		});
 	}
 });

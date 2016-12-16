@@ -173,10 +173,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				padding : '0 0 0 10',
 				vtype: 'match',
 				vtypeText : 'Password does not match',
-				matchfield: 'regpassword',				
-				listeners : {
-					change : 'onPasswordReType'
-				},
+				matchfield: 'regpassword',
 				flex : 1
 			} ]
 		} ],

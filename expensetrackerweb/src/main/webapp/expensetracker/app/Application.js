@@ -10,7 +10,7 @@ Ext.define('expensetracker.Application', {
 
 	stores : [ 'ExpenseDock', 'ExpenseType', 'ExpenseName', 'Expense', 'IncomeType' ],
 
-	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Constants', 'expensetracker.util.Session', 'expensetracker.view.login.Login', 'expensetracker.util.Message',
+	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Constants', 'expensetracker.util.Session', 'expensetracker.view.login.Login', 'expensetracker.view.login.Activation', 'expensetracker.util.Message',
 			'expensetracker.view.main.Main', 'Ext.data.validator.Presence', 'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox', 'Ext.form.Panel',
 			'Ext.form.field.Text', 'Ext.layout.container.HBox', 'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.form.field.Display', 'Ext.plugin.Viewport',
 			'Ext.form.field.TextArea', 'Ext.form.FieldContainer', 'expensetracker.util.Calendar', 'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category',
@@ -61,7 +61,9 @@ Ext.define('expensetracker.Application', {
 
 				},
 				failure : function(response, opts) {
-					expensetracker.util.Message.toast('Server Error. Please contact customer support...');
+					Ext.getBody().unmask();
+					var response = Ext.decode(response.responseText);
+					expensetracker.util.Message.toast(response.message + expensetracker.util.Message.getMailTo());
 					Ext.widget('login');
 				}
 			});

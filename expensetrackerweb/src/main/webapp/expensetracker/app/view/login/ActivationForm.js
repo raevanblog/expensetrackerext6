@@ -3,9 +3,7 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 	alias : 'view.activationform',
 	xtype : 'activationform',
 	scrollable : 'y',	
-	layout : {
-		type : 'vbox'
-	},
+	layout : 'responsivecolumn',
 	items: [{
 		xtype: 'component',
 		padding : '10 10 10 10',
@@ -40,7 +38,7 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 		}, {
 			xtype : 'textfield',
 			fieldLabel : 'Activation Key',
-			reference : 'key',
+			reference : 'activationkey',
 			labelAlign : 'top',
 			bind : {
 				value : '{key}'

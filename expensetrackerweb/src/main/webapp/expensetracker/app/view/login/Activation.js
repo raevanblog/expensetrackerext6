@@ -3,7 +3,8 @@ Ext.define('expensetracker.view.login.Activation', {
 	xtype : 'activation',	
 	alias : 'view.activation',
 	plugins : 'viewport',
-	requires : ['expensetracker.view.login.ActivationForm'],
+	requires : ['expensetracker.view.login.ActivationForm', 'expensetracker.view.login.ActivationController'],
+	controller : 'activation',
 	layout : {
 		type : 'border'
 	},	
@@ -18,13 +19,6 @@ Ext.define('expensetracker.view.login.Activation', {
 			html : '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
 			cls : 'logo-component',
 			width : 250
-		}, '->', {
-			xtype : 'button',
-			text : 'Register',
-			ui : 'toolbar',
-			handler : 'onOpenRegistration',
-			tooltip : 'Login',
-			iconCls: 'x-fa fa-sign-in'
 		}],
 		cls : 'maintoolbar'
 	},{

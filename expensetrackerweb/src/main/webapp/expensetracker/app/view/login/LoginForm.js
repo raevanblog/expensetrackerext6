@@ -59,7 +59,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			},
 			inputType : 'password',
 			flex : 1
-		}, {
+		},{
 			xtype : 'label',
 			padding : '10 10 10 10',
 			reference : 'errorlbl',
