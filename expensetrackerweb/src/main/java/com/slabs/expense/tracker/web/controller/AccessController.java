@@ -235,18 +235,65 @@ public class AccessController {
 
 			if (info != null && !info.isEmpty()) {
 				UserInfo user = info.get(0);
-				if (user.getActivationKey().equals(activationKey)) {
-					if (adminService.activateUser(username, Constants.Y)) {
-						output.put(WebConstants.SUCCESS, Boolean.TRUE);
-						output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_SUCCESSFUL);
-						emailService.sendRegSuccessMail(user);
+				if (Constants.N.equals(user.getIsVerified())) {
+					if (user.getActivationKey().equals(activationKey)) {
+						if (adminService.activateUser(username, Constants.Y)) {
+							output.put(WebConstants.SUCCESS, Boolean.TRUE);
+							output.put(WebConstants.MESSAGE,
+									MessageConstants.ACTIVATION_SUCCESSFUL);
+							emailService.sendRegSuccessMail(user);
+						} else {
+							output.put(WebConstants.SUCCESS, Boolean.FALSE);
+							output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED);
+						}
 					} else {
 						output.put(WebConstants.SUCCESS, Boolean.FALSE);
-						output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED);
+						output.put(WebConstants.MESSAGE,
+								MessageConstants.ACTIVATION_FAILED_INVALID_KEY);
 					}
 				} else {
 					output.put(WebConstants.SUCCESS, Boolean.FALSE);
-					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED);
+					output.put(WebConstants.MESSAGE, MessageConstants.USER_ACTIVATED_ALREADY);
+				}
+			} else {
+				output.put(WebConstants.SUCCESS, Boolean.FALSE);
+				output.put(WebConstants.MESSAGE, MessageConstants.USER_NOT_FOUND);
+			}
+
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			output.put(WebConstants.SUCCESS, Boolean.FALSE);
+			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
+			return new ModelAndView(WebConstants.JSON, output);
+		}
+		return new ModelAndView(WebConstants.JSON, output);
+	}
+
+	@RequestMapping(value = "user/email/activate", method = { RequestMethod.POST })
+	public ModelAndView sendActivationMail(HttpServletRequest request,
+			HttpServletResponse response) {
+		Map<String, Object> output = new HashMap<String, Object>();
+		try {
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			EmailService emailService = ServiceFactory.getInstance()
+					.getService(Services.EMAIL_SERVICE, EmailService.class);
+
+			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
+
+			String username = map.get("username");
+
+			List<UserInfo> info = service.select(username, false);
+
+			if (info != null && !info.isEmpty()) {
+				UserInfo user = info.get(0);
+				if (Constants.N.equals(user.getIsVerified())) {
+					emailService.sendActivationEmail(user);
+					output.put(WebConstants.SUCCESS, Boolean.TRUE);
+					output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_MAILED);
+				} else {
+					output.put(WebConstants.SUCCESS, Boolean.FALSE);
+					output.put(WebConstants.MESSAGE, MessageConstants.USER_ACTIVATED_ALREADY);
 				}
 			} else {
 				output.put(WebConstants.SUCCESS, Boolean.FALSE);
