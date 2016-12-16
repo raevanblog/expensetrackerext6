@@ -30,7 +30,7 @@ public class MessageConstants {
 
 	public static final String USER_NOT_REGISTERED = "User registration failed, please contact customer support.";
 
-	public static final String USER_ACTIVATED_ALREADY = "User activated already.";
+	public static final String USER_ACTIVATED_ALREADY = "User activated already, please contact customer support if there is any issue.";
 
 	public static final String ACTIVATION_SUCCESSFUL = "Your account is activated sucessfully. Now you can start using Expense Tracker";
 
