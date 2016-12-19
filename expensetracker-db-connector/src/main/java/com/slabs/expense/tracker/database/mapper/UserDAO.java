@@ -39,6 +39,6 @@ public interface UserDAO {
 	public Integer deleteMessage(@Param("record") Message message,
 			@Param("isDeleteOldMsg") boolean isDeleteOldMsg) throws Exception;
 
-	public List<Message> getMessage(@Param("username") String username) throws Exception;
+	public List<Message> getMessage(@Param("username") String username, boolean isNew) throws Exception;
 
 }

@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.web.services;
+package com.slabs.expense.tracker.web.services;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,14 +11,15 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slabs.expense.tracker.core.ContentType;
-import com.slabs.expense.tracker.core.ResponseStream;
-import com.slabs.expense.tracker.core.ResponseGenerator;
-import com.slabs.expense.tracker.core.ResponseStatus;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.core.services.ReportingService;
 import com.slabs.expense.tracker.core.services.Services;
+import com.slabs.expense.tracker.web.services.core.ContentType;
+import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
+import com.slabs.expense.tracker.web.services.core.ResponseStatus;
+import com.slabs.expense.tracker.web.services.core.ResponseStream;
+import com.slabs.expense.tracker.web.services.exception.WebServiceException;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 
@@ -61,7 +62,7 @@ public class ReportingWebService {
 					ContentType.APPLICATION_PDF_TYPE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 

@@ -106,9 +106,8 @@
 	</update>
 
 	<insert id="insertMessage" parameterType="java.util.List">
-		insert into EXPENSETRACKER.MESSAGE(USERNAME, MSGFROM, SUBJECT, MESSAGE, ISNEW) values
+		insert into EXPENSETRACKER.MESSAGE(MSGFROM, SUBJECT, MESSAGE, ISNEW) values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
-			#{record.username},
 			#{record.msgfrom},
 			#{record.subject},
 			#{record.message},
@@ -125,14 +124,11 @@
 			<if test="record.message != null">
 				message=#{record.message},
 			</if>
-			<if test="record.msgfrom != null">
-				msgfrom=#{record.msgfrom},
-			</if>
-			<if test="record.msgfrom != null">
+			<if test="record.isNew != null">
 				isnew=#{record.isNew},
 			</if>
 		</set>
-		where username=#{record.username}
+		where msgfrom=#{record.msgfrom}
 	</update>
 
 	<delete id="deleteMessage">
@@ -145,6 +141,9 @@
 
 	<select id="getMessage" resultType="com.slabs.expense.tracker.common.db.entity.Message">
 		select * from EXPENSETRACKER.MESSAGE where username=#{username}
+		<if test=#{record.isNew}>
+			and isNew=#{record.isNew}
+		</if>
 	</select>
 
 </mapper>

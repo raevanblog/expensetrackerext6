@@ -173,5 +173,49 @@ Ext.define('expensetracker.view.login.LoginController', {
 				errorLbl.update('<p>* '+response.message + ' Mail To :' + expensetracker.util.Message.getMailTo() + '</p>');
 			}
 		});
+	},	
+	onContactUs : function(contactUsBtn) {
+		var window = Ext.create('expensetracker.view.message.ContactUs', {
+			modal : true,
+			reference : 'contactus'
+		});
+		window.show();
+	},
+	onSendMessageToAdmin : function(sendBtn) {
+		var me = this;
+		var contactus  = me.lookup('contactus');
+		var form = me.lookup('contactusform');
+		var fromEmail  = me.lookup('contactemail');
+		var subjecttext  = me.lookup('contactsubject');
+		var subject = subjecttext.getValue() + ' from ' + fromEmail; 
+		var message = me.lookup('contactmessage');
+		
+		contactus.setLoading('Sending...');
+		
+		Ext.Ajax.request({
+			url : expensetracker.util.Url.getMail(),
+			method : 'POST',
+			jsonData : Ext.JSON.encode({
+				subject : subject,
+				htmlMessage : message.getValue()
+			}),
+			success : function(response, opts) {
+				contactus.setLoading(false);				
+				form.reset();
+				var response = Ext.decode(response.responseText);
+				if(response.success) {
+					expensetracker.util.Message.toast(response.message);			
+				}else{
+					expensetracker.util.Message.toast(response.message);	
+				}
+				contactus.close();
+			},
+			failure : function(response, opts) {	
+				contactus.setLoading(false);			
+				expensetracker.util.Message.toast(response.message);
+				contactus.close();
+			}
+		});
+		
 	}
 });

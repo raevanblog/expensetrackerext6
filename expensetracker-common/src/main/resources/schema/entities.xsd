@@ -219,8 +219,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="id" type="long" />
-			<element ref="et:username" />
+			<element name="id" type="long" />			
 			<element name="msgfrom" type="string" />
 			<element name="subject" type="string" />
 			<element name="message" type="string" />

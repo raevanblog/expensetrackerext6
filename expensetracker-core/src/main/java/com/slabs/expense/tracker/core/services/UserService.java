@@ -102,8 +102,8 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<Message> getMessages(String username) throws Exception {
-		return dao.getMessage(username);
+	public List<Message> getMessages(String username, boolean isNew) throws Exception {
+		return dao.getMessage(username, isNew);
 	}
 
 }

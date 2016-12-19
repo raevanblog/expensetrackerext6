@@ -14,6 +14,7 @@ Ext.define('expensetracker.view.login.Login', {
 		height : 64,
 		cls : 'maintoolbar shadow',
 		region : 'north',
+		overflowHandler : 'menu',
 		items : [ {
 			xtype : 'component',
 			html : '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
@@ -33,6 +34,13 @@ Ext.define('expensetracker.view.login.Login', {
 			tooltip : 'Activate User',
 			iconCls : 'x-fa fa-check',
 			handler : 'onActivateUser'
+		},{
+			xtype : 'button',
+			text : 'Contact Us',
+			ui : 'toolbar',
+			tooltip : 'Contact Us',
+			handler : 'onContactUs',
+			iconCls : 'x-fa fa-envelope-o'			
 		}],
 		cls : 'maintoolbar'
 	}, {

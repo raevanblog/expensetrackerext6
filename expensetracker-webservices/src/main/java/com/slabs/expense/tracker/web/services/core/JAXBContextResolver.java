@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core;
+package com.slabs.expense.tracker.web.services.core;
 
 import javax.ws.rs.ext.ContextResolver;
 import javax.xml.bind.JAXBContext;

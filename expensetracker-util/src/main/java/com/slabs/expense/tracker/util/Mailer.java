@@ -65,19 +65,22 @@ public class Mailer {
 		}
 	}
 
-	public static Email createSimpleEmail(String content, String subject, String toEmail) throws UtilityException {
+	public static Email createSimpleEmail(String content, String subject, String toEmail)
+			throws UtilityException {
 
 		String[] email = { toEmail };
 		return createSimpleEmail(content, subject, email);
 	}
 
-	public static Email createSimpleEmail(String content, String subject, Set<String> toEmailList) throws UtilityException {
+	public static Email createSimpleEmail(String content, String subject, Set<String> toEmailList)
+			throws UtilityException {
 
 		String[] toEmails = (String[]) toEmailList.toArray();
 		return createSimpleEmail(content, subject, toEmails);
 	}
 
-	private static Email createSimpleEmail(String content, String subject, String... toEmails) throws UtilityException {
+	private static Email createSimpleEmail(String content, String subject, String... toEmails)
+			throws UtilityException {
 
 		Email email = null;
 		try {
@@ -91,19 +94,26 @@ public class Mailer {
 		return email;
 	}
 
-	public static Email createHtmlEmail(String content, String subject, String toEmail) throws UtilityException {
+	public static Email createHtmlEmail(String content, String subject) throws UtilityException {
+		return createHtmlEmail(content, subject, properties.getProperty(EMAIL_ADMIN));
+	}
+
+	public static Email createHtmlEmail(String content, String subject, String toEmail)
+			throws UtilityException {
 
 		String[] email = { toEmail };
 		return createHtmlEmail(content, subject, email);
 	}
 
-	public static Email createHtmlEmail(String content, String subject, Set<String> toEmailList) throws UtilityException {
+	public static Email createHtmlEmail(String content, String subject, Set<String> toEmailList)
+			throws UtilityException {
 
 		String[] toEmails = (String[]) toEmailList.toArray();
 		return createHtmlEmail(content, subject, toEmails);
 	}
 
-	private static Email createHtmlEmail(String content, String subject, String... toEmails) throws UtilityException {
+	private static Email createHtmlEmail(String content, String subject, String... toEmails)
+			throws UtilityException {
 
 		Email email = null;
 		try {
@@ -125,10 +135,12 @@ public class Mailer {
 		}
 
 		try {
-			email.setAuthenticator(new DefaultAuthenticator(properties.getProperty(EMAIL_USERNAME), properties.getProperty(EMAIL_PASSWORD)));
+			email.setAuthenticator(new DefaultAuthenticator(properties.getProperty(EMAIL_USERNAME),
+					properties.getProperty(EMAIL_PASSWORD)));
 			email.setSmtpPort(Integer.parseInt(properties.getProperty(EMAIL_SMTP_PORT)));
 			email.setHostName(properties.getProperty(EMAIL_HOST));
-			email.setFrom(properties.getProperty(EMAIL_ADMIN), properties.getProperty(EMAIL_ADMIN_NAME));
+			email.setFrom(properties.getProperty(EMAIL_ADMIN),
+					properties.getProperty(EMAIL_ADMIN_NAME));
 			email.setStartTLSRequired(true);
 			email.setStartTLSEnabled(true);
 		} catch (EmailException e) {

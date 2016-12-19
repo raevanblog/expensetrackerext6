@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core;
+package com.slabs.expense.tracker.web.services.core;
 
 import java.util.ArrayList;
 import java.util.List;

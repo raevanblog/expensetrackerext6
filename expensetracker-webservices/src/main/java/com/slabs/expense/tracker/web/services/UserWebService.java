@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.web.services;
+package com.slabs.expense.tracker.web.services;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.core.ResponseGenerator;
-import com.slabs.expense.tracker.core.ResponseStatus;
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.core.services.AdminService;
 import com.slabs.expense.tracker.core.services.EmailService;
 import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.core.services.UserService;
+import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
+import com.slabs.expense.tracker.web.services.core.ResponseStatus;
+import com.slabs.expense.tracker.web.services.exception.WebServiceException;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 
@@ -43,14 +43,14 @@ public class UserWebService {
 	 * @param record
 	 *            {@link UserInfo} - User record to INSERT
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws ExpenseTrackerException
-	 *             throws {@link ExpenseTrackerException}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
 	 */
 	@Path("user")
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response createUser(UserInfo record) throws ExpenseTrackerException {
+	public Response createUser(UserInfo record) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
@@ -61,7 +61,7 @@ public class UserWebService {
 			return response;
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
@@ -70,20 +70,20 @@ public class UserWebService {
 	 * @param record
 	 *            {@link UserInfo} - User record to UPDATE
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws ExpenseTrackerException
-	 *             throws {@link ExpenseTrackerException}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
 	 */
 	@Path("user")
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateUser(UserInfo record) throws ExpenseTrackerException {
+	public Response updateUser(UserInfo record) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			return ResponseGenerator.getSuccessResponse(service.update(record), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
@@ -92,14 +92,14 @@ public class UserWebService {
 	 * @param record
 	 *            {@link UserInfo} - User record to UPDATE
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws ExpenseTrackerException
-	 *             throws {@link ExpenseTrackerException}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
 	 */
 	@Path("user/password")
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response changePassword(UserInfo record) throws ExpenseTrackerException {
+	public Response changePassword(UserInfo record) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			List<UserInfo> list = service.select(record.getUsername(), true);
@@ -110,7 +110,7 @@ public class UserWebService {
 			return ResponseGenerator.getSuccessResponse(service.update(record), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
@@ -119,20 +119,20 @@ public class UserWebService {
 	 * @param records
 	 *            {@link UserInfo} - List of records to DELETE
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws ExpenseTrackerException
-	 *             throws {@link ExpenseTrackerException}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
 	 */
 	@Path("user")
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteUser(List<UserInfo> records) throws ExpenseTrackerException {
+	public Response deleteUser(List<UserInfo> records) throws WebServiceException {
 		try {
 			AdminService service = ServiceFactory.getInstance().getService(Services.ADMIN_SERVICE, AdminService.class);
 			return ResponseGenerator.getSuccessResponse(service.deleteUser(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
@@ -141,20 +141,20 @@ public class UserWebService {
 	 * @param username
 	 *            {@link String} - Username of the user
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws ExpenseTrackerException
-	 *             throws {@link ExpenseTrackerException}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
 	 */
 	@Path("user")
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getUser(@QueryParam("username") String username) throws ExpenseTrackerException {
+	public Response getUser(@QueryParam("username") String username) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			return ResponseGenerator.getSuccessResponse(service.select(username, false), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
@@ -163,19 +163,19 @@ public class UserWebService {
 	 * {@link com.slabs.expense.tracker.webservice.response.Response}
 	 * 
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws ExpenseTrackerException
-	 *             throws {@link ExpenseTrackerException}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
 	 */
 	@Path("user")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getUsers() throws ExpenseTrackerException {
+	public Response getUsers() throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			return ResponseGenerator.getSuccessResponse(service.selectAll(false), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 
@@ -185,18 +185,18 @@ public class UserWebService {
 	 * @param username
 	 *            {@link String} - Username of the user
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws ExpenseTrackerException
+	 * @throws WebServiceException
 	 */
 	@Path("user/username")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response isUserNameAvailable(@QueryParam("checkAvailable") String username) throws ExpenseTrackerException {
+	public Response isUserNameAvailable(@QueryParam("checkAvailable") String username) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			return ResponseGenerator.getSuccessResponse(service.isUserNameAvailable(username), Operation.CHECK);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 

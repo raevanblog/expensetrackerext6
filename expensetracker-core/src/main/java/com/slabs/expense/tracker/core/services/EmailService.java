@@ -32,7 +32,8 @@ public class EmailService {
 
 	public void sendActivationEmail(UserInfo user) throws Exception {
 
-		String activationKey = RandomGenerator.generateRandomText(RandomGenerator.DEFAULT_RANDOM_TEXT, 25);
+		String activationKey = RandomGenerator
+				.generateRandomText(RandomGenerator.DEFAULT_RANDOM_TEXT, 25);
 		userDao.setActivationKey(user.getUsername(), activationKey);
 
 		String activationUrl = URLUtil.getAppUrl() + "#activate?vcode=" + activationKey;
@@ -43,9 +44,15 @@ public class EmailService {
 		model.put("activationurl", activationUrl);
 
 		String message = MarkerEngine.process(Constants.EMAIL_ACTIVATION_TEMPLATE, model);
-		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUBJECT, user.getEmail());
+		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUBJECT,
+				user.getEmail());
 		email.send();
 
+	}
+
+	public void sendMail(String subject, String message) throws Exception {
+		Email email = Mailer.createHtmlEmail(message, subject);
+		email.send();
 	}
 
 	public void sendRegSuccessMail(UserInfo user) throws Exception {
@@ -54,7 +61,8 @@ public class EmailService {
 		model.put("lname", user.getLastName());
 
 		String message = MarkerEngine.process(Constants.REG_SUCCESS_TEMPLATE, model);
-		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUCCESS_SUBJECT, user.getEmail());
+		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUCCESS_SUBJECT,
+				user.getEmail());
 		email.send();
 	}
 

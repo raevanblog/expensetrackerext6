@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.web.services;
+package com.slabs.expense.tracker.web.services;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,13 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.Graph;
-import com.slabs.expense.tracker.core.ResponseGenerator;
-import com.slabs.expense.tracker.core.ResponseStatus;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.core.services.ExpenseService;
 import com.slabs.expense.tracker.core.services.IncomeService;
 import com.slabs.expense.tracker.core.services.Services;
+import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
+import com.slabs.expense.tracker.web.services.core.ResponseStatus;
+import com.slabs.expense.tracker.web.services.exception.WebServiceException;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 
@@ -69,7 +70,7 @@ public class GraphWebService {
 			}
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new ExpenseTrackerException(e, ResponseStatus.SERVER_ERROR);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
 

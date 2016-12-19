@@ -9,6 +9,7 @@ Ext.define('expensetracker.util.Url', {
 		createUser : '/expensetrackerweb/web/request/user/create',
 		activateUser : '/expensetrackerweb/web/request/user/activate',
 		activationMail : '/expensetrackerweb/web/request/user/email/activate',
+		mail : '/expensetrackerweb/web/request/email',
 		dashboardService : '/expensetrackerweb/api/exptr-web/dashboard',
 		userService : '/expensetrackerweb/api/exptr-web/user',
 		passwordService : '/expensetrackerweb/api/exptr-web/user/password',			

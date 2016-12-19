@@ -309,4 +309,29 @@ public class AccessController {
 		return new ModelAndView(WebConstants.JSON, output);
 	}
 
+	@RequestMapping(value = "email", method = { RequestMethod.POST })
+	public ModelAndView sendMail(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> output = new HashMap<String, Object>();
+		try {
+			EmailService emailService = ServiceFactory.getInstance()
+					.getService(Services.EMAIL_SERVICE, EmailService.class);
+
+			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
+
+			String subject = map.get("subject");
+			String htmlMessage = map.get("htmlMessage");
+			emailService.sendMail(subject, htmlMessage);
+
+			output.put(WebConstants.SUCCESS, Boolean.TRUE);
+			output.put(WebConstants.MESSAGE, MessageConstants.MAILED);
+
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			output.put(WebConstants.SUCCESS, Boolean.FALSE);
+			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
+			return new ModelAndView(WebConstants.JSON, output);
+		}
+		return new ModelAndView(WebConstants.JSON, output);
+	}
+
 }
