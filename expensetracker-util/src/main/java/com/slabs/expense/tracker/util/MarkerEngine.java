@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.slabs.expense.tracker.util.exception.UtilityException;
 
 import freemarker.template.Configuration;
