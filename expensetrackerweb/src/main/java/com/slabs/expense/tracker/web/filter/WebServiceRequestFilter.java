@@ -11,8 +11,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
-import com.slabs.expense.tracker.core.ResponseGenerator;
-import com.slabs.expense.tracker.core.ResponseStatus;
+import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
+import com.slabs.expense.tracker.web.services.core.ResponseStatus;
 
 @Provider
 @PreMatching
