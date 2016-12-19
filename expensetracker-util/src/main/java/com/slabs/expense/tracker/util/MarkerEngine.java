@@ -17,8 +17,6 @@ import freemarker.template.TemplateException;
 
 public class MarkerEngine {
 
-	private static final Logger L = LoggerFactory.getLogger(MarkerEngine.class);
-
 	private static Configuration configuration;
 
 	public static void initialize() {
@@ -26,7 +24,8 @@ public class MarkerEngine {
 		MarkerEngine.configuration = createDefaultConfig();
 	}
 
-	public static String process(String templateName, Map<String, ? extends Object> model) throws UtilityException {
+	public static String process(String templateName, Map<String, ? extends Object> model)
+			throws UtilityException {
 
 		StringWriter writer = null;
 		if (configuration == null) {
@@ -56,7 +55,8 @@ public class MarkerEngine {
 
 	}
 
-	public static void process(String templateName, Map<String, Object> model, File fileToWrite) throws UtilityException {
+	public static void process(String templateName, Map<String, Object> model, File fileToWrite)
+			throws UtilityException {
 
 		FileWriter writer = null;
 		if (configuration == null) {
@@ -87,7 +87,8 @@ public class MarkerEngine {
 	private static Configuration createDefaultConfig() {
 
 		Configuration configuration = new Configuration(Configuration.VERSION_2_3_25);
-		configuration.setClassLoaderForTemplateLoading(MarkerEngine.class.getClassLoader(), "template");
+		configuration.setClassLoaderForTemplateLoading(MarkerEngine.class.getClassLoader(),
+				"template");
 		return configuration;
 	}
 

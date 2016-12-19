@@ -36,9 +36,11 @@ public class MessageConstants {
 
 	public static final String ACTIVATION_FAILED = "Activation Failed, please contact customer support.";
 
-	public static final String ACTIVATION_FAILED_INVALID_KEY = "Activation failed, invalid activation key.";
+	public static final String ACTIVATION_FAILED_INVALID_KEY = "Activation failed, invalid activation key.";	
 
 	public static final String ACTIVATION_MAILED = "Activation link has been mailed to your registered email.";
+	
+	public static final String MAILED = "Your query has been mailed to Administrator.";
 
 	public static final String USER_NOT_FOUND = "We are unable to verify your username, please contact customer support.";
 }

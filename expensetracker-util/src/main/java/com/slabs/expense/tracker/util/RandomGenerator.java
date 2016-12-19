@@ -2,12 +2,7 @@ package com.slabs.expense.tracker.util;
 
 import java.util.Random;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class RandomGenerator {
-
-	private static final Logger L = LoggerFactory.getLogger(RandomGenerator.class);
 
 	public static final String DEFAULT_RANDOM_TEXT = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
