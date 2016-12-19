@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.slabs</groupId>
-			<artifactId>expensetracker-core</artifactId>
+			<artifactId>expensetracker-webservices</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

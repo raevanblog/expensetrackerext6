@@ -1,16 +1,10 @@
 package com.slabs.expense.tracker.core.server;
 
-import java.net.URI;
-
-import javax.ws.rs.core.UriBuilder;
-
-import org.glassfish.jersey.netty.httpserver.NettyHttpContainerProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.core.web.services.ExpenseTrackerServices;
 import com.slabs.expense.tracker.util.Mailer;
 import com.slabs.expense.tracker.util.MarkerEngine;
 import com.slabs.expense.tracker.util.PropertiesUtil;
@@ -57,27 +51,14 @@ public class Server {
 			L.info("Initializing Url Utility...");
 			URLUtil.initialize(ip, port, appName, isSecured);
 
-			Mailer.initialize(PropertiesUtil.getFromClassPath(Constants.MAIL_PROPERTIES), Constants.APP_NAME);
+			Mailer.initialize(PropertiesUtil.getFromClassPath(Constants.MAIL_PROPERTIES),
+					Constants.APP_NAME);
 
 		} catch (UtilityException e) {
 			L.error("Exception occurred while starting the application, {}", e);
 			System.exit(1);
 		}
 
-	}
-
-	private void start() {
-		L.info("Starting ExpenseTracker Web Server...");
-		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();
-		L.info("Registering Web Services API...");
-		NettyHttpContainerProvider.createHttp2Server(baseUri, new ExpenseTrackerServices(), null);
-		L.info("Server is started and available @ http://localhost:9998/exptr-web");
-	}
-
-	public static void main(String args[]) {
-		L.info("Initializing Expense Tracker Server...");
-		Server.getInstance().initialize("0.0.0.0", 9998, "exptr-web", Boolean.FALSE);
-		Server.getInstance().start();
 	}
 
 }

@@ -7,41 +7,32 @@
 		<artifactId>expensetracker</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-
-	<artifactId>expensetracker-core</artifactId>
-
-	<name>expensetracker-core</name>
+	<artifactId>expensetracker-webservices</artifactId>
+	<name>expensetracker-webservices</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.9.1.0</version>
-		</dependency>
 		<dependency>
 			<groupId>com.slabs</groupId>
-			<artifactId>expensetracker-db-connector</artifactId>
+			<artifactId>expensetracker-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.slabs</groupId>
-			<artifactId>expensetracker-util</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.23.2</version>
 		</dependency>
 		<dependency>
-			<groupId>com.slabs</groupId>
-			<artifactId>expensetracker-reports</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-netty-http</artifactId>
+			<version>2.23.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring-version}</version>
-		</dependency>		
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.23.2</version>
+		</dependency>
 	</dependencies>
-
 </project>
