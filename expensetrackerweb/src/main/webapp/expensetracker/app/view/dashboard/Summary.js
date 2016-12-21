@@ -14,13 +14,7 @@ Ext.define('expensetracker.view.dashboard.Summary', {
 			el : {
 				delegate : 'a',
 				click : 'onIncomeEditClick'
-			},
-			render : function(comp) {
-				Ext.QuickTips.register({
-					target : comp.getEl(),
-					text : 'Edit Income'
-				});
-			}
+			}			
 		}
 	}, {
 		xtype : 'displayfield',

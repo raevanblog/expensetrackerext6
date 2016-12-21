@@ -1,8 +1,9 @@
 Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.expensecategorycontroller',
-	onRenderCategoryGrid : function(grid) {
+	onActivateCategoryGrid : function(grid) {
 		var me = this;
+		var view = me.getView();
 		var store = Ext.create('expensetracker.store.ExpenseCategory');
 		grid.setLoading('Loading...');
 		store.load({
@@ -15,8 +16,10 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
-						me.getView().close();
 						me.fireEvent('navigatelogin');
+						if(view != null) {
+							view.close();
+						}						
 					}
 				}
 			}

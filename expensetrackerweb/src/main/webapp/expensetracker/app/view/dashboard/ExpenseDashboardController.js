@@ -161,6 +161,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	},
 	onRenderExpenseVsIncome : function(panel) {
 		var me = this;
+		var view = me.getView();
 		var expvsincome = me.lookup('expensevsincome');
 		var linechart = expvsincome.down('[itemId=linechart]');
 		var graphStore = Ext.create('expensetracker.store.Graph');
@@ -177,8 +178,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
-						me.getView().close();
 						me.fireEvent('navigatelogin');
+						if(view !== null) {
+							view.close();
+						}						
 					}
 				}
 			}
@@ -189,6 +192,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 
 	onRenderCategoryExpense : function(panel) {
 		var me = this;
+		var view = me.getView();
 		var categorychartpanel = me.lookup('categorychartpanel');
 		var expensechart = categorychartpanel.down('[itemId=expensechart]');
 		var graphStore = Ext.create('expensetracker.store.Graph');
@@ -206,8 +210,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
-						me.getView().close();
 						me.fireEvent('navigatelogin');
+						if(view !== null) {
+							view.close();
+						}						
 					}
 				}
 			}

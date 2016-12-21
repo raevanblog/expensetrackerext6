@@ -11,7 +11,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		handler : 'onCategorySaveOrUpdate'
 	} ],
 	listeners : {
-		afterrender : 'onRenderCategoryGrid'
+		activate : 'onActivateCategoryGrid'
 	},
 	plugins : {
 		ptype : 'cellediting',

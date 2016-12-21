@@ -56,8 +56,10 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
-						me.getView().close();
 						me.fireEvent('navigatelogin');
+						if(view !== null) {
+							view.close();
+						}
 					}
 				}
 			}
@@ -139,7 +141,8 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	},
 	syncData : function(grid, closeWindow) {
 		var me = this;
-		var model = me.getView().getViewModel();
+		var view = me.getView();
+		var model = view.getViewModel();
 		grid.setLoading("Saving...");
 		grid.getStore().sync({
 			success : function(batch) {
@@ -148,7 +151,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 					me.fireEvent('updatedashboard');					
 				}
 				if (closeWindow) {
-					me.getView().close();
+					view.close();
 				} else {
 					me.refreshGridView(grid);
 				}
@@ -170,9 +173,11 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 				if (isUnauthorizedAccess) {
 					expensetracker.util.Message.toast('Unauthorized Access');
-					me.getView().clearListeners();
-					me.getView().close();
 					me.fireEvent('navigatelogin');
+					if(view !== null) {
+						view.clearListeners();
+						view.close();
+					}
 				} else {
 					expensetracker.util.Message.toast('Server Error');
 				}

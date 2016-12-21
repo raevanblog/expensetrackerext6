@@ -26,8 +26,10 @@ Ext.define('expensetracker.view.profile.PasswordController', {
 					view.setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);					
 					if(401 === resObj.status_Code) {
-						me.getView().close();
 						me.fireEvent('navigatelogin');
+						if(view !== null) {
+							view.close();
+						}
 						expensetracker.util.Message.toast(resObj.status_Message);
 					}else if(400 === resObj.status_Code) {						
 						errorLbl.setText(resObj.exception);						

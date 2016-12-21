@@ -40,9 +40,11 @@ Ext.define('expensetracker.view.profile.UserController', {
 				view.setLoading(false);
 				var response = Ext.JSON.decode(response.responseText);
 				expensetracker.util.Message.toast(response.status_Message);
-				if (401 === response.status_Code) {					
-					me.getView().close();
+				if (401 === response.status_Code) {
 					me.fireEvent('navigatelogin');
+					if(view !== null) {
+						view.close();
+					}
 				}
 			}
 		});
@@ -60,12 +62,13 @@ Ext.define('expensetracker.view.profile.UserController', {
 	},
 	onSaveProfile : function(saveBtn) {
 		var me = this;
-		var model = me.getView().getViewModel();
+		var view = me.getView();
+		var model = view.getViewModel();
 		var profileForm = me.lookup('profileform');
 		var profileimage = me.lookup('profileimage');
 		
 		if (profileForm.isValid()) {
-			me.getView().setLoading("Saving...");
+			view.setLoading("Saving...");
 			profileForm.submit({
 				method : 'PUT',
 				params : {
@@ -74,7 +77,7 @@ Ext.define('expensetracker.view.profile.UserController', {
 					
 				},
 				success : function(form, action) {
-					me.getView().setLoading(false);
+					view.setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);
 					var response = resObj.result;
 					if (response.noOfRecords > 0) {
@@ -83,11 +86,11 @@ Ext.define('expensetracker.view.profile.UserController', {
 					}
 				},
 				failure : function(form, action) {
-					me.getView().setLoading(false);
+					view.setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);
 					if(401 === resObj.status_Code) {
-						me.getView().close();
 						me.fireEvent('navigatelogin');
+						view.close();						
 						expensetracker.util.Message.toast(resObj.status_Message);
 					} else {
 						expensetracker.util.Message.toast('*' +resObj.status_Message);
