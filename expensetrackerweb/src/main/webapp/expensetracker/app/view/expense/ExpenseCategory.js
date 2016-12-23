@@ -6,7 +6,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 	requires : [ 'expensetracker.store.ExpenseCategory', 'expensetracker.view.expense.ExpenseCategoryController' ],
 	bbar : ['->', {
 		xtype : 'button',
-		text : 'Save/Update',
+		text : 'Save',
 		iconCls : 'x-fa fa-save',
 		handler : 'onCategorySaveOrUpdate'
 	} ],
@@ -28,7 +28,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 			maxLength: 15,
 			allowBlank : false			
 		},
-		width : 150
+		width : 200
 	}, {
 		text : 'Description',
 		dataIndex : 'description',
@@ -37,7 +37,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 			allowBlank : true,
 			maxLength : 100
 		},
-		width : 150
+		width : 200
 	}, {
 		xtype : 'actioncolumn',
 		align : 'center',

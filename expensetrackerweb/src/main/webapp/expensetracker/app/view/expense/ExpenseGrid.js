@@ -7,7 +7,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	layout : 'fit',	
 	plugins : {
 		ptype : 'cellediting',
-		clicksToEdit : 1
+		clicksToEdit : 1		
 	},
 	initComponent : function() {
 		this.store = Ext.create('expensetracker.store.Expense');
@@ -66,6 +66,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		editor : {
 			xtype : 'combobox',
 			allowBlank : false,
+			focusOnToFront : true,
 			store : 'ExpenseName',
 			displayField : 'itemName',
 			valueField : 'itemName',
@@ -83,6 +84,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			valueField : 'category',
 			store : 'ExpenseCategory',
 			forceSelection : true,
+			allowBlank : false,
 			typeAhead : true,
 			queryMode : 'local',
 			triggerAction : 'all'			
@@ -95,6 +97,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'combobox',
 			displayField : 'exptype',
 			valueField : 'exptype',
+			allowBlank : false,
 			store : 'ExpenseType',
 			forceSelection : true,
 			typeAhead : true,

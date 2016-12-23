@@ -22,7 +22,10 @@ Ext.define('expensetracker.view.login.LoginController', {
 							name : 'IND',
 							symbol : '₹'
 						});
-						me.loadApplicationStore();
+						expensetracker.util.Store.loadStaticStore();
+						expensetracker.util.Store.loadStore(Ext.getStore('ExpenseCategory'), {
+							username : expensetracker.util.Session.getUsername()
+						});
 					}
 					me.getView().destroy();
 					Ext.widget('app-main');
@@ -42,13 +45,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		if (Ext.event.Event.ENTER === e.keyCode) {
 			me.onLogin(loginBtn);
 		}
-	},
-	loadApplicationStore : function() {
-		Ext.getStore('ExpenseDock').load();
-		Ext.getStore('ExpenseType').load();
-		Ext.getStore('ExpenseName').load();
-		Ext.getStore('IncomeType').load();
-	},
+	},	
 	onOpenRegistration : function(registrationBtn) {
 		var me = this;
 		var card = me.lookup('formcard');
@@ -177,6 +174,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 	onContactUs : function(contactUsBtn) {
 		var window = Ext.create('expensetracker.view.message.ContactUs', {
 			modal : true,
+			title : 'Contact Us',
 			reference : 'contactus'
 		});
 		window.show();
@@ -185,9 +183,9 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var contactus  = me.lookup('contactus');
 		var form = me.lookup('contactusform');
+		var fromName = me.lookup('contactname');
 		var fromEmail  = me.lookup('contactemail');
-		var subjecttext  = me.lookup('contactsubject');
-		var subject = subjecttext.getValue() + ' from ' + fromEmail; 
+		var subject  = me.lookup('contactsubject');		
 		var message = me.lookup('contactmessage');
 		
 		contactus.setLoading('Sending...');
@@ -196,8 +194,11 @@ Ext.define('expensetracker.view.login.LoginController', {
 			url : expensetracker.util.Url.getMail(),
 			method : 'POST',
 			jsonData : Ext.JSON.encode({
-				subject : subject,
-				htmlMessage : message.getValue()
+				msgfrom : fromName.getValue(),
+				email : fromEmail.getValue(),
+				subject : subject.getValue(),
+				message : message.getValue(),
+				isNew : 'Y'
 			}),
 			success : function(response, opts) {
 				contactus.setLoading(false);				

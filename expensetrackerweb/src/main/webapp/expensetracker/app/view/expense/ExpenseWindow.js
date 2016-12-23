@@ -11,6 +11,11 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	bind : {
 		title : '{title}'
 	},
+	tools : [{
+		type : 'refresh',
+		tooltip : 'Reload',
+		handler : 'onReload'
+	}],
 	layout : {
 		type: 'card'		
 	},
