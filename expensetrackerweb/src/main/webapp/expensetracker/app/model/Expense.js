@@ -31,5 +31,10 @@ Ext.define('expensetracker.model.Expense', {
 		name : 'username',
 		type : 'string'
 	} ],
-	idProperty : 'id'
+	idProperty : 'id',
+	validators : {
+		itemName : 'presence',
+		category : 'presence',
+		exptype : 'presence'		
+	}
 });

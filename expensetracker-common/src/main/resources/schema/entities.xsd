@@ -4,7 +4,7 @@
 	elementFormDefault="qualified">
 
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
-	<element name="UserInfo" type="et:UserInfo" />	
+	<element name="UserInfo" type="et:UserInfo" />
 	<element name="Expense" type="et:Expense" />
 	<element name="ExpenseType" type="et:ExpenseType" />
 	<element name="Income" type="et:Income" />
@@ -80,7 +80,7 @@
 			<element name="activationKey" type="string" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="ExpenseCategory">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
@@ -219,10 +219,11 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="id" type="long" />			
+			<element name="id" type="long" />
 			<element name="msgfrom" type="string" />
 			<element name="subject" type="string" />
 			<element name="message" type="string" />
+			<element name="email" type="string" />
 			<element name="isNew" type="string" default="Y" />
 		</sequence>
 	</complexType>

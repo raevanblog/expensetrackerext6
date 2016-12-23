@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.slabs.expense.tracker.common.constants.Constants;
+import com.slabs.expense.tracker.common.db.entity.Message;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.services.AdminService;
@@ -309,18 +310,15 @@ public class AccessController {
 		return new ModelAndView(WebConstants.JSON, output);
 	}
 
-	@RequestMapping(value = "email", method = { RequestMethod.POST })
+	@RequestMapping(value = "query", method = { RequestMethod.POST })
 	public ModelAndView sendMail(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			EmailService emailService = ServiceFactory.getInstance()
-					.getService(Services.EMAIL_SERVICE, EmailService.class);
+			AdminService adminService = ServiceFactory.getInstance()
+					.getService(Services.ADMIN_SERVICE, AdminService.class);
 
-			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
-
-			String subject = map.get("subject");
-			String htmlMessage = map.get("htmlMessage");
-			emailService.sendMail(subject, htmlMessage);
+			Message message = JSONUtil.getObjectFromJSON(request.getInputStream(), Message.class);			
+			adminService.createQuery(message);
 
 			output.put(WebConstants.SUCCESS, Boolean.TRUE);
 			output.put(WebConstants.MESSAGE, MessageConstants.MAILED);

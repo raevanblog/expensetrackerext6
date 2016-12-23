@@ -24,8 +24,9 @@ public interface UserDAO {
 	public Integer deleteUser(@Param("record") UserInfo record) throws Exception;
 
 	public Integer updateUser(@Param("record") UserInfo record) throws Exception;
-	
-	public Integer activateUser(@Param("username")String username, @Param("isActivate") String isActivate) throws Exception;
+
+	public Integer activateUser(@Param("username") String username,
+			@Param("isActivate") String isActivate) throws Exception;
 
 	public Integer setActivationKey(@Param("username") String username,
 			@Param("activationKey") String activationKey) throws Exception;
@@ -34,11 +35,19 @@ public interface UserDAO {
 
 	public Integer insertMessage(@Param("records") List<Message> records) throws Exception;
 
-	public Integer updateMessage(@Param("record") Message message) throws Exception;
+	public Integer updateMessage(@Param("record") Message record) throws Exception;
 
-	public Integer deleteMessage(@Param("record") Message message,
-			@Param("isDeleteOldMsg") boolean isDeleteOldMsg) throws Exception;
+	public Integer deleteMessage(@Param("record") Message record) throws Exception;
 
-	public List<Message> getMessage(@Param("username") String username, boolean isNew) throws Exception;
+	public List<Message> getMessage(@Param("username") String username, boolean isNew)
+			throws Exception;
+
+	public Integer insertQuery(@Param("record") Message record) throws Exception;
+
+	public Integer updateQuery(@Param("record") Message record) throws Exception;
+
+	public Integer deleteQuery(@Param("record") Message record) throws Exception;
+
+	public List<Message> getQuery(boolean isNew) throws Exception;
 
 }
