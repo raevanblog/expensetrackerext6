@@ -5,9 +5,13 @@ Ext.define('expensetracker.view.login.Login', {
 	plugins : 'viewport',
 	layout : {
 		type : 'border'
-	},
-	requires : [ 'expensetracker.view.login.LoginForm','expensetracker.view.login.ActivationWindow', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController' ],
+	},	
+	requires : [ 'expensetracker.view.login.LoginForm','expensetracker.view.login.ActivationWindow', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController', 'expensetracker.view.login.LoginViewModel' ],
 	controller : 'login',
+	viewModel : 'loginviewmodel',
+	listeners : {
+		render : 'onRender'
+	},
 	items : [ {
 		xtype : 'toolbar',
 		border : 1,
@@ -55,9 +59,11 @@ Ext.define('expensetracker.view.login.Login', {
 		},
 		items : [ {
 			xtype : 'logincontainer',
+			cls : 'container-background',
 			reference : 'logincontainer'
 		}, {
 			xtype : 'registercontainer',
+			cls : 'container-background',
 			reference : 'registercontainer'
 		}]
 	} ]

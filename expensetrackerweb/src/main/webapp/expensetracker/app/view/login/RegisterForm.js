@@ -69,8 +69,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			reference : 'sex',
 			name : 'sex',
 			allowBlank : false,
-			labelSeparator : '',
-			anchor : '100%',
+			labelSeparator : '',			
 			forceSelection : true,
 			store : [ [ 'M', 'Male' ], [ 'F', 'Female' ] ]
 		}, {
@@ -80,8 +79,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			allowBlank : false,
 			emptyText : 'Email',
 			vtype : 'email',
-			name : 'email',
-			anchor : '100%',
+			name : 'email',		
 			allowBlank : false,
 			maxLength : 50,
 			reference : 'email',
@@ -92,8 +90,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			fieldLabel : 'Mobile',
 			enforceMaxLength : true,
 			name : 'mobile',
-			emptyText : 'Mobile',
-			anchor : '100%',
+			emptyText : 'Mobile',			
 			maxLength : 10,
 			hideTrigger : true,
 			reference : 'mobile',
@@ -104,8 +101,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 		}, {
 			xtype : 'textarea',
 			labelAlign : 'top',
-			fieldLabel : 'Address',
-			anchor : '100%',
+			fieldLabel : 'Address',			
 			emptyText : 'Max(200)',
 			name : 'address',
 			maxLength : 200,
@@ -176,19 +172,24 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				matchfield: 'regpassword',
 				flex : 1
 			} ]
-		} ],
-		buttons : [ {
+		},{
+			xtype : 'button',
 			text : 'Register',
+			scale : 'large',
+			ui : 'soft-green',
 			formBind : true,
 			iconCls : 'x-fa  fa-user-plus',
 			reference : 'registerBtn',
 			handler : 'onRegisterUser'
-		}, {
+		},{
+			xtype : 'button',
+			scale : 'large',
+			ui : 'soft-red',			
 			text : 'Cancel',
 			iconCls : 'x-fa  fa-close',
 			reference : 'closeRegisterBtn',
 			handler : 'onCloseRegister'
-		} ]
+		} ]		
 	} ]
 
 });

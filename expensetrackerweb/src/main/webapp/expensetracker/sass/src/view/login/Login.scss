@@ -1,0 +1,20 @@
+.container-background {
+    
+	background-image:url('images/background.png');
+	background-size:cover;
+	background-repeat:repeat;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+    
+}
+
+.link-forgot-password {
+	line-height:32px;
+	color: #35BAF6;
+	text-decoration:none;
+	margin-left:5px;
+	&:hover{
+		text-decoration:underline;
+	}
+}

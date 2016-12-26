@@ -52,5 +52,18 @@ Ext.define('expensetracker.util.Session', {
 				Ext.widget('app-main');
 			}
 		});
+	},	
+	getCookie : function() {
+		var me = this;
+		var cookie = Ext.util.Cookies.get('expensetracker');
+		if(cookie === null) {
+			return cookie;
+		}else{
+			return Ext.decode(cookie);
+		}		
+	},
+	setCookie : function(object) {		
+		var cookie = Ext.encode(object);	
+		Ext.util.Cookies.set('expensetracker', cookie);
 	}
 });

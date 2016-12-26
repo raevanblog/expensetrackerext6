@@ -47,7 +47,7 @@ Ext.define('expensetracker.view.message.ContactUs', {
 			labelSeparator : ''
 		}],
 		buttons : [{
-			text : 'Send',
+			text : 'Send',			
 			formBind : true,
 			iconCls : 'x-fa fa-envelope',
 			handler : 'onSendMessageToAdmin'

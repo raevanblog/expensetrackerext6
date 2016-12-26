@@ -17,8 +17,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 				width: '80%'
 			 }
 		},
-		reference : 'loginform',
-		title : 'Login',
+		reference : 'loginform',		
 		method : 'POST',		
 		jsonSubmit : true,
 		padding: '100 0 0 0',
@@ -29,36 +28,74 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			 align : 'stretch'
 		},
 		items : [ {
-			xtype : 'textfield',
-			fieldLabel : 'Username',
-			labelSeparator : '',
+			xtype : 'textfield',			
+			labelSeparator : '',			
+			hideLabel : true,
+			height : 51,
 			reference : 'username',
 			submitValue : false,
 			validateBlank : true,
 			name : 'username',
 			allowBlank : false,
+			emptyText : 'Username',
 			enableKeyEvents : true,
+			bind : {
+				value : '{username}'
+			},
 			listeners : {
 				keypress : 'onEnter'
 			},
 			maxLength : 25,
 			flex : 1
 		}, {
-			xtype : 'textfield',
-			fieldLabel : 'Password',
+			xtype : 'textfield',			
+			hideLabel : true,
+			height : 51,
 			submitValue : false,
 			reference : 'password',
 			allowBlank : false,
 			name : 'password',
+			bind : {
+				value : '{password}'
+			},
 			enableKeyEvents : true,
 			validateBlank : true,
 			labelSeparator : '',
 			maxLength : 25,
+			emptyText : 'Password',
 			listeners : {
 				keypress : 'onEnter'
 			},
 			inputType : 'password',
 			flex : 1
+		},{
+			xtype: 'container',
+			layout: 'hbox',
+			items: [
+				{
+					xtype: 'checkboxfield',
+					reference : 'loginrememberme',
+					flex : 1,					
+					height: 30,
+					bind : {
+						value : '{rememberMe}'
+					},
+					boxLabel: 'Remember me'
+				},
+				{
+					xtype: 'box',
+					html: '<a href="#passwordreset" class="link-forgot-password"> Forgot Password ?</a>'
+				}
+			]
+        },{
+			xtype : 'button',
+			scale : 'large',
+			ui : 'soft-green',
+			formBind : true,
+			text : 'Login',
+			iconCls: 'x-fa fa-sign-in',
+			reference : 'loginBtn',
+			handler : 'onLogin'
 		},{
 			xtype : 'label',
 			padding : '10 10 10 10',
@@ -67,14 +104,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			style : {
 				color : 'red'
 			}
-		} ],
-		buttons : [ {
-				text : 'Login',
-				formBind : true,
-				iconCls: 'x-fa fa-sign-in',
-				reference : 'loginBtn',
-				handler : 'onLogin'
-		} ]
+		}]		
 	}]
 	
 });

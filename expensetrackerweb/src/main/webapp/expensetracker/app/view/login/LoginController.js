@@ -1,20 +1,38 @@
 Ext.define('expensetracker.view.login.LoginController', {
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.login',	
+	alias : 'controller.login',
+	onRender : function() {
+		var me = this;
+		var model = me.getView().getViewModel();
+		var cookie = expensetracker.util.Session.getCookie();
+		
+		if(cookie !== null) {			
+			model.set('username', cookie.username);
+			model.set('password', Ext.util.Base64.decode(cookie.password));
+			model.set('rememberMe', true);
+		}
+	},
 	onLogin : function(button) {
 		var me = this;
-		var loginWindow = me.getView();		
+		var view = me.getView();
+		var	model = view.getViewModel();
 		var loginform = me.lookup('loginform');
-		var username = me.lookup('username');
-		var password = me.lookup('password');
+		
 		if (loginform.isValid()) {
-			loginWindow.setLoading('Logging in...');
+			view.setLoading('Logging in...');
 			loginform.submit({
 				params : {
-					credential : Ext.util.Base64.encode(username.getValue() + ':' + password.getValue())
+					credential : Ext.util.Base64.encode(model.get('username') + ':' + model.get('password'))
 				},
 				success : function(form, action) {
-					loginWindow.setLoading(false);
+					view.setLoading(false);
+					if(model.get('rememberMe')) {						
+						var cookie = {
+							username : model.get('username'),
+							password : Ext.util.Base64.encode(model.get('password'))
+						};						
+						expensetracker.util.Session.setCookie(cookie);					
+					}
 					var response = Ext.decode(action.response.responseText);
 					if (response.user !== null) {
 						expensetracker.util.Session.setUser(response.user);
@@ -31,7 +49,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 					Ext.widget('app-main');
 				},
 				failure : function(form, action) {
-					loginWindow.setLoading(false);
+					view.setLoading(false);
 					var errorlbl = me.lookup('errorlbl');
 					var message = action.result.message;
 					errorlbl.update('<p>* ' + message);

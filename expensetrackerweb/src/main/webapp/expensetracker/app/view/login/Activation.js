@@ -3,6 +3,7 @@ Ext.define('expensetracker.view.login.Activation', {
 	xtype : 'activation',	
 	alias : 'view.activation',
 	plugins : 'viewport',
+	cls : 'container-background',
 	requires : ['expensetracker.view.login.ActivationForm', 'expensetracker.view.login.ActivationController'],
 	controller : 'activation',
 	layout : {
