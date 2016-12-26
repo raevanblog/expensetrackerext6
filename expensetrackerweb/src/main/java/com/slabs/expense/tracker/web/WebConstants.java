@@ -8,6 +8,8 @@ public class WebConstants {
 	
 	public static final String MESSAGE = "message";
 	
+	public static final String IS_AVAILABLE = "isAvailable";
+	
 	public static final String IS_USER_REGISTERED = "isUserRegistered";
 	
 	public static final String JSON = "json";

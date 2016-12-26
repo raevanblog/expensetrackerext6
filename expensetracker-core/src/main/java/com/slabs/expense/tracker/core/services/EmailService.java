@@ -32,11 +32,10 @@ public class EmailService {
 
 	public void sendActivationEmail(UserInfo user) throws Exception {
 
-		String activationKey = RandomGenerator
-				.generateRandomText(RandomGenerator.DEFAULT_RANDOM_TEXT, 25);
+		String activationKey = RandomGenerator.generateRandomText(RandomGenerator.DEFAULT_RANDOM_TEXT, 25);
 		userDao.setActivationKey(user.getUsername(), activationKey);
 
-		String activationUrl = URLUtil.getAppUrl() + "#activate?vcode=" + activationKey;
+		String activationUrl = URLUtil.getAppUrl() + "#activate?username=" + user.getUsername() + "&key=" + activationKey;
 
 		Map<String, String> model = new HashMap<String, String>();
 		model.put("fname", user.getFirstName());
@@ -44,8 +43,7 @@ public class EmailService {
 		model.put("activationurl", activationUrl);
 
 		String message = MarkerEngine.process(Constants.EMAIL_ACTIVATION_TEMPLATE, model);
-		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUBJECT,
-				user.getEmail());
+		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUBJECT, user.getEmail());
 		email.send();
 
 	}
@@ -61,8 +59,7 @@ public class EmailService {
 		model.put("lname", user.getLastName());
 
 		String message = MarkerEngine.process(Constants.REG_SUCCESS_TEMPLATE, model);
-		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUCCESS_SUBJECT,
-				user.getEmail());
+		Email email = Mailer.createHtmlEmail(message, Constants.EMAIL_ACTIVATION_SUCCESS_SUBJECT, user.getEmail());
 		email.send();
 	}
 

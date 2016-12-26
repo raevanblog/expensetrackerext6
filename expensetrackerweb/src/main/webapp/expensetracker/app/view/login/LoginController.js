@@ -5,8 +5,8 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var model = me.getView().getViewModel();
 		var cookie = expensetracker.util.Session.getCookie();
-		
-		if(cookie !== null) {			
+
+		if (cookie !== null) {
 			model.set('username', cookie.username);
 			model.set('password', Ext.util.Base64.decode(cookie.password));
 			model.set('rememberMe', true);
@@ -15,9 +15,9 @@ Ext.define('expensetracker.view.login.LoginController', {
 	onLogin : function(button) {
 		var me = this;
 		var view = me.getView();
-		var	model = view.getViewModel();
+		var model = view.getViewModel();
 		var loginform = me.lookup('loginform');
-		
+
 		if (loginform.isValid()) {
 			view.setLoading('Logging in...');
 			loginform.submit({
@@ -26,12 +26,12 @@ Ext.define('expensetracker.view.login.LoginController', {
 				},
 				success : function(form, action) {
 					view.setLoading(false);
-					if(model.get('rememberMe')) {						
+					if (model.get('rememberMe')) {
 						var cookie = {
 							username : model.get('username'),
 							password : Ext.util.Base64.encode(model.get('password'))
-						};						
-						expensetracker.util.Session.setCookie(cookie);					
+						};
+						expensetracker.util.Session.setCookie(cookie);
 					}
 					var response = Ext.decode(action.response.responseText);
 					if (response.user !== null) {
@@ -56,14 +56,14 @@ Ext.define('expensetracker.view.login.LoginController', {
 				}
 			})
 		}
-	},	
+	},
 	onEnter : function(textfield, e) {
 		var me = this;
 		var loginBtn = me.lookup('loginBtn');
 		if (Ext.event.Event.ENTER === e.keyCode) {
 			me.onLogin(loginBtn);
 		}
-	},	
+	},
 	onOpenRegistration : function(registrationBtn) {
 		var me = this;
 		var card = me.lookup('formcard');
@@ -75,8 +75,8 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var registerform = me.lookup('registerform');
 		registerform.reset();
 		card.getLayout().setActiveItem(0);
-	},	
-    onActivateUser : function(actUserBtn) {
+	},
+	onActivateUser : function(actUserBtn) {
 		var me = this;
 		var window = Ext.create('expensetracker.view.login.ActivationWindow', {
 			modal : true,
@@ -91,7 +91,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		if (!newvalue) {
 			usrNmeAvailInd.update('');
 		}
-	},	
+	},
 	onFocusOutUserName : function(textfield, event) {
 		var me = this;
 		var registercontainer = me.lookup('registercontainer');
@@ -111,7 +111,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 						success : function(response, opts) {
 							registercontainer.setLoading(false);
 							var response = Ext.decode(response.responseText);
-							var isAvailable = response.Available;
+							var isAvailable = response.isAvailable;
 							textfield.isAvailable = isAvailable;
 							if (isAvailable) {
 								usrNmeAvailInd.update('<img src="resources/images/check.ico"/> ' + response.message);
@@ -159,9 +159,9 @@ Ext.define('expensetracker.view.login.LoginController', {
 		}
 	},
 	onSendActivationMail : function(sendBtn) {
-		var me = this;		
+		var me = this;
 		var form = me.lookup('activationwindowform');
-		var username = me.lookup('activationwindowuser').getValue();		
+		var username = me.lookup('activationwindowuser').getValue();
 		var errlbl = me.lookup('activationwindowerrlbl');
 		var activationwindow = me.lookup('activationwindow');
 		activationwindow.setLoading('Sending...');
@@ -169,26 +169,26 @@ Ext.define('expensetracker.view.login.LoginController', {
 			url : expensetracker.util.Url.getActivationMail(),
 			method : 'POST',
 			jsonData : Ext.JSON.encode({
-				username : username				
+				username : username
 			}),
 			success : function(response, opts) {
-				activationwindow.setLoading(false);				
+				activationwindow.setLoading(false);
 				form.reset();
 				var response = Ext.decode(response.responseText);
-				if(response.success) {
-					expensetracker.util.Message.toast(response.message);					
-				}else{
-					var errlbl = me.lookup('activationwindowerrlbl');					
-					errlbl.update('<p>* '+response.message + ' Mail To :' + expensetracker.util.Message.getMailTo(username) + '</p>');
+				if (response.success) {
+					expensetracker.util.Message.toast(response.message);
+				} else {
+					var errlbl = me.lookup('activationwindowerrlbl');
+					errlbl.update('<p>* ' + response.message + ' Mail To :' + expensetracker.util.Message.getMailTo(username) + '</p>');
 				}
 			},
-			failure : function(response, opts) {	
-				activationwindow.setLoading(false);			
+			failure : function(response, opts) {
+				activationwindow.setLoading(false);
 				var errlbl = me.lookup('activationwindowerrlbl');
-				errorLbl.update('<p>* '+response.message + ' Mail To :' + expensetracker.util.Message.getMailTo() + '</p>');
+				errorLbl.update('<p>* ' + response.message + ' Mail To :' + expensetracker.util.Message.getMailTo() + '</p>');
 			}
 		});
-	},	
+	},
 	onContactUs : function(contactUsBtn) {
 		var window = Ext.create('expensetracker.view.message.ContactUs', {
 			modal : true,
@@ -199,15 +199,15 @@ Ext.define('expensetracker.view.login.LoginController', {
 	},
 	onSendMessageToAdmin : function(sendBtn) {
 		var me = this;
-		var contactus  = me.lookup('contactus');
+		var contactus = me.lookup('contactus');
 		var form = me.lookup('contactusform');
 		var fromName = me.lookup('contactname');
-		var fromEmail  = me.lookup('contactemail');
-		var subject  = me.lookup('contactsubject');		
+		var fromEmail = me.lookup('contactemail');
+		var subject = me.lookup('contactsubject');
 		var message = me.lookup('contactmessage');
-		
+
 		contactus.setLoading('Sending...');
-		
+
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getMail(),
 			method : 'POST',
@@ -219,22 +219,22 @@ Ext.define('expensetracker.view.login.LoginController', {
 				isNew : 'Y'
 			}),
 			success : function(response, opts) {
-				contactus.setLoading(false);				
+				contactus.setLoading(false);
 				form.reset();
 				var response = Ext.decode(response.responseText);
-				if(response.success) {
-					expensetracker.util.Message.toast(response.message);			
-				}else{
-					expensetracker.util.Message.toast(response.message);	
+				if (response.success) {
+					expensetracker.util.Message.toast(response.message);
+				} else {
+					expensetracker.util.Message.toast(response.message);
 				}
 				contactus.close();
 			},
-			failure : function(response, opts) {	
-				contactus.setLoading(false);			
+			failure : function(response, opts) {
+				contactus.setLoading(false);
 				expensetracker.util.Message.toast(response.message);
 				contactus.close();
 			}
 		});
-		
+
 	}
 });
