@@ -19,7 +19,7 @@ Ext.define('expensetracker.Application', {
 			'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category', 'Ext.chart.series.Bar',
 			'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie',
 			'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line', 'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border',
-			'Ext.form.field.File', 'Ext.form.field.Number', 'Ext.form.field.HtmlEditor', 'Ext.util.Cookies', 'Ext.window.Toast' ],
+			'Ext.form.field.File', 'Ext.form.field.Number', 'Ext.form.field.HtmlEditor', 'Ext.util.Cookies', 'Ext.window.Toast', 'Ext.menu.Menu', 'Ext.selection.CheckboxModel' ],
 	defaultToken : 'login',
 	init : function() {
 		Ext.getBody().mask('Loading Expense Tracker....');
@@ -63,7 +63,10 @@ Ext.define('expensetracker.Application', {
 						});
 						Ext.widget('app-main');
 					} else {
-						Ext.widget('login');
+						window.location = '#login';
+						Ext.create({
+							xtype: 'login'
+						});
 					}
 
 				},
@@ -71,7 +74,10 @@ Ext.define('expensetracker.Application', {
 					Ext.getBody().unmask();
 					var response = Ext.decode(response.responseText);
 					expensetracker.util.Message.toast(response.message + expensetracker.util.Message.getMailTo());
-					Ext.widget('login');
+					window.location = '#login';
+					Ext.create({
+						xtype: 'login'
+					});
 				}
 			});
 		} else {

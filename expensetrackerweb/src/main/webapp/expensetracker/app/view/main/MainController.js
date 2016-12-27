@@ -190,6 +190,7 @@ Ext.define('expensetracker.view.main.MainController', {
 	navigateToLogin : function() {		
 		var me = this;		
 		me.getView().destroy();
+		window.location = '#login';
 		Ext.create({
 			xtype: 'login'
 		});
@@ -210,6 +211,22 @@ Ext.define('expensetracker.view.main.MainController', {
 		} else {
 			model.set('profileimg', picture);
 		}
+	},
+	onMessage : function(messageBtn) {
+		var me = this;
+		var msgWindow = Ext.create('Ext.window.Window', {
+			modal : true,
+			title : 'Message',
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth(),
+			layout : {
+				type : 'fit'
+			},
+			items : [{
+				xtype : 'message'
+			}]
+		});
+		msgWindow.show();
 	}
 
 });

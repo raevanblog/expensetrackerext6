@@ -16,7 +16,7 @@ Ext.define('expensetracker.view.profile.User', {
 	},
 	items : [ {
 		xtype : 'container',
-		height : 100,
+		height : 200,
 		padding : '10 0 10 0',
 		layout : {
 			type : 'hbox',
@@ -29,8 +29,8 @@ Ext.define('expensetracker.view.profile.User', {
 			style : {
 				borderRadius : '50%'
 			},
-			height : 100,
-			width : 100
+			height : 150,
+			width : 150
 		} ]
 	}, {
 		xtype : 'fileuploadfield',
@@ -107,6 +107,7 @@ Ext.define('expensetracker.view.profile.User', {
 				emptyText : 'Sex',
 				labelAlign : 'top',
 				reference : 'sex',
+				hideTrigger : true,
 				name : 'sex',
 				allowBlank : false,
 				labelSeparator : '',

@@ -74,6 +74,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			typeAhead : true,
 			queryMode : 'local',
 			triggerAction : 'query',
+			selectOnFocus : true,
 			hideTrigger : true
 		},
 		width : 150
@@ -88,6 +89,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			allowBlank : false,
 			typeAhead : true,
 			queryMode : 'local',
+			selectOnFocus : true,
 			triggerAction : 'all'
 		},
 		dataIndex : 'category',
@@ -103,6 +105,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			forceSelection : true,
 			typeAhead : true,
 			queryMode : 'local',
+			selectOnFocus : true,
 			triggerAction : 'all'
 		},
 		dataIndex : 'exptype',
@@ -117,7 +120,8 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			bind : {
 				minValue : '{expenseStartDate}',
 				maxValue : '{expenseEndDate}'
-			}
+			},
+			selectOnFocus : true
 		},
 		dataIndex : 'expdate',
 		width : 150
@@ -133,6 +137,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			hideTrigger : true,
 			allowBlank : false,
 			reference : 'gridQty',
+			selectOnFocus : true,
 			listeners : {
 				change : 'onQtyChange'
 			}
@@ -151,6 +156,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'numberfield',
 			hideTrigger : true,
 			allowBlank : false,
+			selectOnFocus : true,
 			listeners : {
 				change : 'onPriceChange'
 			}

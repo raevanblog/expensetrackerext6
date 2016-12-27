@@ -215,3 +215,8 @@
     $background-color: transparent,
     $border-width: 0
 );
+
+.grey-border {
+  border-width: 1px;
+  border-color: $base-border-color;
+}

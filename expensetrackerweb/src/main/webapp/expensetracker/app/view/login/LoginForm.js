@@ -44,8 +44,12 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			},
 			listeners : {
 				keypress : 'onEnter'
+			},			
+			triggers : {
+				glyph : {
+					cls : 'textfield-trigger-icon user-trigger'
+				}
 			},
-			maxLength : 25,
 			flex : 1
 		}, {
 			xtype : 'textfield',
@@ -60,13 +64,17 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			},
 			enableKeyEvents : true,
 			validateBlank : true,
-			labelSeparator : '',
-			maxLength : 25,
+			labelSeparator : '',			
 			emptyText : 'Password',
 			listeners : {
 				keypress : 'onEnter'
 			},
 			inputType : 'password',
+			triggers : {
+				glyph : {
+					cls : 'textfield-trigger-icon password-trigger'
+				}
+			},
 			flex : 1
 		}, {
 			xtype : 'container',

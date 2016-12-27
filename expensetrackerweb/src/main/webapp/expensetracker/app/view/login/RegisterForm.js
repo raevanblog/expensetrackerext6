@@ -36,8 +36,8 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			},
 			items : [ {
 				xtype : 'textfield',
-				labelAlign : 'top',
-				fieldLabel : 'First Name',
+				emptyText : 'First Name',
+				height : 51,
 				labelSeparator : '',
 				reference : 'fname',
 				validateBlank : true,
@@ -45,11 +45,16 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				allowBlank : false,
 				enableKeyEvents : true,
 				maxLength : 30,
+				triggers : {
+					glyph : {
+						cls : 'textfield-trigger-icon user-trigger'
+					}
+				},
 				flex : 1
 			}, {
 				xtype : 'textfield',
-				labelAlign : 'top',
-				fieldLabel : 'Last Name',
+				emptyText : 'Last Name',
+				height : 51,
 				reference : 'lname',
 				allowBlank : false,
 				name : 'lastName',
@@ -58,23 +63,27 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				labelSeparator : '',
 				maxLength : 30,
 				padding : '0 0 0 10',
+				triggers : {
+					glyph : {
+						cls : 'textfield-trigger-icon user-trigger'
+					}
+				},
 				flex : 1
 			} ]
 		}, {
-			xtype : 'combobox',
-			labelAlign : 'top',
-			fieldLabel : 'Sex',
+			xtype : 'combobox',			
 			emptyText : 'Sex',
 			reference : 'sex',
+			height : 51,
 			name : 'sex',
+			hideTrigger : true,
 			allowBlank : false,
 			labelSeparator : '',
 			forceSelection : true,
 			store : [ [ 'M', 'Male' ], [ 'F', 'Female' ] ]
 		}, {
 			xtype : 'textfield',
-			labelAlign : 'top',
-			fieldLabel : 'Email',
+			height : 51,
 			allowBlank : false,
 			emptyText : 'Email',
 			vtype : 'email',
@@ -82,11 +91,15 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			allowBlank : false,
 			maxLength : 50,
 			reference : 'email',
+			triggers : {
+				glyph : {
+					cls : 'textfield-trigger-icon email-trigger'
+				}
+			},
 			labelSeparator : ''
 		}, {
 			xtype : 'numberfield',
-			labelAlign : 'top',
-			fieldLabel : 'Mobile',
+			height : 51,
 			enforceMaxLength : true,
 			name : 'mobile',
 			emptyText : 'Mobile',
@@ -95,13 +108,11 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			reference : 'mobile',
 			validator : function(value) {
 				return value.length == 10 ? true : "Please enter a valid mobile number";
-			},
+			},			
 			labelSeparator : ''
 		}, {
-			xtype : 'textarea',
-			labelAlign : 'top',
-			fieldLabel : 'Address',
-			emptyText : 'Max(200)',
+			xtype : 'textarea',			
+			emptyText : 'Address Max(200)',
 			name : 'address',
 			maxLength : 200,
 			reference : 'address',
@@ -111,8 +122,8 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			layout : 'hbox',
 			items : [ {
 				xtype : 'textfield',
-				labelAlign : 'top',
-				fieldLabel : 'Username',
+				emptyText : 'Username',
+				height : 51,
 				reference : 'regUsername',
 				allowBlank : false,
 				name : 'username',
@@ -122,6 +133,11 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				maxLength : 30,
 				vtype : 'username',
 				flex : 0.8,
+				triggers : {
+					glyph : {
+						cls : 'textfield-trigger-icon user-trigger'
+					}
+				},
 				listeners : {
 					blur : 'onFocusOutUserName',
 					change : 'onUserNameChage'
@@ -138,10 +154,8 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				type : 'hbox'
 			},
 			items : [ {
-				xtype : 'textfield',
-				labelAlign : 'top',
-				fieldLabel : 'Password',
-				reference : 'regPassword',
+				xtype : 'textfield',				
+				emptyText : 'Password',
 				allowBlank : false,
 				name : 'password',
 				enableKeyEvents : true,
@@ -151,11 +165,16 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				id : 'regpassword',
 				inputType : 'password',
 				maxLength : 25,
+				height : 51,
+				triggers : {
+					glyph : {
+						cls : 'textfield-trigger-icon password-trigger'
+					}
+				},
 				flex : 1
 			}, {
-				xtype : 'textfield',
-				labelAlign : 'top',
-				fieldLabel : 'Retype Password',
+				xtype : 'textfield',				
+				emptyText : 'Retype Password',
 				reference : 'regRPassword',
 				allowBlank : false,
 				name : 'rpassword',
@@ -169,6 +188,12 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				vtype : 'match',
 				vtypeText : 'Password does not match',
 				matchfield : 'regpassword',
+				height : 51,
+				triggers : {
+					glyph : {
+						cls : 'textfield-trigger-icon password-trigger'
+					}
+				},
 				flex : 1
 			} ]
 		}, {

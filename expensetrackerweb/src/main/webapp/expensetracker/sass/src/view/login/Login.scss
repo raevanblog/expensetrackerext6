@@ -18,3 +18,35 @@
 		text-decoration:underline;
 	}
 }
+
+.textfield-trigger-icon {
+	cursor:default;
+}
+
+.user-trigger,
+.email-trigger,
+.password-trigger,
+.mobile-trigger{
+	&:before{
+		top: 10px;
+		left:0px;
+		position: relative;
+		color: #E5E5E5;
+		font-size: 30px;
+	}
+	
+	&.password-trigger:before{
+		content: "\f023";
+	}
+	&.user-trigger:before{
+		content: "\f007";
+	}
+	&.email-trigger:before{
+		content: "\f0e0";
+	}
+	
+	&.mobile-trigger:before{
+		content: "\f10b";
+	}
+	
+}
