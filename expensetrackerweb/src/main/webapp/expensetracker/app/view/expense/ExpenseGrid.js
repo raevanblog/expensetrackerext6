@@ -2,12 +2,12 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
-	scrollable: true,
+	scrollable : true,
 	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'Ext.grid.column.Number' ],
-	layout : 'fit',	
+	layout : 'fit',
 	plugins : {
 		ptype : 'cellediting',
-		clicksToEdit : 1		
+		clicksToEdit : 1
 	},
 	initComponent : function() {
 		this.store = Ext.create('expensetracker.store.Expense');
@@ -17,11 +17,11 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		ftype : 'summary',
 		dock : 'bottom'
 	} ],
-	dockedItems: [{
-		xtype: 'toolbar',
-		dock: 'top',
+	dockedItems : [ {
+		xtype : 'toolbar',
+		dock : 'top',
 		overflowHandler : 'menu',
-		items: [ {
+		items : [ {
 			xtype : 'textfield',
 			reference : 'expensegridsearch',
 			submitEmptyText : false,
@@ -29,7 +29,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			listeners : {
 				change : 'filterGrid'
 			}
-		}, '-',{
+		}, '-', {
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Expense',
@@ -47,12 +47,13 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Income',
-			iconCls : 'x-fa  fa-plus',			
+			iconCls : 'x-fa  fa-plus',
 			handler : 'onUpdateIncome'
 		} ]
-	}],	
+	} ],
 	bbar : [ '->', {
-		xtype : 'button',		
+		xtype : 'button',
+		ui : 'soft-green',
 		text : 'Save',
 		iconCls : 'x-fa fa-save',
 		handler : 'onSaveOrUpdateExpense'
@@ -87,7 +88,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			allowBlank : false,
 			typeAhead : true,
 			queryMode : 'local',
-			triggerAction : 'all'			
+			triggerAction : 'all'
 		},
 		dataIndex : 'category',
 		width : 150
@@ -161,7 +162,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 200
 	}, {
 		xtype : 'numbercolumn',
-		text : 'Price/Unit',		
+		text : 'Price/Unit',
 		align : 'center',
 		format : '0.00',
 		dataIndex : 'pricePerUnit',

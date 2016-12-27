@@ -5,8 +5,9 @@ Ext.define('expensetracker.view.login.Login', {
 	plugins : 'viewport',
 	layout : {
 		type : 'border'
-	},	
-	requires : [ 'expensetracker.view.login.LoginForm','expensetracker.view.login.ActivationWindow', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController', 'expensetracker.view.login.LoginViewModel' ],
+	},
+	requires : [ 'expensetracker.view.login.LoginForm', 'expensetracker.view.login.ActivationWindow', 'expensetracker.view.login.ForgotPassword', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController',
+			'expensetracker.view.login.LoginViewModel' ],
 	controller : 'login',
 	viewModel : 'loginviewmodel',
 	listeners : {
@@ -31,25 +32,25 @@ Ext.define('expensetracker.view.login.Login', {
 			handler : 'onOpenRegistration',
 			tooltip : 'Register',
 			iconCls : 'x-fa fa-user-plus'
-		},{
+		}, {
 			xtype : 'button',
 			text : 'Activate User',
 			ui : 'toolbar',
 			tooltip : 'Activate User',
 			iconCls : 'x-fa fa-check',
 			handler : 'onActivateUser'
-		},{
+		}, {
 			xtype : 'button',
 			text : 'Contact Us',
 			ui : 'toolbar',
 			tooltip : 'Contact Us',
 			handler : 'onContactUs',
-			iconCls : 'x-fa fa-envelope-o'			
-		}],
+			iconCls : 'x-fa fa-envelope-o'
+		} ],
 		cls : 'maintoolbar'
 	}, {
 		xtype : 'container',
-		reference : 'formcard',		
+		reference : 'formcard',
 		style : {
 			backgroundColor : '#FFFFFF'
 		},
@@ -65,7 +66,7 @@ Ext.define('expensetracker.view.login.Login', {
 			xtype : 'registercontainer',
 			cls : 'container-background',
 			reference : 'registercontainer'
-		}]
+		} ]
 	} ]
 
 });

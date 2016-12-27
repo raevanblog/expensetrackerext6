@@ -84,6 +84,14 @@ Ext.define('expensetracker.view.login.LoginController', {
 		});
 		window.show();
 	},
+	onForgorPwd : function() {
+		var me = this;
+		var window = Ext.create('expensetracker.view.login.ForgotPassword', {
+			modal : true,
+			reference : 'forgotpwdwindow'
+		});
+		window.show();
+	},
 	onUserNameChage : function(textfield, newvalue, oldvalue) {
 		var me = this;
 		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');

@@ -1,35 +1,35 @@
 Ext.define('expensetracker.view.login.LoginForm', {
-	extend: 'Ext.container.Container',	
+	extend : 'Ext.container.Container',
 	xtype : 'logincontainer',
-	alias : 'view.logincontainer',		
+	alias : 'view.logincontainer',
 	layout : {
 		type : 'hbox',
 		pack : 'middle'
 	},
-	items: [{
-		xtype: 'form',
-		platformConfig: {
-			 desktop: {
-				 width: 350				 
-			 },
+	items : [ {
+		xtype : 'form',
+		platformConfig : {
+			desktop : {
+				width : 350
+			},
 
-			 '!desktop': {
-				width: '80%'
-			 }
+			'!desktop' : {
+				width : '80%'
+			}
 		},
-		reference : 'loginform',		
-		method : 'POST',		
+		reference : 'loginform',
+		method : 'POST',
 		jsonSubmit : true,
-		padding: '100 0 0 0',
+		padding : '100 0 0 0',
 		url : expensetracker.util.Url.getLogin(),
 		bodyPadding : 10,
 		layout : {
-			 type : 'vbox',
-			 align : 'stretch'
+			type : 'vbox',
+			align : 'stretch'
 		},
 		items : [ {
-			xtype : 'textfield',			
-			labelSeparator : '',			
+			xtype : 'textfield',
+			labelSeparator : '',
 			hideLabel : true,
 			height : 51,
 			reference : 'username',
@@ -48,7 +48,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			maxLength : 25,
 			flex : 1
 		}, {
-			xtype : 'textfield',			
+			xtype : 'textfield',
 			hideLabel : true,
 			height : 51,
 			submitValue : false,
@@ -68,35 +68,38 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			},
 			inputType : 'password',
 			flex : 1
-		},{
-			xtype: 'container',
-			layout: 'hbox',
-			items: [
-				{
-					xtype: 'checkboxfield',
-					reference : 'loginrememberme',
-					flex : 1,					
-					height: 30,
-					bind : {
-						value : '{rememberMe}'
-					},
-					boxLabel: 'Remember me'
+		}, {
+			xtype : 'container',
+			layout : 'hbox',
+			items : [ {
+				xtype : 'checkboxfield',
+				reference : 'loginrememberme',
+				flex : 1,
+				height : 30,
+				bind : {
+					value : '{rememberMe}'
 				},
-				{
-					xtype: 'box',
-					html: '<a href="#passwordreset" class="link-forgot-password"> Forgot Password ?</a>'
+				boxLabel : 'Remember me'
+			}, {
+				xtype : 'box',
+				html : '<a href="javascript:void(0);" class="link-forgot-password"> Forgot Password ?</a>',
+				listeners : {
+					el : {
+						delegate : 'a',
+						click : 'onForgorPwd'
+					}
 				}
-			]
-        },{
+			} ]
+		}, {
 			xtype : 'button',
 			scale : 'large',
 			ui : 'soft-green',
 			formBind : true,
 			text : 'Login',
-			iconCls: 'x-fa fa-sign-in',
+			iconCls : 'x-fa fa-sign-in',
 			reference : 'loginBtn',
 			handler : 'onLogin'
-		},{
+		}, {
 			xtype : 'label',
 			padding : '10 10 10 10',
 			reference : 'errorlbl',
@@ -104,7 +107,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			style : {
 				color : 'red'
 			}
-		}]		
-	}]
-	
+		} ]
+	} ]
+
 });

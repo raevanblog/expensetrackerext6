@@ -18,6 +18,7 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 	bbar : [ '->', {
 		xtype : 'button',
 		text : 'Save',
+		ui : 'soft-green',
 		iconCls : 'x-fa fa-save',
 		handler : 'onSaveIncome'
 	} ],

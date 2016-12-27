@@ -4,9 +4,10 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 	xtype : 'expensecategory',
 	controller : 'expensecategorycontroller',
 	requires : [ 'expensetracker.store.ExpenseCategory', 'expensetracker.view.expense.ExpenseCategoryController' ],
-	bbar : ['->', {
+	bbar : [ '->', {
 		xtype : 'button',
 		text : 'Save',
+		ui : 'soft-green',
 		iconCls : 'x-fa fa-save',
 		handler : 'onCategorySaveOrUpdate'
 	} ],
@@ -25,8 +26,8 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		dataIndex : 'category',
 		editor : {
 			xtype : 'textfield',
-			maxLength: 15,
-			allowBlank : false			
+			maxLength : 15,
+			allowBlank : false
 		},
 		width : 200
 	}, {
@@ -44,6 +45,6 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		tooltip : 'Delete',
 		handler : 'onDeleteCategory',
 		iconCls : 'x-fa  fa-minus-circle',
-		flex :1 
+		flex : 1
 	} ]
 });
