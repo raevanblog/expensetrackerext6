@@ -166,7 +166,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var model = me.getView().getViewModel();
 		var mainCard = me.lookup('mainCard');
 		var chgPwdWindow = Ext.create('expensetracker.view.profile.ChangePassword', {
-			modal : true,
+			modal : true,			
 			height : Ext.Element.getViewportHeight(),
 			width : Ext.Element.getViewportWidth()
 		});

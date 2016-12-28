@@ -17,7 +17,12 @@ Ext.define('expensetracker.view.message.MessageController', {
 			return false;
 		}
 
-		if (view) {
+		if(params && params.isWindow) {
+			var win = Ext.apply({
+				xtype : view				
+			},params);
+			Ext.create(win);			
+		}else {
 			Ext.suspendLayouts();
 
 			viewer.removeAll();

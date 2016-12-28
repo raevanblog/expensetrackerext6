@@ -32,9 +32,9 @@ Ext.define('expensetracker.view.profile.PasswordController', {
 						}
 						expensetracker.util.Message.toast(resObj.status_Message);
 					} else if (400 === resObj.status_Code) {
-						errorLbl.setText(resObj.exception);
+						errorLbl.setText('* ' + resObj.exception);
 					} else {
-						expensetracker.util.Message.toast('*' + resObj.status_Message);
+						expensetracker.util.Message.toast('* ' + resObj.status_Message);
 					}
 				}
 			});

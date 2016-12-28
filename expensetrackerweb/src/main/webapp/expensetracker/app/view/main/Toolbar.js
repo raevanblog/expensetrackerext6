@@ -47,7 +47,7 @@ Ext.define('expensetracker.view.main.Toolbar', {
 			handler : 'onUserProfile'
 		}, {
 			text : 'Change Password',
-			iconCls : 'x-fa fa-key',
+			iconCls : 'x-fa fa-lock',
 			tooltip : 'Change Password',
 			handler : 'onChangePwd'
 		} ]
