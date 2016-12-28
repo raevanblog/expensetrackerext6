@@ -2,12 +2,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	extend : 'Ext.container.Container',
 	xtype : 'expensedashboard',
 	alias : 'view.expensedashboard',
-	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController',
-			'expensetracker.view.dashboard.TopExpense', 'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie',
-			'expensetracker.view.charts.LineChart',
-			'expensetracker.view.income.IncomeWindow',
-			'expensetracker.store.Graph',
-			'expensetracker.view.dashboard.ExpenseDashboardModel' ],
+	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController', 'expensetracker.view.dashboard.TopExpense',
+			'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie', 'expensetracker.view.charts.LineChart', 'expensetracker.view.income.IncomeWindow',
+			'expensetracker.store.Graph', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
 	layout : 'responsivecolumn',
 	controller : 'expensedashboardcontroller',
 	viewModel : 'expensedashboard',
@@ -80,7 +77,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			afterrender : 'onRenderExpenseVsIncome'
 		},
 		cls : 'big-100 small-100 dash-panel'
-	},{
+	}, {
 		xtype : 'expensechart',
 		reference : 'categorychartpanel',
 		title : 'Expense',

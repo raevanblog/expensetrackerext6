@@ -17,9 +17,9 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
 						me.fireEvent('navigatelogin');
-						if(view != null) {
+						if (view != null) {
 							view.close();
-						}						
+						}
 					}
 				}
 			}

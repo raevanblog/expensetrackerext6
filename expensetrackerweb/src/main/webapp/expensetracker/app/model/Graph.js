@@ -10,11 +10,11 @@ Ext.define('expensetracker.model.Graph', {
 	}, {
 		name : 'income',
 		type : 'float'
-	},{
+	}, {
 		name : 'expense',
 		type : 'float'
 	}, {
 		name : 'type',
 		type : 'string'
-	} ]	
+	} ]
 });

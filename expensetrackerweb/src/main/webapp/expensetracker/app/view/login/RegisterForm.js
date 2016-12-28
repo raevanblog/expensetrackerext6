@@ -71,7 +71,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				flex : 1
 			} ]
 		}, {
-			xtype : 'combobox',			
+			xtype : 'combobox',
 			emptyText : 'Sex',
 			reference : 'sex',
 			height : 51,
@@ -108,10 +108,10 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			reference : 'mobile',
 			validator : function(value) {
 				return value.length == 10 ? true : "Please enter a valid mobile number";
-			},			
+			},
 			labelSeparator : ''
 		}, {
-			xtype : 'textarea',			
+			xtype : 'textarea',
 			emptyText : 'Address Max(200)',
 			name : 'address',
 			maxLength : 200,
@@ -154,7 +154,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				type : 'hbox'
 			},
 			items : [ {
-				xtype : 'textfield',				
+				xtype : 'textfield',
 				emptyText : 'Password',
 				allowBlank : false,
 				name : 'password',
@@ -173,7 +173,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				},
 				flex : 1
 			}, {
-				xtype : 'textfield',				
+				xtype : 'textfield',
 				emptyText : 'Retype Password',
 				reference : 'regRPassword',
 				allowBlank : false,

@@ -178,7 +178,7 @@ Ext.define('expensetracker.view.main.MainController', {
 			url : expensetracker.util.Url.getLogout(),
 			method : 'POST',
 			success : function(response, opts) {
-				var response = Ext.decode(response.responseText);				
+				var response = Ext.decode(response.responseText);
 				me.navigateToLogin();
 			},
 			failure : function(response, opts) {
@@ -187,12 +187,12 @@ Ext.define('expensetracker.view.main.MainController', {
 		});
 
 	},
-	navigateToLogin : function() {		
-		var me = this;		
+	navigateToLogin : function() {
+		var me = this;
 		me.getView().destroy();
 		window.location = '#login';
 		Ext.create({
-			xtype: 'login'
+			xtype : 'login'
 		});
 	},
 	updateProfile : function() {
@@ -222,9 +222,9 @@ Ext.define('expensetracker.view.main.MainController', {
 			layout : {
 				type : 'fit'
 			},
-			items : [{
+			items : [ {
 				xtype : 'message'
-			}]
+			} ]
 		});
 		msgWindow.show();
 	}

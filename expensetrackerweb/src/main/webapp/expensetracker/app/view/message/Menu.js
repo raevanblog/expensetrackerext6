@@ -13,7 +13,7 @@ Ext.define('expensetracker.view.message.Menu', {
 	}, {
 		text : 'Inbox',
 		iconCls : 'x-fa fa-inbox',
-		routeId : 'emailinbox'
+		routeId : 'inbox'
 	}, {
 		text : 'Sent',
 		iconCls : 'x-fa fa-check',

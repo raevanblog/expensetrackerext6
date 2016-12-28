@@ -1,11 +1,11 @@
 Ext.define('expensetracker.util.Validation', {
-	override: 'Ext.form.field.VTypes',
-	username: function(value) {
-		if(value) {
+	override : 'Ext.form.field.VTypes',
+	username : function(value) {
+		if (value) {
 			return this.userNameReg.test(value);
 		}
 		return true;
-    },
+	},
 	userNameReg : /^[a-zA-Z0-9]+$/,
 	usernameText : 'Username should not contain special characters',
 

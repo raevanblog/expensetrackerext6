@@ -5,7 +5,7 @@ Ext.define('expensetracker.view.dashboard.Summary', {
 	layout : {
 		type : 'vbox',
 		align : 'stretch'
-	},	
+	},
 	items : [ {
 		xtype : 'component',
 		padding : '5 0 20 0',
@@ -14,7 +14,7 @@ Ext.define('expensetracker.view.dashboard.Summary', {
 			el : {
 				delegate : 'a',
 				click : 'onIncomeEditClick'
-			}			
+			}
 		}
 	}, {
 		xtype : 'displayfield',

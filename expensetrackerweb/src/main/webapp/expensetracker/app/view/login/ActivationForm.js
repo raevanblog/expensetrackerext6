@@ -1,11 +1,11 @@
 Ext.define('expensetracker.view.login.ActivationForm', {
-	extend: 'Ext.container.Container',
+	extend : 'Ext.container.Container',
 	alias : 'view.activationform',
 	xtype : 'activationform',
-	scrollable : 'y',	
+	scrollable : 'y',
 	layout : 'responsivecolumn',
-	items: [{
-		xtype: 'component',
+	items : [ {
+		xtype : 'component',
 		padding : '10 10 10 10',
 		html : '<h1>Activate Your Account</h1><br><p>Before you can login,you must active your account with the activation email sent to your email address.</p><p>If you did not receive this e-mail, please check your junk/spam folder.</p><p>Click <a href="javascript:void(0);">here</a> to resend the activation email</p>',
 		cls : 'big-100 small-100',
@@ -15,18 +15,18 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 				click : function() {
 					expensetracker.util.Message.toast('Sending Activation E-mail');
 				}
-			}			
+			}
 		}
-	},{
+	}, {
 		xtype : 'form',
 		cls : 'big-40 small-100',
 		padding : '5 10 10 10',
-		bodyPadding: '10 10 10 10',
+		bodyPadding : '10 10 10 10',
 		layout : {
 			type : 'vbox',
-			align : 'stretch'			
+			align : 'stretch'
 		},
-		items: [{
+		items : [ {
 			xtype : 'textfield',
 			fieldLabel : 'Username',
 			reference : 'activationuser',
@@ -34,7 +34,7 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 			bind : {
 				value : '{username}'
 			},
-			labelSeparator: ''
+			labelSeparator : ''
 		}, {
 			xtype : 'textfield',
 			fieldLabel : 'Activation Key',
@@ -43,13 +43,13 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 			bind : {
 				value : '{key}'
 			},
-			labelSeparator: ''
-		}],
-		buttons: [{
+			labelSeparator : ''
+		} ],
+		buttons : [ {
 			text : 'Activate',
 			iconCls : 'x-fa fa-check',
 			handler : 'onActivate'
-		}]
+		} ]
 	}, {
 		xtype : 'component',
 		reference : 'activateerrorlbl',
@@ -58,5 +58,5 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 		style : {
 			color : 'red'
 		}
-	}]
+	} ]
 });

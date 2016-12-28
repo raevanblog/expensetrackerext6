@@ -3,7 +3,6 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardModel', {
 
 	alias : 'viewmodel.expensedashboard',
 
-	data : {		
-	}
+	data : {}
 
 });

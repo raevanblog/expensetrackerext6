@@ -6,8 +6,7 @@ Ext.define('expensetracker.view.login.Login', {
 	layout : {
 		type : 'border'
 	},
-	requires : [ 'expensetracker.view.login.LoginForm', 'expensetracker.view.login.ActivationWindow', 'expensetracker.view.login.ForgotPassword', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController',
-			'expensetracker.view.login.LoginViewModel' ],
+	requires : [ 'expensetracker.view.login.LoginForm', 'expensetracker.view.login.ActivationWindow', 'expensetracker.view.login.ForgotPassword', 'expensetracker.view.login.RegisterForm', 'expensetracker.view.login.LoginController', 'expensetracker.view.login.LoginViewModel' ],
 	controller : 'login',
 	viewModel : 'loginviewmodel',
 	listeners : {

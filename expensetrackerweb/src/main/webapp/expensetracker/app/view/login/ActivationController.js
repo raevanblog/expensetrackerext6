@@ -16,22 +16,22 @@ Ext.define('expensetracker.view.login.ActivationController', {
 			}),
 			success : function(response, opts) {
 				view.setLoading(false);
-				var errorLbl = me.lookup('activateerrorlbl');				
+				var errorLbl = me.lookup('activateerrorlbl');
 				var response = Ext.decode(response.responseText);
-				if(response.success) {
+				if (response.success) {
 					expensetracker.util.Message.toast('Activation Successful');
 					me.getView().destroy();
 					window.location = "#login";
 					Ext.widget('login');
-				}else{					
-					errorLbl.update('<p>* '+response.message + ' Mail To :' + expensetracker.util.Message.getMailTo('Activation failed for ' + username) + '</p>');
+				} else {
+					errorLbl.update('<p>* ' + response.message + ' Mail To :' + expensetracker.util.Message.getMailTo('Activation failed for ' + username) + '</p>');
 				}
 			},
 			failure : function(response, opts) {
 				view.setLoading(false);
 				var errorLbl = me.lookup('activateerrorlbl');
-				errorLbl.update('<p>* '+response.message + ' Mail To :' + expensetracker.util.Message.getMailTo() + '</p>');
+				errorLbl.update('<p>* ' + response.message + ' Mail To :' + expensetracker.util.Message.getMailTo() + '</p>');
 			}
 		});
 	}
-});	
+});

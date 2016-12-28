@@ -38,13 +38,13 @@ Ext.define('expensetracker.util.Session', {
 	reload : function(controller) {
 		var me = this;
 		Ext.Ajax.request({
-			url : expensetracker.util.Url.getSessionReload(),
+			url : expensetracker.util.Url.getSession(),
 			success : function(response, opts) {
 				var response = Ext.decode(response.responseText);
 				if (response.success) {
 					me.setUser(response.user);
 					controller.fireEvent('updateprofile');
-				} else {					
+				} else {
 					Ext.widget('login');
 				}
 			},
@@ -52,18 +52,18 @@ Ext.define('expensetracker.util.Session', {
 				Ext.widget('app-main');
 			}
 		});
-	},	
+	},
 	getCookie : function() {
 		var me = this;
 		var cookie = Ext.util.Cookies.get('expensetracker');
-		if(cookie === null) {
+		if (cookie === null) {
 			return cookie;
-		}else{
+		} else {
 			return Ext.decode(cookie);
-		}		
+		}
 	},
-	setCookie : function(object) {		
-		var cookie = Ext.encode(object);	
+	setCookie : function(object) {
+		var cookie = Ext.encode(object);
 		Ext.util.Cookies.set('expensetracker', cookie);
 	}
 });

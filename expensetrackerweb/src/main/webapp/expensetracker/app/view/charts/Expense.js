@@ -3,12 +3,12 @@ Ext.define('expensetracker.view.charts.Expense', {
 	xtype : 'expensechart',
 	alias : 'view.expensechart',
 	layout : 'fit',
-	tbar: ['->', {
+	tbar : [ '->', {
 		iconCls : 'x-fa fa-eye',
 		tooltip : 'Preview',
 		ui : 'toolbar',
 		handler : 'onCCPreview'
-	}],
+	} ],
 	items : [ {
 		xtype : 'cartesian',
 		itemId : 'expensechart',
@@ -39,7 +39,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 		} ],
 		series : {
 			type : 'bar',
-			title: 'Expense',
+			title : 'Expense',
 			xField : 'category',
 			yField : 'expense',
 			style : {
@@ -59,7 +59,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 			tooltip : {
 				trackMouse : true,
 				renderer : function(tooltip, record) {
-					var tip = expensetracker.util.Session.getCurrencySymbol() + ' '+ record.get('expense');
+					var tip = expensetracker.util.Session.getCurrencySymbol() + ' ' + record.get('expense');
 					tooltip.setHtml(tip);
 				}
 			}

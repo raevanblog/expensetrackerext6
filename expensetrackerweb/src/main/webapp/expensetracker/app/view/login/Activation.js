@@ -1,15 +1,15 @@
 Ext.define('expensetracker.view.login.Activation', {
-	extend: 'Ext.container.Container',	
-	xtype : 'activation',	
+	extend : 'Ext.container.Container',
+	xtype : 'activation',
 	alias : 'view.activation',
 	plugins : 'viewport',
 	cls : 'container-background',
-	requires : ['expensetracker.view.login.ActivationForm', 'expensetracker.view.login.ActivationController'],
+	requires : [ 'expensetracker.view.login.ActivationForm', 'expensetracker.view.login.ActivationController' ],
 	controller : 'activation',
 	layout : {
 		type : 'border'
-	},	
-	items: [{
+	},
+	items : [ {
 		xtype : 'toolbar',
 		border : 1,
 		height : 64,
@@ -20,20 +20,20 @@ Ext.define('expensetracker.view.login.Activation', {
 			html : '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
 			cls : 'logo-component',
 			width : 250
-		}],
+		} ],
 		cls : 'maintoolbar'
-	},{
+	}, {
 		xtype : 'container',
 		reference : 'formcard',
 		region : 'center',
 		layout : {
 			type : 'fit'
 		},
-		items: [{
+		items : [ {
 			xtype : 'activationform',
 			style : {
 				backgroundColor : '#FFFFFF'
 			}
-		}]
-	}]
+		} ]
+	} ]
 });

@@ -44,7 +44,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			},
 			listeners : {
 				keypress : 'onEnter'
-			},			
+			},
 			triggers : {
 				glyph : {
 					cls : 'textfield-trigger-icon user-trigger'
@@ -64,7 +64,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			},
 			enableKeyEvents : true,
 			validateBlank : true,
-			labelSeparator : '',			
+			labelSeparator : '',
 			emptyText : 'Password',
 			listeners : {
 				keypress : 'onEnter'

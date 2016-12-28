@@ -2,62 +2,59 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	extend : 'Ext.toolbar.Toolbar',
 	alias : 'view.maintoolbar',
 	xtype : 'maintoolbar',
-	overflowHandler : 'menu',	
+	overflowHandler : 'menu',
 	items : [ {
 		xtype : 'component',
-		html: '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
+		html : '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
 		reference : 'logocomponent',
 		width : expensetracker.util.Constants.getNavBarWidth(),
 		cls : 'logo-component'
-	}, /*{
-		xtype : 'button',
-		ui: 'toolbar',
-		iconCls : 'x-fa fa-bars',
-		reference : 'toggleNavigation',
-		handler : 'onToggleNavigation'
-	},*/{
-		xtype: 'image',
-		height: 35,
-        width: 35,
-		reference : 'tbProfileImage', 
-		alt  : 'Profile Image',
+	}, /*
+		 * { xtype : 'button', ui: 'toolbar', iconCls : 'x-fa fa-bars',
+		 * reference : 'toggleNavigation', handler : 'onToggleNavigation' },
+		 */{
+		xtype : 'image',
+		height : 35,
+		width : 35,
+		reference : 'tbProfileImage',
+		alt : 'Profile Image',
 		bind : {
 			src : '{profileimg}'
 		},
-		cls: 'profile-image'		
-	},{
+		cls : 'profile-image'
+	}, {
 		xtype : 'displayfield',
-		bind: {
+		bind : {
 			value : '{usrname}'
 		},
 		reference : 'tbUserName'
 	}, '->', {
-		xtype : 'button',		
-		ui: 'toolbar',
+		xtype : 'button',
+		ui : 'toolbar',
 		text : 'Message',
 		handler : 'onMessage',
 		iconCls : 'x-fa fa-envelope'
 	}, {
 		xtype : 'button',
-		ui: 'toolbar',
+		ui : 'toolbar',
 		text : 'Profile',
-		tooltip : 'Profile',		
+		tooltip : 'Profile',
 		iconCls : 'x-fa fa-user',
-		menu : [{
+		menu : [ {
 			text : 'View Profile',
 			iconCls : 'x-fa fa-user',
 			tooltip : 'View profile',
 			handler : 'onUserProfile'
-		},{
+		}, {
 			text : 'Change Password',
 			iconCls : 'x-fa fa-key',
 			tooltip : 'Change Password',
 			handler : 'onChangePwd'
-		}]
+		} ]
 	}, {
 		xtype : 'button',
 		text : 'Sign Out',
-		ui: 'toolbar',		
+		ui : 'toolbar',
 		tooltip : 'Sign Out',
 		iconCls : 'x-fa fa-sign-out',
 		handler : 'onSignOut'

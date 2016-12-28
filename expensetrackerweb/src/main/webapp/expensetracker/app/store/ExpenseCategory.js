@@ -5,7 +5,7 @@ Ext.define('expensetracker.store.ExpenseCategory', {
 	model : 'expensetracker.model.ExpenseCategory',
 	proxy : {
 		type : 'rest',
-		useDefaultXhrHeader : false,		
+		useDefaultXhrHeader : false,
 		api : {
 			create : expensetracker.util.Url.getCategoryService(),
 			read : expensetracker.util.Url.getCategoryService(),

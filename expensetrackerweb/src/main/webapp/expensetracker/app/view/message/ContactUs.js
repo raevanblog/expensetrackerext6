@@ -1,25 +1,25 @@
 Ext.define('expensetracker.view.message.ContactUs', {
 	extend : 'Ext.window.Window',
 	layout : 'fit',
-	items : [{
-		xtype: 'form',
+	items : [ {
+		xtype : 'form',
 		reference : 'contactusform',
 		layout : {
-			 type : 'vbox',
-			 align : 'stretch'
+			type : 'vbox',
+			align : 'stretch'
 		},
 		bodyPadding : 10,
 		height : '80%',
 		width : '80%',
-		items : [{
+		items : [ {
 			xtype : 'textfield',
 			fieldLabel : 'Name',
-			labelAlign : 'top',			
+			labelAlign : 'top',
 			validateBlank : true,
 			allowBlank : false,
 			reference : 'contactname',
-			labelSeparator : ''		
-		},{
+			labelSeparator : ''
+		}, {
 			xtype : 'textfield',
 			fieldLabel : 'E-Mail',
 			labelAlign : 'top',
@@ -27,30 +27,30 @@ Ext.define('expensetracker.view.message.ContactUs', {
 			validateBlank : true,
 			allowBlank : false,
 			reference : 'contactemail',
-			labelSeparator : ''			
-		},{
+			labelSeparator : ''
+		}, {
 			xtype : 'textfield',
 			fieldLabel : 'Subject',
 			labelAlign : 'top',
 			validateBlank : true,
-			allowBlank : false,			
+			allowBlank : false,
 			reference : 'contactsubject',
-			labelSeparator : ''	
-		},{
+			labelSeparator : ''
+		}, {
 			xtype : 'htmleditor',
 			fieldLabel : 'Message',
 			enableSourceEdit : false,
 			labelAlign : 'top',
 			validateBlank : true,
-			allowBlank : false,			
+			allowBlank : false,
 			reference : 'contactmessage',
 			labelSeparator : ''
-		}],
-		buttons : [{
-			text : 'Send',			
+		} ],
+		buttons : [ {
+			text : 'Send',
 			formBind : true,
 			iconCls : 'x-fa fa-envelope',
 			handler : 'onSendMessageToAdmin'
-		}]
-	}]	
+		} ]
+	} ]
 });

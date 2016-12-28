@@ -1,4 +1,4 @@
-Ext.define('expensetracker.util.Store',{
+Ext.define('expensetracker.util.Store', {
 	singleton : true,
 	loadStaticStore : function() {
 		Ext.getStore('ExpenseDock').load();

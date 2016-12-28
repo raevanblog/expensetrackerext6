@@ -1,63 +1,63 @@
 Ext.define('expensetracker.view.profile.ChangePassword', {
-	extend: 'Ext.window.Window',
-	xtype: 'changepassword',
-	alias: 'view.changepassword',
+	extend : 'Ext.window.Window',
+	xtype : 'changepassword',
+	alias : 'view.changepassword',
 	title : 'Change Password',
 	iconCls : 'x-fa fa-key',
 	bodyPadding : 10,
-	requires : ['expensetracker.view.profile.PasswordController'],
+	requires : [ 'expensetracker.view.profile.PasswordController' ],
 	controller : 'password',
 	layout : {
 		type : 'hbox',
 		pack : 'middle'
 	},
-	items: [{
-		xtype : 'form',		
-		method : 'PUT',		
+	items : [ {
+		xtype : 'form',
+		method : 'PUT',
 		jsonSubmit : true,
 		padding : '75 0 0 0',
-		url: expensetracker.util.Url.getPasswordService(),
+		url : expensetracker.util.Url.getPasswordService(),
 		reference : 'changepwdform',
-		layout :  {
+		layout : {
 			type : 'vbox',
 			align : 'stretch'
 		},
-		items: [{
-			xtype: 'textfield',
+		items : [ {
+			xtype : 'textfield',
 			fieldLabel : 'Password',
-			labelSeparator : '',			
+			labelSeparator : '',
 			reference : 'changeCurrPwd',
 			validateBlank : true,
 			name : 'password',
-			allowBlank : false,			
+			allowBlank : false,
 			maxLength : 25,
-			inputType : 'password'			
+			inputType : 'password'
 		}, {
-			xtype: 'textfield',
-			fieldLabel : 'New Password',		
+			xtype : 'textfield',
+			fieldLabel : 'New Password',
 			labelSeparator : '',
 			reference : 'newPwd',
 			validateBlank : true,
 			name : 'newPassword',
-			allowBlank : false,			
+			allowBlank : false,
 			maxLength : 25,
-			vtype: 'password',
-			id: 'chgpassword',
-			inputType : 'password'			
+			vtype : 'password',
+			id : 'chgpassword',
+			inputType : 'password'
 		}, {
-			xtype: 'textfield',
+			xtype : 'textfield',
 			fieldLabel : 'Retype Password',
-			labelSeparator : '',			
+			labelSeparator : '',
 			reference : 'newRetypePwd',
 			validateBlank : true,
 			submitValue : false,
-			allowBlank : false,			
+			allowBlank : false,
 			maxLength : 25,
-			vtype: 'match',
+			vtype : 'match',
 			vtypeText : 'Password does not match',
-			matchfield: 'chgpassword',	
-			inputType : 'password'		
-		},{
+			matchfield : 'chgpassword',
+			inputType : 'password'
+		}, {
 			xtype : 'label',
 			padding : '10 10 10 10',
 			reference : 'chgPwdErrorLbl',
@@ -65,11 +65,11 @@ Ext.define('expensetracker.view.profile.ChangePassword', {
 			style : {
 				color : 'red'
 			}
-		}],
-		buttons: [{
-			text: 'Submit',
+		} ],
+		buttons : [ {
+			text : 'Submit',
 			handler : 'onSubmitPwd',
 			formBind : true
-		}]
-	}]
+		} ]
+	} ]
 });

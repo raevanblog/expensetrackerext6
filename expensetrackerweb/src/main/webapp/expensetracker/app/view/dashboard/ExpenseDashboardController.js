@@ -179,9 +179,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
 						me.fireEvent('navigatelogin');
-						if(view !== null) {
+						if (view !== null) {
 							view.close();
-						}						
+						}
 					}
 				}
 			}
@@ -211,9 +211,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
 						me.fireEvent('navigatelogin');
-						if(view !== null) {
+						if (view !== null) {
 							view.close();
-						}						
+						}
 					}
 				}
 			}

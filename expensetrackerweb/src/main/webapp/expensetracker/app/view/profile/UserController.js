@@ -25,13 +25,13 @@ Ext.define('expensetracker.view.profile.UserController', {
 					refs.email.setValue(user.email);
 					refs.mobile.setValue(user.mobile);
 					refs.address.setValue(user.address);
-					if(user.profilePic === null) {
+					if (user.profilePic === null) {
 						if ('M' === user.sex) {
 							refs.profileimage.setSrc('resources/images/male-profile.png');
 						} else if ('F' === user.sex) {
 							refs.profileimage.setSrc('resources/images/female-profile.png');
 						}
-					}else{
+					} else {
 						refs.profileimage.setSrc(user.profilePic);
 					}
 				}
@@ -42,7 +42,7 @@ Ext.define('expensetracker.view.profile.UserController', {
 				expensetracker.util.Message.toast(response.status_Message);
 				if (401 === response.status_Code) {
 					me.fireEvent('navigatelogin');
-					if(view !== null) {
+					if (view !== null) {
 						view.close();
 					}
 				}
@@ -66,7 +66,7 @@ Ext.define('expensetracker.view.profile.UserController', {
 		var model = view.getViewModel();
 		var profileForm = me.lookup('profileform');
 		var profileimage = me.lookup('profileimage');
-		
+
 		if (profileForm.isValid()) {
 			view.setLoading("Saving...");
 			profileForm.submit({
@@ -74,26 +74,26 @@ Ext.define('expensetracker.view.profile.UserController', {
 				params : {
 					username : expensetracker.util.Session.getUsername(),
 					profilePic : profileimage.getSrc()
-					
+
 				},
 				success : function(form, action) {
 					view.setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);
 					var response = resObj.result;
 					if (response.noOfRecords > 0) {
-						expensetracker.util.Message.toast('Profile Updated');						
+						expensetracker.util.Message.toast('Profile Updated');
 						expensetracker.util.Session.reload(me);
 					}
 				},
 				failure : function(form, action) {
 					view.setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);
-					if(401 === resObj.status_Code) {
+					if (401 === resObj.status_Code) {
 						me.fireEvent('navigatelogin');
-						view.close();						
+						view.close();
 						expensetracker.util.Message.toast(resObj.status_Message);
 					} else {
-						expensetracker.util.Message.toast('*' +resObj.status_Message);
+						expensetracker.util.Message.toast('*' + resObj.status_Message);
 					}
 				}
 			});

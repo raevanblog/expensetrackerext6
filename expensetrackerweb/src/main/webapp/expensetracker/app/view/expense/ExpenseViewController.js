@@ -24,9 +24,9 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 
 			var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
 				height : Ext.Element.getViewportHeight(),
-				width : Ext.Element.getViewportWidth(),					
+				width : Ext.Element.getViewportWidth(),
 				resizable : false,
-				modal : true			
+				modal : true
 			});
 
 			var model = expenseWindow.getViewModel();
@@ -40,7 +40,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 			expenseWindow.show();
 		}
 	},
-	filterDock : function(textfield,  newValue, oldValue, options) {
+	filterDock : function(textfield, newValue, oldValue, options) {
 		var me = this;
 		var docker = me.lookup('thumbnaildocker');
 		var store = docker.getStore();
@@ -49,8 +49,8 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 	onYearSelection : function(numberfield, newValue, oldValue, options) {
 		var me = this;
 		var expensedock = me.lookup('expensedock');
-		expensedock.setTitle('' + newValue);		
-	},	
+		expensedock.setTitle('' + newValue);
+	},
 	onRenderExpenseDock : function(expensedock) {
 		var me = this;
 		expensedock.setTitle('' + new Date().getFullYear());

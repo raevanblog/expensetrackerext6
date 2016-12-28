@@ -11,18 +11,18 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	bind : {
 		title : '{title}'
 	},
-	tools : [{
+	tools : [ {
 		type : 'refresh',
 		tooltip : 'Reload',
 		handler : 'onReload'
-	}],
+	} ],
 	layout : {
-		type: 'card'		
+		type : 'card'
 	},
 	listeners : {
 		beforeclose : 'onCloseExpenseWindow',
 		beforerender : 'onRender'
-	},	
+	},
 	items : [ {
 		xtype : 'expensegrid',
 		reference : 'expensegrid',
@@ -32,14 +32,14 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 	}, {
 		xtype : 'expensecategory',
 		reference : 'expensecategory',
-		dockedItems: [{
-		xtype: 'toolbar',
-		dock: 'top',
-		overflowHandler : 'menu',
-		items : [{
+		dockedItems : [ {
+			xtype : 'toolbar',
+			dock : 'top',
+			overflowHandler : 'menu',
+			items : [ {
 				xtype : 'button',
 				ui : 'toolbar',
-				iconCls : 'x-fa fa-backward',			
+				iconCls : 'x-fa fa-backward',
 				handler : 'onBackCategory'
 			}, '-', {
 				xtype : 'textfield',
@@ -55,6 +55,6 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 				iconCls : 'x-fa fa-plus-square',
 				handler : 'onAddCategory'
 			} ]
-		}]	
+		} ]
 	} ]
 });

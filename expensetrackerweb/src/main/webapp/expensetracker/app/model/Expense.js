@@ -35,6 +35,6 @@ Ext.define('expensetracker.model.Expense', {
 	validators : {
 		itemName : 'presence',
 		category : 'presence',
-		exptype : 'presence'		
+		exptype : 'presence'
 	}
 });

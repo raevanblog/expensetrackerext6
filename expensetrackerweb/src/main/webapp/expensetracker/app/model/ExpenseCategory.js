@@ -7,13 +7,13 @@ Ext.define('expensetracker.model.ExpenseCategory', {
 		persist : false
 	}, {
 		name : 'category',
-		type : 'string'		
+		type : 'string'
 	}, {
 		name : 'description',
 		type : 'string'
 	}, {
 		name : 'username',
-		type : 'string'		
+		type : 'string'
 	} ],
 	validators : {
 		category : {

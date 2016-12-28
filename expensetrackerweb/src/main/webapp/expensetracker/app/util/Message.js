@@ -10,11 +10,11 @@ Ext.define('expensetracker.util.Message', {
 		});
 	},
 	getMailTo : function(subject) {
-		
-		if(subject === undefined || subject === null) {
+
+		if (subject === undefined || subject === null) {
 			subject = 'Server Error';
 		}
-		
+
 		return '<a href="mailto:raevanblog@gmail.com?Subject=' + subject + '" target="_top">raevanblog@gmail.com</a>';
-	}	
+	}
 });

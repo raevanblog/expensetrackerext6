@@ -57,7 +57,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
 						me.fireEvent('navigatelogin');
-						if(view !== null) {
+						if (view !== null) {
 							view.close();
 						}
 					}
@@ -148,7 +148,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			success : function(batch) {
 				grid.setLoading(false);
 				if (model.get('isLatestExpense')) {
-					me.fireEvent('updatedashboard');					
+					me.fireEvent('updatedashboard');
 				}
 				if (closeWindow) {
 					view.close();
@@ -174,7 +174,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				if (isUnauthorizedAccess) {
 					expensetracker.util.Message.toast('Unauthorized Access');
 					me.fireEvent('navigatelogin');
-					if(view !== null) {
+					if (view !== null) {
 						view.clearListeners();
 						view.close();
 					}
@@ -188,11 +188,11 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var me = this;
 		var view = me.getView();
 		var model = view.getViewModel();
-		
+
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
 			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth(),					
-			modal : true			
+			width : Ext.Element.getViewportWidth(),
+			modal : true
 		});
 		var incomeWindowModel = incomeWindow.getViewModel();
 		incomeWindowModel.set('source', view);
