@@ -21,24 +21,7 @@
 		<result column="ISVERIFIED" property="isVerified" />
 		<result column="ACTIVATIONKEY" property="activationKey" />
 	</resultMap>
-
-	<resultMap type="com.slabs.expense.tracker.common.db.entity.Message" id="Message">
-		<result column="ID" property="id" />
-		<result column="MSGFROM" property="msgfrom" />
-		<result column="SUBJECT" property="subject" />
-		<result column="MESSAGE" property="message" typeHandler="org.apache.ibatis.type.ClobTypeHandler" />
-		<result column="ISNEW" property="isNew" />
-	</resultMap>
-
-	<resultMap type="com.slabs.expense.tracker.common.db.entity.Message" id="Query">
-		<result column="ID" property="id" />
-		<result column="MSGFROM" property="msgfrom" />
-		<result column="SUBJECT" property="subject" />
-		<result column="EMAIL" property="email" />
-		<result column="MESSAGE" property="message" typeHandler="org.apache.ibatis.type.ClobTypeHandler" />
-		<result column="ISNEW" property="isNew" />
-	</resultMap>
-
+	
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
 		values(
@@ -121,77 +104,5 @@
 	<update id="setActivationKey">
 		update EXPENSETRACKER.USERINFO set activationKey=#{activationKey} where username=#{username}
 	</update>
-
-	<insert id="insertMessage" parameterType="java.util.List">
-		insert into EXPENSETRACKER.MESSAGE(MSGFROM, SUBJECT, MESSAGE, ISNEW) values
-		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
-			#{record.msgfrom},
-			#{record.subject},
-			#{record.message,
-			typeHandler=org.apache.ibatis.type.ClobTypeHandler},
-			#{record.isNew}
-		</foreach>
-	</insert>
-
-	<update id="updateMessage" parameterType="com.slabs.expense.tracker.common.db.entity.Message">
-		update EXPENSETRACKER.MESSAGE
-		<set>
-			<if test="record.subject != null">
-				subject=#{record.subject},
-			</if>
-			<if test="record.message != null">
-				message=#{record.message},
-			</if>
-			<if test="record.isNew != null">
-				isnew=#{record.isNew},
-			</if>
-		</set>
-		where msgfrom=#{record.msgfrom}
-	</update>
-
-	<delete id="deleteMessage">
-		delete from EXPENSETRACKER.MESSAGE
-		where id=#{record.id}
-	</delete>
-
-	<select id="getMessage" resultMap="Message">
-		select * from EXPENSETRACKER.MESSAGE where username=#{username}
-		<if test="isNew">
-			and isNew=#{isNew}
-		</if>
-	</select>
-
-	<insert id="insertQuery">
-		insert into EXPENSETRACKER.QUERY(MSGFROM, SUBJECT,EMAIL, MESSAGE, ISNEW) values (		
-			#{record.msgfrom},
-			#{record.subject},
-			#{record.email},
-			#{record.message,
-			typeHandler=org.apache.ibatis.type.ClobTypeHandler},
-			#{record.isNew}
-			)		
-	</insert>
-
-	<update id="updateQuery" parameterType="com.slabs.expense.tracker.common.db.entity.Message">
-		update EXPENSETRACKER.MESSAGE
-		<set>
-			<if test="record.isNew != null">
-				isnew=#{record.isNew},
-			</if>
-		</set>
-	</update>
-
-	<delete id="deleteQuery">
-		delete from EXPENSETRACKER.MESSAGE
-		where id=#{record.id}
-	</delete>
-
-	<select id="getQuery" resultMap="Query">
-		select * from EXPENSETRACKER.QUERY
-		<if test="isNew">
-			where isNew=#{isNew}
-		</if>
-	</select>
-
-
+	
 </mapper>

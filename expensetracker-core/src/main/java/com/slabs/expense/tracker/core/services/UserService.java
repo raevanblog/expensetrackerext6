@@ -93,17 +93,5 @@ public class UserService {
 		int noOfRecords = dao.createUser(record);
 		return noOfRecords;
 	}
-
-	/**
-	 * 
-	 * @param username
-	 *            {@link String} - Username of the user
-	 * @return {@link Message} - List of Message records
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	public List<Message> getMessages(String username, boolean isNew) throws Exception {
-		return dao.getMessage(username, isNew);
-	}
-
+	
 }

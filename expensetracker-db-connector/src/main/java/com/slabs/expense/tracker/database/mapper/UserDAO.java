@@ -32,22 +32,5 @@ public interface UserDAO {
 			@Param("activationKey") String activationKey) throws Exception;
 
 	public Integer deleteUserFeature(@Param("username") String username) throws Exception;
-
-	public Integer insertMessage(@Param("records") List<Message> records) throws Exception;
-
-	public Integer updateMessage(@Param("record") Message record) throws Exception;
-
-	public Integer deleteMessage(@Param("record") Message record) throws Exception;
-
-	public List<Message> getMessage(@Param("username") String username, boolean isNew)
-			throws Exception;
-
-	public Integer insertQuery(@Param("record") Message record) throws Exception;
-
-	public Integer updateQuery(@Param("record") Message record) throws Exception;
-
-	public Integer deleteQuery(@Param("record") Message record) throws Exception;
-
-	public List<Message> getQuery(boolean isNew) throws Exception;
-
+	
 }

@@ -217,7 +217,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		contactus.setLoading('Sending...');
 
 		Ext.Ajax.request({
-			url : expensetracker.util.Url.getMail(),
+			url : expensetracker.util.Url.getQuery(),
 			method : 'POST',
 			jsonData : Ext.JSON.encode({
 				msgfrom : fromName.getValue(),

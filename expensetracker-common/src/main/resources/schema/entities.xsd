@@ -220,6 +220,7 @@
 		</annotation>
 		<sequence>
 			<element name="id" type="long" />
+			<element name="msgto" type="string" />
 			<element name="msgfrom" type="string" />
 			<element name="subject" type="string" />
 			<element name="message" type="string" />
