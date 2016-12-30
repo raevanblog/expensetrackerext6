@@ -222,9 +222,13 @@
 			<element name="id" type="long" />
 			<element name="msgto" type="string" />
 			<element name="msgfrom" type="string" />
+			<element name="msgdate" type="date" />
 			<element name="subject" type="string" />
 			<element name="message" type="string" />
 			<element name="email" type="string" />
+			<element name="senderfname" type="string" />
+			<element name="senderlname" type="string" />
+			<element name="senderpic" type="string" />			
 			<element name="isNew" type="string" default="Y" />
 		</sequence>
 	</complexType>

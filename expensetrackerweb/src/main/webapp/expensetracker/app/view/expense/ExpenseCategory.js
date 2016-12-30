@@ -4,16 +4,14 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 	xtype : 'expensecategory',
 	controller : 'expensecategorycontroller',
 	requires : [ 'expensetracker.store.ExpenseCategory', 'expensetracker.view.expense.ExpenseCategoryController' ],
+	store : 'ExpenseCategory',
 	bbar : [ '->', {
 		xtype : 'button',
 		text : 'Save',
 		ui : 'soft-green',
 		iconCls : 'x-fa fa-save',
 		handler : 'onCategorySaveOrUpdate'
-	} ],
-	listeners : {
-		activate : 'onActivateCategoryGrid'
-	},
+	} ],	
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1

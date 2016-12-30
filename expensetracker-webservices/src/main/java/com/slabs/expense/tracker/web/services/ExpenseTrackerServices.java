@@ -7,6 +7,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.slabs.expense.tracker.web.services.core.JAXBContextResolver;
 import com.slabs.expense.tracker.web.services.core.ObjectMapperResolver;
+import com.slabs.expense.tracker.web.services.exception.WebServiceException;
 
 /**
  * {@link ExpenseTrackerServices} is the resource configuration for Expense
@@ -23,7 +24,7 @@ public class ExpenseTrackerServices extends ResourceConfig {
 		register(JAXBContextResolver.class);
 		register(ObjectMapperResolver.class);
 		register(JacksonFeature.class);
-		register(com.slabs.expense.tracker.core.exception.ExpenseTrackerException.class);
+		register(WebServiceException.class);
 	}
 
 	public ExpenseTrackerServices(Class<?>... classes) {

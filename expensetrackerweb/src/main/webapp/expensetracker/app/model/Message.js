@@ -12,6 +12,10 @@ Ext.define('expensetracker.model.Message', {
 		name : 'msgfrom',
 		type : 'string'		
 	}, {
+		name : 'msgdate',
+		type : 'date',
+		dateFormat : 'Y-m-d H:i:s T'
+	},{
 		name : 'subject',
 		type : 'string'
 	}, {

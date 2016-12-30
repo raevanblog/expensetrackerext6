@@ -9,6 +9,10 @@
 		<result column="ID" property="id" />
 		<result column="MSGTO" property="msgto" />
 		<result column="MSGFROM" property="msgfrom" />
+		<result column="SENDERFNAME" property="senderfname" />
+		<result column="SENDERLNAME" property="senderlname" />
+		<result column="SENDERPIC" property="senderpic" typeHandler="org.apache.ibatis.type.ClobTypeHandler"/>
+		<result column="MSGDATE" property="msgdate" typeHandler="org.apache.ibatis.type.DateTypeHandler" />
 		<result column="SUBJECT" property="subject" />
 		<result column="MESSAGE" property="message" typeHandler="org.apache.ibatis.type.ClobTypeHandler" />
 		<result column="ISNEW" property="isNew" />
@@ -17,6 +21,7 @@
 	<resultMap type="com.slabs.expense.tracker.common.db.entity.Message" id="Query">
 		<result column="ID" property="id" />
 		<result column="MSGFROM" property="msgfrom" />
+		<result column="MSGDATE" property="msgdate" typeHandler="org.apache.ibatis.type.DateTypeHandler" />
 		<result column="SUBJECT" property="subject" />
 		<result column="EMAIL" property="email" />
 		<result column="MESSAGE" property="message" typeHandler="org.apache.ibatis.type.ClobTypeHandler" />
@@ -24,10 +29,12 @@
 	</resultMap>
 
 	<insert id="insertMessage" parameterType="java.util.List">
-		insert into EXPENSETRACKER.MESSAGE(MSGTO, MSGFROM, SUBJECT, MESSAGE, ISNEW) values
+		insert into EXPENSETRACKER.MESSAGE(MSGTO, MSGFROM, MSGDATE, SUBJECT, MESSAGE, ISNEW) values
 		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.msgto},
 			#{record.msgfrom},
+			#{record.msgdate,
+			typeHandler=org.apache.ibatis.type.DateTypeHandler},
 			#{record.subject},
 			#{record.message,
 			typeHandler=org.apache.ibatis.type.ClobTypeHandler},
@@ -60,15 +67,19 @@
 	</delete>
 
 	<select id="getMessage" resultMap="Message">
-		select * from EXPENSETRACKER.MESSAGE where msgto=#{username}
+		select m.id, m.msgfrom, m.msgto, m.subject, m.message, m.msgdate, m.isnew, u.firstname as senderfname,
+		u.lastname as senderlname,u.profilepic as senderpic from expensetracker.message m, expensetracker.userinfo u where
+		m.msgto =#{username}and m.msgfrom = u.username
 		<if test="isNew">
-			and isNew=#{isNew}
+			and m.isNew=#{isNew}
 		</if>
 	</select>
 
 	<insert id="insertQuery">
 		insert into EXPENSETRACKER.QUERY(MSGFROM, SUBJECT,EMAIL, MESSAGE, ISNEW) values (
 		#{record.msgfrom},
+		#{record.msgdate,
+		typeHandler=org.apache.ibatis.type.DateTypeHandler},
 		#{record.subject},
 		#{record.email},
 		#{record.message,

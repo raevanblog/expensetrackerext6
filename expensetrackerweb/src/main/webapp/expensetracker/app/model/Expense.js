@@ -11,7 +11,7 @@ Ext.define('expensetracker.model.Expense', {
 	}, {
 		name : 'expdate',
 		type : 'date',
-		dateFormat : 'Y-m-d'
+		dateFormat : 'Y-m-d H:i:s T'
 	}, {
 		name : 'category',
 		type : 'string'

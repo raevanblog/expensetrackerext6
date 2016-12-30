@@ -4,9 +4,22 @@ Ext.define('expensetracker.view.message.Compose', {
 	alias : 'view.emailcompose',
 	title : 'New Message',
 	autoShow : true,
-	layout : 'fit',
+	layout : {
+		type : 'anchor',
+		anchor : '100%'
+	},
 	bodyPadding : 10,
+	controller : 'message',
+	listeners : {
+		beforerender : 'onRenderCompose'
+	},
 	items : [{
+			xtype : 'image',
+			itemId : 'profileimg',
+			height : 80,
+			width : 80,
+			style : 'border-radius: 64px'
+		},{
 		xtype : 'form',
 		bodyPadding : 10,
 		layout : {
@@ -20,24 +33,25 @@ Ext.define('expensetracker.view.message.Compose', {
 			value : 'Administrator'
 		}, {
 			xtype : 'textfield',
-			fieldLabel : 'Subject',			
+			fieldLabel : 'Subject',
+			itemId : 'messagesubject',
 			labelSeparator : ''			
 		},{
 			xtype : 'htmleditor',
+			itemId : 'messageeditor',
 			fieldLabel : 'Message',
-			labelSeparator : '',
-			flex : 1,
+			labelSeparator : '',			
 			labelAlign : 'top'
 		}]
 	}],
 	bbar : ['->',{
 		xtype : 'button',
 		ui : 'soft-red',		
-		text : 'Discard',
+		text : 'Discard'
 	}, {
 		xtype : 'button',
 		ui : 'soft-green',
 		formBind : true,
-		text : 'Send',
+		text : 'Send'
 	}]
 });

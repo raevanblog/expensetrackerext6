@@ -1,9 +1,10 @@
 Ext.define('expensetracker.view.message.Message', {
 	extend : 'Ext.container.Container',
-	requires : [ 'expensetracker.view.message.Menu', 'expensetracker.view.message.Inbox', 'expensetracker.view.message.Compose', 'expensetracker.view.message.MessageController', 'expensetracker.store.Message' ],
+	requires : [ 'expensetracker.view.message.Menu', 'expensetracker.view.message.Inbox', 'expensetracker.view.message.Compose', 'expensetracker.view.message.Details', 'expensetracker.view.message.MessageController', 'expensetracker.store.Message' ],
 	xtype : 'message',
 	alias : 'view.message',
 	controller : 'message',
+	scrollable: 'y',
 	listeners : {
 		render : 'onRender'
 	},

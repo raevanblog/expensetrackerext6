@@ -11,8 +11,10 @@ Ext.define('expensetracker.view.message.Menu', {
 		iconCls : 'x-fa fa-edit',
 		params : {
 			isWindow : true,
+			type : 'NEW',
 			modal : true,
-			height : '80%',
+			contrain : true,
+			height : '85%',
 			width : '80%' 
 		},
 		routeId : 'emailcompose'

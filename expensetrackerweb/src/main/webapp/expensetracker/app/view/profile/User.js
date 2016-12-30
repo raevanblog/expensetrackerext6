@@ -34,6 +34,7 @@ Ext.define('expensetracker.view.profile.User', {
 		} ]
 	}, {
 		xtype : 'fileuploadfield',
+		accept : 'image/*',
 		buttonText : 'Change Photo',
 		buttonOnly : true,
 		buttonConfig : {

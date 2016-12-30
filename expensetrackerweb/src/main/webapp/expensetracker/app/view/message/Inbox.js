@@ -17,11 +17,23 @@ Ext.define('expensetracker.view.message.Inbox', {
 	rowLines : false,
 	columns : [ {
 		text : 'From',
-		dataIndex : 'msgfrom',
+		align : 'left',
+		dataIndex: 'senderfname',
+		renderer : function(value, metadata, record){
+			return value + ' ' + record.get('senderlname');
+		},
 		width : 140
 	}, {
 		text : 'Subject',
+		align : 'left',
 		dataIndex : 'subject',
 		flex : 1
+	}, {
+		xtype : 'datecolumn',
+		align : 'left',
+		text : 'Received',		
+		dataIndex : 'msgdate',
+		format : 'd/m/Y H:i:s A',
+		width : 180
 	}]
 });
