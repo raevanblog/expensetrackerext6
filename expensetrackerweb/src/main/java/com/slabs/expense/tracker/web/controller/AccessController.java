@@ -200,8 +200,12 @@ public class AccessController {
 					UserService.class);
 			EmailService emailService = ServiceFactory.getInstance()
 					.getService(Services.EMAIL_SERVICE, EmailService.class);
+
 			AdminService adminService = ServiceFactory.getInstance()
 					.getService(Services.ADMIN_SERVICE, AdminService.class);
+
+			MessagingService messagingService = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
 
 			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
 			String activationKey = map.get("activationkey");
@@ -218,6 +222,7 @@ public class AccessController {
 							output.put(WebConstants.MESSAGE,
 									MessageConstants.ACTIVATION_SUCCESSFUL);
 							emailService.sendRegSuccessMail(user);
+							messagingService.sendWelcomeMessage(user);
 						} else {
 							output.put(WebConstants.SUCCESS, Boolean.FALSE);
 							output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED);

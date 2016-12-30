@@ -1,14 +1,21 @@
 package com.slabs.expense.tracker.core.services;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.db.entity.Message;
+import com.slabs.expense.tracker.common.db.entity.UserInfo;
 import com.slabs.expense.tracker.database.mapper.MessageDAO;
+import com.slabs.expense.tracker.util.MarkerEngine;
 
 /**
  * {@link MessagingService} provides API for INSERT, DELETE, UPDATE, SELECT on
@@ -23,6 +30,35 @@ public class MessagingService {
 
 	@Autowired
 	private MessageDAO dao;
+
+	/**
+	 * 
+	 * @param user
+	 *            {@link UserInfo} User record
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	public void sendWelcomeMessage(UserInfo user) throws Exception {
+		Message message = new Message();
+		Map<String, String> model = new HashMap<String, String>();
+		model.put("fname", user.getFirstName());
+		model.put("lname", user.getLastName());
+
+		List<Message> messages = new ArrayList<Message>();
+		String content = MarkerEngine.process(Constants.WELCOME_TEMPLATE, model);
+
+		message.setMsgdate(new Date());
+		message.setSubject("Welcome");
+		message.setMsgto(user.getUsername());
+		message.setMsgfrom("admin");
+		message.setMessage(content);
+		message.setIsNew("Y");
+
+		messages.add(message);
+
+		createMessage(messages);
+
+	}
 
 	/**
 	 * 

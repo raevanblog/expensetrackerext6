@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.slabs.expense.tracker.common.db.entity.Message;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
 
 /**
