@@ -20,20 +20,38 @@ Ext.define('expensetracker.view.message.Inbox', {
 		align : 'left',
 		dataIndex: 'senderfname',
 		renderer : function(value, metadata, record){
-			return value + ' ' + record.get('senderlname');
+			if('Y' === record.get('isNew')) {
+				return '<b>' + value + ' ' + record.get('senderlname') + '</b>';
+			} else {
+				return value + ' ' + record.get('senderlname');
+			}
 		},
 		width : 140
 	}, {
 		text : 'Subject',
 		align : 'left',
 		dataIndex : 'subject',
+		renderer : function(value, metadata, record){
+			if('Y' === record.get('isNew')) {
+				return '<b>' + value + '</b>';
+			} else {
+				return value;
+			}
+		},
 		flex : 1
 	}, {
 		xtype : 'datecolumn',
 		align : 'left',
 		text : 'Received',		
-		dataIndex : 'msgdate',
-		format : 'd/m/Y H:i:s A',
+		dataIndex : 'msgdate',		
+		renderer : function(value, metadata, record){
+			value = Ext.Date.format(value, 'd/m/Y H:i:s A');
+			if('Y' === record.get('isNew')) {
+				return '<b>' + value + '</b>';
+			} else {
+				return value;
+			}
+		},
 		width : 180
 	}]
 });

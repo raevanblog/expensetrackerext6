@@ -43,7 +43,7 @@ Ext.define('expensetracker.view.message.Details', {
 			data : {},
 			itemId : 'mailsubject',
 			padding : 10,
-			tpl : [ '<div class="user-name">From : {senderfname} {senderlname}</div>', '<div class="mail-subject">{subject}</div>', '<div>{msgdate}</div>' ]
+			tpl : [ '<div class="user-name">From : {senderfname} {senderlname}</div>', '<div class="mail-subject">{subject}</div>', '<div>{msgdate:date("d/m/Y H:i:s A")}</div>' ]
 		} ]
 	}, {
 		xtype : 'box',

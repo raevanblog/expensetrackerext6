@@ -30,8 +30,35 @@ Ext.define('expensetracker.view.message.MessageController', {
 		Ext.create(replywin);
 	},
 	onGridCellItemClick : function(view, td, cellIndex, record) {
-		var me = this;
-		me.setCurrentView('messagedetails', {record: record});
+		var me = this;			
+		if('Y' === record.get('isNew')) {
+			view.setLoading('Loading...');		
+			var params = [];		
+			params.push({
+					id: record.get('id'),
+					isNew : record.get('isNew'),
+					msgto : record.get('msgto')
+			});
+			Ext.Ajax.request({
+				url : expensetracker.util.Url.getMessageService(),
+				method : 'PUT',
+				jsonData : Ext.JSON.encode(params),
+				success : function(response, opts) {				
+					view.setLoading(false);					
+				},
+				failure : function(response, opts) {
+					view.setLoading(false);
+					var response = Ext.decode(response.responseText);
+					if (401 === response.status_Code) {
+						me.fireEvent('navigatelogin');						
+					}else{
+						expensetracker.util.Message.toast('* Server Error');
+					}
+				} 			
+			});
+		} else {
+			me.setCurrentView('messagedetails', {record: record});
+		}		
 	},
 	setCurrentView : function(view, params) {
 		var me = this;
@@ -86,8 +113,7 @@ Ext.define('expensetracker.view.message.MessageController', {
 		inbox.bindStore(store);
 	},
 	onRenderDetails : function(details) {
-		 var record = details.record ? details.record : {};
-
+		var record = details.record ? details.record : {};		
         details.down('#mailbody').setHtml(record.get('message'));        
         details.down('#mailsubject').setData(record);
         details.down('#senderpic').setSrc(record.get('senderpic'));
@@ -96,7 +122,7 @@ Ext.define('expensetracker.view.message.MessageController', {
 		var record = compose.record ? compose.record : {};
 		compose.down('#profileimg').setSrc(expensetracker.util.Session.getProfilePicture());
 		if("REPLY" === compose.type) {			
-			var message = '<br><br><br><br><br><br><hr>' + '<div style="font-size=16px">From : '+record.get('senderfname')+' '+ record.get('senderlname')+'</div>'+'<div style="font-size=16px">Subject : '+record.get('subject')+'</div>'+'<div>'+record.get('msgdate')+'</div>'+record.get('message');
+			var message = '<br><br><br><br><br><br><hr>' + '<div style="font-size=16px">From : '+record.get('senderfname')+' '+ record.get('senderlname')+'</div>'+'<div style="font-size=16px">Subject : '+record.get('subject')+'</div>'+'<div>'+ Ext.Date.format(record.get('msgdate'), 'D M d,Y H:i:s A')+'</div>'+record.get('message');
 			
 			compose.down('#messagesubject').setValue('Reply: ' + record.get('subject'));
 			compose.down('#messageeditor').setValue(message);

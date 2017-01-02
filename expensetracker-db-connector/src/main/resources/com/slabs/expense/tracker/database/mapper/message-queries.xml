@@ -58,7 +58,7 @@
 				isnew=#{record.isNew},
 			</if>
 		</set>
-		where msgfrom=#{record.msgfrom}
+		where msgto=#{record.msgto}
 	</update>
 
 	<delete id="deleteMessage">

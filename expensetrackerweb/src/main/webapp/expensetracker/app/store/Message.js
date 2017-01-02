@@ -9,12 +9,14 @@ Ext.define('expensetracker.store.Message', {
 		useDefaultXhrHeader : false,
 		api : {
 			create : expensetracker.util.Url.getMessageService(),
-			read : expensetracker.util.Url.getMessageService(),			
+			read : expensetracker.util.Url.getMessageService(),
+			update : expensetracker.util.Url.getMessageService(),
 			destroy : expensetracker.util.Url.getMessageService()
 		},
 		actionMethods : {
 			create : 'POST',
-			read : 'GET',			
+			read : 'GET',
+			update : 'PUT',
 			destroy : 'DELETE'
 		},
 		reader : {

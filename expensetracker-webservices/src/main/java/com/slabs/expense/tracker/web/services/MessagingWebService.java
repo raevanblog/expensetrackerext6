@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -81,6 +82,30 @@ public class MessagingWebService {
 					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
 			return ResponseGenerator.getSuccessResponse(service.createMessage(messages),
 					Operation.INSERT);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param messages
+	 *            {@link List} - List of Message records
+	 * @return {@link Response}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
+	 */
+	@Path("/message")
+	@PUT
+	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response updateMessage(List<Message> messages) throws WebServiceException {
+		try {
+			MessagingService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			return ResponseGenerator.getSuccessResponse(service.updateMessage(messages),
+					Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
