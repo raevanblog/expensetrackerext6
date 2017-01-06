@@ -81,11 +81,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		incomeWindow.show();
 	},
 	updateDashBoardSummary : function() {
-		var me = this;
-		var totInc = me.lookup('totIncome');
-		var totExp = me.lookup('totExpense');
-		var summaryPanel = me.lookup('summarypanel');
-		var cih = me.lookup('cashInHand');
+		var me = this;		
+		var summaryPanel = me.lookup('summarypanel');		
 		summaryPanel.setLoading('Loading...');
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getDashboardService(),
@@ -101,32 +98,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				var dashData = response.result.any[0];
 				if (dashData != null || dashData != undefined) {
 					var summary = dashData.summary;
-					var piePanel = me.lookup('summarypiepanel');
-					var pie = piePanel.down('[itemId=summaryPolar]');
-
-					totInc.setValue(summary.totalIncome);
-					totExp.setValue(summary.totalExpense);
-					cih.setValue(summary.cashInHand);
-					if (summary.totalIncome !== 0.0) {
-
-						var pieStore = Ext.create('Ext.data.Store');
-						var expPercentage = (summary.totalExpense / summary.totalIncome) * 100;
-						var cihPercentage = (summary.cashInHand / summary.totalIncome) * 100;
-
-						pieStore.add({
-							item : 'CASH-IN-HAND',
-							value : cihPercentage
-						}, {
-							item : 'EXPENSE',
-							value : expPercentage
-						});
-						pie.bindStore(pieStore);
-					} else {
-						var pieStore = pie.getStore();
-						if (pieStore !== null || pieStore !== undefined) {
-							pieStore.removeAll();
-						}
-					}
+					var data = [{
+						category : 'Total Income',
+						value : summary.totalIncome + ''
+					},{
+						category : 'Total Expense',
+						value : summary.totalExpense + ''
+					}, {
+						category : 'Cash In Hand',
+						value : summary.cashInHand + ''
+					}];
+					summaryPanel.down('#summary').down('#summary-component').setData(data);
 				}
 			},
 			failure : function(response, opts) {

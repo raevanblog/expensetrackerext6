@@ -12,33 +12,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		afterrender : 'onRender'
 	},
 	items : [ {
-		xtype : 'panel',
-		title : 'Summary',
-		scrollable : true,
-		reference : 'summarypanel',
-		tools : [ {
-			type : 'refresh',
-			tooltip : 'Reload',
-			handler : 'updateDashBoardSummary'
-		} ],
-		height : 250,
-		iconCls : 'x-fa fa-th',
-		cls : 'big-40 small-100 dash-panel shadow',
+		xtype : 'panel',				
+		reference : 'summarypanel',		
+		height : 100,		
+		cls : 'big-100 small-100 dash-panel shadow',
 		layout : {
-			type : 'hbox',
-			align : 'stretch'
+			type : 'fit'			
 		},
 		items : [ {
 			xtype : 'summary',
-			bodyPadding : '10 0 0 10',
-			flex : 0.5
-		}, {
-			xtype : 'summarypie',
-			reference : 'summarypiepanel',
-			height : '100%',
-			flex : 0.5,
-			padding : '0 0 0 20'
-		} ]
+			itemId : 'summary'
+		}]
 	}, {
 		xtype : 'panel',
 		title : 'Expense Sheet',

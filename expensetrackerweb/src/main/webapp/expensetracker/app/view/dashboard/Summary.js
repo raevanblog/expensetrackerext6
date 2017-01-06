@@ -1,41 +1,20 @@
 Ext.define('expensetracker.view.dashboard.Summary', {
-	extend : 'Ext.form.Panel',
+	extend : 'Ext.container.Container',
 	xtype : 'summary',
 	alias : 'view.summary',
-	layout : {
-		type : 'vbox',
-		align : 'stretch'
-	},
-	items : [ {
+	layout : 'fit',
+	items : [{
 		xtype : 'component',
-		padding : '5 0 20 0',
-		html : '<a href="javascript:void(0);">Update Income</a>',
-		listeners : {
-			el : {
-				delegate : 'a',
-				click : 'onIncomeEditClick'
-			}
-		}
-	}, {
-		xtype : 'displayfield',
-		bind : {
-			fieldLabel : 'Total Income ({currencySymbol})'
-		},
-		reference : 'totIncome',
-		labelSeparator : ''
-	}, {
-		xtype : 'displayfield',
-		bind : {
-			fieldLabel : 'Total Expense ({currencySymbol})'
-		},
-		reference : 'totExpense',
-		labelSeparator : ''
-	}, {
-		xtype : 'displayfield',
-		bind : {
-			fieldLabel : 'Cash in Hand ({currencySymbol})'
-		},
-		reference : 'cashInHand',
-		labelSeparator : ''
-	} ]
+		itemId : 'summary-component',
+		cls: 'summary-tiles',
+		tpl:[
+            '<div class="summary">',
+                '<tpl for=".">',
+                    '<span>',
+                        '<div>{value}</div> {category}',
+                    '</span>',
+                '</tpl>',
+            '</div>'
+        ]
+	}]
 });
