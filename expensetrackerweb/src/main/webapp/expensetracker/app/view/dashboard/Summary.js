@@ -11,7 +11,7 @@ Ext.define('expensetracker.view.dashboard.Summary', {
             '<div class="summary">',
                 '<tpl for=".">',
                     '<span>',
-                        '<div>{value}</div> {category}',
+                        '<div>{value:currency([expensetracker.util.Session.getCurrencySymbol()], 2, false, " ")}</div> {category}',
                     '</span>',
                 '</tpl>',
             '</div>'

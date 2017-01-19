@@ -12,17 +12,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		afterrender : 'onRender'
 	},
 	items : [ {
-		xtype : 'panel',				
-		reference : 'summarypanel',		
+		xtype : 'summary',				
+		reference : 'summary',		
 		height : 100,		
-		cls : 'big-100 small-100 dash-panel shadow',
-		layout : {
-			type : 'fit'			
-		},
-		items : [ {
-			xtype : 'summary',
-			itemId : 'summary'
-		}]
+		cls : 'big-100 small-100 dash-panel shadow'		
 	}, {
 		xtype : 'panel',
 		title : 'Expense Sheet',

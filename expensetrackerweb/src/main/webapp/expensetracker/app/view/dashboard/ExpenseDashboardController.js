@@ -82,8 +82,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	},
 	updateDashBoardSummary : function() {
 		var me = this;		
-		var summaryPanel = me.lookup('summarypanel');		
-		summaryPanel.setLoading('Loading...');
+		var summaryContainer = me.lookup('summary');		
+		summaryContainer.setLoading('Loading...');
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getDashboardService(),
 			method : 'GET',
@@ -93,7 +93,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 				year : expensetracker.util.Calendar.getCurrentYear()
 			},
 			success : function(response, opts) {
-				summaryPanel.setLoading(false);
+				summaryContainer.setLoading(false);
 				var response = Ext.decode(response.responseText);
 				var dashData = response.result.any[0];
 				if (dashData != null || dashData != undefined) {
@@ -105,14 +105,14 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 						category : 'Total Expense',
 						value : summary.totalExpense + ''
 					}, {
-						category : 'Cash In Hand',
+						category : 'Balance',
 						value : summary.cashInHand + ''
 					}];
-					summaryPanel.down('#summary').down('#summary-component').setData(data);
+					summaryContainer.down('#summary-component').setData(data);
 				}
 			},
 			failure : function(response, opts) {
-				summaryPanel.setLoading(false);
+				summaryContainer.setLoading(false);
 			}
 		});
 
