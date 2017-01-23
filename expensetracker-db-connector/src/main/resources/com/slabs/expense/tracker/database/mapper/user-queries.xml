@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slabs.expense.tracker.database.mapper.UserDAO">
+<mapper namespace="com.slabs.expense.tracker.common.db.mapper.UserDAO">
 
 	<resultMap type="com.slabs.expense.tracker.common.db.entity.UserInfo" id="UserInfo">
 		<result column="FIRSTNAME" property="firstName" />
@@ -25,84 +25,84 @@
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
 		values(
-		#{record.firstName},
-		#{record.lastName},
-		#{record.sex},
-		#{record.username},
-		#{record.password},
-		#{record.email},
-		#{record.mobile},
-		#{record.address}
+		#{param1.firstName},
+		#{param1.lastName},
+		#{param1.sex},
+		#{param1.username},
+		#{param1.password},
+		#{param1.email},
+		#{param1.mobile},
+		#{param1.address}
 		)
 	</insert>
 
 	<update id="updateUser">
 		update EXPENSETRACKER.USERINFO
 		<set>
-			<if test="record.firstName != null">
-				firstName=#{record.firstName},
+			<if test="param1.firstName != null">
+				firstName=#{param1.firstName},
 			</if>
-			<if test="record.lastName != null">
-				lastName=#{record.lastName},
+			<if test="param1.lastName != null">
+				lastName=#{param1.lastName},
 			</if>
-			<if test="record.sex != null">
-				sex=#{record.sex},
+			<if test="param1.sex != null">
+				sex=#{param1.sex},
 			</if>
-			<if test="record.newPassword != null">
-				password=#{record.newPassword},
+			<if test="param1.newPassword != null">
+				password=#{param1.newPassword},
 			</if>
-			<if test="record.email != null">
-				email=#{record.email},
+			<if test="param1.email != null">
+				email=#{param1.email},
 			</if>
-			<if test="record.mobile != null">
-				mobile=#{record.mobile},
+			<if test="param1.mobile != null">
+				mobile=#{param1.mobile},
 			</if>
-			<if test="record.address != null">
-				address=#{record.address},
+			<if test="param1.address != null">
+				address=#{param1.address},
 			</if>
-			<if test="record.profilePic != null">
-				profilePic=#{record.profilePic, typeHandler=org.apache.ibatis.type.ClobTypeHandler},
+			<if test="param1.profilePic != null">
+				profilePic=#{param1.profilePic, typeHandler=org.apache.ibatis.type.ClobTypeHandler},
 			</if>
-			<if test="record.isAdmin != null">
-				isAdmin=#{record.isAdmin}
+			<if test="param1.isAdmin != null">
+				isAdmin=#{param1.isAdmin}
 			</if>
-			<if test="record.isFtLogin != null">
-				isFtLogin=#{record.isFtLogin}
+			<if test="param1.isFtLogin != null">
+				isFtLogin=#{param1.isFtLogin}
 			</if>
-			<if test="record.isVerified != null">
-				isVerified=#{record.isVerified}
+			<if test="param1.isVerified != null">
+				isVerified=#{param1.isVerified}
 			</if>
-			<if test="record.isLocked != null">
-				isLocked=#{record.isLocked}
+			<if test="param1.isLocked != null">
+				isLocked=#{param1.isLocked}
 			</if>
-			<if test="record.activationKey != null">
-				activationKey=#{record.activationKey}
+			<if test="param1.activationKey != null">
+				activationKey=#{param1.activationKey}
 			</if>
 		</set>
-		where username=#{record.username}
+		where username=#{param1.username}
 	</update>
 
 	<update id="activateUser">
-		update EXPENSETRACKER.USERINFO set isVerified=#{isActivate} where username=#{username}
+		update EXPENSETRACKER.USERINFO set isVerified=#{param2} where username=#{param1}
 	</update>
 
 	<select id="getUser" resultMap="UserInfo">
 		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE, ADDRESS, PROFILEPIC, ISADMIN, ISFTLOGIN, ISVERIFIED, ISLOCKED, ACTIVATIONKEY
-		<if test="includePassword">
+		<if test="param2">
 			,PASSWORD
 		</if>
 		from EXPENSETRACKER.USERINFO
-		<if test="username != null">
-			where USERNAME=#{username}
+		<if test="param1 != null">
+			where USERNAME=#{param1}
 		</if>
 	</select>
 
 	<delete id="deleteUser">
-		delete from EXPENSETRACKER.USERINFO where username=#{record.username}
+		delete from EXPENSETRACKER.USERINFO where username=#{param1.username}
 	</delete>
 
 	<update id="setActivationKey">
-		update EXPENSETRACKER.USERINFO set activationKey=#{activationKey} where username=#{username}
+		update EXPENSETRACKER.USERINFO set activationKey=#{param2} where username=#{param1}
 	</update>
 	
 </mapper>

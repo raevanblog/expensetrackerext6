@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slabs.expense.tracker.database.mapper.MessageDAO">
+<mapper namespace="com.slabs.expense.tracker.common.db.mapper.MessageDAO">
 
 	<resultMap type="com.slabs.expense.tracker.common.db.entity.Message" id="Message">
 		<result column="ID" property="id" />
@@ -30,7 +30,7 @@
 
 	<insert id="insertMessage" parameterType="java.util.List">
 		insert into EXPENSETRACKER.MESSAGE(MSGTO, MSGFROM, MSGDATE, SUBJECT, MESSAGE, ISNEW) values
-		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.msgto},
 			#{record.msgfrom},
 			#{record.msgdate,
@@ -45,46 +45,46 @@
 	<update id="updateMessage" parameterType="com.slabs.expense.tracker.common.db.entity.Message">
 		update EXPENSETRACKER.MESSAGE
 		<set>
-			<if test="record.msgto != null">
-				subject=#{record.msgto},
+			<if test="param1.msgto != null">
+				subject=#{param1.msgto},
 			</if>
-			<if test="record.subject != null">
-				subject=#{record.subject},
+			<if test="param1.subject != null">
+				subject=#{param1.subject},
 			</if>
-			<if test="record.message != null">
-				message=#{record.message},
+			<if test="param1.message != null">
+				message=#{param1.message},
 			</if>
-			<if test="record.isNew != null">
-				isnew=#{record.isNew},
+			<if test="param1.isNew != null">
+				isnew=#{param1.isNew},
 			</if>
 		</set>
-		where msgto=#{record.msgto}
+		where msgto=#{param1.msgto}
 	</update>
 
 	<delete id="deleteMessage">
 		delete from EXPENSETRACKER.MESSAGE
-		where id=#{record.id}
+		where id=#{param1.id}
 	</delete>
 
 	<select id="getMessage" resultMap="Message">
 		select m.id, m.msgfrom, m.msgto, m.subject, m.message, m.msgdate, m.isnew, u.firstname as senderfname,
 		u.lastname as senderlname,u.profilepic as senderpic from expensetracker.message m, expensetracker.userinfo u where
-		m.msgto =#{username}and m.msgfrom = u.username
+		m.msgto =#{param1}and m.msgfrom = u.username
 		<if test="isNew">
-			and m.isNew=#{isNew}
+			and m.isNew=#{param2}
 		</if>
 	</select>
 
 	<insert id="insertQuery">
 		insert into EXPENSETRACKER.QUERY(MSGFROM, SUBJECT,EMAIL, MESSAGE, ISNEW) values (
-		#{record.msgfrom},
-		#{record.msgdate,
+		#{param1.msgfrom},
+		#{param1.msgdate,
 		typeHandler=org.apache.ibatis.type.DateTypeHandler},
-		#{record.subject},
-		#{record.email},
-		#{record.message,
+		#{param1.subject},
+		#{param1.email},
+		#{param1.message,
 		typeHandler=org.apache.ibatis.type.ClobTypeHandler},
-		#{record.isNew}
+		#{param1.isNew}
 		)
 	</insert>
 
@@ -92,20 +92,20 @@
 		update EXPENSETRACKER.MESSAGE
 		<set>
 			<if test="record.isNew != null">
-				isnew=#{record.isNew},
+				isnew=#{param1.isNew},
 			</if>
 		</set>
 	</update>
 
 	<delete id="deleteQuery">
 		delete from EXPENSETRACKER.MESSAGE
-		where id=#{record.id}
+		where id=#{param1.id}
 	</delete>
 
 	<select id="getQuery" resultMap="Query">
 		select * from EXPENSETRACKER.QUERY
 		<if test="isNew">
-			where isNew=#{isNew}
+			where isNew=#{param1}
 		</if>
 	</select>
 

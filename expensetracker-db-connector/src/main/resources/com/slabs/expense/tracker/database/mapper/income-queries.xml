@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.slabs.expense.tracker.database.mapper.IncomeDAO">
+<mapper namespace="com.slabs.expense.tracker.common.db.mapper.IncomeDAO">
 
 	<insert id="insertIncome" parameterType="java.util.List">
 		insert into EXPENSETRACKER.INCOME(INCOME,INCOMETYPE, YR, MTH, USERNAME)
 		values
-		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.income},
 			#{record.incometype},
 			#{record.yr},
@@ -17,42 +17,42 @@
 	</insert>
 
 	<update id="updateIncome">
-		update EXPENSETRACKER.INCOME set income=#{record.income} where id=#{record.id}
+		update EXPENSETRACKER.INCOME set income=#{param1.income} where id=#{param1.id}
 	</update>
 
 	<select id="getIncome" resultType="com.slabs.expense.tracker.common.db.entity.Income">
-		select * from EXPENSETRACKER.INCOME where username=#{username}
-		<if test="year != null">
-			and yr=#{year}
+		select * from EXPENSETRACKER.INCOME where username=#{param1}
+		<if test="param2 != null">
+			and yr=#{param2}
 		</if>
-		<if test="month != null">
-			and mth=#{month}
+		<if test="param3 != null">
+			and mth=#{param3}
 		</if>
 	</select>
 
 	<select id="getTotalIncome" resultType="java.lang.Double">
 		select SUM(income) from EXPENSETRACKER.INCOME where
-		username=#{username}
-		<if test="year != null">
-			and yr=#{year}
+		username=#{param1}
+		<if test="param2 != null">
+			and yr=#{param2}
 		</if>
-		<if test="month != null">
-			and mth=#{month}
+		<if test="param3 != null">
+			and mth=#{param3}
 		</if>
 	</select>
 
 	<select id="getMonthWiseTotalIncome" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
 		select mth as MONTH, sum(income) as INCOME from INCOME
 		where
-		username = #{username}
+		username = #{param1}
 		and yr =
-		#{year}
+		#{param2}
 		group by mth
 	</select>
 
 	<delete id="deleteIncome">
-		delete from EXPENSETRACKER.INCOME where mth=#{record.mth} and yr=#{record.yr}
-		and username=#{record.username}
+		delete from EXPENSETRACKER.INCOME where mth=#{record.mth} and yr=#{param1.yr}
+		and username=#{param1.username}
 	</delete>
 
 	<select id="getIncomeType" resultType="com.slabs.expense.tracker.common.db.entity.IncomeType">

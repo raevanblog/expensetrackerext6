@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.slabs.expense.tracker.database.mapper.ExpenseDAO">
+<mapper namespace="com.slabs.expense.tracker.common.db.mapper.ExpenseDAO">
 
 
 
 	<insert id="insertExpense" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
-		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.itemName},
 			#{record.category},
 			#{record.exptype},
@@ -23,81 +23,81 @@
 	<update id="updateExpense">
 		update EXPENSETRACKER.EXPENSE
 		<set>
-			<if test="record.itemName != null">
-				itemName = #{record.itemName},
+			<if test="param1.itemName != null">
+				itemName = #{param1.itemName},
 			</if>
-			<if test="record.category != null">
-				category=#{record.category},
+			<if test="param1.category != null">
+				category=#{param1.category},
 			</if>
-			<if test="record.exptype != null">
-				exptype=#{record.exptype},
+			<if test="param1.exptype != null">
+				exptype=#{param1.exptype},
 			</if>
-			<if test="record.expdate != null">
-				expdate=#{record.expdate},
+			<if test="param1.expdate != null">
+				expdate=#{param1.expdate},
 			</if>
-			<if test="record.price != null">
-				price=#{record.price},
+			<if test="param1.price != null">
+				price=#{param1.price},
 			</if>
-			<if test="record.qty != null">
-				qty=#{record.qty},
+			<if test="param1.qty != null">
+				qty=#{param1.qty},
 			</if>
-			<if test="record.pricePerUnit != null">
-				pricePerUnit=#{record.pricePerUnit}
+			<if test="param1.pricePerUnit != null">
+				pricePerUnit=#{param1.pricePerUnit}
 			</if>
 		</set>
-		where id=#{record.id}
+		where id=#{param1.id}
 	</update>
 
 	<select id="getExpense" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
-		username=#{username}
-		<if test="year != null">
-			and YEAR(expdate)=#{year}
+		username=#{param1}
+		<if test="param2 != null">
+			and YEAR(expdate)=#{param2}
 		</if>
-		<if test="month != null">
-			and MONTH(expdate) = #{month}
+		<if test="param3 != null">
+			and MONTH(expdate) = #{param3}
 		</if>
 	</select>
 
 	<select id="getTopExpense" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where price in (
-		select max(price) from expense where username=#{username}
-		and YEAR(expdate) = #{year}
-		<if test="month != null">
-			and MONTH(expdate) = #{month}
+		select max(price) from expense where username=#{param1}
+		and YEAR(expdate) = #{param2}
+		<if test="param3 != null">
+			and MONTH(expdate) = #{param3}
 		</if>
 		group by category)
-		and username=#{username}
-		and YEAR(expdate)=#{year}
-		<if test="month != null">
-			and MONTH(expdate) = #{month}
+		and username=#{param1}
+		and YEAR(expdate)=#{param2}
+		<if test="param3 != null">
+			and MONTH(expdate) = #{param3}
 		</if>
 	</select>
 
 	<select id="getTotalExpense" resultType="java.lang.Double">
 		select sum(price) from EXPENSETRACKER.EXPENSE where
-		username=#{username}
-		<if test="year != null">
-			and YEAR(expdate)=#{year}
+		username=#{param1}
+		<if test="param2 != null">
+			and YEAR(expdate)=#{param2}
 		</if>
-		<if test="month != null">
-			and MONTH(expdate) = #{month}
+		<if test="param3 != null">
+			and MONTH(expdate) = #{param3}
 		</if>
 	</select>
 
 	<select id="getMonthWiseTotalExpense" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
 		select month(expdate) as MONTH, sum(price) as EXPENSE from EXPENSE where
 		username =
-		#{username} and
-		year(expdate) = #{year}
+		#{param1} and
+		year(expdate) = #{param2}
 		group by month(expdate)
 	</select>
 
 	<select id="getCategoryWiseTotalExpense" resultType="com.slabs.expense.tracker.common.db.entity.Graph">
 		select category, sum(price) as EXPENSE from EXPENSE
-		where username=#{username} and year(expdate) = #{year}
-		<if test="month != null">
-			and MONTH(expdate) = #{month}
+		where username=#{param1} and year(expdate) = #{param2}
+		<if test="param3 != null">
+			and MONTH(expdate) = #{param3}
 		</if>
 		group by category
 	</select>
@@ -105,7 +105,7 @@
 
 	<select id="getExpenseById" resultType="com.slabs.expense.tracker.common.db.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
-		id=#{id}
+		id=#{param1}
 	</select>
 
 	<select id="selectExpenseNames" resultType="com.slabs.expense.tracker.common.db.entity.Dictionary">
@@ -114,12 +114,12 @@
 
 	<delete id="deleteExpense">
 		delete from EXPENSETRACKER.EXPENSE
-		where id=#{record.id}
+		where id=#{param1.id}
 	</delete>
 
 	<insert id="insertExpenseCategory" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION,USERNAME) values
-		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.category},
 			#{record.description},
 			#{record.username}
@@ -130,25 +130,25 @@
 
 		update EXPENSETRACKER.EXPENSE_CATEGORY
 		<set>
-			<if test="record.category != null">
-				category=#{record.category},
+			<if test="param1.category != null">
+				category=#{param1.category},
 			</if>
-			<if test="record.description != null">
-				description=#{record.description}
+			<if test="param1.description != null">
+				description=#{param1.description}
 			</if>
 		</set>
-		where categoryId=#{record.categoryId}
+		where categoryId=#{param1.categoryId}
 
 	</update>
 
 	<select id="retrieveExpenseCategory" resultType="com.slabs.expense.tracker.common.db.entity.ExpenseCategory">
-		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username=#{username}
+		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username=#{param1}
 	</select>
 
 	<delete id="deleteExpenseCategory">
 		delete from EXPENSETRACKER.EXPENSE_CATEGORY
 		<if test="record.categoryId != null">
-			where categoryId=#{record.categoryId}
+			where categoryId=#{param1.categoryId}
 		</if>
 	</delete>
 
@@ -158,7 +158,7 @@
 
 	<insert id="insertExpenseType" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSETYPE(EXPTYPE, DESCRIPTION) values
-		<foreach collection="records" item="record" index="index" open="(" separator="),(" close=")">
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.exptype},
 			#{record.description}
 		</foreach>
@@ -167,17 +167,17 @@
 	<update id="updateExpenseType" parameterType="com.slabs.expense.tracker.common.db.entity.ExpenseType">
 		update EXPENSETRACKER.EXPENSETYPE
 		<set>
-			<if test="record.exptype != null">
-				exptype=#{record.exptype},
+			<if test="param1.exptype != null">
+				exptype=#{param1.exptype},
 			</if>
-			<if test="record.description != null">
-				description=#{record.description}
+			<if test="param1.description != null">
+				description=#{param1.description}
 			</if>
 		</set>
 	</update>
 
 	<delete id="deleteExpenseType" parameterType="int">
-		delete from EXPENSETRACKER.EXPENSETYPE where id=#{id}
+		delete from EXPENSETRACKER.EXPENSETYPE where id=#{param1}
 	</delete>
 
 </mapper>
