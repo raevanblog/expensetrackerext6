@@ -16,9 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.Message;
+import com.slabs.expense.tracker.common.services.MessageService;
+import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.core.services.MessagingService;
-import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
 import com.slabs.expense.tracker.web.services.core.ResponseStatus;
 import com.slabs.expense.tracker.web.services.exception.WebServiceException;
@@ -54,8 +54,8 @@ public class MessagingWebService {
 	public Response getMessages(@QueryParam("username") String username,
 			@QueryParam("isNew") Boolean isNew) throws WebServiceException {
 		try {
-			MessagingService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.getMessages(username, isNew),
 					Operation.SELECT);
 		} catch (Exception e) {
@@ -78,8 +78,8 @@ public class MessagingWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createMessage(List<Message> messages) throws WebServiceException {
 		try {
-			MessagingService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.createMessage(messages),
 					Operation.INSERT);
 		} catch (Exception e) {
@@ -102,8 +102,8 @@ public class MessagingWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response updateMessage(List<Message> messages) throws WebServiceException {
 		try {
-			MessagingService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.updateMessage(messages),
 					Operation.UPDATE);
 		} catch (Exception e) {
@@ -126,8 +126,8 @@ public class MessagingWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteMessage(List<Message> messages) throws WebServiceException {
 		try {
-			MessagingService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.deleteMessage(messages),
 					Operation.INSERT);
 		} catch (Exception e) {
@@ -151,8 +151,8 @@ public class MessagingWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getQueries(@QueryParam("isNew") Boolean isNew) throws WebServiceException {
 		try {
-			MessagingService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.getQueries(isNew),
 					Operation.SELECT);
 		} catch (Exception e) {
@@ -175,8 +175,8 @@ public class MessagingWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createQuery(Message message) throws WebServiceException {
 		try {
-			MessagingService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.createQuery(message),
 					Operation.INSERT);
 		} catch (Exception e) {
@@ -199,8 +199,8 @@ public class MessagingWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteQuery(List<Message> messages) throws WebServiceException {
 		try {
-			MessagingService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService service = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.deleteQuery(messages),
 					Operation.DELETE);
 		} catch (Exception e) {

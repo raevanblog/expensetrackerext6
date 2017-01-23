@@ -15,9 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.Income;
+import com.slabs.expense.tracker.common.services.IncomeService;
+import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.core.services.IncomeService;
-import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
 import com.slabs.expense.tracker.web.services.core.ResponseStatus;
 import com.slabs.expense.tracker.web.services.exception.WebServiceException;
@@ -64,7 +64,7 @@ public class IncomeWebService {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);
 
-			return ResponseGenerator.getSuccessResponse(service.select(username, year, month),
+			return ResponseGenerator.getSuccessResponse(service.selectIncome(username, year, month),
 					Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
@@ -87,7 +87,7 @@ public class IncomeWebService {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);
-			return ResponseGenerator.getSuccessResponse(service.insert(records), Operation.INSERT);
+			return ResponseGenerator.getSuccessResponse(service.createIncome(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -110,7 +110,7 @@ public class IncomeWebService {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);
-			return ResponseGenerator.getSuccessResponse(service.update(records), Operation.UPDATE);
+			return ResponseGenerator.getSuccessResponse(service.updateIncome(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -133,7 +133,7 @@ public class IncomeWebService {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);
-			return ResponseGenerator.getSuccessResponse(service.delete(records), Operation.DELETE);
+			return ResponseGenerator.getSuccessResponse(service.deleteIncome(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);

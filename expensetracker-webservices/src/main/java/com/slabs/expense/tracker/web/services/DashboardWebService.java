@@ -9,10 +9,10 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.slabs.expense.tracker.common.services.DashboardService;
+import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.core.services.DashboardService;
-import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
 import com.slabs.expense.tracker.web.services.core.ResponseStatus;
 import com.slabs.expense.tracker.web.services.exception.WebServiceException;

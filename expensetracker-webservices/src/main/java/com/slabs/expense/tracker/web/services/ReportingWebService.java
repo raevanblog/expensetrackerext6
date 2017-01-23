@@ -11,10 +11,10 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.core.services.ReportingService;
-import com.slabs.expense.tracker.core.services.Services;
+import com.slabs.expense.tracker.reports.service.ReportingService;
 import com.slabs.expense.tracker.web.services.core.ContentType;
 import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
 import com.slabs.expense.tracker.web.services.core.ResponseStatus;

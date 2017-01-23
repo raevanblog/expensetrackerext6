@@ -14,11 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.Graph;
+import com.slabs.expense.tracker.common.services.ExpenseService;
+import com.slabs.expense.tracker.common.services.IncomeService;
+import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.core.services.ExpenseService;
-import com.slabs.expense.tracker.core.services.IncomeService;
-import com.slabs.expense.tracker.core.services.Services;
 import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
 import com.slabs.expense.tracker.web.services.core.ResponseStatus;
 import com.slabs.expense.tracker.web.services.exception.WebServiceException;
@@ -75,10 +75,10 @@ public class GraphWebService {
 	}
 
 	private List<Graph> getMonthlyExpenseVsIncome(String username, Integer year) throws Exception {
-		ExpenseService eService = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
-				ExpenseService.class);
-		IncomeService iService = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
-				IncomeService.class);
+		ExpenseService eService = ServiceFactory.getInstance()
+				.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
+		IncomeService iService = ServiceFactory.getInstance()
+				.getService(Services.INCOME_SERVICE, IncomeService.class);
 
 		List<Graph> eGraph = eService.getMonthWiseTotalExpense(username, year);
 		List<Graph> iGraph = iService.getMonthWiseTotalIncome(username, year);
@@ -103,8 +103,8 @@ public class GraphWebService {
 
 	private List<Graph> getCategoryWiseTotalExpense(@QueryParam("username") String username,
 			@QueryParam("year") Integer year, @QueryParam("month") Integer month) throws Exception {
-		ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE,
-				ExpenseService.class);
+		ExpenseService service = ServiceFactory.getInstance()
+				.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
 		return service.getCategoryWiseTotalExpense(username, year, month);
 	}
 

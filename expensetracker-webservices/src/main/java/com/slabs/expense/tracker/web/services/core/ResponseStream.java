@@ -30,7 +30,7 @@ public class ResponseStream implements StreamingOutput {
 
 	@Override
 	public void write(OutputStream output) throws IOException, WebApplicationException {
-		try {
+		try {			
 			builder.toPdf(output);
 			output.flush();
 		} catch (DRException e) {

@@ -18,12 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.db.entity.Message;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.services.AdminService;
+import com.slabs.expense.tracker.common.services.EmailService;
+import com.slabs.expense.tracker.common.services.MessageService;
+import com.slabs.expense.tracker.common.services.Services;
+import com.slabs.expense.tracker.common.services.UserService;
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.core.services.AdminService;
-import com.slabs.expense.tracker.core.services.EmailService;
-import com.slabs.expense.tracker.core.services.MessagingService;
-import com.slabs.expense.tracker.core.services.Services;
-import com.slabs.expense.tracker.core.services.UserService;
+import com.slabs.expense.tracker.core.services.EmailServiceImpl;
+import com.slabs.expense.tracker.core.services.MessageServiceImpl;
+import com.slabs.expense.tracker.core.services.UserServiceImpl;
 import com.slabs.expense.tracker.util.Base64Encoder;
 import com.slabs.expense.tracker.util.JSONUtil;
 import com.slabs.expense.tracker.web.MessageConstants;
@@ -44,7 +47,7 @@ public class AccessController {
 			Map<String, String> parameters = JSONUtil
 					.getMapFromInputStream(request.getInputStream());
 			String[] credentials = Base64Encoder.decode(parameters.get("credential"), ":");
-			List<UserInfo> users = service.select(credentials[0], Boolean.TRUE);
+			List<UserInfo> users = service.selectUser(credentials[0], Boolean.TRUE);
 			if (users != null && !users.isEmpty()) {
 				UserInfo info = users.get(0);
 				if (info.getPassword().equals(credentials[1])) {
@@ -109,7 +112,7 @@ public class AccessController {
 				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 						UserService.class);
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
-				List<UserInfo> list = service.select(user.getUsername(), Boolean.FALSE);
+				List<UserInfo> list = service.selectUser(user.getUsername(), Boolean.FALSE);
 				if (list != null && !list.isEmpty()) {
 					user = list.get(0);
 					session.removeAttribute(WebConstants.LOGGED_IN_USER);
@@ -139,8 +142,8 @@ public class AccessController {
 			HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
+			UserServiceImpl service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserServiceImpl.class);
 
 			String username = request.getParameter("checkAvailable");
 			Boolean availability = service.isUserNameAvailable(username);
@@ -169,10 +172,10 @@ public class AccessController {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 					UserService.class);
-			EmailService emailService = ServiceFactory.getInstance()
-					.getService(Services.EMAIL_SERVICE, EmailService.class);
+			EmailServiceImpl emailService = ServiceFactory.getInstance()
+					.getService(Services.EMAIL_SERVICE, EmailServiceImpl.class);
 			UserInfo user = JSONUtil.getObjectFromJSON(request.getInputStream(), UserInfo.class);
-			Integer isCreated = service.create(user);
+			Integer isCreated = service.createUser(user);
 			output.put(WebConstants.SUCCESS, Boolean.TRUE);
 			if (isCreated > 0) {
 				emailService.sendActivationEmail(user);
@@ -197,21 +200,21 @@ public class AccessController {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
+					UserServiceImpl.class);
 			EmailService emailService = ServiceFactory.getInstance()
 					.getService(Services.EMAIL_SERVICE, EmailService.class);
 
 			AdminService adminService = ServiceFactory.getInstance()
 					.getService(Services.ADMIN_SERVICE, AdminService.class);
 
-			MessagingService messagingService = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageService messagingService = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageService.class);
 
 			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
 			String activationKey = map.get("activationkey");
 			String username = map.get("username");
 
-			List<UserInfo> info = service.select(username, false);
+			List<UserInfo> info = service.selectUser(username, false);
 
 			if (info != null && !info.isEmpty()) {
 				UserInfo user = info.get(0);
@@ -264,7 +267,7 @@ public class AccessController {
 
 			String username = map.get("username");
 
-			List<UserInfo> info = service.select(username, false);
+			List<UserInfo> info = service.selectUser(username, false);
 
 			if (info != null && !info.isEmpty()) {
 				UserInfo user = info.get(0);
@@ -294,8 +297,8 @@ public class AccessController {
 	public ModelAndView sendMail(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			MessagingService messagingService = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessagingService.class);
+			MessageServiceImpl messagingService = ServiceFactory.getInstance()
+					.getService(Services.MESSAGING_SERVICE, MessageServiceImpl.class);
 
 			Message message = JSONUtil.getObjectFromJSON(request.getInputStream(), Message.class);
 			messagingService.createQuery(message);

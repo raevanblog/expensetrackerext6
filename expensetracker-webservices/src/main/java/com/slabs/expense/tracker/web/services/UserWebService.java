@@ -16,11 +16,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.services.AdminService;
+import com.slabs.expense.tracker.common.services.EmailService;
+import com.slabs.expense.tracker.common.services.Services;
+import com.slabs.expense.tracker.common.services.UserService;
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.core.services.AdminService;
-import com.slabs.expense.tracker.core.services.EmailService;
-import com.slabs.expense.tracker.core.services.Services;
-import com.slabs.expense.tracker.core.services.UserService;
+import com.slabs.expense.tracker.core.services.UserServiceImpl;
 import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
 import com.slabs.expense.tracker.web.services.core.ResponseStatus;
 import com.slabs.expense.tracker.web.services.exception.WebServiceException;
@@ -54,7 +55,7 @@ public class UserWebService {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
-			Response response = ResponseGenerator.getSuccessResponse(service.create(record), Operation.INSERT);
+			Response response = ResponseGenerator.getSuccessResponse(service.createUser(record), Operation.INSERT);
 			if (response.getResult().getNoOfRecords() != 0) {
 				emailService.sendActivationEmail(record);
 			}
@@ -80,7 +81,7 @@ public class UserWebService {
 	public Response updateUser(UserInfo record) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSuccessResponse(service.update(record), Operation.UPDATE);
+			return ResponseGenerator.getSuccessResponse(service.updateUser(record), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -102,12 +103,12 @@ public class UserWebService {
 	public Response changePassword(UserInfo record) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			List<UserInfo> list = service.select(record.getUsername(), true);
+			List<UserInfo> list = service.selectUser(record.getUsername(), true);
 			UserInfo user = list.get(0);
 			if (!user.getPassword().equals(record.getPassword())) {
 				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Password is wrong");
 			}
-			return ResponseGenerator.getSuccessResponse(service.update(record), Operation.UPDATE);
+			return ResponseGenerator.getSuccessResponse(service.updateUser(record), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -151,7 +152,7 @@ public class UserWebService {
 	public Response getUser(@QueryParam("username") String username) throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSuccessResponse(service.select(username, false), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.selectUser(username, false), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -172,7 +173,7 @@ public class UserWebService {
 	public Response getUsers() throws WebServiceException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-			return ResponseGenerator.getSuccessResponse(service.selectAll(false), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.selectAllUsers(false), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -192,7 +193,7 @@ public class UserWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response isUserNameAvailable(@QueryParam("checkAvailable") String username) throws WebServiceException {
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			UserServiceImpl service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserServiceImpl.class);
 			return ResponseGenerator.getSuccessResponse(service.isUserNameAvailable(username), Operation.CHECK);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
