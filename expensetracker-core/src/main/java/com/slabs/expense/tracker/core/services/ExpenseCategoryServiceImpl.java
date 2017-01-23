@@ -8,10 +8,11 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
-import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.db.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.services.ExpenseCategoryService;
 
 /**
- * {@link ExpenseCategory} provides API for INSERT, UPDATE, DELETE, SELECT on
+ * {@link ExpenseCategoryServiceImpl} provides API for INSERT, UPDATE, DELETE, SELECT on
  * EXPENSE_CATEGORY table
  * 
  * @author Shyam Natarajan
@@ -19,7 +20,7 @@ import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
  */
 @Service(value = "ExpenseCategoryService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
-public class ExpenseCategoryService {
+public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
 
 	@Autowired
 	private ExpenseDAO mapper;
@@ -32,7 +33,8 @@ public class ExpenseCategoryService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer insert(List<ExpenseCategory> records) throws Exception {
+	@Override
+	public Integer createCategory(List<ExpenseCategory> records) throws Exception {
 
 		return mapper.insertExpenseCategory(records);
 	}
@@ -46,7 +48,8 @@ public class ExpenseCategoryService {
 	 *             throws {@link Exception}
 	 * 
 	 */
-	public Integer update(List<ExpenseCategory> records) throws Exception {
+	@Override
+	public Integer updateCategory(List<ExpenseCategory> records) throws Exception {
 		Integer noOfRecords = 0;
 		for (ExpenseCategory record : records) {
 			noOfRecords = noOfRecords + mapper.updateExpenseCategory(record);
@@ -62,7 +65,8 @@ public class ExpenseCategoryService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<ExpenseCategory> select(String username) throws Exception {
+	@Override
+	public List<ExpenseCategory> selectCategory(String username) throws Exception {
 		return mapper.retrieveExpenseCategory(username);
 	}
 
@@ -74,7 +78,8 @@ public class ExpenseCategoryService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer delete(List<ExpenseCategory> records) throws Exception {
+	@Override
+	public Integer deleteCategory(List<ExpenseCategory> records) throws Exception {
 		Integer noOfRecords = 0;
 		for (ExpenseCategory record : records) {
 			noOfRecords = noOfRecords + mapper.deleteExpenseCategory(record);

@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.slabs.expense.tracker.core.services.Services;
+import com.slabs.expense.tracker.common.services.Services;
 
 /**
  * {@link ServiceFactory} is a singleton class, which will get the instance of

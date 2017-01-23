@@ -14,19 +14,20 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.db.entity.Message;
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.database.mapper.MessageDAO;
+import com.slabs.expense.tracker.common.db.mapper.MessageDAO;
+import com.slabs.expense.tracker.common.services.MessageService;
 import com.slabs.expense.tracker.util.MarkerEngine;
 
 /**
- * {@link MessagingService} provides API for INSERT, DELETE, UPDATE, SELECT on
+ * {@link MessageServiceImpl} provides API for INSERT, DELETE, UPDATE, SELECT on
  * MESSAGE & QUERY table
  * 
  * @author Shyam Natarajan
  *
  */
-@Service(value = "MessagingService")
+@Service(value = "MessageService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
-public class MessagingService {
+public class MessageServiceImpl implements MessageService {
 
 	@Autowired
 	private MessageDAO dao;
@@ -38,6 +39,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public void sendWelcomeMessage(UserInfo user) throws Exception {
 		Message message = new Message();
 		Map<String, String> model = new HashMap<String, String>();
@@ -68,6 +70,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public List<Message> getMessages(String username, boolean isNew) throws Exception {
 		return dao.getMessage(username, isNew);
 	}
@@ -80,6 +83,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Integer createMessage(List<Message> messages) throws Exception {
 		return dao.insertMessage(messages);
 	}
@@ -92,6 +96,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Integer updateMessage(List<Message> messages) throws Exception {
 		int noOfRecords = 0;
 		for (Message message : messages) {
@@ -111,6 +116,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Integer deleteMessage(List<Message> messages) throws Exception {
 		int noOfRecords = 0;
 		for (Message message : messages) {
@@ -127,6 +133,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Integer createQuery(Message query) throws Exception {
 		return dao.insertQuery(query);
 	}
@@ -139,6 +146,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Integer updateQuery(List<Message> queries) throws Exception {
 		int noOfRecords = 0;
 		for (Message message : queries) {
@@ -158,6 +166,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Integer deleteQuery(List<Message> queries) throws Exception {
 		int noOfRecords = 0;
 		for (Message message : queries) {
@@ -174,6 +183,7 @@ public class MessagingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public List<Message> getQueries(boolean isNew) throws Exception {
 		return dao.getQuery(isNew);
 	}

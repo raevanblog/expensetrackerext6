@@ -11,10 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.db.entity.Graph;
 import com.slabs.expense.tracker.common.db.entity.Income;
 import com.slabs.expense.tracker.common.db.entity.IncomeType;
-import com.slabs.expense.tracker.database.mapper.IncomeDAO;
+import com.slabs.expense.tracker.common.db.mapper.IncomeDAO;
+import com.slabs.expense.tracker.common.services.IncomeService;
 
 /**
- * {@link IncomeService} provides API for INSERT, DELETE, UPDATE, SELECT on
+ * {@link IncomeServiceImpl} provides API for INSERT, DELETE, UPDATE, SELECT on
  * INCOME table.
  * 
  * @author Shyam Natarajan
@@ -22,7 +23,7 @@ import com.slabs.expense.tracker.database.mapper.IncomeDAO;
  */
 @Service(value = "IncomeService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
-public class IncomeService {
+public class IncomeServiceImpl implements IncomeService {
 
 	@Autowired
 	private IncomeDAO mapper;
@@ -39,7 +40,9 @@ public class IncomeService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<Income> select(String username, Integer year, Integer month) throws Exception {
+	@Override
+	public List<Income> selectIncome(String username, Integer year, Integer month)
+			throws Exception {
 		return mapper.getIncome(username, year, month);
 	}
 
@@ -55,6 +58,7 @@ public class IncomeService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Double getTotalIncome(String username, Integer year, Integer month) throws Exception {
 		return mapper.getTotalIncome(username, year, month);
 	}
@@ -69,6 +73,7 @@ public class IncomeService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public List<Graph> getMonthWiseTotalIncome(String username, Integer year) throws Exception {
 		List<Graph> list = mapper.getMonthWiseTotalIncome(username, year);
 		List<Graph> newList = new ArrayList<Graph>();
@@ -82,7 +87,7 @@ public class IncomeService {
 				}
 			}
 			if (!isFound) {
-				Graph graph = new Graph();		
+				Graph graph = new Graph();
 				graph.setIncome(0);
 				graph.setYear(year);
 				graph.setMonth(i);
@@ -101,6 +106,7 @@ public class IncomeService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public List<IncomeType> selectIncomeType() throws Exception {
 		return mapper.getIncomeType();
 	}
@@ -113,7 +119,8 @@ public class IncomeService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer insert(List<Income> records) throws Exception {
+	@Override
+	public Integer createIncome(List<Income> records) throws Exception {
 		return mapper.insertIncome(records);
 	}
 
@@ -125,7 +132,8 @@ public class IncomeService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer delete(List<Income> records) throws Exception {
+	@Override
+	public Integer deleteIncome(List<Income> records) throws Exception {
 		int noOfRecords = 0;
 		for (Income record : records) {
 			noOfRecords = noOfRecords + mapper.deleteIncome(record);
@@ -141,7 +149,8 @@ public class IncomeService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer update(List<Income> records) throws Exception {
+	@Override
+	public Integer updateIncome(List<Income> records) throws Exception {
 		int noOfRecords = 0;
 		for (Income record : records) {
 			noOfRecords = noOfRecords + mapper.updateIncome(record);

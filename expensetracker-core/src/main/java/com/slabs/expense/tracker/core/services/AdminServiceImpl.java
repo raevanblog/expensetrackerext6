@@ -8,11 +8,12 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.database.mapper.UserDAO;
+import com.slabs.expense.tracker.common.db.mapper.UserDAO;
+import com.slabs.expense.tracker.common.services.AdminService;
 
 @Service(value = "AdminService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
-public class AdminService {
+public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private UserDAO dao;
@@ -27,6 +28,7 @@ public class AdminService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public boolean activateUser(String username, String isActivate) throws Exception {
 		return dao.activateUser(username, isActivate) > 0 ? Boolean.TRUE : Boolean.FALSE;
 	}
@@ -39,6 +41,7 @@ public class AdminService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Integer deleteUser(List<UserInfo> records) throws Exception {
 		int noOfRecords = 0;
 		for (UserInfo record : records) {
@@ -46,7 +49,5 @@ public class AdminService {
 		}
 		return noOfRecords;
 	}
-
-	
 
 }

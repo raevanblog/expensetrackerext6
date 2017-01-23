@@ -8,10 +8,11 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.database.mapper.UserDAO;
+import com.slabs.expense.tracker.common.db.mapper.UserDAO;
+import com.slabs.expense.tracker.common.services.UserService;
 
 /**
- * {@link UserService} provides API for INSERT, DELETE, UPDATE, SELECT on
+ * {@link UserServiceImpl} provides API for INSERT, DELETE, UPDATE, SELECT on
  * USERINFO table
  * 
  * @author Shyam Natarajan
@@ -19,7 +20,7 @@ import com.slabs.expense.tracker.database.mapper.UserDAO;
  */
 @Service(value = "UserService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
-public class UserService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO dao;
@@ -35,7 +36,8 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<UserInfo> select(String username, boolean includePassword) throws Exception {
+	@Override
+	public List<UserInfo> selectUser(String username, boolean includePassword) throws Exception {
 		return dao.getUser(username, includePassword);
 	}
 
@@ -47,6 +49,7 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Boolean isUserNameAvailable(String username) throws Exception {
 		List<UserInfo> list = dao.getUser(username, Boolean.FALSE);
 		if (list != null && list.isEmpty()) {
@@ -64,7 +67,8 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<UserInfo> selectAll(boolean includePassword) throws Exception {
+	@Override
+	public List<UserInfo> selectAllUsers(boolean includePassword) throws Exception {
 		return dao.getUser(null, includePassword);
 	}
 
@@ -76,7 +80,8 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer update(UserInfo record) throws Exception {
+	@Override
+	public Integer updateUser(UserInfo record) throws Exception {
 		return dao.updateUser(record);
 	}
 
@@ -88,9 +93,10 @@ public class UserService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer create(UserInfo record) throws Exception {
+	@Override
+	public Integer createUser(UserInfo record) throws Exception {
 		int noOfRecords = dao.createUser(record);
 		return noOfRecords;
 	}
-	
+
 }

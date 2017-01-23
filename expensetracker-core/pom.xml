@@ -31,12 +31,7 @@
 			<groupId>com.slabs</groupId>
 			<artifactId>expensetracker-util</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.slabs</groupId>
-			<artifactId>expensetracker-reports</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>

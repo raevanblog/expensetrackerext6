@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.db.entity.Dictionary;
 import com.slabs.expense.tracker.common.db.entity.Expense;
+import com.slabs.expense.tracker.common.db.entity.ExpenseType;
 import com.slabs.expense.tracker.common.db.entity.Graph;
-import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.db.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.services.ExpenseService;
 
 /**
- * {@link ExpenseService} provides API for INSERT,SELECT,UPDATE, DELETE on
+ * {@link ExpenseServiceImpl} provides API for INSERT,SELECT,UPDATE, DELETE on
  * EXPENSE table
  * 
  * @author Shyam Natarajan
@@ -22,7 +24,7 @@ import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
  */
 @Service(value = "ExpenseService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)
-public class ExpenseService {
+public class ExpenseServiceImpl implements ExpenseService {
 
 	@Autowired
 	private ExpenseDAO mapper;
@@ -35,7 +37,8 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer insert(List<Expense> records) throws Exception {
+	@Override
+	public Integer createExpense(List<Expense> records) throws Exception {
 		return mapper.insertExpense(records);
 	}
 
@@ -47,7 +50,8 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer update(List<Expense> records) throws Exception {
+	@Override
+	public Integer updateExpense(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
 		for (Expense record : records) {
 			noOfRecords = noOfRecords + mapper.updateExpense(record);
@@ -72,7 +76,8 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<Expense> select(String username, Integer year, Integer month,
+	@Override
+	public List<Expense> selectExpense(String username, Integer year, Integer month,
 			boolean fetchTopExpense) throws Exception {
 		if (fetchTopExpense) {
 			return mapper.getTopExpense(username, year, month);
@@ -95,6 +100,7 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public Double getTotalExpense(String username, Integer year, Integer month) throws Exception {
 		return mapper.getTotalExpense(username, year, month);
 	}
@@ -111,6 +117,7 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public List<Graph> getMonthWiseTotalExpense(String username, Integer year) throws Exception {
 		List<Graph> list = mapper.getMonthWiseTotalExpense(username, year);
 		List<Graph> newList = new ArrayList<Graph>();
@@ -151,6 +158,7 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public List<Graph> getCategoryWiseTotalExpense(String username, Integer year, Integer month)
 			throws Exception {
 		return mapper.getCategoryWiseTotalExpense(username, year, month);
@@ -164,7 +172,8 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public List<Expense> selectById(Integer id) throws Exception {
+	@Override
+	public List<Expense> selectExpenseById(Integer id) throws Exception {
 		return mapper.getExpenseById(id);
 	}
 
@@ -176,7 +185,8 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public Integer delete(List<Expense> records) throws Exception {
+	@Override
+	public Integer deleteExpense(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
 		for (Expense record : records) {
 			noOfRecords = noOfRecords + mapper.deleteExpense(record);
@@ -191,7 +201,62 @@ public class ExpenseService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
+	@Override
 	public List<Dictionary> selectExpenseNames() throws Exception {
 		return mapper.selectExpenseNames();
+	}
+
+	/**
+	 * 
+	 * @return {@link ExpenseType} - List of records from EXPENSETYPE table
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	@Override
+	public List<ExpenseType> selectExpenseType() throws Exception {
+		return mapper.getExpenseTypes();
+	}
+
+	/**
+	 * 
+	 * @param records
+	 *            {@link ExpenseType} - List of records to UPDATE.
+	 * @return {@link Integer} - No of records updated.
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	@Override
+	public Integer updateExpenseType(List<ExpenseType> records) throws Exception {
+		int noOfRecords = 0;
+		for (ExpenseType record : records) {
+			noOfRecords = noOfRecords + mapper.updateExpenseType(record);
+		}
+		return noOfRecords;
+	}
+
+	/**
+	 * 
+	 * @param records
+	 *            {@link ExpenseType} - List of records to INSERT.
+	 * @return {@link Integer} - No of records inserted.
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	@Override
+	public Integer createExpenseType(List<ExpenseType> records) throws Exception {
+		return mapper.insertExpenseType(records);
+	}
+
+	/**
+	 * 
+	 * @param id
+	 *            {@link Integer} - Record id for deletion
+	 * @return {@link Integer} - No of records deleted
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	@Override
+	public Integer deleteExpenseType(Integer id) throws Exception {
+		return mapper.deleteExpenseType(id);
 	}
 }

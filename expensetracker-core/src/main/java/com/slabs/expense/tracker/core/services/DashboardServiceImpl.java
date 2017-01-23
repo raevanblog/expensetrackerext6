@@ -5,18 +5,19 @@ import org.springframework.stereotype.Service;
 
 import com.slabs.expense.tracker.common.db.entity.Dashboard;
 import com.slabs.expense.tracker.common.db.entity.Summary;
-import com.slabs.expense.tracker.database.mapper.ExpenseDAO;
-import com.slabs.expense.tracker.database.mapper.IncomeDAO;
+import com.slabs.expense.tracker.common.db.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.db.mapper.IncomeDAO;
+import com.slabs.expense.tracker.common.services.DashboardService;
 
 /**
- * {@link DashboardService} provides API's for retrieving data for Expense
+ * {@link DashboardServiceImpl} provides API's for retrieving data for Expense
  * Tracker dashboard.
  * 
  * @author Shyam Natarajan
  *
  */
 @Service(value = "DashboardService")
-public class DashboardService {
+public class DashboardServiceImpl implements DashboardService {
 
 	@Autowired
 	private ExpenseDAO eMapper;
@@ -33,12 +34,11 @@ public class DashboardService {
 	 * @param month
 	 *            {@link Integer} - Month for which the data is to be retrieved
 	 * 
-	 * @return {@link com.slabs.expense.tracker.common.db.entity.Dashboard}
-	 * @throws Exception
-	 *             throws {@link Exception}
+	 * @return {@link com.slabs.expense.tracker.common.db.entity.Dashboard} @
+	 *         throws {@link Exception}
 	 */
-	public Dashboard getDashboardData(String username, Integer year, Integer month)
-			throws Exception {
+	@Override
+	public Dashboard getDashboardData(String username, Integer year, Integer month) throws Exception {
 		Double totalExpense = eMapper.getTotalExpense(username, year, month);
 		Double totalIncome = iMapper.getTotalIncome(username, year, month);
 
