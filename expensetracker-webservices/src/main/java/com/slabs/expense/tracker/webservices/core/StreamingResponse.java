@@ -13,18 +13,18 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
- * {@link ResponseStream}
+ * {@link StreamingResponse}
  * 
  * @author Shyam Natarajan
  *
  */
-public class ResponseStream implements StreamingOutput {
+public class StreamingResponse implements StreamingOutput {
 
-	private static final Logger L = LoggerFactory.getLogger(ResponseStream.class);
+	private static final Logger L = LoggerFactory.getLogger(StreamingResponse.class);
 
 	private JasperReportBuilder builder;
 
-	public ResponseStream(JasperReportBuilder builder) {
+	public StreamingResponse(JasperReportBuilder builder) {
 		this.builder = builder;
 	}
 

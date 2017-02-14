@@ -18,7 +18,7 @@ import com.slabs.expense.tracker.reports.service.ReportingService;
 import com.slabs.expense.tracker.webservices.core.ContentType;
 import com.slabs.expense.tracker.webservices.core.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.core.ResponseStatus;
-import com.slabs.expense.tracker.webservices.core.ResponseStream;
+import com.slabs.expense.tracker.webservices.core.StreamingResponse;
 import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -58,7 +58,7 @@ public class ReportingWebService {
 					.getService(Services.REPORTING_SERVICE, ReportingService.class);
 			JasperReportBuilder report = service.monthlyReport(username, year, month);
 			String fileName = username + "_" + month + "_" + year + ".pdf";
-			return ResponseGenerator.getSuccessResponse(new ResponseStream(report), fileName,
+			return ResponseGenerator.getSuccessResponse(new StreamingResponse(report), fileName,
 					ContentType.APPLICATION_PDF_TYPE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);

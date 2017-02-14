@@ -157,7 +157,7 @@ public class ResponseGenerator {
 	 * 
 	 * @param output
 	 *            {@link StreamingOutput} - Output stream containing the
-	 *            file. @see {@link ResponseStream}
+	 *            file. @see {@link StreamingResponse}
 	 * 
 	 * @param fileName
 	 *            - Name of the file.
