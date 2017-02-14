@@ -2,9 +2,9 @@ package com.slabs.expense.tracker.common.services;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.entity.Graph;
-import com.slabs.expense.tracker.common.db.entity.Income;
-import com.slabs.expense.tracker.common.db.entity.IncomeType;
+import com.slabs.expense.tracker.common.database.entity.Graph;
+import com.slabs.expense.tracker.common.database.entity.Income;
+import com.slabs.expense.tracker.common.database.entity.IncomeType;
 
 public interface IncomeService {
 

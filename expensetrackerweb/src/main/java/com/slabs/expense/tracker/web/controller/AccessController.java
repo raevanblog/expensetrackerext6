@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.slabs.expense.tracker.common.constants.Constants;
-import com.slabs.expense.tracker.common.db.entity.Message;
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.Message;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.services.AdminService;
 import com.slabs.expense.tracker.common.services.EmailService;
 import com.slabs.expense.tracker.common.services.MessageService;

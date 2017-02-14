@@ -1,8 +1,8 @@
-package com.slabs.expense.tracker.common.db.mapper;
+package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.entity.Message;
+import com.slabs.expense.tracker.common.database.entity.Message;
 
 public interface MessageDAO {
 

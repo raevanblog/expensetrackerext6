@@ -3,10 +3,10 @@ package com.slabs.expense.tracker.core.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.slabs.expense.tracker.common.db.entity.Dashboard;
-import com.slabs.expense.tracker.common.db.entity.Summary;
-import com.slabs.expense.tracker.common.db.mapper.ExpenseDAO;
-import com.slabs.expense.tracker.common.db.mapper.IncomeDAO;
+import com.slabs.expense.tracker.common.database.entity.Dashboard;
+import com.slabs.expense.tracker.common.database.entity.Summary;
+import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
 import com.slabs.expense.tracker.common.services.DashboardService;
 
 /**
@@ -34,7 +34,7 @@ public class DashboardServiceImpl implements DashboardService {
 	 * @param month
 	 *            {@link Integer} - Month for which the data is to be retrieved
 	 * 
-	 * @return {@link com.slabs.expense.tracker.common.db.entity.Dashboard} @
+	 * @return {@link com.slabs.expense.tracker.common.database.entity.Dashboard} @
 	 *         throws {@link Exception}
 	 */
 	@Override

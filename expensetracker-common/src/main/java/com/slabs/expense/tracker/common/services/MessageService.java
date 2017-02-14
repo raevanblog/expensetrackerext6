@@ -2,8 +2,8 @@ package com.slabs.expense.tracker.common.services;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.entity.Message;
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.Message;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 
 public interface MessageService {
 

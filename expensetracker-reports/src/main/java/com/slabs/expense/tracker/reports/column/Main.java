@@ -3,8 +3,8 @@ package com.slabs.expense.tracker.reports.column;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import com.slabs.expense.tracker.common.db.column.Column;
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.column.Column;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;

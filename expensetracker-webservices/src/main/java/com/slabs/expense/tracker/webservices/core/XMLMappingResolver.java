@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slabs.expense.tracker.common.db.entity.ObjectFactory;
+import com.slabs.expense.tracker.common.database.entity.ObjectFactory;
 
 /**
  * {@link XMLMappingResolver}

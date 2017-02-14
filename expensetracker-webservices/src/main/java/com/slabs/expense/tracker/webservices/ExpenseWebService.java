@@ -15,8 +15,8 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slabs.expense.tracker.common.db.entity.Expense;
-import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
+import com.slabs.expense.tracker.common.database.entity.Expense;
+import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.ExpenseCategoryService;
 import com.slabs.expense.tracker.common.services.ExpenseService;

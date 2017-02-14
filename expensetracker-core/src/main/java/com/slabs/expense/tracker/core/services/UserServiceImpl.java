@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.common.db.mapper.UserDAO;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.mapper.UserDAO;
 import com.slabs.expense.tracker.common.services.UserService;
 
 /**

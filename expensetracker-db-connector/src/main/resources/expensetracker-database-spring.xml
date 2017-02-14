@@ -8,7 +8,7 @@
       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
 
-	<mybatis:scan base-package="com.slabs.expense.tracker.common.db.mapper" />
+	<mybatis:scan base-package="com.slabs.expense.tracker.common.database.mapper" />
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />

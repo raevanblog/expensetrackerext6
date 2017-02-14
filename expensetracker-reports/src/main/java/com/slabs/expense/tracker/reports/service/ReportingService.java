@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.slabs.expense.tracker.common.db.column.Column;
-import com.slabs.expense.tracker.common.db.entity.Expense;
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
-import com.slabs.expense.tracker.common.db.mapper.ExpenseDAO;
-import com.slabs.expense.tracker.common.db.mapper.IncomeDAO;
-import com.slabs.expense.tracker.common.db.mapper.UserDAO;
+import com.slabs.expense.tracker.common.database.column.Column;
+import com.slabs.expense.tracker.common.database.entity.Expense;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
+import com.slabs.expense.tracker.common.database.mapper.UserDAO;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;

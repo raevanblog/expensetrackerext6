@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.db.entity.Graph;
-import com.slabs.expense.tracker.common.db.entity.Income;
-import com.slabs.expense.tracker.common.db.entity.IncomeType;
-import com.slabs.expense.tracker.common.db.mapper.IncomeDAO;
+import com.slabs.expense.tracker.common.database.entity.Graph;
+import com.slabs.expense.tracker.common.database.entity.Income;
+import com.slabs.expense.tracker.common.database.entity.IncomeType;
+import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
 import com.slabs.expense.tracker.common.services.IncomeService;
 
 /**

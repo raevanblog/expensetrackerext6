@@ -1,10 +1,10 @@
-package com.slabs.expense.tracker.common.db.mapper;
+package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.entity.Graph;
-import com.slabs.expense.tracker.common.db.entity.Income;
-import com.slabs.expense.tracker.common.db.entity.IncomeType;
+import com.slabs.expense.tracker.common.database.entity.Graph;
+import com.slabs.expense.tracker.common.database.entity.Income;
+import com.slabs.expense.tracker.common.database.entity.IncomeType;
 
 /**
  * {@link IncomeDAO} is an interface providing mapper methods for executing

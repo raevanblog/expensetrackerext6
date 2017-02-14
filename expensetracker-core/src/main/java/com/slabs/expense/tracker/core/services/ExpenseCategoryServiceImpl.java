@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
-import com.slabs.expense.tracker.common.db.mapper.ExpenseDAO;
+import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
+import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
 import com.slabs.expense.tracker.common.services.ExpenseCategoryService;
 
 /**

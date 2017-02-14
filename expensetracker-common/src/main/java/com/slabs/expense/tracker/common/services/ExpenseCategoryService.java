@@ -2,7 +2,7 @@ package com.slabs.expense.tracker.common.services;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
+import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
 
 public interface ExpenseCategoryService {
 

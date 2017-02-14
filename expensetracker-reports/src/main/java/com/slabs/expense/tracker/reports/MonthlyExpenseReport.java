@@ -3,8 +3,8 @@ package com.slabs.expense.tracker.reports;
 import java.awt.Color;
 import java.math.BigDecimal;
 
-import com.slabs.expense.tracker.common.db.column.Column;
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.column.Column;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 import com.slabs.expense.tracker.reports.expression.ExpenseImageResolver;
 

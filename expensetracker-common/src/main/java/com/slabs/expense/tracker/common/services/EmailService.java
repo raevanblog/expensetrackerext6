@@ -1,6 +1,6 @@
 package com.slabs.expense.tracker.common.services;
 
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 
 public interface EmailService {
 	

@@ -1,12 +1,12 @@
-package com.slabs.expense.tracker.common.db.mapper;
+package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.entity.Dictionary;
-import com.slabs.expense.tracker.common.db.entity.Expense;
-import com.slabs.expense.tracker.common.db.entity.ExpenseCategory;
-import com.slabs.expense.tracker.common.db.entity.ExpenseType;
-import com.slabs.expense.tracker.common.db.entity.Graph;
+import com.slabs.expense.tracker.common.database.entity.Dictionary;
+import com.slabs.expense.tracker.common.database.entity.Expense;
+import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
+import com.slabs.expense.tracker.common.database.entity.ExpenseType;
+import com.slabs.expense.tracker.common.database.entity.Graph;
 
 /**
  * {@link ExpenseDAO} is an interface providing mapper methods for executing

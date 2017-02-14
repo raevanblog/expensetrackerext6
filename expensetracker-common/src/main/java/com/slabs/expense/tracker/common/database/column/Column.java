@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.common.db.column;
+package com.slabs.expense.tracker.common.database.column;
 
 import java.util.Date;
 

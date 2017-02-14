@@ -1,8 +1,8 @@
-package com.slabs.expense.tracker.common.db.mapper;
+package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 
 /**
  * {@link UserDAO} is an interface providing mapper methods for executing query

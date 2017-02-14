@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://slabs.com/expense/tracker/common/db/entity" xmlns:et="http://slabs.com/expense/tracker/common/db/entity"
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://slabs.com/expense/tracker/common/database/entity" xmlns:et="http://slabs.com/expense/tracker/common/database/entity"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" jaxb:extensionBindingPrefixes="annox" jaxb:version="2.1"
 	elementFormDefault="qualified">
 

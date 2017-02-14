@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.slabs.expense.tracker.common.db.column.Column;
-import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.column.Column;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
 import com.slabs.expense.tracker.reports.column.data.type.Currency;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
