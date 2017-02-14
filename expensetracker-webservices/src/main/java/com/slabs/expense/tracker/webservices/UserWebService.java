@@ -25,9 +25,9 @@ import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.services.UserServiceImpl;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.core.ResponseGenerator;
-import com.slabs.expense.tracker.webservices.core.ResponseStatus;
 import com.slabs.expense.tracker.webservices.exception.WebServiceException;
+import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
+import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
 /**
  * {@link UserWebService} - Web Service for retrieving/updating User information
