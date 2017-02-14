@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
+import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.webservices.core.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.core.ResponseStatus;
 

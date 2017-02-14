@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.Message;
+import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.MessageService;
 import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
@@ -52,7 +53,7 @@ public class MessagingWebService {
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getMessages(@QueryParam("username") String username,
-			@QueryParam("isNew") Boolean isNew) throws WebServiceException {
+			@QueryParam("isNew") Boolean isNew) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance()
 					.getService(Services.MESSAGING_SERVICE, MessageService.class);
@@ -76,7 +77,7 @@ public class MessagingWebService {
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response createMessage(List<Message> messages) throws WebServiceException {
+	public Response createMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance()
 					.getService(Services.MESSAGING_SERVICE, MessageService.class);
@@ -100,7 +101,7 @@ public class MessagingWebService {
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateMessage(List<Message> messages) throws WebServiceException {
+	public Response updateMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance()
 					.getService(Services.MESSAGING_SERVICE, MessageService.class);
@@ -124,7 +125,7 @@ public class MessagingWebService {
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteMessage(List<Message> messages) throws WebServiceException {
+	public Response deleteMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance()
 					.getService(Services.MESSAGING_SERVICE, MessageService.class);
@@ -149,7 +150,7 @@ public class MessagingWebService {
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getQueries(@QueryParam("isNew") Boolean isNew) throws WebServiceException {
+	public Response getQueries(@QueryParam("isNew") Boolean isNew) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance()
 					.getService(Services.MESSAGING_SERVICE, MessageService.class);
@@ -173,7 +174,7 @@ public class MessagingWebService {
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response createQuery(Message message) throws WebServiceException {
+	public Response createQuery(Message message) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance()
 					.getService(Services.MESSAGING_SERVICE, MessageService.class);
@@ -197,7 +198,7 @@ public class MessagingWebService {
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteQuery(List<Message> messages) throws WebServiceException {
+	public Response deleteQuery(List<Message> messages) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance()
 					.getService(Services.MESSAGING_SERVICE, MessageService.class);

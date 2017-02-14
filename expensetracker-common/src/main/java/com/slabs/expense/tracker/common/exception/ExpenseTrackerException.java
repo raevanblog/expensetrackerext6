@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.exception;
+package com.slabs.expense.tracker.common.exception;
 
 /**
  * {@link ExpenseTrackerException} is a custom exception class.

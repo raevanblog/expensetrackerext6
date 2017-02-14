@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.Income;
+import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.IncomeService;
 import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
@@ -52,7 +53,7 @@ public class IncomeWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getIncome(@QueryParam("username") String username,
 			@QueryParam("year") Integer year, @QueryParam("month") Integer month)
-			throws WebServiceException {
+					throws ExpenseTrackerException {
 
 		try {
 			if (username == null) {
@@ -83,7 +84,7 @@ public class IncomeWebService {
 	@Path("income/")
 	@POST
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response addIncome(List<Income> records) throws WebServiceException {
+	public Response addIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);
@@ -106,7 +107,7 @@ public class IncomeWebService {
 	@Path("income/")
 	@PUT
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateIncome(List<Income> records) throws WebServiceException {
+	public Response updateIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);
@@ -129,7 +130,7 @@ public class IncomeWebService {
 	@Path("income/")
 	@DELETE
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteIncome(List<Income> records) throws WebServiceException {
+	public Response deleteIncome(List<Income> records) throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);
@@ -152,7 +153,7 @@ public class IncomeWebService {
 	@Path("incometype/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getIncomeType() throws WebServiceException {
+	public Response getIncomeType() throws ExpenseTrackerException {
 		try {
 			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
 					IncomeService.class);

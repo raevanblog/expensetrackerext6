@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.db.entity.UserInfo;
+import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.AdminService;
 import com.slabs.expense.tracker.common.services.EmailService;
 import com.slabs.expense.tracker.common.services.Services;
@@ -51,7 +52,7 @@ public class UserWebService {
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response createUser(UserInfo record) throws WebServiceException {
+	public Response createUser(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
@@ -78,7 +79,7 @@ public class UserWebService {
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateUser(UserInfo record) throws WebServiceException {
+	public Response updateUser(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			return ResponseGenerator.getSuccessResponse(service.updateUser(record), Operation.UPDATE);
@@ -100,7 +101,7 @@ public class UserWebService {
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response changePassword(UserInfo record) throws WebServiceException {
+	public Response changePassword(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			List<UserInfo> list = service.selectUser(record.getUsername(), true);
@@ -127,7 +128,7 @@ public class UserWebService {
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response deleteUser(List<UserInfo> records) throws WebServiceException {
+	public Response deleteUser(List<UserInfo> records) throws ExpenseTrackerException {
 		try {
 			AdminService service = ServiceFactory.getInstance().getService(Services.ADMIN_SERVICE, AdminService.class);
 			return ResponseGenerator.getSuccessResponse(service.deleteUser(records), Operation.DELETE);
@@ -149,7 +150,7 @@ public class UserWebService {
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getUser(@QueryParam("username") String username) throws WebServiceException {
+	public Response getUser(@QueryParam("username") String username) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			return ResponseGenerator.getSuccessResponse(service.selectUser(username, false), Operation.SELECT);
@@ -170,7 +171,7 @@ public class UserWebService {
 	@Path("user")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getUsers() throws WebServiceException {
+	public Response getUsers() throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 			return ResponseGenerator.getSuccessResponse(service.selectAllUsers(false), Operation.SELECT);
@@ -191,7 +192,7 @@ public class UserWebService {
 	@Path("user/username")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response isUserNameAvailable(@QueryParam("checkAvailable") String username) throws WebServiceException {
+	public Response isUserNameAvailable(@QueryParam("checkAvailable") String username) throws ExpenseTrackerException {
 		try {
 			UserServiceImpl service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserServiceImpl.class);
 			return ResponseGenerator.getSuccessResponse(service.isUserNameAvailable(username), Operation.CHECK);
