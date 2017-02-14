@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 import com.slabs.expense.tracker.common.db.entity.ObjectFactory;
 
 /**
- * {@link JAXBContextResolver}
+ * {@link XMLMappingResolver}
  * 
  * @author Shyam Natarajan
  *
  */
-public class JAXBContextResolver implements ContextResolver<JAXBContext> {
+public class XMLMappingResolver implements ContextResolver<JAXBContext> {
 
-	private static final Logger L = LoggerFactory.getLogger(JAXBContextResolver.class);
+	private static final Logger L = LoggerFactory.getLogger(XMLMappingResolver.class);
 
 	public JAXBContext getContext(Class<?> type) {
 		JAXBContext context = null;

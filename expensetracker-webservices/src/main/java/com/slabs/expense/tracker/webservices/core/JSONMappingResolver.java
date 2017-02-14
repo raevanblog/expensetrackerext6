@@ -9,12 +9,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 /**
- * {@link ObjectMapperResolver}
+ * {@link JSONMappingResolver}
  * 
  * @author Shyam Natarajan
  *
  */
-public class ObjectMapperResolver implements ContextResolver<ObjectMapper> {
+public class JSONMappingResolver implements ContextResolver<ObjectMapper> {
 
 	public ObjectMapper getContext(Class<?> arg0) {
 		ObjectMapper mapper = new ObjectMapper();
