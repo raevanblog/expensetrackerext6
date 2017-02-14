@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.web.services;
+package com.slabs.expense.tracker.webservices;
 
 import java.io.IOException;
 

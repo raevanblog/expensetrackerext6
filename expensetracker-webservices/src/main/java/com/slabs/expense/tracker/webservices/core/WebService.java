@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.web.services.core;
+package com.slabs.expense.tracker.webservices.core;
 
 import java.net.URI;
 
@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.core.server.Server;
-import com.slabs.expense.tracker.web.services.ExpenseTrackerServices;
+import com.slabs.expense.tracker.webservices.ExpenseTrackerServices;
 
 public class WebService {
 

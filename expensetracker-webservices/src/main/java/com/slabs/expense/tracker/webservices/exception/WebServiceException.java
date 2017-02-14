@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.web.services.exception;
+package com.slabs.expense.tracker.webservices.exception;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -7,8 +7,8 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
-import com.slabs.expense.tracker.web.services.core.ResponseStatus;
+import com.slabs.expense.tracker.webservices.core.ResponseGenerator;
+import com.slabs.expense.tracker.webservices.core.ResponseStatus;
 
 
 /**

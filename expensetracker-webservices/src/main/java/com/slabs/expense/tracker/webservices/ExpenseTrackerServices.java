@@ -1,13 +1,13 @@
-package com.slabs.expense.tracker.web.services;
+package com.slabs.expense.tracker.webservices;
 
 import java.util.Set;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
-import com.slabs.expense.tracker.web.services.core.JAXBContextResolver;
-import com.slabs.expense.tracker.web.services.core.ObjectMapperResolver;
-import com.slabs.expense.tracker.web.services.exception.WebServiceException;
+import com.slabs.expense.tracker.webservices.core.JAXBContextResolver;
+import com.slabs.expense.tracker.webservices.core.ObjectMapperResolver;
+import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 
 /**
  * {@link ExpenseTrackerServices} is the resource configuration for Expense

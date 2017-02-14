@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.web.services;
+package com.slabs.expense.tracker.webservices;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,11 +15,11 @@ import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.reports.service.ReportingService;
-import com.slabs.expense.tracker.web.services.core.ContentType;
-import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
-import com.slabs.expense.tracker.web.services.core.ResponseStatus;
-import com.slabs.expense.tracker.web.services.core.ResponseStream;
-import com.slabs.expense.tracker.web.services.exception.WebServiceException;
+import com.slabs.expense.tracker.webservices.core.ContentType;
+import com.slabs.expense.tracker.webservices.core.ResponseGenerator;
+import com.slabs.expense.tracker.webservices.core.ResponseStatus;
+import com.slabs.expense.tracker.webservices.core.ResponseStream;
+import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 

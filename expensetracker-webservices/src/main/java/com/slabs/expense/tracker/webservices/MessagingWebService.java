@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.web.services;
+package com.slabs.expense.tracker.webservices;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ import com.slabs.expense.tracker.common.db.entity.Message;
 import com.slabs.expense.tracker.common.services.MessageService;
 import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
-import com.slabs.expense.tracker.web.services.core.ResponseGenerator;
-import com.slabs.expense.tracker.web.services.core.ResponseStatus;
-import com.slabs.expense.tracker.web.services.exception.WebServiceException;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
+import com.slabs.expense.tracker.webservices.core.ResponseGenerator;
+import com.slabs.expense.tracker.webservices.core.ResponseStatus;
+import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 
 /**
  * {@link MessagingWebService} - Web Service for sending and recieving
