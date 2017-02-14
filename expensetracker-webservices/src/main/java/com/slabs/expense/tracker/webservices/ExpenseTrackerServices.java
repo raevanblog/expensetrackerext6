@@ -5,8 +5,8 @@ import java.util.Set;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
-import com.slabs.expense.tracker.webservices.core.JAXBContextResolver;
-import com.slabs.expense.tracker.webservices.core.ObjectMapperResolver;
+import com.slabs.expense.tracker.webservices.core.XMLMappingResolver;
+import com.slabs.expense.tracker.webservices.core.JSONMappingResolver;
 import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 
 /**
@@ -21,8 +21,8 @@ public class ExpenseTrackerServices extends ResourceConfig {
 	public ExpenseTrackerServices() {
 		super();
 		packages("com.slabs.expense.tracker.web.services");
-		register(JAXBContextResolver.class);
-		register(ObjectMapperResolver.class);
+		register(XMLMappingResolver.class);
+		register(JSONMappingResolver.class);
 		register(JacksonFeature.class);
 		register(WebServiceException.class);
 	}
