@@ -20,7 +20,7 @@ public class ExpenseTrackerServices extends ResourceConfig {
 
 	public ExpenseTrackerServices() {
 		super();
-		packages("com.slabs.expense.tracker.web.services");
+		packages("com.slabs.expense.tracker.webservices");
 		register(XMLMappingResolver.class);
 		register(JSONMappingResolver.class);
 		register(JacksonFeature.class);

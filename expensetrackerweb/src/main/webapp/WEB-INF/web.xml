@@ -38,7 +38,7 @@
     	</description>
 		<display-name>Initialization</display-name>
 		<servlet-name>InitializationServlet</servlet-name>
-		<servlet-class>com.slabs.expense.tracker.web.servlet.Initialization</servlet-class>
+		<servlet-class>com.slabs.expense.tracker.web.servlet.ApplicationLoader</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
