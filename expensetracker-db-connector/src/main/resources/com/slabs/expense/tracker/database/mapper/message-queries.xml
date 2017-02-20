@@ -70,7 +70,7 @@
 		select m.id, m.msgfrom, m.msgto, m.subject, m.message, m.msgdate, m.isnew, u.firstname as senderfname,
 		u.lastname as senderlname,u.profilepic as senderpic from expensetracker.message m, expensetracker.userinfo u where
 		m.msgto =#{param1}and m.msgfrom = u.username
-		<if test="isNew">
+		<if test="param2">
 			and m.isNew=#{param2}
 		</if>
 	</select>
@@ -91,7 +91,7 @@
 	<update id="updateQuery" parameterType="com.slabs.expense.tracker.common.database.entity.Message">
 		update EXPENSETRACKER.MESSAGE
 		<set>
-			<if test="record.isNew != null">
+			<if test="param1.isNew != null">
 				isnew=#{param1.isNew},
 			</if>
 		</set>
@@ -104,7 +104,7 @@
 
 	<select id="getQuery" resultMap="Query">
 		select * from EXPENSETRACKER.QUERY
-		<if test="isNew">
+		<if test="param1">
 			where isNew=#{param1}
 		</if>
 	</select>

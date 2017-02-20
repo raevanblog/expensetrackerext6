@@ -147,7 +147,7 @@
 
 	<delete id="deleteExpenseCategory">
 		delete from EXPENSETRACKER.EXPENSE_CATEGORY
-		<if test="record.categoryId != null">
+		<if test="param1.categoryId != null">
 			where categoryId=#{param1.categoryId}
 		</if>
 	</delete>
