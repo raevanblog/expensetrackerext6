@@ -14,7 +14,7 @@ import com.slabs.expense.tracker.core.server.Server;
 /**
  * Servlet implementation class Initialization
  */
-public class Initialization extends HttpServlet {
+public class ApplicationLoader extends HttpServlet {
 
 	private static final Logger L = LoggerFactory.getLogger("InitializationServlet");
 
@@ -23,7 +23,7 @@ public class Initialization extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Initialization() {
+	public ApplicationLoader() {
 		super();
 	}
 

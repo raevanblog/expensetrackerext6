@@ -23,7 +23,7 @@
 		</init-param>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>com.slabs.expense.tracker.web.services.ExpenseTrackerServices</param-value>
+			<param-value>com.slabs.expense.tracker.webservices.ExpenseTrackerServices</param-value>
 		</init-param>
 		<init-param>
 			<param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
