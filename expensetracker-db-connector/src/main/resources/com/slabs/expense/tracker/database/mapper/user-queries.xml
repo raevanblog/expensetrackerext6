@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slabs.expense.tracker.common.db.mapper.UserDAO">
+<mapper namespace="com.slabs.expense.tracker.common.database.mapper.UserDAO">
 
-	<resultMap type="com.slabs.expense.tracker.common.db.entity.UserInfo" id="UserInfo">
+	<resultMap type="com.slabs.expense.tracker.common.database.entity.UserInfo" id="UserInfo">
 		<result column="FIRSTNAME" property="firstName" />
 		<result column="LASTNAME" property="lastName" />
 		<result column="SEX" property="sex" />
@@ -22,7 +22,7 @@
 		<result column="ACTIVATIONKEY" property="activationKey" />
 	</resultMap>
 	
-	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.db.entity.UserInfo">
+	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.database.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
 		values(
 		#{param1.firstName},

@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slabs.expense.tracker.common.db.mapper.MessageDAO">
+<mapper namespace="com.slabs.expense.tracker.common.database.mapper.MessageDAO">
 
-	<resultMap type="com.slabs.expense.tracker.common.db.entity.Message" id="Message">
+	<resultMap type="com.slabs.expense.tracker.common.database.entity.Message" id="Message">
 		<result column="ID" property="id" />
 		<result column="MSGTO" property="msgto" />
 		<result column="MSGFROM" property="msgfrom" />
@@ -18,7 +18,7 @@
 		<result column="ISNEW" property="isNew" />
 	</resultMap>
 
-	<resultMap type="com.slabs.expense.tracker.common.db.entity.Message" id="Query">
+	<resultMap type="com.slabs.expense.tracker.common.database.entity.Message" id="Query">
 		<result column="ID" property="id" />
 		<result column="MSGFROM" property="msgfrom" />
 		<result column="MSGDATE" property="msgdate" typeHandler="org.apache.ibatis.type.DateTypeHandler" />
@@ -42,7 +42,7 @@
 		</foreach>
 	</insert>
 
-	<update id="updateMessage" parameterType="com.slabs.expense.tracker.common.db.entity.Message">
+	<update id="updateMessage" parameterType="com.slabs.expense.tracker.common.database.entity.Message">
 		update EXPENSETRACKER.MESSAGE
 		<set>
 			<if test="param1.msgto != null">
@@ -88,7 +88,7 @@
 		)
 	</insert>
 
-	<update id="updateQuery" parameterType="com.slabs.expense.tracker.common.db.entity.Message">
+	<update id="updateQuery" parameterType="com.slabs.expense.tracker.common.database.entity.Message">
 		update EXPENSETRACKER.MESSAGE
 		<set>
 			<if test="record.isNew != null">
