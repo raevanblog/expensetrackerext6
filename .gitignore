@@ -1,9 +1,15 @@
-/target/
+/expensetrackerweb/target/
+/expensetracker-common/target/
+/expensetracker-core/target/
+/expensetracker-db-connector/target/
+/expensetracker-reports/target/
+/expensetracker-util/target/
+/expensetracker-webservices/target/
+/expensetrackerweb/src/main/webapp/expensetracker/build/
 *.sencha/
 .classpath
 .project
 .gitignore
-/expensetrackerweb/src/main/webapp/expensetracker/build/
 bootstrap.js
 bootstrap.json
 bootstrap.jsonp
