@@ -1,0 +1,13 @@
+/target/
+*.sencha/
+.classpath
+.project
+.gitignore
+/expensetrackerweb/src/main/webapp/expensetracker/build/
+bootstrap.js
+bootstrap.json
+bootstrap.jsonp
+example.css
+.springBeans
+.settings
+sun-jaxb.episode
