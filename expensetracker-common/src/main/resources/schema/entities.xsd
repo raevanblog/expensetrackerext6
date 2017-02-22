@@ -6,6 +6,7 @@
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
 	<element name="UserInfo" type="et:UserInfo" />
 	<element name="Expense" type="et:Expense" />
+	<element name="Inventory" type="et:Inventory" />
 	<element name="ExpenseType" type="et:ExpenseType" />
 	<element name="Income" type="et:Income" />
 	<element name="IncomeType" type="et:IncomeType" />
@@ -126,6 +127,31 @@
 			<element name="qty" type="double" minOccurs="0" />
 			<element name="pricePerUnit" type="double" minOccurs="0" />
 			<element name="inventoryInd" type="string" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Inventory">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: INVENTORY
+				Inventory will hold the data for table INVENTORY
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="id" type="long" />
+			<element name="expId" type="long" />
+			<element name="itemName" type="string" />			
+			<element ref="et:username" />
+			<element name="category" type="string" />			
+			<element name="qty" type="double" minOccurs="0" />
+			<element name="yr" type="int" minOccurs="0" />
+			<element name="mth" type="int" minOccurs="0" />			
 		</sequence>
 	</complexType>
 
