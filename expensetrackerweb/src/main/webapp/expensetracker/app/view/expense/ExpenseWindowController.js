@@ -85,6 +85,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			price : 0,
 			expdate : model.get('expenseDate'),
 			qty : 0,
+			inventoryInd: 'Y',
 			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);

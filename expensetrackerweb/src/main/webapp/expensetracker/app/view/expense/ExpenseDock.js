@@ -4,7 +4,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 	storeId : 'ExpenseDock',
 	alias : 'view.expensedock',
 	iconCls : 'x-fa fa-file-text-o',
-	requires : [ 'expensetracker.store.ExpenseDock', 'expensetracker.view.expense.ThumbnailContainer' ],
+	requires : [ 'expensetracker.store.ExpenseSheet', 'expensetracker.view.expense.ThumbnailContainer' ],
 	layout : {
 		type : 'vbox',
 		align : 'stretch',
@@ -37,7 +37,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 	} ],
 	items : [ {
 		xtype : 'thumnailcontainer',
-		store : 'ExpenseDock',
+		store : 'ExpenseSheet',
 		reference : 'thumbnaildocker',
 		listeners : {
 			itemclick : 'onThumbnailClick'

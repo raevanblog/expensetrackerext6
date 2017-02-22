@@ -45,25 +45,25 @@
 	<update id="updateMessage" parameterType="com.slabs.expense.tracker.common.database.entity.Message">
 		update EXPENSETRACKER.MESSAGE
 		<set>
-			<if test="param1.msgto != null">
-				subject=#{param1.msgto},
+			<if test="msgto != null">
+				subject=#{msgto},
 			</if>
-			<if test="param1.subject != null">
-				subject=#{param1.subject},
+			<if test="subject != null">
+				subject=#{subject},
 			</if>
-			<if test="param1.message != null">
-				message=#{param1.message},
+			<if test="message != null">
+				message=#{message},
 			</if>
-			<if test="param1.isNew != null">
-				isnew=#{param1.isNew},
+			<if test="isNew != null">
+				isnew=#{isNew},
 			</if>
 		</set>
-		where msgto=#{param1.msgto}
+		where msgto=#{msgto}
 	</update>
 
 	<delete id="deleteMessage">
 		delete from EXPENSETRACKER.MESSAGE
-		where id=#{param1.id}
+		where id=#{id}
 	</delete>
 
 	<select id="getMessage" resultMap="Message">
@@ -77,29 +77,29 @@
 
 	<insert id="insertQuery">
 		insert into EXPENSETRACKER.QUERY(MSGFROM, SUBJECT,EMAIL, MESSAGE, ISNEW) values (
-		#{param1.msgfrom},
-		#{param1.msgdate,
+		#{msgfrom},
+		#{msgdate,
 		typeHandler=org.apache.ibatis.type.DateTypeHandler},
-		#{param1.subject},
-		#{param1.email},
-		#{param1.message,
+		#{subject},
+		#{email},
+		#{message,
 		typeHandler=org.apache.ibatis.type.ClobTypeHandler},
-		#{param1.isNew}
+		#{isNew}
 		)
 	</insert>
 
 	<update id="updateQuery" parameterType="com.slabs.expense.tracker.common.database.entity.Message">
 		update EXPENSETRACKER.MESSAGE
 		<set>
-			<if test="param1.isNew != null">
-				isnew=#{param1.isNew},
+			<if test="isNew != null">
+				isnew=#{isNew},
 			</if>
 		</set>
 	</update>
 
 	<delete id="deleteQuery">
 		delete from EXPENSETRACKER.MESSAGE
-		where id=#{param1.id}
+		where id=#{id}
 	</delete>
 
 	<select id="getQuery" resultMap="Query">

@@ -1,7 +1,7 @@
 Ext.define('expensetracker.util.Store', {
 	singleton : true,
 	loadStaticStore : function() {
-		Ext.getStore('ExpenseDock').load();
+		Ext.getStore('ExpenseSheet').load();
 		Ext.getStore('ExpenseType').load();
 		Ext.getStore('ExpenseName').load();
 		Ext.getStore('IncomeType').load();

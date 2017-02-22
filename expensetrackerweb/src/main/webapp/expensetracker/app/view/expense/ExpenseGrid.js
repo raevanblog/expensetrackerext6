@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
 	scrollable : true,
-	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'Ext.grid.column.Number' ],
+	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'expensetracker.component.grid.column.CheckColumn', 'Ext.grid.column.Number' ],
 	layout : 'fit',
 	plugins : {
 		ptype : 'cellediting',
@@ -62,6 +62,14 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		xtype : 'rownumberer',
 		width : 50
 	}, {
+		xtype : 'yncheckcolumn',
+		checkedTooltip : 'Remove from Inventory',
+		tooltip : 'Add to Inventory',
+		tooltipType : 'qtip',
+		text : 'Inventory',		
+		dataIndex : 'inventoryInd',
+		width : 100
+	}, {
 		text : 'Item Name',
 		dataIndex : 'itemName',
 		editor : {
@@ -109,7 +117,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			triggerAction : 'all'
 		},
 		dataIndex : 'exptype',
-		width : 150
+		width : 150		
 	}, {
 		xtype : 'datecolumn',
 		text : 'Expense Date',

@@ -7,7 +7,7 @@
 
 
 	<insert id="insertExpense" parameterType="java.util.List">
-		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
+		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT, INVENTORYIND) values
 		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.itemName},
 			#{record.category},
@@ -16,36 +16,40 @@
 			#{record.price},
 			#{record.expdate},
 			#{record.username},
-			#{record.pricePerUnit}
+			#{record.pricePerUnit},
+			#{record.inventoryInd}
 		</foreach>
 	</insert>
 
 	<update id="updateExpense">
 		update EXPENSETRACKER.EXPENSE
 		<set>
-			<if test="param1.itemName != null">
-				itemName = #{param1.itemName},
+			<if test="itemName != null">
+				itemName = #{itemName},
 			</if>
-			<if test="param1.category != null">
-				category=#{param1.category},
+			<if test="category != null">
+				category=#{category},
 			</if>
-			<if test="param1.exptype != null">
-				exptype=#{param1.exptype},
+			<if test="exptype != null">
+				exptype=#{exptype},
 			</if>
-			<if test="param1.expdate != null">
-				expdate=#{param1.expdate},
+			<if test="expdate != null">
+				expdate=#{expdate},
 			</if>
-			<if test="param1.price != null">
-				price=#{param1.price},
+			<if test="price != null">
+				price=#{price},
 			</if>
-			<if test="param1.qty != null">
-				qty=#{param1.qty},
+			<if test="qty != null">
+				qty=#{qty},
 			</if>
-			<if test="param1.pricePerUnit != null">
-				pricePerUnit=#{param1.pricePerUnit}
+			<if test="pricePerUnit != null">
+				pricePerUnit=#{pricePerUnit},
+			</if>
+			<if test="inventoryInd != null">
+				inventoryInd=#{inventoryInd}
 			</if>
 		</set>
-		where id=#{param1.id}
+		where id=#{id}
 	</update>
 
 	<select id="getExpense" resultType="com.slabs.expense.tracker.common.database.entity.Expense">
@@ -114,7 +118,7 @@
 
 	<delete id="deleteExpense">
 		delete from EXPENSETRACKER.EXPENSE
-		where id=#{param1.id}
+		where id=#{id}
 	</delete>
 
 	<insert id="insertExpenseCategory" parameterType="java.util.List">
@@ -130,14 +134,14 @@
 
 		update EXPENSETRACKER.EXPENSE_CATEGORY
 		<set>
-			<if test="param1.category != null">
-				category=#{param1.category},
+			<if test="category != null">
+				category=#{category},
 			</if>
-			<if test="param1.description != null">
-				description=#{param1.description}
+			<if test="description != null">
+				description=#{description}
 			</if>
 		</set>
-		where categoryId=#{param1.categoryId}
+		where categoryId=#{categoryId}
 
 	</update>
 
@@ -147,8 +151,8 @@
 
 	<delete id="deleteExpenseCategory">
 		delete from EXPENSETRACKER.EXPENSE_CATEGORY
-		<if test="param1.categoryId != null">
-			where categoryId=#{param1.categoryId}
+		<if test="categoryId != null">
+			where categoryId=#{categoryId}
 		</if>
 	</delete>
 
@@ -167,11 +171,11 @@
 	<update id="updateExpenseType" parameterType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
 		update EXPENSETRACKER.EXPENSETYPE
 		<set>
-			<if test="param1.exptype != null">
-				exptype=#{param1.exptype},
+			<if test="exptype != null">
+				exptype=#{exptype},
 			</if>
-			<if test="param1.description != null">
-				description=#{param1.description}
+			<if test="description != null">
+				description=#{description}
 			</if>
 		</set>
 	</update>

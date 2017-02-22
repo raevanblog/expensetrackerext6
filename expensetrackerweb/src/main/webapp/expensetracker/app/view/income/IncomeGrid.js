@@ -28,6 +28,7 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 	}, {
 		text : 'Income Type',
 		dataIndex : 'incometype',
+		align : 'center',
 		flex : 1
 	}, {
 		xtype : 'numbercolumn',

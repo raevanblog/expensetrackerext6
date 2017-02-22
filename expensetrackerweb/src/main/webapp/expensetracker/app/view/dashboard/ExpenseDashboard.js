@@ -17,15 +17,28 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		height : 100,		
 		cls : 'big-100 small-100 dash-panel shadow'		
 	}, {
-		xtype : 'panel',
-		title : 'Expense Sheet',
-		height : 250,
+		xtype : 'container',		
+		height : 150,
 		layout : {
 			type : 'hbox',
 			pack : 'middle'
 		},
-		cls : 'big-20 small-100 dash-panel shadow',
-		iconCls : 'x-fa fa-file-text-o',
+		cls : 'big-20 small-100 dash-panel shadow',		
+		items : [ {
+			xtype : 'thumnailcontainer',
+			reference : 'incomesheetdash',
+			listeners : {
+				itemclick : 'onOpenIncomeSheet'
+			}
+		} ]
+	}, {
+		xtype : 'container',		
+		height : 150,
+		layout : {
+			type : 'hbox',
+			pack : 'middle'
+		},
+		cls : 'big-20 small-100 dash-panel shadow',		
 		items : [ {
 			xtype : 'thumnailcontainer',
 			reference : 'expsheetdash',

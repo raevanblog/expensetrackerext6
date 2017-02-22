@@ -13,19 +13,31 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	onRender : function(dashboard) {
 		var me = this;
 		var topexpense = me.lookup('topexpense');
-
-		var sheet = me.lookup('expsheetdash');
-
-		var expSheetStore = Ext.create('expensetracker.store.ExpenseDock');
+		var expenseSheet = me.lookup('expsheetdash');
+		var incomeSheet = me.lookup('incomesheetdash');
+		var expSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
+		var incSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
+		var expenseStore = Ext.create('expensetracker.store.Expense');
+		
 		expSheetStore.removeAll();
+		incSheetStore.removeAll();
+		
 		expSheetStore.add({
+			title : 'Expense Sheet',
+			month : expensetracker.util.Calendar.getCurrentMonth(),
+			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
+		});
+		
+		
+		incSheetStore.add({
+			title : 'Income Sheet',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
 
-		sheet.bindStore(expSheetStore);
-
-		var expenseStore = Ext.create('expensetracker.store.Expense');
+		expenseSheet.bindStore(expSheetStore);
+		incomeSheet.bindStore(incSheetStore);
+		
 		expenseStore.load({
 			params : {
 				username : expensetracker.util.Session.getUsername(),
@@ -65,9 +77,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 
 		expenseWindow.show();
 	},
-	onIncomeEditClick : function() {
-		var me = this;
-		var model = me.getView().getViewModel();
+	onOpenIncomeSheet : function() {
+		var me = this;		
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
 			height : Ext.Element.getViewportHeight(),
 			width : Ext.Element.getViewportWidth(),
@@ -78,6 +89,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());
 		model.set('year', expensetracker.util.Calendar.getCurrentYear());
 		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
+		
 		incomeWindow.show();
 	},
 	updateDashBoardSummary : function() {

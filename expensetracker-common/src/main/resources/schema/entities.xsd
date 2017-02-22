@@ -125,6 +125,7 @@
 			<element name="price" type="double" minOccurs="0" />
 			<element name="qty" type="double" minOccurs="0" />
 			<element name="pricePerUnit" type="double" minOccurs="0" />
+			<element name="inventoryInd" type="string" />
 		</sequence>
 	</complexType>
 

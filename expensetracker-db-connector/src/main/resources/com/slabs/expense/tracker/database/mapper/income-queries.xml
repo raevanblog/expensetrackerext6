@@ -17,7 +17,7 @@
 	</insert>
 
 	<update id="updateIncome">
-		update EXPENSETRACKER.INCOME set income=#{param1.income} where id=#{param1.id}
+		update EXPENSETRACKER.INCOME set income=#{income} where id=#{id}
 	</update>
 
 	<select id="getIncome" resultType="com.slabs.expense.tracker.common.database.entity.Income">
@@ -51,8 +51,8 @@
 	</select>
 
 	<delete id="deleteIncome">
-		delete from EXPENSETRACKER.INCOME where mth=#{record.mth} and yr=#{param1.yr}
-		and username=#{param1.username}
+		delete from EXPENSETRACKER.INCOME where mth=#{mth} and yr=#{yr}
+		and username=#{username}
 	</delete>
 
 	<select id="getIncomeType" resultType="com.slabs.expense.tracker.common.database.entity.IncomeType">

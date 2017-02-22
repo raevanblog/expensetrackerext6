@@ -5,7 +5,7 @@ Ext.define('expensetracker.view.expense.ThumbnailContainer', {
 	itemSelector : '.thumbnail-item',
 	initComponent : function() {
 		this.tpl = '<tpl for=".">' + '<div class="thumbnail-item">' + '<div class="thumbnail-icon-wrap">' + '<div class="thumbnail-icon icon-calendar"></div>' + '</div>'
-				+ '<div class="thumbnail-text">{month}</div>' + '</div>' + '</tpl>';
+				+ '<div class="thumbnail-text">{title}</div>' + '</div>' + '</tpl>';
 		this.callParent();
 	}
 });

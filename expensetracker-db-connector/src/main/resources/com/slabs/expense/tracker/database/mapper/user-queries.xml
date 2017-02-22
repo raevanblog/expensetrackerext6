@@ -25,61 +25,61 @@
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.database.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
 		values(
-		#{param1.firstName},
-		#{param1.lastName},
-		#{param1.sex},
-		#{param1.username},
-		#{param1.password},
-		#{param1.email},
-		#{param1.mobile},
-		#{param1.address}
+		#{firstName},
+		#{lastName},
+		#{sex},
+		#{username},
+		#{password},
+		#{email},
+		#{mobile},
+		#{address}
 		)
 	</insert>
 
 	<update id="updateUser">
 		update EXPENSETRACKER.USERINFO
 		<set>
-			<if test="param1.firstName != null">
-				firstName=#{param1.firstName},
+			<if test="firstName != null">
+				firstName=#{firstName},
 			</if>
-			<if test="param1.lastName != null">
-				lastName=#{param1.lastName},
+			<if test="lastName != null">
+				lastName=#{lastName},
 			</if>
-			<if test="param1.sex != null">
-				sex=#{param1.sex},
+			<if test="sex != null">
+				sex=#{sex},
 			</if>
-			<if test="param1.newPassword != null">
-				password=#{param1.newPassword},
+			<if test="newPassword != null">
+				password=#{newPassword},
 			</if>
-			<if test="param1.email != null">
-				email=#{param1.email},
+			<if test="email != null">
+				email=#{email},
 			</if>
-			<if test="param1.mobile != null">
-				mobile=#{param1.mobile},
+			<if test="mobile != null">
+				mobile=#{mobile},
 			</if>
-			<if test="param1.address != null">
-				address=#{param1.address},
+			<if test="address != null">
+				address=#{address},
 			</if>
-			<if test="param1.profilePic != null">
-				profilePic=#{param1.profilePic, typeHandler=org.apache.ibatis.type.ClobTypeHandler},
+			<if test="profilePic != null">
+				profilePic=#{profilePic, typeHandler=org.apache.ibatis.type.ClobTypeHandler},
 			</if>
-			<if test="param1.isAdmin != null">
-				isAdmin=#{param1.isAdmin}
+			<if test="isAdmin != null">
+				isAdmin=#{isAdmin}
 			</if>
-			<if test="param1.isFtLogin != null">
-				isFtLogin=#{param1.isFtLogin}
+			<if test="isFtLogin != null">
+				isFtLogin=#{isFtLogin}
 			</if>
-			<if test="param1.isVerified != null">
-				isVerified=#{param1.isVerified}
+			<if test="isVerified != null">
+				isVerified=#{isVerified}
 			</if>
-			<if test="param1.isLocked != null">
-				isLocked=#{param1.isLocked}
+			<if test="isLocked != null">
+				isLocked=#{isLocked}
 			</if>
-			<if test="param1.activationKey != null">
-				activationKey=#{param1.activationKey}
+			<if test="activationKey != null">
+				activationKey=#{activationKey}
 			</if>
 		</set>
-		where username=#{param1.username}
+		where username=#{username}
 	</update>
 
 	<update id="activateUser">
@@ -98,7 +98,7 @@
 	</select>
 
 	<delete id="deleteUser">
-		delete from EXPENSETRACKER.USERINFO where username=#{param1.username}
+		delete from EXPENSETRACKER.USERINFO where username=#{username}
 	</delete>
 
 	<update id="setActivationKey">
