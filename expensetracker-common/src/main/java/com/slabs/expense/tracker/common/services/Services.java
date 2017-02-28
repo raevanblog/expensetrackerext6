@@ -10,7 +10,8 @@ public enum Services {
 	
 	ADMIN_SERVICE("AdminService"), 
 	EXPENSE_CATEGORY_SERVICE("ExpenseCategoryService"), 	
-	EXPENSE_SERVICE("ExpenseService"), 
+	EXPENSE_SERVICE("ExpenseService"),
+	INVENTORY_SERVICE("InventoryService"),
 	USER_SERVICE("UserService"),
 	EMAIL_SERVICE("EmailService"), 
 	INCOME_SERVICE("IncomeService"), 

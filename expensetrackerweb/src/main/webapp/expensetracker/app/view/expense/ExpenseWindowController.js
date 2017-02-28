@@ -153,7 +153,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 				if (closeWindow) {
 					view.close();
-				} else {
+				} else {					
 					me.refreshGridView(grid);
 				}
 			},
@@ -201,6 +201,48 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		incomeWindowModel.set('year', model.get('year'));
 		incomeWindowModel.set('title', model.get('title'));
 		incomeWindow.show();
+	},	
+	addExpenseToInventory : function(btn) {
+		var me = this;		
+		var record = btn.getWidgetRecord();		
+		
+		if(undefined === record.get('id') || null === record.get('id')) {
+			expensetracker.util.Message.alert('Expense Tracker', 'Save expense before adding to Inventory');
+		} else if('Y' === record.get('inventoryInd')) {
+			expensetracker.util.Message.toast(record.get('itemName') + " is already added to Inventory");
+		} else {
+			var grid = me.lookup('expensegrid');
+			var view = me.getView();
+			var viewModel = view.getViewModel();
+			var requestArray = new Array();		
+			requestArray.push({
+				expId : record.get('id'),
+				itemName : record.get('itemName'),
+				username : record.get('username'),
+				category : record.get('category'),
+				qty : record.get('qty'),
+				yr : viewModel.get('year'),
+				mth : viewModel.get('month')
+			});
+			view.setLoading('Adding to Inventory...');
+			Ext.Ajax.request({
+				url : expensetracker.util.Url.getInventoryService(),
+				method : 'POST',
+				jsonData : Ext.JSON.encode(requestArray),
+				success : function(response, opts) {
+					view.setLoading(false);
+					var response = Ext.decode(response.responseText);
+					if(200 === response.status_Code) {						
+						grid.getStore().reload();
+						expensetracker.util.Message.toast( record.get('itemName') + ' added to Inventory');
+					}
+				},
+				failure : function(response, opts) {
+					view.setLoading(false);
+					expensetracker.util.Message.alert('Expense Tracker', 'Server Error');
+				}
+			});
+		}
 	},
 	refreshGridView : function(grid) {
 		grid.getView().refresh();

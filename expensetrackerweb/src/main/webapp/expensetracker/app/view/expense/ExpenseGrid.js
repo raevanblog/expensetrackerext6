@@ -3,11 +3,17 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	alias : 'view.expensegrid',
 	xtype : 'expensegrid',
 	scrollable : true,
-	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'expensetracker.component.grid.column.CheckColumn', 'Ext.grid.column.Number' ],
+	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'Ext.grid.column.Widget', 'expensetracker.component.grid.column.CheckColumn', 'Ext.grid.column.Number' ],
 	layout : 'fit',
 	plugins : {
 		ptype : 'cellediting',
-		clicksToEdit : 1
+		clicksToEdit : 1,
+		listeners: {
+				beforeedit: function(editor, context, eOpts){
+				if (context.column.widget)
+				return false;
+			}
+		}
 	},
 	initComponent : function() {
 		this.store = Ext.create('expensetracker.store.Expense');
@@ -62,13 +68,14 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		xtype : 'rownumberer',
 		width : 50
 	}, {
-		xtype : 'yncheckcolumn',
-		checkedTooltip : 'Remove from Inventory',
-		tooltip : 'Add to Inventory',
-		tooltipType : 'qtip',
-		text : 'Inventory',		
-		dataIndex : 'inventoryInd',
-		width : 100
+		xtype : 'widgetcolumn',
+		editor: {}, 
+		widget : {
+			xtype : 'button',
+			text : 'Add to Inventory',
+			handler : 'addExpenseToInventory'			
+		},
+		width : 150
 	}, {
 		text : 'Item Name',
 		dataIndex : 'itemName',

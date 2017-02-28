@@ -8,6 +8,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowModel', {
 		month : '',
 		year : '',
 		title : '',
+		disableInvCheck : false,
 		isLatestExpense : false
 	} ]
 })
