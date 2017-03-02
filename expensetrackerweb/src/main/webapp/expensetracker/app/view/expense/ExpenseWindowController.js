@@ -1,7 +1,7 @@
 Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.expensewindowcontroller',
-	onRender : function(window) {
+	onRender : function(expenseWindow) {
 		var me = this;
 		var view = me.getView();
 		var model = view.getViewModel();
@@ -9,7 +9,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			model.set('isLatestExpense', true);
 		}
 	},
-	onCloseExpenseWindow : function(window) {
+	onCloseExpenseWindow : function(expenseWindow) {
 		var me = this;
 		var view = me.getView();
 		var model = view.getViewModel();
@@ -26,8 +26,8 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 						me.syncData(component, true);
 					}
 					if (button === 'no') {
-						window.clearListeners();
-						window.close();
+						expenseWindow.clearListeners();
+						expenseWindow.close();
 					}
 				}
 			});
@@ -79,17 +79,17 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
 		var view = me.getView();
-		var model = view.getViewModel();
+		var viewmodel = view.getViewModel();
 		var model = new expensetracker.model.Expense({
 			itemName : '',
 			price : 0,
-			expdate : model.get('expenseDate'),
+			expdate : viewmodel.get('expenseDate'),
 			qty : 0,
-			inventoryInd: 'Y',
+			inventoryInd: 'N',
 			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);
-		me.refreshGridView(grid);
+		expensetracker.util.Grid.refresh(grid);
 	},
 	onQtyChange : function(gridqtytext, newValue, oldValue, options) {
 		var me = this;
@@ -127,20 +127,42 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
 		store.remove(record);
-		me.refreshGridView(grid);
+		expensetracker.util.Grid.refresh(grid);
 	},
 	onShowCategory : function(addCategBtn) {
 		var me = this;
-		var view = me.getView();
-		view.getLayout().next();
+		var view = me.getView();		
+		var component = view.getLayout().getActiveItem();
+		
+		var store = component.getStore();
+		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
+			Ext.Msg.show({
+				title : 'Expense Tracker',
+				message : 'Do you want to save your changes?',
+				buttons : Ext.Msg.YESNO,
+				icon : Ext.Msg.QUESTION,
+				fn : function(button) {
+					if (button === 'yes') {
+						me.syncData(component, false, function() {
+							view.getLayout().next();
+						});
+					}
+					if (button === 'no') {
+						view.getLayout().next();
+					}
+				}
+			});
+		} else {
+			view.getLayout().next();
+		}		
 	},
 	onReload : function(event) {
 		var me = this;
 		var view = me.getView();
-		var component = view.getLayout().getActiveItem();
-		component.getStore().reload();
+		var grid = view.getLayout().getActiveItem();
+		expensetracker.util.Grid.reload(grid);
 	},
-	syncData : function(grid, closeWindow) {
+	syncData : function(grid, closeWindow, callback) {
 		var me = this;
 		var view = me.getView();
 		var model = view.getViewModel();
@@ -154,15 +176,20 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				if (closeWindow) {
 					view.close();
 				} else {					
-					me.refreshGridView(grid);
+					expensetracker.util.Grid.reload(grid);
 				}
+				
+				if(!closeWindow && callback !== undefined && callback !== null) {
+					callback.call(this);
+				}
+				
 			},
 			failure : function(batch) {
 				var isUnauthorizedAccess = false;
 				var operations = batch.getOperations();
 
 				grid.setLoading(false);
-				me.refreshGridView(grid);
+				expensetracker.util.Grid.refresh(grid);
 
 				for (var i = 0; i < operations.length; i++) {
 					var operation = operations[i];
@@ -201,15 +228,33 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		incomeWindowModel.set('year', model.get('year'));
 		incomeWindowModel.set('title', model.get('title'));
 		incomeWindow.show();
-	},	
+	},
+	onOpenInventory	:  function() {
+		var me = this;
+		var view = me.getView();
+		var model = view.getViewModel();
+		
+		var inventoryWindow = Ext.create('expensetracker.view.inventory.InventoryWindow', {
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth(),
+			modal : true
+		});
+		
+		var inventoryWindowModel = inventoryWindow.getViewModel();
+		inventoryWindowModel.set('month', model.get('month'));
+		inventoryWindowModel.set('year', model.get('year'));
+		inventoryWindowModel.set('title', 'Inventory ' + model.get('title'));
+		
+		inventoryWindow.show();
+	},
 	addExpenseToInventory : function(btn) {
 		var me = this;		
 		var record = btn.getWidgetRecord();		
 		
-		if(undefined === record.get('id') || null === record.get('id')) {
-			expensetracker.util.Message.alert('Expense Tracker', 'Save expense before adding to Inventory');
+		if(undefined === record.get('id') || null === record.get('id') || !Number.isInteger(record.get('id'))) {
+			expensetracker.util.Message.toast('Save expense before adding to Inventory.');
 		} else if('Y' === record.get('inventoryInd')) {
-			expensetracker.util.Message.toast(record.get('itemName') + " is already added to Inventory");
+			expensetracker.util.Message.toast(record.get('itemName') + " is already in Inventory");
 		} else {
 			var grid = me.lookup('expensegrid');
 			var view = me.getView();

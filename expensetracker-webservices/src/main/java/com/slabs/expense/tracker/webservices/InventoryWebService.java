@@ -2,9 +2,13 @@ package com.slabs.expense.tracker.webservices;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.slabs.expense.tracker.common.database.entity.Inventory;
@@ -30,14 +34,61 @@ public class InventoryWebService {
 	@Path("inventory/")
 	@POST
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response addToInventory(List<Inventory> records) throws ExpenseTrackerException {
+	public Response addInventory(List<Inventory> records) throws ExpenseTrackerException {
 		try {
 			InventoryService service = ServiceFactory.getInstance()
 					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
 
 			return ResponseGenerator.getSuccessResponse(service.createInventory(records),
-					Operation.SELECT);
+					Operation.INSERT);
 
+		} catch (Exception e) {
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	@Path("inventory/")
+	@DELETE
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response deleteInventory(List<Inventory> records) throws ExpenseTrackerException {
+		try {
+			InventoryService service = ServiceFactory.getInstance()
+					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
+
+			return ResponseGenerator.getSuccessResponse(service.deleteInventory(records),
+					Operation.DELETE);
+		} catch (Exception e) {
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	@Path("inventory/")
+	@PUT
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response updateInventory(List<Inventory> records) throws ExpenseTrackerException {
+		try {
+			InventoryService service = ServiceFactory.getInstance()
+					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
+
+			return ResponseGenerator.getSuccessResponse(service.updateInventory(records),
+					Operation.UPDATE);
+		} catch (Exception e) {
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	@Path("inventory/")
+	@GET
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getInventory(@QueryParam("username") String username,
+			@QueryParam("year") Integer year, @QueryParam("month") Integer month)
+			throws ExpenseTrackerException {
+		try {
+			InventoryService service = ServiceFactory.getInstance()
+					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
+
+			return ResponseGenerator.getSuccessResponse(service.getInventory(username, year, month),
+					Operation.SELECT);
 		} catch (Exception e) {
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}

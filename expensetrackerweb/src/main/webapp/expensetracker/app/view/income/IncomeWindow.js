@@ -2,9 +2,9 @@ Ext.define('expensetracker.view.income.IncomeWindow', {
 	extend : 'Ext.window.Window',
 	alias : 'view.incomewindow',
 	xtype : 'incomewindow',
-	controller : 'incomewindowcontroller',
+	controller : 'incomecontroller',
 	iconCls : 'x-fa fa-file-text-o',
-	viewModel : 'incomewindowmodel',
+	viewModel : 'incomemodel',
 	requires : [ 'expensetracker.view.income.IncomeGrid', 'expensetracker.view.income.IncomeWindowController', 'expensetracker.view.income.IncomeWindowModel' ],
 	bind : {
 		title : '{title}'

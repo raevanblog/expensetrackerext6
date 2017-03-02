@@ -42,7 +42,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		align : 'center',
 		tooltip : 'Delete',
 		handler : 'onDeleteCategory',
-		iconCls : 'x-fa  fa-minus-circle',
+		iconCls : 'x-fa fa-trash-o',
 		flex : 1
 	} ]
 });

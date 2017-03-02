@@ -14,5 +14,5 @@ Ext.define('expensetracker.util.Store', {
 	},
 	createStore : function(name) {
 		return Ext.create(name);
-	}
+	}	
 });

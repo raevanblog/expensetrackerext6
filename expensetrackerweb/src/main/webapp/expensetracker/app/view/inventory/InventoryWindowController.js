@@ -1,18 +1,10 @@
-Ext.define('expensetracker.view.income.IncomeWindowController', {
+Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.incomecontroller',	
-	onRender : function(window) {
+	alias : 'controller.inventorycontroller',
+	onCloseInventoryWindow : function(inventoryWindow) {
 		var me = this;
 		var view = me.getView();
 		var model = view.getViewModel();
-		if (expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
-			model.set('isLatestIncome', true);
-		}
-	},
-	onCloseIncomeWindow : function(incomeWindow) {
-		var me = this;
-		var view = me.getView();
-		var model = me.getViewModel();
 		var component = view.getLayout().getActiveItem();
 		var store = component.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
@@ -26,8 +18,8 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 						me.syncData(component, true);
 					}
 					if (button === 'no') {
-						incomeWindow.clearListeners();
-						incomeWindow.close();
+						inventoryWindow.clearListeners();
+						inventoryWindow.close();
 					}
 				}
 			});
@@ -37,13 +29,13 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 			}
 			return true;
 		}
-		return false;
+		return false;		
 	},
-	onRenderIncomeGrid : function(incomegrid) {
+	onRenderInventoryGrid : function(inventorygrid) {
 		var me = this;
 		var view = me.getView();
 		var viewmodel = view.getViewModel();
-		var store = incomegrid.getStore();
+		var store = inventorygrid.getStore();
 		store.load({
 			params : {
 				username : expensetracker.util.Session.getUsername(),
@@ -51,23 +43,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 				year : viewmodel.get('year')
 			},
 			callback : function(records, operation, success) {
-				if (success) {
-					if (records.length === 0) {
-						var typeStore = Ext.getStore('IncomeType');
-						typeStore.each(function(record) {
-							var incomeType = record.get('incometype');
-							var model = new expensetracker.model.Income({
-								incometype : incomeType,
-								mth : viewmodel.get('month'),
-								yr : viewmodel.get('year'),
-								income : 0.0,
-								username : expensetracker.util.Session.getUsername()
-							});
-							store.add(model);
-						});
-						incomegrid.getView().refresh();
-					}
-				} else {
+				if (!success) {					
 					var response = Ext.JSON.decode(operation.getError().response.responseText)
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
@@ -78,23 +54,29 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 					}
 				}
 			}
-		});
-
-	},
-	onSaveIncome : function(saveBtn) {
-		var me = this;
-		var model = me.getView().getViewModel();
-		var grid = me.lookup('incomegrid');
-		var store = grid.getStore();
-		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
-			me.syncData(grid, false);
-		}
+		});	
 	},
 	onReload : function() {
 		var me = this;
 		var view = me.getView();
 		var grid = view.getLayout().getActiveItem();
 		expensetracker.util.Grid.reload(grid);
+	},
+	onSaveInventory : function(saveBtn) {
+		var me = this;
+		var model = me.getView().getViewModel();
+		var grid = me.lookup('inventorygrid');
+		var store = grid.getStore();
+		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
+			me.syncData(grid, false);
+		}
+	},
+	onDeleteInventory : function(view, rowIndex, colIndex, item, e, record, row) {
+		var me = this;
+		var grid = me.lookup('inventorygrid');
+		var store = grid.getStore();
+		store.remove(record);
+		expensetracker.util.Grid.refresh(grid);
 	},
 	syncData : function(grid, closeWindow) {
 		var me = this;
@@ -103,10 +85,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 		grid.setLoading("Saving...");
 		grid.getStore().sync({
 			success : function(batch) {
-				grid.setLoading(false);
-				if (model.get('isLatestIncome')) {
-					me.fireEvent('updatedashboard');
-				}
+				grid.setLoading(false);				
 				if (closeWindow) {
 					me.getView().close();
 				} else {
@@ -144,7 +123,32 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 			}
 		});
 	},
-	refreshGridView : function(grid) {
-		grid.getView().refresh();
+	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
+		var me = this;
+		var view = me.getView();
+		var grid = view.getLayout().getActiveItem();
+		var store = grid.getStore();
+		if (gridsearchtext.reference === 'inventorygridsearch') {
+			store.filter('itemName', newValue);
+		}
+	},
+	onAddInventory : function() {
+		var me = this;
+		var grid = me.lookup('inventorygrid');
+		var store = grid.getStore();
+		var view = me.getView();
+		var viewmodel = view.getViewModel();
+		var model = new expensetracker.model.Inventory({
+			itemName : '',
+			expId : null,
+			qty : 0,
+			category : '',
+			mth : viewmodel.get('month'),
+			yr : viewmodel.get('year'),
+			username : expensetracker.util.Session.getUsername()
+		});
+		console.log(model);
+		store.insert(0, model);
+		expensetracker.util.Grid.refresh(grid);
 	}
 });

@@ -16,8 +16,5 @@ Ext.define('expensetracker.util.Message', {
 		}
 
 		return '<a href="mailto:raevanblog@gmail.com?Subject=' + subject + '" target="_top">raevanblog@gmail.com</a>';
-	},
-	alert : function(title, message) {
-		Ext.Msg.alert(title, message);
-	}
+	}	
 });

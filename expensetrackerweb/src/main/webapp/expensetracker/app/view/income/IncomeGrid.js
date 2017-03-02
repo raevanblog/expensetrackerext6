@@ -4,8 +4,9 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 	alias : 'view.incomegrid',
 	requires : [ 'expensetracker.store.Income' ],
 	initComponent : function() {
-		this.store = Ext.create('expensetracker.store.Income');
-		this.callParent();
+		var me = this;
+		me.store = Ext.create('expensetracker.store.Income');
+		me.callParent();
 	},
 	plugins : {
 		ptype : 'cellediting',

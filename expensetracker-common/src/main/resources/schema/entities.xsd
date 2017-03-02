@@ -145,7 +145,7 @@
 		</annotation>
 		<sequence>
 			<element name="id" type="long" />
-			<element name="expId" type="long" />
+			<element name="expId" type="long" minOccurs="0"/>
 			<element name="itemName" type="string" />			
 			<element ref="et:username" />
 			<element name="category" type="string" />			

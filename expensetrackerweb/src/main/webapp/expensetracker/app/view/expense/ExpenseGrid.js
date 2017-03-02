@@ -39,22 +39,28 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Expense',
-			iconCls : 'x-fa  fa-plus',
+			iconCls : 'x-fa fa-plus-square',
 			handler : 'onAddExpenseRecord',
 			tooltip : 'Add Expense'
 		}, {
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Category',
-			iconCls : 'x-fa fa-plus',
+			iconCls : 'x-fa fa-plus-square',
 			handler : 'onShowCategory',
 			tooltip : 'Add Category'
 		}, {
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Income',
-			iconCls : 'x-fa  fa-plus',
+			iconCls : 'x-fa fa-plus-square',
 			handler : 'onUpdateIncome'
+		}, {
+			xtype : 'button',
+			ui : 'toolbar',
+			text : 'Inventory',
+			iconCls : 'x-fa fa-codepen',
+			handler : 'onOpenInventory'
 		} ]
 	} ],
 	bbar : [ '->', {
@@ -193,7 +199,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		align : 'center',
 		tooltip : 'Delete',
 		handler : 'onDeleteExpense',
-		iconCls : 'x-fa  fa-minus-circle',
+		iconCls : 'x-fa  fa-trash-o',
 		flex : 1
 	} ]
 });

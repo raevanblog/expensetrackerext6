@@ -5,6 +5,18 @@
 <mapper namespace="com.slabs.expense.tracker.common.database.mapper.InventoryDAO">
 
 	<insert id="createInventory" parameterType="java.util.List">
+		insert into EXPENSETRACKER.INVENTORY(ITEMNAME, CATEGORY, QTY, USERNAME, MTH, YR) values
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">			
+			#{record.itemName},
+			#{record.category},
+			#{record.qty},
+			#{record.username},
+			#{record.mth},
+			#{record.yr}
+		</foreach>
+	</insert>
+	
+	<insert id="createInventoryByExpenseId" parameterType="java.util.List">
 		insert into EXPENSETRACKER.INVENTORY(EXPID, ITEMNAME, CATEGORY, QTY, USERNAME, MTH, YR) values
 		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.expId},
