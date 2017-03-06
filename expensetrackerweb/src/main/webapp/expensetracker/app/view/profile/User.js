@@ -5,6 +5,7 @@ Ext.define('expensetracker.view.profile.User', {
 	xtype : 'profile',
 	resizable : false,
 	scrollable : 'y',
+	iconCls : 'x-fa fa-user',
 	title : 'User Profile',
 	layout : {
 		type : 'vbox',

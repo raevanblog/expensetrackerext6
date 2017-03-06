@@ -97,9 +97,9 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 			xtype : 'numberfield',
 			hideTrigger : true,
 			allowBlank : false,			
-			selectOnFocus : true,			
+			selectOnFocus : true			
 		},
-		flex : 1
+		width : 200
 	}, {
 		xtype : 'actioncolumn',
 		align : 'center',

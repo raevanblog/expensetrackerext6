@@ -11,16 +11,19 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		}
 	},
 	onRender : function(dashboard) {
-		var me = this;
-		var topexpense = me.lookup('topexpense');
+		var me = this;		
 		var expenseSheet = me.lookup('expsheetdash');
 		var incomeSheet = me.lookup('incomesheetdash');
+		var inventorySheet = me.lookup('inventorydash');
+		
 		var expSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
 		var incSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
-		var expenseStore = Ext.create('expensetracker.store.Expense');
+		var invSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
+		
 		
 		expSheetStore.removeAll();
 		incSheetStore.removeAll();
+		invSheetStore.removeAll();
 		
 		expSheetStore.add({
 			title : 'Expense Sheet',
@@ -34,21 +37,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
-
-		expenseSheet.bindStore(expSheetStore);
-		incomeSheet.bindStore(incSheetStore);
 		
-		expenseStore.load({
-			params : {
-				username : expensetracker.util.Session.getUsername(),
-				month : expensetracker.util.Calendar.getCurrentMonthNo(),
-				year : expensetracker.util.Calendar.getCurrentYear(),
-				fetchTopExpense : true
-			}
+		invSheetStore.add({
+			title : 'Inventory',
+			month : expensetracker.util.Calendar.getCurrentMonth(),
+			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
 
-		topexpense.bindStore(expenseStore);
-
+		expenseSheet.bindStore(expSheetStore);
+		incomeSheet.bindStore(incSheetStore);		
+		inventorySheet.bindStore(invSheetStore);
+		
 		me.updateDashBoardSummary();
 	},
 
@@ -91,6 +90,21 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
 		
 		incomeWindow.show();
+	},
+	onOpenInventory : function() {
+		var me = this;		
+		var inventoryWindow = Ext.create('expensetracker.view.inventory.InventoryWindow', {
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth(),
+			modal : true
+		});
+		var model = inventoryWindow.getViewModel();
+		model.set('source', me.getView());
+		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());
+		model.set('year', expensetracker.util.Calendar.getCurrentYear());
+		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
+		
+		inventoryWindow.show();
 	},
 	updateDashBoardSummary : function() {
 		var me = this;		

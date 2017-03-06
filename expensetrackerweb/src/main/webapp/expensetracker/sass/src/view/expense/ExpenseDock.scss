@@ -67,3 +67,8 @@ $thumbnail-color: $base-color;
    	font-family: 'FontAwesome';
  	content: $fa-var-calendar;   
 }
+
+.icon-inventory:before {
+   	font-family: 'FontAwesome';
+ 	content: $fa-var-codepen;   
+}

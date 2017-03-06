@@ -20,6 +20,7 @@ Ext.define('expensetracker.view.message.Inbox', {
 		align : 'left',
 		dataIndex: 'senderfname',
 		renderer : function(value, metadata, record){
+			metadata.tdAttr = 'data-qtip="' + value + '"';
 			if('Y' === record.get('isNew')) {
 				return '<b>' + value + ' ' + record.get('senderlname') + '</b>';
 			} else {
@@ -32,6 +33,7 @@ Ext.define('expensetracker.view.message.Inbox', {
 		align : 'left',
 		dataIndex : 'subject',
 		renderer : function(value, metadata, record){
+			metadata.tdAttr = 'data-qtip="' + value + '"';
 			if('Y' === record.get('isNew')) {
 				return '<b>' + value + '</b>';
 			} else {
@@ -46,12 +48,13 @@ Ext.define('expensetracker.view.message.Inbox', {
 		dataIndex : 'msgdate',		
 		renderer : function(value, metadata, record){
 			value = Ext.Date.format(value, 'd/m/Y H:i:s A');
+			metadata.tdAttr = 'data-qtip="' + value + '"';
 			if('Y' === record.get('isNew')) {
 				return '<b>' + value + '</b>';
 			} else {
 				return value;
 			}
 		},
-		width : 180
+		width : 200
 	}]
 });

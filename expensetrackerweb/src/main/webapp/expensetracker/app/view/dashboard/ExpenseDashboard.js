@@ -28,6 +28,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		items : [ {
 			xtype : 'thumnailcontainer',
 			reference : 'incomesheetdash',
+			icontype : 'calendar',
 			listeners : {
 				itemclick : 'onOpenIncomeSheet'
 			}
@@ -43,21 +44,27 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		items : [ {
 			xtype : 'thumnailcontainer',
 			reference : 'expsheetdash',
+			icontype : 'calendar',
 			listeners : {
 				itemclick : 'onOpenExpenseSheet'
 			}
 		} ]
 	}, {
-		xtype : 'panel',
-		layout : 'fit',
-		iconCls : 'x-fa  fa-rupee',
-		title : 'Top Expense',
-		height : 250,
+		xtype : 'container',		
+		height : 150,
+		layout : {
+			type : 'hbox',
+			pack : 'middle'
+		},
+		cls : 'big-20 small-100 dash-panel shadow',		
 		items : [ {
-			xtype : 'topexpense',
-			reference : 'topexpense'
-		} ],
-		cls : 'big-40 small-100 dash-panel'
+			xtype : 'thumnailcontainer',
+			reference : 'inventorydash',
+			icontype : 'inventory',
+			listeners : {
+				itemclick : 'onOpenInventory'
+			}
+		} ]
 	}, {
 		xtype : 'linechart',
 		reference : 'expensevsincome',

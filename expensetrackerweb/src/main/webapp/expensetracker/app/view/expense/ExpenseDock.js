@@ -38,6 +38,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 	items : [ {
 		xtype : 'thumnailcontainer',
 		store : 'ExpenseSheet',
+		icontype : 'calendar',
 		reference : 'thumbnaildocker',
 		listeners : {
 			itemclick : 'onThumbnailClick'

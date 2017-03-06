@@ -189,7 +189,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 200
 	}, {
 		xtype : 'numbercolumn',
-		text : 'Price/Unit',
+		text : 'Unit Price',
 		align : 'center',
 		format : '0.00',
 		dataIndex : 'pricePerUnit',

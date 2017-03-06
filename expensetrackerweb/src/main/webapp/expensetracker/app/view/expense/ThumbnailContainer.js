@@ -4,8 +4,17 @@ Ext.define('expensetracker.view.expense.ThumbnailContainer', {
 	xtype : 'thumnailcontainer',
 	itemSelector : '.thumbnail-item',
 	initComponent : function() {
-		this.tpl = '<tpl for=".">' + '<div class="thumbnail-item">' + '<div class="thumbnail-icon-wrap">' + '<div class="thumbnail-icon icon-calendar"></div>' + '</div>'
-				+ '<div class="thumbnail-text">{title}</div>' + '</div>' + '</tpl>';
+		this.tpl =  new Ext.XTemplate('<tpl for=".">' + '<div class="thumbnail-item">' + '<div class="thumbnail-icon-wrap">' + '<div class="thumbnail-icon {[this.getIcon()]}"></div>' + '</div>'+ '<div class="thumbnail-text">{title}</div>' + '</div>' + '</tpl>', {
+			icontype : this.icontype,
+			getIcon : function() {
+				var me = this;
+				if('calendar' === me.icontype) {
+					return 'icon-calendar';
+				}else if('inventory' === me.icontype) {
+					return 'icon-inventory';
+				}
+			}		
+		});
 		this.callParent();
-	}
+	}	
 });

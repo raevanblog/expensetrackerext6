@@ -2,6 +2,9 @@ Ext.define('expensetracker.store.ExpenseSheet', {
 	extend : 'Ext.data.Store',
 	alias : 'store.expensedock',
 	fields : [ {
+		name : 'title',
+		type : 'string'
+	},{
 		name : 'month',
 		type : 'string'
 	}, {
