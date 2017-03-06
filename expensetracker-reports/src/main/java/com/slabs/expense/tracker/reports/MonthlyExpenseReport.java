@@ -66,6 +66,7 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
 		TextColumnBuilder<Integer> rowNum = cProvider.getRowNumberColumn("S.No");
 		ValueColumnBuilder expDate = cProvider.getDateColumn(Column.EXPDATE).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
+		TextColumnBuilder<String> itemName = cProvider.getColumn(Column.ITEMNAME, String.class);
 		TextColumnBuilder<String> expenseType = cProvider.getColumn(Column.EXPTYPE, String.class).setFixedColumns(10);
 		TextColumnBuilder<String> expenseCategory = cProvider.getColumn(Column.CATEGORY, String.class);
 		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class).setStyle(rightAligned).setFixedColumns(5);
@@ -73,7 +74,7 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		TextColumnBuilder<Double> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, Double.class).setStyle(rightAligned)
 				.setDataType(this.currency);
 
-		addColumns(rowNum, expDate, expenseType, expenseCategory, qty, price, pricePerUnit);
+		addColumns(rowNum, expDate, itemName, expenseType, expenseCategory, qty, price, pricePerUnit);
 	}
 
 	private void addColumnsToReport() {

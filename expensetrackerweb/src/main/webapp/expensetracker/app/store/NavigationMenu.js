@@ -21,7 +21,7 @@ Ext.define('expensetracker.store.NavigationMenu', {
 		}, {
 			text : 'Reports',
 			iconCls : 'x-fa fa-file-pdf-o',
-			viewType : 'reports',
+			viewType : 'reportview',
 			leaf : true
 		}, {
 			text : 'Graph',

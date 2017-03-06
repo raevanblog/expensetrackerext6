@@ -15,7 +15,7 @@ public enum Column {
 	QTY("Qty","QTY", "qty",  Double.class), 
 	EXPTYPE("Expense Type", "EXPTYPE", "exptype", String.class), 
 	EXPDATE("Date", "EXPDATE", "expdate", Date.class),
-	ITEMNAME("Commodity", "ITEMNAME", "itemName", String.class),
+	ITEMNAME("Item Name", "ITEMNAME", "itemName", String.class),
 	CATEGORY("Category", "CATEGORY","category", String.class), 
 	USERNAME("Username", "USERNAME", "username", String.class), 
 	DESCRIPTION("Description", "DESCRIPTION", "description", String.class), 

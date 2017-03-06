@@ -2,7 +2,7 @@ Ext.define('expensetracker.view.main.MainDashboard', {
 	extend : 'Ext.container.Container',
 	alias : 'view.maindashboard',
 	xtype : 'maindashboard',
-	requires : [ 'expensetracker.store.NavigationMenu', 'expensetracker.view.dashboard.ExpenseDashboard', 'expensetracker.view.expense.ExpenseView' ],
+	requires : [ 'expensetracker.store.NavigationMenu', 'expensetracker.view.dashboard.ExpenseDashboard', 'expensetracker.view.expense.ExpenseView', 'expensetracker.view.report.ReportView' ],
 	scrollable : true,
 	layout : {
 		type : 'hbox',

@@ -1,7 +1,7 @@
-Ext.define('expensetracker.view.expense.ExpenseDock', {
+Ext.define('expensetracker.view.report.ReportDock', {
 	extend : 'Ext.panel.Panel',
-	xtype : 'expensedock',	
-	alias : 'view.expensedock',
+	xtype : 'reportdock',	
+	alias : 'view.reportdock',
 	iconCls : 'x-fa fa-file-text-o',
 	requires : [ 'expensetracker.store.ExpenseSheet', 'expensetracker.view.expense.ThumbnailContainer' ],
 	layout : {
@@ -15,7 +15,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 		overflowHandler : 'menu',
 		items : [ {
 			xtype : 'textfield',
-			reference : 'expensedocksearch',
+			reference : 'reportdocksearch',
 			submitEmptyText : false,
 			emptyText : 'Search...',
 			listeners : {
@@ -23,7 +23,7 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 			}
 		}, '-', {
 			xtype : 'numberfield',
-			reference : 'expenseyear',
+			reference : 'reportyear',
 			fieldLabel : 'Select Year',
 			minValue : 2008,
 			editable : false,
@@ -37,8 +37,8 @@ Ext.define('expensetracker.view.expense.ExpenseDock', {
 	items : [ {
 		xtype : 'thumnailcontainer',
 		store : 'ExpenseSheet',
-		icontype : 'calendar',
-		reference : 'thumbnaildocker',
+		icontype : 'pdf',
+		reference : 'reportthumbdocker',
 		listeners : {
 			itemclick : 'onThumbnailClick'
 		}

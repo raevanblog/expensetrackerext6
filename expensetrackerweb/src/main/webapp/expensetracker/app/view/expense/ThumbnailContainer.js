@@ -10,8 +10,10 @@ Ext.define('expensetracker.view.expense.ThumbnailContainer', {
 				var me = this;
 				if('calendar' === me.icontype) {
 					return 'icon-calendar';
-				}else if('inventory' === me.icontype) {
+				} else if('inventory' === me.icontype) {
 					return 'icon-inventory';
+				} else if('pdf' === me.icontype) {
+					return 'icon-pdf';
 				}
 			}		
 		});

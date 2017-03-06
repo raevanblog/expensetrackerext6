@@ -72,3 +72,8 @@ $thumbnail-color: $base-color;
    	font-family: 'FontAwesome';
  	content: $fa-var-codepen;   
 }
+
+.icon-pdf:before {
+   	font-family: 'FontAwesome';
+ 	content: $fa-var-file-pdf-o;   
+}

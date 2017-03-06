@@ -53,6 +53,6 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 	},
 	onRenderExpenseDock : function(expensedock) {
 		var me = this;
-		expensedock.setTitle('' + new Date().getFullYear());
+		expensedock.setTitle(expensetracker.util.Calendar.getCurrentYear());
 	}
 });
