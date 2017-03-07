@@ -5,8 +5,30 @@ Ext.define('expensetracker.view.report.ReportViewController', {
 		var me = this;
 		reportdock.setTitle(expensetracker.util.Calendar.getCurrentYear());
 	},
-	onThumbnailClick : function() {
-		Ext.Msg.alert('Expense Tracker', 'Not Enabled');
+	onThumbnailClick : function(thumbnailcont, record, item, index, e) {
+		var me = this;
+		var selectedYear = me.lookup('reportyear');
+		var currentYear = expensetracker.util.Calendar.getCurrentYear();
+		var currentMonth = expensetracker.util.Calendar.getCurrentMonthNo();
+		var selectedMonth = record.get('monthNo');
+		
+		if (selectedYear.getValue() === currentYear && selectedMonth > currentMonth) {
+			Ext.Msg.show({
+				title : 'Expense Tracker',
+				message : 'Report cannot be generated for thee future',
+				buttons : Ext.Msg.OK,
+				icon : Ext.Msg.INFO
+			});
+		} else {			
+			var username = expensetracker.util.Session.getUsername();			
+			var pdfWindow = Ext.create('expensetracker.view.report.ReportWindow',{
+				height : 500,
+				width : 700,
+				modal : true,
+				reportUrl : expensetracker.util.Url.getReportingService() + '?username='+ username + '&year=' + selectedYear.getValue() + '&month=' + selectedMonth
+			});
+			pdfWindow.show();	
+		}
 	},
 	filterDock : function(textfield, newValue, oldValue, options) {
 		var me = this;

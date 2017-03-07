@@ -284,7 +284,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				},
 				failure : function(response, opts) {
 					view.setLoading(false);
-					expensetracker.util.Message.alert('Expense Tracker', 'Server Error');
+					expensetracker.util.Message.toast('Expense Tracker', 'Server Error');
 				}
 			});
 		}

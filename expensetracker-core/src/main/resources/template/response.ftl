@@ -1,0 +1,1 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Signed Out</title><style>.center{position: absolute;left : 25%;right : 25%;top:25%; bottom:25%;}</style></head><body><div class="center"><h2>${response}</h2></div></body></html>

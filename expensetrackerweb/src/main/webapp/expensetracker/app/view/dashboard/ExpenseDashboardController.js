@@ -16,9 +16,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var incomeSheet = me.lookup('incomesheetdash');
 		var inventorySheet = me.lookup('inventorydash');
 		
-		var expSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
-		var incSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
-		var invSheetStore = Ext.create('expensetracker.store.ExpenseSheet');
+		var expSheetStore = Ext.create('expensetracker.store.Thumbnail');
+		var incSheetStore = Ext.create('expensetracker.store.Thumbnail');
+		var invSheetStore = Ext.create('expensetracker.store.Thumbnail');
 		
 		
 		expSheetStore.removeAll();

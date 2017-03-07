@@ -21,6 +21,7 @@ Ext.define('expensetracker.util.Url', {
 		expenseTypeService : '/expensetrackerweb/api/exptr-web/expensetype',
 		expenseNameService : '/expensetrackerweb/api/exptr-web/expense/expensenames',
 		inventoryService : '/expensetrackerweb/api/exptr-web/inventory',
+		reportingService : '/expensetrackerweb/api/exptr-web/reports',
 		graphService : '/expensetrackerweb/api/exptr-web/graph'
 	},
 	constructor : function(config) {

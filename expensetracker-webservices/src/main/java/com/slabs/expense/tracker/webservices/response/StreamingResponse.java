@@ -2,6 +2,7 @@ package com.slabs.expense.tracker.webservices.response;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintStream;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.StreamingOutput;
@@ -24,14 +25,26 @@ public class StreamingResponse implements StreamingOutput {
 
 	private JasperReportBuilder builder;
 
+	private String html;
+
+	public StreamingResponse(String html) {
+		this.html = html;
+	}
+
 	public StreamingResponse(JasperReportBuilder builder) {
 		this.builder = builder;
 	}
 
 	@Override
 	public void write(OutputStream output) throws IOException, WebApplicationException {
-		try {			
-			builder.toPdf(output);
+		try {
+			if (builder != null) {
+				builder.toPdf(output);
+			} else if (html != null) {
+				PrintStream ps = new PrintStream(output);
+				ps.print(html);
+				ps.close();
+			}
 			output.flush();
 		} catch (DRException e) {
 			L.error("Exception occurred while writing report, {}", e);

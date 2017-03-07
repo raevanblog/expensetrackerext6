@@ -8,7 +8,7 @@ Ext.define('expensetracker.Application', {
 
 	name : 'expensetracker',
 
-	stores : [ 'ExpenseSheet', 'ExpenseType', 'ExpenseCategory', 'ExpenseName', 'Expense', 'IncomeType' ],
+	stores : [ 'Thumbnail', 'ExpenseType', 'ExpenseCategory', 'ExpenseName', 'Expense', 'IncomeType' ],
 
 	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Constants', 'expensetracker.util.Session', 'expensetracker.util.Grid', 'expensetracker.util.Store', 'expensetracker.view.login.Login',
 			'expensetracker.view.login.Activation', 'expensetracker.view.message.ContactUs', 'expensetracker.util.Message', 'expensetracker.view.main.Main', 'Ext.data.validator.Presence',
@@ -16,7 +16,7 @@ Ext.define('expensetracker.Application', {
 			'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.form.field.Display', 'Ext.plugin.Viewport', 'Ext.form.field.TextArea',
 			'Ext.form.FieldContainer', 'expensetracker.util.Calendar', 'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category', 'Ext.chart.series.Bar',
 			'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line',
-			'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border', 'Ext.form.field.File', 'Ext.form.field.Number', 'Ext.form.field.HtmlEditor', 'Ext.util.Cookies', 'Ext.window.Toast',
+			'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border', 'Ext.form.field.File', 'Ext.form.field.Number', 'Ext.form.field.HtmlEditor', 'Ext.util.Cookies', 'Ext.window.Window', 'Ext.window.Toast',
 			'Ext.menu.Menu', 'Ext.window.MessageBox','Ext.selection.CheckboxModel' ],
 	defaultToken : 'login',
 	init : function() {

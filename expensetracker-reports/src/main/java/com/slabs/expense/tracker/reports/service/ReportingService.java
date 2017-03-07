@@ -53,19 +53,24 @@ public class ReportingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public JasperReportBuilder monthlyReport(String username, Integer year, Integer month)
+	public JasperReportBuilder generateReport(String username, Integer year, Integer month)
 			throws Exception {
 		List<UserInfo> info = userDao.getUser(username, Boolean.FALSE);
 		if (info != null && !info.isEmpty()) {
 			List<Expense> expenses = expenseDao.getExpense(username, year, month);
-
-			MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0),
-					Month.getMonth(month), year, CurrencyType.DOLLAR);
-			report.addPageNumber();
-			report.subTotalPrice();
-			report.groupBy(Column.EXPTYPE, Boolean.TRUE);
-			report.setDataSource(expenses);
-			return report.buildReport();
+			if (year != null) {
+				if (month != null) {
+					if (!expenses.isEmpty()) {
+						MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0),
+								Month.getMonth(month), year, CurrencyType.DOLLAR);
+						report.addPageNumber();
+						report.subTotalPrice();
+						report.groupBy(Column.EXPTYPE, Boolean.TRUE);
+						report.setDataSource(expenses);
+						return report.buildReport();
+					}
+				}
+			}
 		}
 		return null;
 	}

@@ -1,20 +1,30 @@
 package com.slabs.expense.tracker.webservices;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.service.ReportingService;
+import com.slabs.expense.tracker.util.MarkerEngine;
 import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 import com.slabs.expense.tracker.webservices.response.ContentType;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
@@ -46,7 +56,7 @@ public class ReportingWebService {
 	 * @throws ExpenseTrackerException
 	 *             throws {@link ExpenseTrackerException}
 	 */
-	@Path("report/monthly")
+	@Path("reports")
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -54,15 +64,46 @@ public class ReportingWebService {
 			@QueryParam("year") Integer year, @QueryParam("month") Integer month)
 			throws ExpenseTrackerException {
 		try {
+
+			String monthName = null;
+
+			if (year == null) {
+				throw new WebServiceException("Year is a required parameter",
+						ResponseStatus.BAD_REQUEST);
+			}
+
+			if (month != null) {
+				monthName = Month.getMonth(month).getName();
+			}
+
 			ReportingService service = ServiceFactory.getInstance()
 					.getService(Services.REPORTING_SERVICE, ReportingService.class);
-			JasperReportBuilder report = service.monthlyReport(username, year, month);
-			String fileName = username + "_" + month + "_" + year + ".pdf";
-			return ResponseGenerator.getSuccessResponse(new StreamingResponse(report), fileName,
-					ContentType.APPLICATION_PDF_TYPE);
+			JasperReportBuilder report = service.generateReport(username, year, month);
+			if (report != null) {
+				return ResponseGenerator.getSuccessResponse(new StreamingResponse(report),
+						getFileName(username, monthName, year), ContentType.APPLICATION_PDF_TYPE);
+			} else {
+				Map<String, String> model = new HashMap<String, String>();
+				model.put("response", "Report not generated due to insufficient data.");
+				return ResponseGenerator.getSuccessResponse(
+						new StreamingResponse(
+								MarkerEngine.process(Constants.RESPONSE_TEMPLATE, model)),
+						"Response.html", ContentType.TEXT_HTML_TYPE);
+			}
+		} catch (WebServiceException e) {
+			throw e;
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+
+		}
+	}
+
+	private String getFileName(String username, String month, Integer year) {
+		if (month != null) {
+			return username + "_" + month + "_" + year + ".pdf";
+		} else {
+			return username + "_" + year + ".pdf";
 		}
 	}
 

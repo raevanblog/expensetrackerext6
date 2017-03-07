@@ -1,6 +1,5 @@
-Ext.define('expensetracker.store.ExpenseSheet', {
-	extend : 'Ext.data.Store',
-	alias : 'store.expensedock',
+Ext.define('expensetracker.store.Thumbnail', {
+	extend  : 'Ext.data.Store',	
 	fields : [ {
 		name : 'title',
 		type : 'string'

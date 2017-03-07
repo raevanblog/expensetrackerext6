@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.webservices.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.StreamingOutput;
 
 import com.slabs.expense.tracker.webservice.response.Operation;
@@ -166,9 +167,9 @@ public class ResponseGenerator {
 	 * @return {@link javax.ws.rs.core.Response}
 	 */
 	public static javax.ws.rs.core.Response getSuccessResponse(StreamingOutput output,
-			String fileName, ContentType type) {
+			String fileName, MediaType type) {
 		return javax.ws.rs.core.Response.ok(output, type)
-				.header("content-disposition", "attachment; filename = " + fileName).build();
+				.header("content-disposition", "inline; filename = " + fileName).build();
 	}
 
 }

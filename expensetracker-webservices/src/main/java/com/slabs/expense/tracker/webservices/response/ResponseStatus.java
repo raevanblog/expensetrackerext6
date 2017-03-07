@@ -10,7 +10,7 @@ public enum ResponseStatus {
 
 	OK(200, "Successful"), BAD_REQUEST(400, "Bad Request"), UNAUTHORIZED(401,
 			"Unauthorized Access"), LOGIN_TIMEOUT(440, "Login Time Out"), FORBIDDEN(403,
-					"Forbidden"), SERVER_ERROR(500,
+					"Forbidden"), DATA_NOT_FOUND(404, "No data found"), SERVER_ERROR(500,
 							"Server Error"), SERVICE_UNAVAILABLE(503, "Service Unavailable");
 
 	private int statusCode;

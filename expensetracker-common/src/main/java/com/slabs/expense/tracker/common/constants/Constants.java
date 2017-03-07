@@ -18,6 +18,8 @@ public class Constants {
 
 	public static final String WELCOME_TEMPLATE = "welcome.ftl";
 
+	public static final String RESPONSE_TEMPLATE = "response.ftl";
+
 	public static final String REG_SUCCESS_TEMPLATE = "registration_success.ftl";
 
 	public static final String EMAIL_ACTIVATION_SUBJECT = "Activate your Account";

@@ -10,7 +10,6 @@ import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
-
 /**
  * {@link WebServiceException} is a custom exception class implementing
  * {@link ExceptionMapper} of Jersey implementation.
