@@ -2,12 +2,10 @@ Ext.define('expensetracker.view.report.ReportWindow', {
 	extend : 'Ext.window.Window',
 	xtype : 'reportwindow',
 	alias : 'view.reportwindow',
-	title : 'Expense Report',
-	viewModel : 'reportwindowmodel',
+	title : 'Expense Report',	
 	iconCls : 'x-fa fa-file-pdf-o',	
 	constructor :function(config) {
-		var me = this;
-		
+		var me = this;			
 		config.items = [{
 		xtype : 'component',
 			autoEl: {

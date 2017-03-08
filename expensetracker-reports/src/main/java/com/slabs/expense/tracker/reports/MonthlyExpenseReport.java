@@ -38,13 +38,13 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency)
 			throws InstantiationException, IllegalAccessException {
 		super(userInfo, month, year, currency);
-		addColumns();
+		addColumns();		
 	}
 
 	@Override
 	public JasperReportBuilder buildReport() throws DRException {
 		addTitle();
-		addColumnsToReport();
+		addColumnsToReport();		
 		return report;
 	}
 
@@ -61,25 +61,24 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
 	@SuppressWarnings("rawtypes")
 	private void addColumns() {
-		StyleBuilder rightAligned = sProvider.getStyle(HorizontalTextAlignment.RIGHT);
+		StyleBuilder centerAligned = sProvider.getStyle(HorizontalTextAlignment.CENTER);		
 		report.setColumnTitleStyle(sProvider.getColumnHeader(Color.BLACK, DEFAULT_HEADER_COLOR, false));
+		report.setColumnStyle(sProvider.getBorder(centerAligned, 1.0f));
 
 		TextColumnBuilder<Integer> rowNum = cProvider.getRowNumberColumn("S.No");
-		ValueColumnBuilder expDate = cProvider.getDateColumn(Column.EXPDATE).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
+		ValueColumnBuilder expDate = cProvider.getDateColumn(Column.EXPDATE);
 		TextColumnBuilder<String> itemName = cProvider.getColumn(Column.ITEMNAME, String.class);
 		TextColumnBuilder<String> expenseType = cProvider.getColumn(Column.EXPTYPE, String.class).setFixedColumns(10);
 		TextColumnBuilder<String> expenseCategory = cProvider.getColumn(Column.CATEGORY, String.class);
-		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class).setStyle(rightAligned).setFixedColumns(5);
-		TextColumnBuilder<Double> price = cProvider.getColumn(Column.PRICE, Double.class).setStyle(rightAligned).setDataType(this.currency);
-		TextColumnBuilder<Double> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, Double.class).setStyle(rightAligned)
-				.setDataType(this.currency);
-
+		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class).setFixedColumns(5);
+		TextColumnBuilder<Double> price = cProvider.getColumn(Column.PRICE, Double.class).setDataType(this.currency);
+		TextColumnBuilder<Double> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, Double.class).setDataType(this.currency);
+					
 		addColumns(rowNum, expDate, itemName, expenseType, expenseCategory, qty, price, pricePerUnit);
 	}
-
-	private void addColumnsToReport() {
-
-		report.columns(getAllColumns());
+	
+	private void addColumnsToReport() {	
+		report.columns(getAllColumns());		
 		report.highlightDetailOddRows();
 	}
 

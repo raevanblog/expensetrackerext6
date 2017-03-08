@@ -1,7 +1,5 @@
 package com.slabs.expense.tracker.webservices;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +8,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,7 +80,7 @@ public class ReportingWebService {
 						getFileName(username, monthName, year), ContentType.APPLICATION_PDF_TYPE);
 			} else {
 				Map<String, String> model = new HashMap<String, String>();
-				model.put("response", "Report not generated due to insufficient data.");
+				model.put("response", "Report not available.");
 				return ResponseGenerator.getSuccessResponse(
 						new StreamingResponse(
 								MarkerEngine.process(Constants.RESPONSE_TEMPLATE, model)),

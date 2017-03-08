@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
@@ -64,8 +63,7 @@ public class ReportingService {
 						MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0),
 								Month.getMonth(month), year, CurrencyType.DOLLAR);
 						report.addPageNumber();
-						report.subTotalPrice();
-						report.groupBy(Column.EXPTYPE, Boolean.TRUE);
+						report.subTotalPrice();						
 						report.setDataSource(expenses);
 						return report.buildReport();
 					}

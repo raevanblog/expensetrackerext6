@@ -8,6 +8,7 @@ import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.PenBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.LineStyle;
 
 /**
  * {@link StyleProvider} provides style for the report
@@ -28,7 +29,8 @@ public class StyleProvider {
 	 * @return {@link StyleBuilder}
 	 */
 	public StyleBuilder getStyle() {
-		return getStyle(defaultFont.getFont().getFontName(), defaultFont.getFont().getFontSize(), false, false);
+		return getStyle(defaultFont.getFont().getFontName(), defaultFont.getFont().getFontSize(),
+				false, false);
 	}
 
 	/**
@@ -54,7 +56,8 @@ public class StyleProvider {
 	 * @return {@link StyleBuilder}
 	 */
 	public StyleBuilder getStyle(String fontName, Integer fontSize, boolean bold, boolean italic) {
-		return DynamicReports.stl.style().setFont(DynamicReports.stl.font(fontName, bold, italic, fontSize));
+		return DynamicReports.stl.style()
+				.setFont(DynamicReports.stl.font(fontName, bold, italic, fontSize));
 	}
 
 	/**
@@ -93,7 +96,8 @@ public class StyleProvider {
 	 *            {@link HorizontalTextAlignment}
 	 * @return
 	 */
-	public StyleBuilder getBoldStyle(String fontName, Integer fontSize, boolean italic, HorizontalTextAlignment alignment) {
+	public StyleBuilder getBoldStyle(String fontName, Integer fontSize, boolean italic,
+			HorizontalTextAlignment alignment) {
 		return getStyle(fontName, fontSize, true, italic).bold();
 	}
 
@@ -129,9 +133,11 @@ public class StyleProvider {
 	 *            {@link Boolean}
 	 * @return {@link StyleBuilder}
 	 */
-	public StyleBuilder getColumnHeader(String fontName, Integer fontSize, Color foreGroundColor, Color backGroundColor, boolean italic) {
-		return getBoldStyle(fontName, fontSize, italic, HorizontalTextAlignment.CENTER).setBackgroundColor(backGroundColor)
-				.setForegroundColor(foreGroundColor).setBorder(DynamicReports.stl.pen1Point());
+	public StyleBuilder getColumnHeader(String fontName, Integer fontSize, Color foreGroundColor,
+			Color backGroundColor, boolean italic) {
+		return getBoldStyle(fontName, fontSize, italic, HorizontalTextAlignment.CENTER)
+				.setBackgroundColor(backGroundColor).setForegroundColor(foreGroundColor)
+				.setBorder(DynamicReports.stl.pen1Point());
 	}
 
 	/**
@@ -144,8 +150,10 @@ public class StyleProvider {
 	 *            {@link Boolean}
 	 * @return {@link StyleBuilder}
 	 */
-	public StyleBuilder getColumnHeader(Color foreGroundColor, Color backGroundColor, boolean italic) {
-		return getBoldStyle(HorizontalTextAlignment.CENTER).setBackgroundColor(backGroundColor).setForegroundColor(foreGroundColor).setItalic(italic)
+	public StyleBuilder getColumnHeader(Color foreGroundColor, Color backGroundColor,
+			boolean italic) {
+		return getBoldStyle(HorizontalTextAlignment.CENTER).setBackgroundColor(backGroundColor)
+				.setForegroundColor(foreGroundColor).setItalic(italic)
 				.setBorder(DynamicReports.stl.pen1Point());
 	}
 
@@ -163,7 +171,8 @@ public class StyleProvider {
 	 *            {@link HorizontalTextAlignment}
 	 * @return {@link StyleBuilder}
 	 */
-	public StyleBuilder getTitleStyle(String fontName, Integer fontSize, boolean bold, boolean italic, HorizontalTextAlignment alignment) {
+	public StyleBuilder getTitleStyle(String fontName, Integer fontSize, boolean bold,
+			boolean italic, HorizontalTextAlignment alignment) {
 		return getStyle(fontName, fontSize, bold, italic).setHorizontalTextAlignment(alignment);
 	}
 
@@ -177,8 +186,66 @@ public class StyleProvider {
 	 *            {@link HorizontalTextAlignment}
 	 * @return {@link StyleBuilder}
 	 */
-	public StyleBuilder getTitleStyle(boolean bold, boolean italic, HorizontalTextAlignment alignment) {
-		return getStyle().setFontSize(14).setBold(bold).setItalic(italic).setHorizontalTextAlignment(alignment);
+	public StyleBuilder getTitleStyle(boolean bold, boolean italic,
+			HorizontalTextAlignment alignment) {
+		return getStyle().setFontSize(14).setBold(bold).setItalic(italic)
+				.setHorizontalTextAlignment(alignment);
+	}
+
+	/**
+	 * 
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getDefaultBorder() {
+		return getStyle().setBorder(DynamicReports.stl.pen1Point());
+	}
+
+	/**
+	 * 
+	 * @param builder
+	 *            {@link StyleBuilder}
+	 * @param penPoint
+	 *            {@link Float} - Border width
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getBorder(StyleBuilder builder, Float penPoint) {
+		return builder.setBorder(DynamicReports.stl.pen(penPoint, LineStyle.SOLID));
+	}
+
+	/**
+	 * 
+	 * @param builder
+	 *            {@link StyleBuilder}
+	 * @param penPoint
+	 *            {@link Float} - Border width
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getDottedBorder(StyleBuilder builder, Float penPoint) {
+		return builder.setBorder(DynamicReports.stl.pen(penPoint, LineStyle.DOTTED));
+	}
+
+	/**
+	 * 
+	 * @param builder
+	 *            {@link StyleBuilder}
+	 * @param penPoint
+	 *            {@link Float} - Border width
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getDashedBorder(StyleBuilder builder, Float penPoint) {
+		return builder.setBorder(DynamicReports.stl.pen(penPoint, LineStyle.DASHED));
+	}
+
+	/**
+	 * 
+	 * @param builder
+	 *            {@link StyleBuilder}
+	 * @param penPoint
+	 *            {@link Float} - Border width
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getDoubleBorder(StyleBuilder builder, Float penPoint) {
+		return builder.setBorder(DynamicReports.stl.pen(penPoint, LineStyle.DOUBLE));
 	}
 
 	/**
@@ -196,7 +263,8 @@ public class StyleProvider {
 	 * @return {@link FillerBuilder}
 	 */
 	public FillerBuilder getDefaultFillerLine(Integer height) {
-		return getFiller().setStyle(getStyle().setTopBorder(DynamicReports.stl.pen1Point())).setFixedHeight(height);
+		return getFiller().setStyle(getStyle().setTopBorder(DynamicReports.stl.pen1Point()))
+				.setFixedHeight(height);
 	}
 
 	/**

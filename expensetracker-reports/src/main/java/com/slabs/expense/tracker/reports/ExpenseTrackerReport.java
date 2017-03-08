@@ -20,6 +20,7 @@ import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.builder.grid.GridBuilders;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
@@ -45,6 +46,8 @@ public abstract class ExpenseTrackerReport {
 	protected StyleProvider sProvider = builder.getStyleProvider();
 
 	protected StyleBuilders sBuilders = builder.getStyleBuilders();
+	
+	protected GridBuilders gBuilders = builder.getGridBuilders();
 
 	protected JasperReportBuilder report;
 
@@ -126,7 +129,7 @@ public abstract class ExpenseTrackerReport {
 	 */
 	@SuppressWarnings("rawtypes")
 	public void addColumns(ValueColumnBuilder... columns) {
-		for (ValueColumnBuilder c : columns) {
+		for (ValueColumnBuilder c : columns) {			
 			this.columns.add(c);
 		}
 	}

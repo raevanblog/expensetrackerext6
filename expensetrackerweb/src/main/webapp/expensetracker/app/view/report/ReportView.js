@@ -2,7 +2,7 @@ Ext.define('expensetracker.view.report.ReportView', {
 	extend : 'Ext.container.Container',
 	xtype : 'reportview',
 	alias : 'view.reportview',
-	requires : [ 'expensetracker.view.report.ReportDock', 'expensetracker.view.report.ReportViewController', 'expensetracker.view.report.ReportViewModel'],
+	requires : [ 'expensetracker.view.report.ReportDock', 'expensetracker.view.report.ReportWindow', 'expensetracker.view.report.ReportViewController', 'expensetracker.view.report.ReportViewModel'],
 	controller : 'reportviewcontroller',
 	viewModel : 'reportviewmodel',
 	layout : 'responsivecolumn',
