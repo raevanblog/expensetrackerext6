@@ -150,6 +150,7 @@
 			<element ref="et:username" />
 			<element name="category" type="string" />			
 			<element name="qty" type="double" minOccurs="0" />
+			<element name="qtyAvailable" type="double" minOccurs="0" />
 			<element name="yr" type="int" minOccurs="0" />
 			<element name="mth" type="int" minOccurs="0" />			
 		</sequence>
