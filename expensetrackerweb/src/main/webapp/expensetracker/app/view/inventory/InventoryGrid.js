@@ -90,7 +90,7 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 	},{
 		xtype : 'numbercolumn',
 		text : 'Available Units',
-		dataIndex : 'qty',
+		dataIndex : 'qtyAvailable',
 		align : 'center',
 		format : '0.00',
 		editor : {

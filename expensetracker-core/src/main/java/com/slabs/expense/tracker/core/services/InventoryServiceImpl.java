@@ -42,6 +42,7 @@ public class InventoryServiceImpl implements InventoryService {
 
 				expenseList.add(expense);
 			}
+			record.setQty(record.getQtyAvailable());
 		}
 
 		if (expenseList != null) {

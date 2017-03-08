@@ -141,13 +141,12 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 		var model = new expensetracker.model.Inventory({
 			itemName : '',
 			expId : null,
-			qty : 0,
+			qtyAvailable : 0,
 			category : '',
 			mth : viewmodel.get('month'),
 			yr : viewmodel.get('year'),
 			username : expensetracker.util.Session.getUsername()
-		});
-		console.log(model);
+		});		
 		store.insert(0, model);
 		expensetracker.util.Grid.refresh(grid);
 	}
