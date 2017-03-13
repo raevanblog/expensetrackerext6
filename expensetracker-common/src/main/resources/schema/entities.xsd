@@ -5,6 +5,7 @@
 
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
 	<element name="UserInfo" type="et:UserInfo" />
+	<element name="UserSettings" type="et:UserSettings" />
 	<element name="Expense" type="et:Expense" />
 	<element name="Inventory" type="et:Inventory" />
 	<element name="ExpenseType" type="et:ExpenseType" />
@@ -79,6 +80,47 @@
 			<element name="isFtLogin" type="string" default="Y" />
 			<element name="isLocked" type="string" default="N" />
 			<element name="activationKey" type="string" />
+			<element name="settings" type="et:UserSettings" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="UserSettings">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: USER_SETTINGS
+				UserSettings will hold the data for table USER_SETTINGS
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element ref="et:username" />
+			<element name="currency" type="et:Currency" minOccurs="0" />
+			<element name="rcvryemail" type="string" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Currency">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: CURRENCY
+				Currency will hold the data for table CURRENCY
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="id" type="long" />
+			<element name="currsymb" type="string" />
+			<element name="currtxt" type="string" />
 		</sequence>
 	</complexType>
 
@@ -129,7 +171,7 @@
 			<element name="inventoryInd" type="string" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="Inventory">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
@@ -145,13 +187,13 @@
 		</annotation>
 		<sequence>
 			<element name="id" type="long" />
-			<element name="expId" type="long" minOccurs="0"/>
-			<element name="itemName" type="string" />			
+			<element name="expId" type="long" minOccurs="0" />
+			<element name="itemName" type="string" />
 			<element ref="et:username" />
-			<element name="category" type="string" />			
-			<element name="qty" type="double" minOccurs="0" />			
+			<element name="category" type="string" />
+			<element name="qty" type="double" minOccurs="0" />
 			<element name="yr" type="int" minOccurs="0" />
-			<element name="mth" type="int" minOccurs="0" />			
+			<element name="mth" type="int" minOccurs="0" />
 		</sequence>
 	</complexType>
 
@@ -255,7 +297,7 @@
 			<element name="email" type="string" />
 			<element name="senderfname" type="string" />
 			<element name="senderlname" type="string" />
-			<element name="senderpic" type="string" />			
+			<element name="senderpic" type="string" />
 			<element name="isNew" type="string" default="Y" />
 		</sequence>
 	</complexType>

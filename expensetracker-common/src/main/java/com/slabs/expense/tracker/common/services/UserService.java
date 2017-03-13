@@ -6,7 +6,8 @@ import com.slabs.expense.tracker.common.database.entity.UserInfo;
 
 public interface UserService {
 
-	public List<UserInfo> selectUser(String username, boolean includePassword) throws Exception;
+	public List<UserInfo> selectUser(String username, boolean includeSettings,
+			boolean includePassword) throws Exception;
 
 	public Boolean isUserNameAvailable(String username) throws Exception;
 

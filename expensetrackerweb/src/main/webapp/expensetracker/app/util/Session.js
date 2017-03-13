@@ -2,7 +2,11 @@ Ext.define('expensetracker.util.Session', {
 	singleton : true,
 	requires : [ 'expensetracker.util.Storage' ],
 	setUser : function(user) {
+		var me = this;
 		expensetracker.util.Storage.put('user', user);
+		if(user.settings !== undefined && user.settings !== null) {
+			me.setCurrency(user.settings.currency);
+		}
 	},
 	getUser : function() {
 		return expensetracker.util.Storage.get('user');
@@ -25,9 +29,17 @@ Ext.define('expensetracker.util.Session', {
 	getProfilePicture : function() {
 		return this.getUser().profilePic;
 	},
+	setPreferences : function(settings) {
+		expensetracker.util.Storage.put('preferences', settings);
+	},
+	getPreferences : function() {
+		return expensetracker.util.Storage.get('preferences');
+	},
 	setCurrency : function(currency) {
-		expensetracker.util.Storage.put('currency', currency.name);
-		expensetracker.util.Storage.put('currencysymbol', currency.symbol);
+		if(currency !== undefined || currency !== null) {
+			expensetracker.util.Storage.put('currency', currency.currtxt);
+			expensetracker.util.Storage.put('currencysymbol', currency.currsymb);
+		}
 	},
 	getCurrencyName : function() {
 		return expensetracker.util.Storage.get('currency');

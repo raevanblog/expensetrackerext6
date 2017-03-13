@@ -47,7 +47,7 @@ public class AccessController {
 			Map<String, String> parameters = JSONUtil
 					.getMapFromInputStream(request.getInputStream());
 			String[] credentials = Base64Encoder.decode(parameters.get("credential"), ":");
-			List<UserInfo> users = service.selectUser(credentials[0], Boolean.TRUE);
+			List<UserInfo> users = service.selectUser(credentials[0], Boolean.TRUE, Boolean.TRUE);
 			if (users != null && !users.isEmpty()) {
 				UserInfo info = users.get(0);
 				if (info.getPassword().equals(credentials[1])) {
@@ -112,7 +112,7 @@ public class AccessController {
 				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 						UserService.class);
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
-				List<UserInfo> list = service.selectUser(user.getUsername(), Boolean.FALSE);
+				List<UserInfo> list = service.selectUser(user.getUsername(), Boolean.TRUE, Boolean.FALSE);
 				if (list != null && !list.isEmpty()) {
 					user = list.get(0);
 					session.removeAttribute(WebConstants.LOGGED_IN_USER);
@@ -214,7 +214,7 @@ public class AccessController {
 			String activationKey = map.get("activationkey");
 			String username = map.get("username");
 
-			List<UserInfo> info = service.selectUser(username, false);
+			List<UserInfo> info = service.selectUser(username, Boolean.FALSE, Boolean.FALSE);
 
 			if (info != null && !info.isEmpty()) {
 				UserInfo user = info.get(0);
@@ -267,7 +267,7 @@ public class AccessController {
 
 			String username = map.get("username");
 
-			List<UserInfo> info = service.selectUser(username, false);
+			List<UserInfo> info = service.selectUser(username, Boolean.FALSE, Boolean.FALSE);
 
 			if (info != null && !info.isEmpty()) {
 				UserInfo user = info.get(0);

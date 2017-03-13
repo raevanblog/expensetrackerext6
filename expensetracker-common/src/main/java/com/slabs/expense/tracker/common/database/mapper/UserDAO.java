@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.common.database.mapper;
 import java.util.List;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.UserSettings;
 
 /**
  * {@link UserDAO} is an interface providing mapper methods for executing query
@@ -14,6 +15,8 @@ import com.slabs.expense.tracker.common.database.entity.UserInfo;
 public interface UserDAO {
 
 	public List<UserInfo> getUser(String username, boolean includePassword);
+
+	public UserSettings getUserSettings(String username);
 
 	public Integer createUser(UserInfo record);
 

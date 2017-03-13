@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.UserSettings;
 import com.slabs.expense.tracker.common.database.mapper.UserDAO;
 import com.slabs.expense.tracker.common.services.UserService;
 
@@ -37,8 +38,16 @@ public class UserServiceImpl implements UserService {
 	 *             throws {@link Exception}
 	 */
 	@Override
-	public List<UserInfo> selectUser(String username, boolean includePassword) throws Exception {
-		return dao.getUser(username, includePassword);
+	public List<UserInfo> selectUser(String username, boolean includeSettings,
+			boolean includePassword) throws Exception {
+		List<UserInfo> users = dao.getUser(username, includePassword);
+		if (includeSettings) {
+			for (UserInfo user : users) {
+				UserSettings settings = dao.getUserSettings(user.getUsername());
+				user.setSettings(settings);
+			}
+		}
+		return users;
 	}
 
 	/**

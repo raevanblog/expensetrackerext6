@@ -21,7 +21,17 @@
 		<result column="ISVERIFIED" property="isVerified" />
 		<result column="ACTIVATIONKEY" property="activationKey" />
 	</resultMap>
-	
+
+	<resultMap id="Settings" type="com.slabs.expense.tracker.common.database.entity.UserSettings">
+		<result column="USERNAME" property="username" />
+		<result column="RCVRYEMAIL" property="rcvryemail" />
+		<association property="currency" javaType="com.slabs.expense.tracker.common.database.entity.Currency">
+			<id column="ID" property="id" />
+			<result column="CURRSYMB" property="currsymb" />
+			<result column="CURRTXT" property="currtxt" />
+		</association>
+	</resultMap>
+
 	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.database.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
 		values(
@@ -97,6 +107,12 @@
 		</if>
 	</select>
 
+	<select id="getUserSettings" resultMap="Settings">
+		select s.*, c.* from EXPENSETRACKER.USER_SETTINGS s, EXPENSETRACKER.CURRENCY c where s.username=#{param1}
+		and
+		s.currency = c.id
+	</select>
+
 	<delete id="deleteUser">
 		delete from EXPENSETRACKER.USERINFO where username=#{username}
 	</delete>
@@ -104,5 +120,5 @@
 	<update id="setActivationKey">
 		update EXPENSETRACKER.USERINFO set activationKey=#{param2} where username=#{param1}
 	</update>
-	
+
 </mapper>

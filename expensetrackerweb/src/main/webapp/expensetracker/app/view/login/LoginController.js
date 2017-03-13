@@ -35,11 +35,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 					}
 					var response = Ext.decode(action.response.responseText);
 					if (response.user !== null) {
-						expensetracker.util.Session.setUser(response.user);
-						expensetracker.util.Session.setCurrency({
-							name : 'IND',
-							symbol : '₹'
-						});
+						expensetracker.util.Session.setUser(response.user);						
 						expensetracker.util.Store.loadStaticStore();
 						expensetracker.util.Store.loadStore(Ext.getStore('ExpenseCategory'), {
 							username : expensetracker.util.Session.getUsername()

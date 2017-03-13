@@ -28,7 +28,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public Integer createInventory(List<Inventory> records) throws Exception {
 		int noOfRecords = 0;
-		List<Expense> expenseList = null;		
+		List<Expense> expenseList = null;
 
 		for (Inventory record : records) {
 			if (null != record.getExpId()) {
@@ -42,7 +42,6 @@ public class InventoryServiceImpl implements InventoryService {
 
 				expenseList.add(expense);
 			}
-			record.setQty(record.getQtyAvailable());
 		}
 
 		if (expenseList != null) {
