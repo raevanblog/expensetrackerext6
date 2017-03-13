@@ -3,6 +3,7 @@ Ext.define('expensetracker.view.login.ForgotPassword', {
 	xtype : 'forgotpwdwindow',
 	alias : 'view.forgotpwdwindow',
 	title : 'Forgot Password?',
+	closeToolText : 'Close',
 	layout : 'fit',
 	items : [ {
 		xtype : 'form',

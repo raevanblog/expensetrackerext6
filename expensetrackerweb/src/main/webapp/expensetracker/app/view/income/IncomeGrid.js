@@ -25,7 +25,8 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 	} ],
 	columns : [ {
 		xtype : 'rownumberer',
-		width : 50
+		text : 'S.No',
+		width : 75
 	}, {
 		text : 'Income Type',
 		dataIndex : 'incometype',
@@ -34,10 +35,12 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 	}, {
 		xtype : 'numbercolumn',
 		align : 'center',
-		text : 'Income',
-		format : '0.00',
+		text : 'Income',		
 		flex : 1,
 		dataIndex : 'income',
+		renderer : function(value) {
+			return Ext.util.Format.currency(value, expensetracker.util.Session.getCurrencySymbol() + ' ', 2);
+		},
 		editor : {
 			xtype : 'numberfield',
 			hideTrigger : true,
@@ -46,7 +49,7 @@ Ext.define('expensetracker.view.income.IncomeGrid', {
 		},
 		summaryType : 'sum',
 		summaryRenderer : function(value, summaryData, dataIndex) {
-			return 'Total  :' + Ext.util.Format.currency(value, '₹ ', 2);
+			return 'Total  :' + Ext.util.Format.currency(value, expensetracker.util.Session.getCurrencySymbol() + ' ', 2);
 		},
 		flex : 1
 	} ]

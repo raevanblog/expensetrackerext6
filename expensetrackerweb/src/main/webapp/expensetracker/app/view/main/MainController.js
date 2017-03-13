@@ -217,6 +217,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var msgWindow = Ext.create('Ext.window.Window', {
 			modal : true,
 			title : 'Message',
+			closeToolText : 'Close',
 			height : Ext.Element.getViewportHeight(),
 			width : Ext.Element.getViewportWidth(),
 			layout : {

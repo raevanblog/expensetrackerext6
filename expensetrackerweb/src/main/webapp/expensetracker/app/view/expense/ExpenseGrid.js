@@ -72,7 +72,8 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	} ],
 	columns : [ {
 		xtype : 'rownumberer',
-		width : 50
+		text : 'S.No',
+		width : 75
 	}, {
 		xtype : 'widgetcolumn',
 		editor: {}, 
@@ -85,6 +86,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	}, {
 		text : 'Item Name',
 		dataIndex : 'itemName',
+		align : 'left',
 		editor : {
 			xtype : 'combobox',
 			allowBlank : false,
@@ -101,6 +103,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 150
 	}, {
 		text : 'Category',
+		align : 'left',
 		editor : {
 			xtype : 'combobox',
 			displayField : 'category',
@@ -117,6 +120,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 150
 	}, {
 		text : 'Expense Type',
+		align : 'left',
 		editor : {
 			xtype : 'combobox',
 			displayField : 'exptype',
@@ -133,6 +137,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 150		
 	}, {
 		xtype : 'datecolumn',
+		align : 'left',
 		text : 'Expense Date',
 		format : 'M d,Y',
 		editor : {
@@ -166,6 +171,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 100
 	}, {
 		xtype : 'numbercolumn',
+		align : 'center',
 		text : 'Price',
 		format : '0.00',
 		currencySymbol : expensetracker.util.Session.getCurrencySymbol(),
@@ -193,7 +199,10 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		align : 'center',
 		format : '0.00',
 		dataIndex : 'pricePerUnit',
-		width : 100
+		renderer : function(value) {
+			return Ext.util.Format.currency(value, expensetracker.util.Session.getCurrencySymbol() + ' ', 2);
+		},
+		width : 150
 	}, {
 		xtype : 'actioncolumn',
 		align : 'center',

@@ -2,6 +2,7 @@ Ext.define('expensetracker.view.message.Compose', {
 	extend : 'Ext.window.Window',
 	xtype : 'emailcompose',
 	alias : 'view.emailcompose',
+	closeToolText : 'Close',
 	title : 'New Message',
 	autoShow : true,
 	layout : {

@@ -5,6 +5,7 @@ Ext.define('expensetracker.view.income.IncomeWindow', {
 	controller : 'incomecontroller',
 	iconCls : 'x-fa fa-file-text-o',
 	viewModel : 'incomemodel',
+	closeToolText : 'Close',
 	requires : [ 'expensetracker.view.income.IncomeGrid', 'expensetracker.view.income.IncomeWindowController', 'expensetracker.view.income.IncomeWindowModel' ],
 	bind : {
 		title : '{title}'

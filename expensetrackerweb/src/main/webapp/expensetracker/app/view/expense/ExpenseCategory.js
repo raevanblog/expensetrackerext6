@@ -18,9 +18,11 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 	},
 	columns : [ {
 		xtype : 'rownumberer',
-		width : 50
+		text : 'S.No',
+		width : 75
 	}, {
 		text : 'Category',
+		align : 'center',
 		dataIndex : 'category',
 		editor : {
 			xtype : 'textfield',
@@ -30,6 +32,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		width : 200
 	}, {
 		text : 'Description',
+		align : 'left',
 		dataIndex : 'description',
 		editor : {
 			xtype : 'textfield',

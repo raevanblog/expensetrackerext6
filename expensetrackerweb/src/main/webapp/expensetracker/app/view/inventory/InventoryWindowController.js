@@ -141,7 +141,7 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 		var model = new expensetracker.model.Inventory({
 			itemName : '',
 			expId : null,
-			qtyAvailable : 0,
+			qty : 0,
 			category : '',
 			mth : viewmodel.get('month'),
 			yr : viewmodel.get('year'),

@@ -2,7 +2,8 @@ Ext.define('expensetracker.view.report.ReportWindow', {
 	extend : 'Ext.window.Window',
 	xtype : 'reportwindow',
 	alias : 'view.reportwindow',
-	title : 'Expense Report',	
+	title : 'Expense Report',
+	closeToolText : 'Close',
 	iconCls : 'x-fa fa-file-pdf-o',	
 	constructor :function(config) {
 		var me = this;			

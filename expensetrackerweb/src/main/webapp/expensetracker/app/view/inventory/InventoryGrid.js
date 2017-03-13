@@ -51,7 +51,8 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 	} ],
 	columns : [{
 		xtype : 'rownumberer',
-		width : 50
+		text : 'S.No',
+		width : 75
 	}, {
 		text : 'Item Name',
 		dataIndex : 'itemName',
@@ -90,7 +91,7 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 	},{
 		xtype : 'numbercolumn',
 		text : 'Available Units',
-		dataIndex : 'qtyAvailable',
+		dataIndex : 'qty',
 		align : 'center',
 		format : '0.00',
 		editor : {

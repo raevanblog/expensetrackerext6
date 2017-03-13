@@ -3,6 +3,7 @@ Ext.define('expensetracker.view.profile.User', {
 	alias : 'view.profile',
 	requires : [ 'expensetracker.view.profile.UserController', 'Ext.form.field.VTypes' ],
 	xtype : 'profile',
+	closeToolText : 'Close',
 	resizable : false,
 	scrollable : 'y',
 	iconCls : 'x-fa fa-user',

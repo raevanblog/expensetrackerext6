@@ -1,5 +1,6 @@
 Ext.define('expensetracker.view.message.ContactUs', {
 	extend : 'Ext.window.Window',
+	closeToolText : 'Close',
 	layout : 'fit',
 	items : [ {
 		xtype : 'form',

@@ -5,6 +5,7 @@ Ext.define('expensetracker.view.profile.ChangePassword', {
 	title : 'Change Password',
 	iconCls : 'x-fa fa-lock',
 	bodyPadding : '75 0 0 0',
+	closeToolText : 'Close',
 	requires : [ 'expensetracker.view.profile.PasswordController' ],
 	controller : 'password',
 	layout : {

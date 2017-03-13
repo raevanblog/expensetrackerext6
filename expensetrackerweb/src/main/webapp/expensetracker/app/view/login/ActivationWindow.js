@@ -3,6 +3,7 @@ Ext.define('expensetracker.view.login.ActivationWindow', {
 	xtype : 'activationwindow',
 	alias : 'view.activationwindow',
 	title : 'Send Activation Mail',
+	closeToolText : 'Close',
 	layout : 'fit',
 	items : [ {
 		xtype : 'form',
