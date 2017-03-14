@@ -15,13 +15,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<dependencies>
-
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.9.1.0</version>
-		</dependency>
+	<dependencies>		
 		<dependency>
 			<groupId>com.slabs</groupId>
 			<artifactId>expensetracker-db-connector</artifactId>

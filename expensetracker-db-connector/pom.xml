@@ -18,6 +18,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>10.9.1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.slabs</groupId>
 			<artifactId>expensetracker-common</artifactId>
 			<version>${project.version}</version>
