@@ -89,9 +89,7 @@ Ext.define('expensetracker.view.main.MainController', {
 		var me = this;
 		var model = me.getView().getViewModel();
 		var name = me.lookup('tbUserName');
-		var profileImg = me.lookup('tbProfileImage');
-		model.set('currency', expensetracker.util.Session.getCurrencyName());
-		model.set('currencySymbol', expensetracker.util.Session.getCurrencySymbol());
+		var profileImg = me.lookup('tbProfileImage');		
 		me.updateProfile();
 		me.setCurrentView('expensedashboard');
 	},
@@ -161,16 +159,19 @@ Ext.define('expensetracker.view.main.MainController', {
 		});
 		profileWindow.show();
 	},
-	onChangePwd : function(chgPwdBtn) {
-		var me = this;
-		var model = me.getView().getViewModel();
-		var mainCard = me.lookup('mainCard');
+	onChangePwd : function(chgPwdBtn) {			
 		var chgPwdWindow = Ext.create('expensetracker.view.profile.ChangePassword', {
 			modal : true,			
 			height : Ext.Element.getViewportHeight(),
 			width : Ext.Element.getViewportWidth()
 		});
 		chgPwdWindow.show();
+	},
+	onChangeSettings : function(chgSettingsBtn) {
+		var settingsWindow = Ext.create('expensetracker.view.main.Settings', {
+			modal : true			
+		});
+		settingsWindow.show();
 	},
 	onSignOut : function(signOutBtn) {
 		var me = this;

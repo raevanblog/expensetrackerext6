@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.UserSettings;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.AdminService;
 import com.slabs.expense.tracker.common.services.EmailService;
@@ -215,6 +216,75 @@ public class UserWebService {
 					UserServiceImpl.class);
 			return ResponseGenerator.getSuccessResponse(service.isUserNameAvailable(username),
 					Operation.CHECK);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	/**
+	 * This method will retrieve the User Settings
+	 * 
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
+	 */
+	@Path("user/settings")
+	@GET
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getUserSettings(@QueryParam("username") String username)
+			throws ExpenseTrackerException {
+		try {
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			return ResponseGenerator.getSuccessResponse(service.getUserSettings(username),
+					Operation.SELECT);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	/**
+	 * This method will create user settings
+	 * 
+	 * 
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
+	 */
+	@Path("user/settings")
+	@POST
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response createUserSettings(UserSettings record) throws ExpenseTrackerException {
+		try {
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);		
+			return ResponseGenerator.getSuccessResponse(service.createUserSettings(record),
+					Operation.SELECT);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	/**
+	 * This method will create user settings
+	 * 
+	 * 
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
+	 */
+	@Path("user/settings")
+	@PUT
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response updateUserSettings(UserSettings record) throws ExpenseTrackerException {
+		try {
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+			return ResponseGenerator.getSuccessResponse(service.updateUserSettings(record),
+					Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);

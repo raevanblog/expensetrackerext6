@@ -15,8 +15,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.constants.Constants;
+import com.slabs.expense.tracker.common.database.entity.UserSettings;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.Services;
+import com.slabs.expense.tracker.common.services.UserService;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.service.ReportingService;
@@ -74,7 +76,15 @@ public class ReportingWebService {
 
 			ReportingService service = ServiceFactory.getInstance()
 					.getService(Services.REPORTING_SERVICE, ReportingService.class);
-			JasperReportBuilder report = service.generateReport(username, year, month);
+
+			UserService userService = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+					UserService.class);
+
+			UserSettings settings = userService.getUserSettings(username);
+
+			JasperReportBuilder report = service.generateReport(username, year, month,
+					settings.getCurrency().getCurrtxt());
+
 			if (report != null) {
 				return ResponseGenerator.getSuccessResponse(new StreamingResponse(report),
 						getFileName(username, monthName, year), ContentType.APPLICATION_PDF_TYPE);

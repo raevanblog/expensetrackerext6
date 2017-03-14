@@ -5,7 +5,6 @@ import java.util.List;
 import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
-import com.slabs.expense.tracker.common.database.entity.ExpenseType;
 import com.slabs.expense.tracker.common.database.entity.Graph;
 
 /**
@@ -44,13 +43,5 @@ public interface ExpenseDAO {
 	public List<ExpenseCategory> retrieveExpenseCategory(String username) throws Exception;
 
 	public Integer deleteExpenseCategory(ExpenseCategory record);
-
-	public List<ExpenseType> getExpenseTypes();
-
-	public Integer insertExpenseType(List<ExpenseType> records);
-
-	public Integer updateExpenseType(ExpenseType record);
-
-	public Integer deleteExpenseType(Integer id);
-
+	
 }

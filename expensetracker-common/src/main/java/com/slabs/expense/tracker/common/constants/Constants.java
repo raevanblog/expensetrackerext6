@@ -26,4 +26,12 @@ public class Constants {
 
 	public static final String EMAIL_ACTIVATION_SUCCESS_SUBJECT = "Account Activated";
 
+	public static final String INR = "INR";
+
+	public static final String INR_SYMB = "₹";
+
+	public static final String USD = "USD";
+
+	public static final String USD_SYMB = "$";
+
 }

@@ -16,7 +16,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		Class.forName("org.apache.derby.jdbc.ClientDriver");
-		Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/EXPENSETRACKER", "expensetracker", "expensetracker");
+		Connection connection = DriverManager.getConnection(
+				"jdbc:derby://localhost:1527/EXPENSETRACKER", "expensetracker", "expensetracker");
 
 		UserInfo userInfo = new UserInfo();
 		userInfo.setFirstName("Shyam");
@@ -24,8 +25,11 @@ public class Main {
 		userInfo.setMobile("9894362480");
 		userInfo.setEmail("shyamcse07@gmail.com");
 
-		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.getMonth(9), 2016, CurrencyType.RUPEES);
-		report.setDataSource("select * from EXPENSETRACKER.EXPENSE where username='shyamcse07' order by CATEGORY ASC", connection);
+		MonthlyExpenseReport report = new MonthlyExpenseReport(userInfo, Month.getMonth(9), 2016,
+				CurrencyType.INR);
+		report.setDataSource(
+				"select * from EXPENSETRACKER.EXPENSE where username='shyamcse07' order by CATEGORY ASC",
+				connection);
 		report.groupBy(Column.CATEGORY, true);
 		report.subTotalPrice();
 		JasperReportBuilder rep = report.buildReport();

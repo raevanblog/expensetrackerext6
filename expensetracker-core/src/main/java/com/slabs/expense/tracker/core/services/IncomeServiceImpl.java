@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.database.entity.Income;
-import com.slabs.expense.tracker.common.database.entity.IncomeType;
 import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
 import com.slabs.expense.tracker.common.services.IncomeService;
 
@@ -99,18 +98,7 @@ public class IncomeServiceImpl implements IncomeService {
 		}
 		return list;
 	}
-
-	/**
-	 * 
-	 * @return {@link Income} - List of records
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	@Override
-	public List<IncomeType> selectIncomeType() throws Exception {
-		return mapper.getIncomeType();
-	}
-
+	
 	/**
 	 * 
 	 * @param records

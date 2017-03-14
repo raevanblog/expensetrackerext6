@@ -141,28 +141,5 @@ public class IncomeWebService {
 		}
 
 	}
-
-	/**
-	 * This method will return a list of income type in the
-	 * {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * 
-	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws WebServiceException
-	 *             throws {@link WebServiceException}
-	 */
-	@Path("incometype/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getIncomeType() throws ExpenseTrackerException {
-		try {
-			IncomeService service = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE,
-					IncomeService.class);
-			return ResponseGenerator.getSuccessResponse(service.selectIncomeType(),
-					Operation.SELECT);
-		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
-		}
-	}
-
+	
 }

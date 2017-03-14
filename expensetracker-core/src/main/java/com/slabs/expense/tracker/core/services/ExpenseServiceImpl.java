@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.Expense;
-import com.slabs.expense.tracker.common.database.entity.ExpenseType;
 import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
 import com.slabs.expense.tracker.common.services.ExpenseService;
@@ -205,58 +204,5 @@ public class ExpenseServiceImpl implements ExpenseService {
 	public List<Dictionary> selectExpenseNames() throws Exception {
 		return mapper.selectExpenseNames();
 	}
-
-	/**
-	 * 
-	 * @return {@link ExpenseType} - List of records from EXPENSETYPE table
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	@Override
-	public List<ExpenseType> selectExpenseType() throws Exception {
-		return mapper.getExpenseTypes();
-	}
-
-	/**
-	 * 
-	 * @param records
-	 *            {@link ExpenseType} - List of records to UPDATE.
-	 * @return {@link Integer} - No of records updated.
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	@Override
-	public Integer updateExpenseType(List<ExpenseType> records) throws Exception {
-		int noOfRecords = 0;
-		for (ExpenseType record : records) {
-			noOfRecords = noOfRecords + mapper.updateExpenseType(record);
-		}
-		return noOfRecords;
-	}
-
-	/**
-	 * 
-	 * @param records
-	 *            {@link ExpenseType} - List of records to INSERT.
-	 * @return {@link Integer} - No of records inserted.
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	@Override
-	public Integer createExpenseType(List<ExpenseType> records) throws Exception {
-		return mapper.insertExpenseType(records);
-	}
-
-	/**
-	 * 
-	 * @param id
-	 *            {@link Integer} - Record id for deletion
-	 * @return {@link Integer} - No of records deleted
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	@Override
-	public Integer deleteExpenseType(Integer id) throws Exception {
-		return mapper.deleteExpenseType(id);
-	}
+	
 }

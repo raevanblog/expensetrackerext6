@@ -14,9 +14,7 @@ import com.slabs.expense.tracker.common.database.entity.UserSettings;
  */
 public interface UserDAO {
 
-	public List<UserInfo> getUser(String username, boolean includePassword);
-
-	public UserSettings getUserSettings(String username);
+	public List<UserInfo> getUser(String username, boolean includePassword);	
 
 	public Integer createUser(UserInfo record);
 
@@ -29,5 +27,11 @@ public interface UserDAO {
 	public Integer setActivationKey(String username, String activationKey);
 
 	public Integer deleteUserFeature(String username);
+
+	public UserSettings getUserSettings(String username);
+
+	public Integer createUserSettings(UserSettings record);
+
+	public Integer updateUserSettings(UserSettings record);
 
 }

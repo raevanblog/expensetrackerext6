@@ -1,5 +1,7 @@
 package com.slabs.expense.tracker.reports.column.data.type;
 
+import com.slabs.expense.tracker.common.constants.Constants;
+
 /**
  * {@link CurrencyType} is an {@link Enum} for curreny types
  * 
@@ -8,7 +10,7 @@ package com.slabs.expense.tracker.reports.column.data.type;
  */
 public enum CurrencyType {
 
-	DOLLAR(Dollar.class), RUPEES(Rupee.class);
+	USD(Dollar.class), INR(Rupee.class);
 
 	private Class<?> className;
 
@@ -18,6 +20,15 @@ public enum CurrencyType {
 
 	public Class<?> getTypeClass() {
 		return this.className;
+	}
+
+	public static CurrencyType getCurrency(String currencyName) {
+		if (Constants.INR.equals(currencyName)) {
+			return CurrencyType.INR;
+		} else if (Constants.USD.equals(currencyName)) {
+			return CurrencyType.USD;
+		}
+		return null;
 	}
 
 }

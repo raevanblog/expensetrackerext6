@@ -5,8 +5,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		controller : {
 			'*' : {
 				updatedashboard : 'updateDashBoard',
-				updatesummary : 'updateDashBoardSummary',
-				updatetopexpense : 'updateTopExpense'
+				updatesummary : 'updateDashBoardSummary'				
 			}
 		}
 	},
@@ -47,6 +46,16 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		expenseSheet.bindStore(expSheetStore);
 		incomeSheet.bindStore(incSheetStore);		
 		inventorySheet.bindStore(invSheetStore);
+		
+		if(expensetracker.util.Session.isFirstLogin()) {
+			var settingsWindow = Ext.create('expensetracker.view.main.Settings', {
+				modal : true,
+				closable : false
+			});
+			var model = settingsWindow.getViewModel();
+			model.set('buttonText', 'Save & Close');
+			settingsWindow.show();
+		}
 		
 		me.updateDashBoardSummary();
 	},
@@ -142,12 +151,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			}
 		});
 
-	},
-	updateTopExpense : function() {
-		var me = this;
-		var topexpense = me.lookup('topexpense');
-		topexpense.getStore().reload();
-	},
+	},	
 	updateExpVsIncomeChart : function() {
 		var me = this;
 		var expvsincome = me.lookup('expensevsincome');
@@ -161,8 +165,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		expensechart.getStore().reload();
 	},
 	updateDashBoard : function() {
-		var me = this;
-		me.updateTopExpense();
+		var me = this;		
 		me.updateDashBoardSummary();
 		me.updateExpVsIncomeChart();
 		me.updateExpenseChart();

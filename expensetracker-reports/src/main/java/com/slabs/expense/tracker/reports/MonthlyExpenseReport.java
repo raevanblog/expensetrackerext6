@@ -31,27 +31,29 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
-	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year) throws InstantiationException, IllegalAccessException {
-		this(userInfo, month, year, CurrencyType.DOLLAR);
+	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year)
+			throws InstantiationException, IllegalAccessException {
+		this(userInfo, month, year, CurrencyType.USD);
 	}
 
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency)
 			throws InstantiationException, IllegalAccessException {
 		super(userInfo, month, year, currency);
-		addColumns();		
+		addColumns();
 	}
 
 	@Override
 	public JasperReportBuilder buildReport() throws DRException {
 		addTitle();
-		addColumnsToReport();		
+		addColumnsToReport();
 		return report;
 	}
 
 	private void addTitle() {
 
 		HorizontalListBuilder titleContainer = cBuilders.horizontalList();
-		TextFieldBuilder<String> reportTitle = cBuilders.text("Monthly Report").setStyle(sProvider.getBoldStyle());
+		TextFieldBuilder<String> reportTitle = cBuilders.text("Monthly Report")
+				.setStyle(sProvider.getBoldStyle());
 		TextFieldBuilder<String> monthAnYear = cBuilders.text(month.getName() + "," + year)
 				.setStyle(sProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
 		titleContainer.add(reportTitle, monthAnYear).newRow(2);
@@ -61,24 +63,31 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
 	@SuppressWarnings("rawtypes")
 	private void addColumns() {
-		StyleBuilder centerAligned = sProvider.getStyle(HorizontalTextAlignment.CENTER);		
-		report.setColumnTitleStyle(sProvider.getColumnHeader(Color.BLACK, DEFAULT_HEADER_COLOR, false));
+		StyleBuilder centerAligned = sProvider.getStyle(HorizontalTextAlignment.CENTER);
+		report.setColumnTitleStyle(
+				sProvider.getColumnHeader(Color.BLACK, DEFAULT_HEADER_COLOR, false));
 		report.setColumnStyle(sProvider.getBorder(centerAligned, 1.0f));
 
 		TextColumnBuilder<Integer> rowNum = cProvider.getRowNumberColumn("S.No");
 		ValueColumnBuilder expDate = cProvider.getDateColumn(Column.EXPDATE);
 		TextColumnBuilder<String> itemName = cProvider.getColumn(Column.ITEMNAME, String.class);
-		TextColumnBuilder<String> expenseType = cProvider.getColumn(Column.EXPTYPE, String.class).setFixedColumns(10);
-		TextColumnBuilder<String> expenseCategory = cProvider.getColumn(Column.CATEGORY, String.class);
-		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class).setFixedColumns(5);
-		TextColumnBuilder<Double> price = cProvider.getColumn(Column.PRICE, Double.class).setDataType(this.currency);
-		TextColumnBuilder<Double> pricePerUnit = cProvider.getColumn(Column.PRICEPERUNIT, Double.class).setDataType(this.currency);
-					
-		addColumns(rowNum, expDate, itemName, expenseType, expenseCategory, qty, price, pricePerUnit);
+		TextColumnBuilder<String> expenseType = cProvider.getColumn(Column.EXPTYPE, String.class)
+				.setFixedColumns(10);
+		TextColumnBuilder<String> expenseCategory = cProvider.getColumn(Column.CATEGORY,
+				String.class);
+		TextColumnBuilder<BigDecimal> qty = cProvider.getColumn(Column.QTY, BigDecimal.class)
+				.setFixedColumns(5);
+		TextColumnBuilder<Double> price = cProvider.getColumn(Column.PRICE, Double.class)
+				.setDataType(this.currency);
+		TextColumnBuilder<Double> pricePerUnit = cProvider
+				.getColumn(Column.PRICEPERUNIT, Double.class).setDataType(this.currency);
+
+		addColumns(rowNum, expDate, itemName, expenseType, expenseCategory, qty, price,
+				pricePerUnit);
 	}
-	
-	private void addColumnsToReport() {	
-		report.columns(getAllColumns());		
+
+	private void addColumnsToReport() {
+		report.columns(getAllColumns());
 		report.highlightDetailOddRows();
 	}
 
@@ -88,17 +97,20 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		StyleBuilder grpTitleStyle = sProvider.getStyle().setBottomPadding(2).setTopPadding(5);
 		StyleBuilder imageStyle = sProvider.getStyle().setBottomPadding(2);
 
-		CustomGroupBuilder group = DynamicReports.grp.group(column.titleName, column.mappingName, column.datatype);
+		CustomGroupBuilder group = DynamicReports.grp.group(column.titleName, column.mappingName,
+				column.datatype);
 
 		if (Column.EXPTYPE == column) {
-			ImageBuilder image = DynamicReports.cmp.image(new ExpenseImageResolver()).setFixedDimension(16, 16).setStyle(imageStyle);
+			ImageBuilder image = DynamicReports.cmp.image(new ExpenseImageResolver())
+					.setFixedDimension(16, 16).setStyle(imageStyle);
 			group.addHeaderComponent(image).setStyle(grpTitleStyle);
 		}
 
 		if (subtotalPrice) {
 			AggregationSubtotalBuilder subtotal = getSubTotalBuilder(Column.PRICE);
 			report.subtotalsAtGroupFooter(group, subtotal);
-			group.setPrintSubtotalsWhenExpression(DynamicReports.exp.printWhenGroupHasMoreThanOneRow(group));
+			group.setPrintSubtotalsWhenExpression(
+					DynamicReports.exp.printWhenGroupHasMoreThanOneRow(group));
 		}
 		report.groupBy(group);
 	}

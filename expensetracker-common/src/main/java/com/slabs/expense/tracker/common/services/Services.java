@@ -8,7 +8,8 @@ package com.slabs.expense.tracker.common.services;
  */
 public enum Services {
 	
-	ADMIN_SERVICE("AdminService"), 
+	ADMIN_SERVICE("AdminService"),
+	APPLICATION_SERVICE("ApplicationService"),
 	EXPENSE_CATEGORY_SERVICE("ExpenseCategoryService"), 	
 	EXPENSE_SERVICE("ExpenseService"),
 	INVENTORY_SERVICE("InventoryService"),

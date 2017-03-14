@@ -158,29 +158,7 @@ public class ExpenseWebService {
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
-
-	/**
-	 * This method will return a list of expense type in the
-	 * {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * 
-	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws WebServiceException
-	 *             throws {@link WebServiceException}
-	 */
-	@Path("expensetype/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseType() throws ExpenseTrackerException {
-		try {
-			ExpenseService service = ServiceFactory.getInstance()
-					.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-			return ResponseGenerator.getSuccessResponse(service.selectExpenseType(), Operation.SELECT);
-		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
-		}
-	}
-
+	
 	/**
 	 * 
 	 * @param username

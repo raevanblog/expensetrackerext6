@@ -108,4 +108,24 @@ public class UserServiceImpl implements UserService {
 		return noOfRecords;
 	}
 
+	@Override
+	public UserSettings getUserSettings(String username) throws Exception {
+		return dao.getUserSettings(username);
+	}
+
+	@Override
+	public Integer createUserSettings(UserSettings record) throws Exception {
+		Integer noOfRecords = dao.createUserSettings(record);
+		UserInfo user = new UserInfo();
+		user.setUsername(record.getUsername());
+		user.setIsFtLogin("N");
+		noOfRecords = noOfRecords + dao.updateUser(user);
+		return noOfRecords;
+	}
+
+	@Override
+	public Integer updateUserSettings(UserSettings record) throws Exception {
+		return dao.updateUserSettings(record);
+	}
+
 }

@@ -107,18 +107,36 @@
 		</if>
 	</select>
 
-	<select id="getUserSettings" resultMap="Settings">
-		select s.*, c.* from EXPENSETRACKER.USER_SETTINGS s, EXPENSETRACKER.CURRENCY c where s.username=#{param1}
-		and
-		s.currency = c.id
-	</select>
-
 	<delete id="deleteUser">
 		delete from EXPENSETRACKER.USERINFO where username=#{username}
 	</delete>
 
 	<update id="setActivationKey">
 		update EXPENSETRACKER.USERINFO set activationKey=#{param2} where username=#{param1}
+	</update>
+
+	<select id="getUserSettings" resultMap="Settings">
+		select s.*, c.* from EXPENSETRACKER.USER_SETTINGS s, EXPENSETRACKER.CURRENCY c where s.username=#{param1}
+		and
+		s.currency = c.id
+	</select>
+
+	<insert id="createUserSettings" parameterType="com.slabs.expense.tracker.common.database.entity.UserSettings">
+		insert into EXPENSETRACKER.USER_SETTINGS(USERNAME, CURRENCY, RCVRYEMAIL) values (#{username}, #{currency.id},
+		#{rcvryemail})
+	</insert>
+
+	<update id="updateUserSettings" parameterType="com.slabs.expense.tracker.common.database.entity.UserSettings">
+		update EXPENSETRACKER.USER_SETTINGS
+		<set>
+			<if test="currency != null">
+				currency=#{currency.id},
+			</if>
+			<if test="rcvryemail != null">
+				rcvryemail=#{rcvryemail}
+			</if>
+		</set>
+		where username=#{username}
 	</update>
 
 </mapper>

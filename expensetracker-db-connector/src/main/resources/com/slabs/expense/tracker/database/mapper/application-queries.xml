@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.slabs.expense.tracker.common.database.mapper.ApplicationDAO">
+
+	<select id="getExpenseType" resultType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
+		select * from EXPENSETRACKER.EXPENSETYPE
+	</select>
+
+	<insert id="createExpenseType" parameterType="java.util.List">
+		insert into EXPENSETRACKER.EXPENSETYPE(EXPTYPE, DESCRIPTION) values
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.exptype},
+			#{record.description}
+		</foreach>
+	</insert>
+
+	<update id="updateExpenseType" parameterType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
+		update EXPENSETRACKER.EXPENSETYPE
+		<set>
+			<if test="exptype != null">
+				exptype=#{exptype},
+			</if>
+			<if test="description != null">
+				description=#{description}
+			</if>
+		</set>
+	</update>
+
+	<delete id="deleteExpenseType" parameterType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
+		delete from EXPENSETRACKER.EXPENSETYPE where id=#{id}
+	</delete>
+
+	<select id="getIncomeType" resultType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+		select * from EXPENSETRACKER.INCOMETYPE
+	</select>
+
+	<insert id="createIncomeType" parameterType="java.util.List">
+		insert into EXPENSETRACKER.INCOMETYPE(INCOMETYPE, DESCRIPTION) values
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.incometype},
+			#{record.description}
+		</foreach>
+	</insert>
+
+	<update id="updateIncomeType" parameterType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+		update EXPENSETRACKER.INCOMETYPE
+		<set>
+			<if test="incometype != null">
+				incometype=#{incometype},
+			</if>
+			<if test="description != null">
+				description=#{description}
+			</if>
+		</set>
+	</update>
+
+	<delete id="deleteIncomeType" parameterType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+		delete from EXPENSETRACKER.EXPENSETYPE where id=#{id}
+	</delete>
+
+	<select id="getCurrency" resultType="com.slabs.expense.tracker.common.database.entity.Currency">
+		select * from EXPENSETRACKER.CURRENCY
+	</select>
+
+	<insert id="createCurrency" parameterType="java.util.List">
+		insert into EXPENSETRACKER.CURRENCY(CURRSYMB, CURRTXT) values
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.currsymb},
+			#{record.currtxt}
+		</foreach>
+	</insert>
+
+	<update id="updateCurrency" parameterType="com.slabs.expense.tracker.common.database.entity.Currency">
+		update EXPENSETRACKER.CURRENCY
+		<set>
+			<if test="currsymb != null">
+				currsymb=#{currsymb},
+			</if>
+			<if test="currtxt != null">
+				currtxt=#{currtxt}
+			</if>
+		</set>
+	</update>
+
+	<delete id="deleteCurrency" parameterType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+		delete from EXPENSETRACKER.CURRENCY where id=#{id}
+	</delete>
+	
+</mapper>

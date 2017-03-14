@@ -155,33 +155,5 @@
 			where categoryId=#{categoryId}
 		</if>
 	</delete>
-
-	<select id="getExpenseTypes" resultType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
-		select * from EXPENSETRACKER.EXPENSETYPE
-	</select>
-
-	<insert id="insertExpenseType" parameterType="java.util.List">
-		insert into EXPENSETRACKER.EXPENSETYPE(EXPTYPE, DESCRIPTION) values
-		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
-			#{record.exptype},
-			#{record.description}
-		</foreach>
-	</insert>
-
-	<update id="updateExpenseType" parameterType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
-		update EXPENSETRACKER.EXPENSETYPE
-		<set>
-			<if test="exptype != null">
-				exptype=#{exptype},
-			</if>
-			<if test="description != null">
-				description=#{description}
-			</if>
-		</set>
-	</update>
-
-	<delete id="deleteExpenseType" parameterType="int">
-		delete from EXPENSETRACKER.EXPENSETYPE where id=#{param1}
-	</delete>
-
+	
 </mapper>

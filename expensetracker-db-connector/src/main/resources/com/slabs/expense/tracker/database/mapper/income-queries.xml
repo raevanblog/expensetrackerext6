@@ -55,8 +55,4 @@
 		and username=#{username}
 	</delete>
 
-	<select id="getIncomeType" resultType="com.slabs.expense.tracker.common.database.entity.IncomeType">
-		select * from EXPENSETRACKER.INCOMETYPE
-	</select>
-
 </mapper>

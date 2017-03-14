@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.common.services;
 import java.util.List;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expense.tracker.common.database.entity.UserSettings;
 
 public interface UserService {
 
@@ -16,5 +17,11 @@ public interface UserService {
 	public Integer updateUser(UserInfo record) throws Exception;
 
 	public Integer createUser(UserInfo record) throws Exception;
+
+	public UserSettings getUserSettings(String username) throws Exception;
+
+	public Integer createUserSettings(UserSettings record) throws Exception;
+
+	public Integer updateUserSettings(UserSettings record) throws Exception;
 
 }

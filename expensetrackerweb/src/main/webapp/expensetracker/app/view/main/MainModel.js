@@ -9,9 +9,7 @@ Ext.define('expensetracker.view.main.MainModel', {
 	data : {
 		name : 'expensetracker',
 		usrname : '',
-		profileimg : '',
-		currency : '',
-		currencySymbol : '',
+		profileimg : '',		
 		navBarWidth : expensetracker.util.Constants.getNavBarWidth()
 	}
 

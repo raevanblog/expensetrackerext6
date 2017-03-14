@@ -33,13 +33,13 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		ui : 'toolbar',
 		text : 'Message',
 		handler : 'onMessage',
-		iconCls : 'x-fa fa-envelope'
+		iconCls : 'x-fa fa-envelope fa-2x'
 	}, {
 		xtype : 'button',
 		ui : 'toolbar',
 		text : 'Profile',
 		tooltip : 'Profile',
-		iconCls : 'x-fa fa-user',
+		iconCls : 'x-fa fa-user fa-2x',
 		menu : [ {
 			text : 'View Profile',
 			iconCls : 'x-fa fa-user',
@@ -50,6 +50,11 @@ Ext.define('expensetracker.view.main.Toolbar', {
 			iconCls : 'x-fa fa-lock',
 			tooltip : 'Change Password',
 			handler : 'onChangePwd'
+		}, {
+			text : 'Settings',
+			iconCls : 'x-fa fa-cog',
+			tooltip : 'Settings',
+			handler : 'onChangeSettings'
 		} ]
 	}, {
 		xtype : 'button',
