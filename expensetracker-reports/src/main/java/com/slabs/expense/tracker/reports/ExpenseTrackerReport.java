@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
@@ -19,6 +20,7 @@ import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
+import net.sf.dynamicreports.report.builder.component.ImageBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.grid.GridBuilders;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
@@ -26,6 +28,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Position;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -55,9 +58,7 @@ public abstract class ExpenseTrackerReport {
 	protected List<ValueColumnBuilder> columns = new ArrayList<ValueColumnBuilder>();
 
 	protected static final Color DEFAULT_HEADER_COLOR = new Color(127, 217, 244);
-
-	private static final String APPLICATION_NAME = "Expense Tracker";
-
+	
 	protected UserInfo userInfo;
 
 	protected Integer year;
@@ -107,6 +108,27 @@ public abstract class ExpenseTrackerReport {
 		hList.add(getApplicationName(10), cBuilders.pageXslashY().setStyle(sProvider.getStyle(HorizontalTextAlignment.LEFT)));
 		report.pageFooter(sProvider.getDefaultFillerLine(10), hList);
 	}
+	
+	/**
+	 * This method will return the application logo.
+	 * 
+	 * @return {@link ImageBuilder}
+	 */
+	public ImageBuilder getLogo() {
+		return cBuilders.image(getClass().getResourceAsStream("/images/logo-blue.png"))
+				.setFixedDimension(50, 50);
+	}
+	
+	/**
+	 * This method will return the logo title.
+	 * 
+	 * @param alignment {@link VerticalTextAlignment} - To align the title vertically.
+	 * @return {@link TextFieldBuilder}
+	 */
+	public TextFieldBuilder<String> getLogoTitle(VerticalTextAlignment alignment) {
+		return cBuilders.text(Constants.APP_NAME_CC).setStyle(sProvider.getBoldStyle(14).setVerticalTextAlignment(alignment));
+	}
+
 
 	/**
 	 * This method will return the application name using the font size
@@ -116,7 +138,7 @@ public abstract class ExpenseTrackerReport {
 	 * @return {@link TextFieldBuilder}
 	 */
 	public TextFieldBuilder<String> getApplicationName(Integer fontSize) {
-		TextFieldBuilder<String> appName = cBuilders.text(APPLICATION_NAME);
+		TextFieldBuilder<String> appName = cBuilders.text(Constants.APP_NAME_CC);
 		StyleBuilder appNameStyle = sProvider.getStyle(fontSize).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 		return appName.setStyle(appNameStyle);
 	}

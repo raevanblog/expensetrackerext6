@@ -111,6 +111,38 @@ public class StyleProvider {
 
 	/**
 	 * 
+	 * @param fontSize
+	 *            {@link Integer} - Font size
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getBoldStyle(Integer fontSize) {
+		return getBoldStyle().setFontSize(fontSize);
+	}
+
+	/**
+	 * 
+	 * @param fontName
+	 *            {@link String} - Font name
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getBoldStyle(String fontName) {
+		return getBoldStyle().setFontName(fontName);
+	}
+
+	/**
+	 * 
+	 * @param fontName
+	 *            {@link String} - Font name
+	 * @param fontSize
+	 *            {@link Integer} - Font size
+	 * @return {@link StyleBuilder}
+	 */
+	public StyleBuilder getBoldStyle(String fontName, Integer fontSize) {
+		return getBoldStyle(fontName).setFontSize(fontSize);
+	}
+
+	/**
+	 * 
 	 * @param alignment
 	 *            {@link HorizontalTextAlignment}
 	 * @return {@link StyleBuilder}

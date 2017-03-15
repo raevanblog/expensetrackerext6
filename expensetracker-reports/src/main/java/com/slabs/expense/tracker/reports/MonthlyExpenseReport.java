@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.reports;
 import java.awt.Color;
 import java.math.BigDecimal;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
@@ -15,10 +16,12 @@ import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.ImageBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.group.CustomGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -45,25 +48,49 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 	@Override
 	public JasperReportBuilder buildReport() throws DRException {
 		addTitle();
+		addReportDetails();
 		addColumnsToReport();
 		return report;
 	}
 
+	
 	private void addTitle() {
 
 		HorizontalListBuilder titleContainer = cBuilders.horizontalList();
-		TextFieldBuilder<String> reportTitle = cBuilders.text("Monthly Report")
+		TextFieldBuilder<String> logoTitle = getLogoTitle(VerticalTextAlignment.BOTTOM).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
+		
+		TextFieldBuilder<String> reportTitle = cBuilders.text(Constants.MONTHLY_REPORT)
 				.setStyle(sProvider.getBoldStyle());
-		TextFieldBuilder<String> monthAnYear = cBuilders.text(month.getName() + "," + year)
-				.setStyle(sProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
-		titleContainer.add(reportTitle, monthAnYear).newRow(2);
+		
+		TextFieldBuilder<String> monthAnYear = cBuilders.text(new StringBuilder(month.getName()).append(",").append(year).toString())
+				.setStyle(sProvider.getBoldStyle(12).setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT));
+		titleContainer.add(getLogo(), monthAnYear).newFlowRow(2);
+		titleContainer.add(logoTitle, reportTitle.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT)).newRow();
 
 		report.title(titleContainer, cBuilders.verticalGap(5), sProvider.getDefaultFillerLine(10));
+	}
+	
+	private void addReportDetails() {
+		HorizontalListBuilder container = cBuilders.horizontalList();
+		
+		HorizontalListBuilder detailContainer = cBuilders.horizontalList();
+		
+		TextFieldBuilder<String> name = cBuilders.text("Name : " + userInfo.getFirstName() + " " + userInfo.getLastName()).setStyle(sProvider.getStyle());
+		TextFieldBuilder<String> email = cBuilders.text("Email : " + userInfo.getEmail()).setStyle(sProvider.getStyle());		
+		TextFieldBuilder<String> address = cBuilders.text("Address : " + userInfo.getAddress()).setStyle(sProvider.getStyle());
+		
+		detailContainer.add(name).newRow();		
+		detailContainer.add(email).newRow();
+		detailContainer.add(address).newRow(5);
+		
+		container.add(cBuilders.hListCell(detailContainer));
+		
+		report.title(container);
 	}
 
 	@SuppressWarnings("rawtypes")
 	private void addColumns() {
-		StyleBuilder centerAligned = sProvider.getStyle(HorizontalTextAlignment.CENTER);
+		StyleBuilder centerAligned = sProvider.getStyle(HorizontalTextAlignment.CENTER).setBottomPadding(2).setTopPadding(2);
 		report.setColumnTitleStyle(
 				sProvider.getColumnHeader(Color.BLACK, DEFAULT_HEADER_COLOR, false));
 		report.setColumnStyle(sProvider.getBorder(centerAligned, 1.0f));
