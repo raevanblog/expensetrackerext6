@@ -2,6 +2,7 @@ package com.slabs.expense.tracker.reports;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.column.Column;
@@ -17,9 +18,11 @@ import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.CategoryChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import net.sf.dynamicreports.report.builder.component.FillerBuilder;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.ImageBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.group.CustomGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
@@ -37,14 +40,18 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
-	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year)
-			throws InstantiationException, IllegalAccessException {
-		this(userInfo, month, year, CurrencyType.USD);
+	private List<Income> monthlyIncome;
+
+	public MonthlyExpenseReport(UserInfo userInfo, List<Income> monthlyIncome, Month month,
+			Integer year) throws InstantiationException, IllegalAccessException {
+		this(userInfo, monthlyIncome, month, year, CurrencyType.USD);
 	}
 
-	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year,
-			CurrencyType currency) throws InstantiationException, IllegalAccessException {
+	public MonthlyExpenseReport(UserInfo userInfo, List<Income> monthlyIncome, Month month,
+			Integer year, CurrencyType currency)
+			throws InstantiationException, IllegalAccessException {
 		super(userInfo, month, year, currency);
+		this.monthlyIncome = monthlyIncome;
 		addColumns();
 	}
 
@@ -52,6 +59,7 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 	public JasperReportBuilder buildReport() throws DRException {
 		addTitle();
 		addReportDetails();
+		addIncomeDetails();
 		addColumnsToReport();
 		addSummary();
 		return report;
@@ -81,7 +89,10 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 	}
 
 	private void addReportDetails() {
-		HorizontalListBuilder container = componentBuilder.horizontalList();
+		VerticalListBuilder verticalContainer = componentBuilder.verticalList();
+
+		TextFieldBuilder<String> title = componentBuilder.text("Report Owner")
+				.setStyle(styleProvider.getBoldStyle(12).setUnderline(Boolean.TRUE));
 
 		HorizontalListBuilder detailContainer = componentBuilder.horizontalList();
 
@@ -97,9 +108,37 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 		detailContainer.add(email).newRow();
 		detailContainer.add(address).newRow(5);
 
-		container.add(componentBuilder.hListCell(detailContainer));
+		verticalContainer.add(title, componentBuilder.verticalGap(5), detailContainer);
 
-		report.title(container);
+		report.title(verticalContainer);
+	}
+
+	private void addIncomeDetails() {
+		VerticalListBuilder verticalContainer = componentBuilder.verticalList();
+		Double totalIncome = 0.0;
+
+		TextFieldBuilder<String> title = componentBuilder.text("Income Details")
+				.setStyle(styleProvider.getBoldStyle(12).setUnderline(Boolean.TRUE));
+		
+		TextFieldBuilder<String> expenseTitle = componentBuilder.text("Expense Details")
+				.setStyle(styleProvider.getBoldStyle(12).setUnderline(Boolean.TRUE));
+		
+		HorizontalListBuilder detailContainer = componentBuilder.horizontalList();
+
+		for (Income income : monthlyIncome) {
+			TextFieldBuilder<String> data = componentBuilder
+					.text(income.getIncometype() + " : " + getCurrency().currencySymbol() + " " + income.getIncome());
+			detailContainer.add(data).newRow();
+			totalIncome = totalIncome + income.getIncome();
+		}
+		
+		TextFieldBuilder<String> totIncome = componentBuilder
+				.text("Total Income : " + getCurrency().currencySymbol() + " " + totalIncome);
+		detailContainer.add(totIncome).newRow();
+		
+		verticalContainer.add(title, componentBuilder.verticalGap(5), detailContainer, componentBuilder.verticalGap(10), expenseTitle, componentBuilder.verticalGap(5));
+		
+		report.title(verticalContainer);
 	}
 
 	@SuppressWarnings("rawtypes")

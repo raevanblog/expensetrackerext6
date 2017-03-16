@@ -223,6 +223,30 @@ public abstract class ExpenseTrackerReport {
 	public FontBuilder getDefaultFont(Integer fontSize, boolean bold, boolean italic) {
 		return builder.getDefaultFont().setFontSize(fontSize).setBold(bold).setItalic(italic);
 	}
+		
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer getYear() {
+		return year;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Month getMonth() {
+		return month;
+	}
+
+	/**
+	 * s
+	 * @return
+	 */
+	public Currency getCurrency() {
+		return currency;
+	}
 
 	/**
 	 * This method will build the report

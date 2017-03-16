@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.slabs.expense.tracker.common.database.entity.Expense;
+import com.slabs.expense.tracker.common.database.entity.Income;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
 import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
@@ -57,10 +58,11 @@ public class ReportingService {
 		List<UserInfo> info = userDao.getUser(username, Boolean.FALSE);
 		if (info != null && !info.isEmpty()) {
 			List<Expense> expenses = expenseDao.getExpense(username, year, month);
+			List<Income> income = incomeDao.getIncome(username, year, month);
 			if (year != null) {
 				if (month != null) {
 					if (!expenses.isEmpty()) {
-						MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0),
+						MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0), income,
 								Month.getMonth(month), year,
 								CurrencyType.getCurrency(currencyName));
 						report.addPageNumber();
