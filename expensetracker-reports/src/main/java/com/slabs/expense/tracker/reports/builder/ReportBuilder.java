@@ -5,6 +5,7 @@ import com.slabs.expense.tracker.reports.provider.StyleProvider;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.grid.GridBuilders;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
@@ -48,7 +49,7 @@ public class ReportBuilder {
 	 * 
 	 * @return {@link JasperReportBuilder}
 	 */
-	public JasperReportBuilder createJasperReportBuilder() {		
+	public JasperReportBuilder createJasperReportBuilder() {
 		return DynamicReports.report();
 	}
 
@@ -60,7 +61,7 @@ public class ReportBuilder {
 	public ComponentBuilders getComponentBuilders() {
 		return DynamicReports.cmp;
 	}
-	
+
 	/**
 	 * This method will provide the {@link GridBuilders} for the report
 	 * 
@@ -77,6 +78,15 @@ public class ReportBuilder {
 	 */
 	public StyleBuilders getStyleBuilders() {
 		return DynamicReports.stl;
+	}
+
+	/**
+	 * This method will provide the {@link ChartBuilders} for the report
+	 * 
+	 * @return {@link ChartBuilders}
+	 */
+	public ChartBuilders getChartBuilders() {
+		return DynamicReports.cht;
 	}
 
 	/**

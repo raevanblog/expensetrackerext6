@@ -17,12 +17,14 @@ import com.slabs.expense.tracker.reports.provider.StyleProvider;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.ImageBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.grid.GridBuilders;
+import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
@@ -42,15 +44,17 @@ public abstract class ExpenseTrackerReport {
 
 	protected ReportBuilder builder = ReportBuilder.getInstance();
 
-	protected ColumnProvider cProvider = builder.getColumnProvider();
+	protected ColumnProvider columnProvider = builder.getColumnProvider();
 
-	protected ComponentBuilders cBuilders = builder.getComponentBuilders();
+	protected ComponentBuilders componentBuilder = builder.getComponentBuilders();
 
-	protected StyleProvider sProvider = builder.getStyleProvider();
+	protected StyleProvider styleProvider = builder.getStyleProvider();
 
-	protected StyleBuilders sBuilders = builder.getStyleBuilders();
-	
-	protected GridBuilders gBuilders = builder.getGridBuilders();
+	protected StyleBuilders styleBuilder = builder.getStyleBuilders();
+
+	protected GridBuilders gridBuilder = builder.getGridBuilders();
+
+	protected ChartBuilders chartBuilder = builder.getChartBuilders();
 
 	protected JasperReportBuilder report;
 
@@ -58,7 +62,7 @@ public abstract class ExpenseTrackerReport {
 	protected List<ValueColumnBuilder> columns = new ArrayList<ValueColumnBuilder>();
 
 	protected static final Color DEFAULT_HEADER_COLOR = new Color(127, 217, 244);
-	
+
 	protected UserInfo userInfo;
 
 	protected Integer year;
@@ -104,31 +108,33 @@ public abstract class ExpenseTrackerReport {
 	 * 
 	 */
 	public void addPageNumber() {
-		HorizontalListBuilder hList = cBuilders.horizontalFlowList();
-		hList.add(getApplicationName(10), cBuilders.pageXslashY().setStyle(sProvider.getStyle(HorizontalTextAlignment.LEFT)));
-		report.pageFooter(sProvider.getDefaultFillerLine(10), hList);
+		HorizontalListBuilder hList = componentBuilder.horizontalFlowList();
+		hList.add(getApplicationName(10), componentBuilder.pageXslashY()
+				.setStyle(styleProvider.getStyle(HorizontalTextAlignment.LEFT)));
+		report.pageFooter(styleProvider.getDefaultFillerLine(10), hList);
 	}
-	
+
 	/**
 	 * This method will return the application logo.
 	 * 
 	 * @return {@link ImageBuilder}
 	 */
 	public ImageBuilder getLogo() {
-		return cBuilders.image(getClass().getResourceAsStream("/images/logo-blue.png"))
+		return componentBuilder.image(getClass().getResourceAsStream("/images/logo-blue.png"))
 				.setFixedDimension(50, 50);
 	}
-	
+
 	/**
 	 * This method will return the logo title.
 	 * 
-	 * @param alignment {@link VerticalTextAlignment} - To align the title vertically.
+	 * @param alignment
+	 *            {@link VerticalTextAlignment} - To align the title vertically.
 	 * @return {@link TextFieldBuilder}
 	 */
 	public TextFieldBuilder<String> getLogoTitle(VerticalTextAlignment alignment) {
-		return cBuilders.text(Constants.APP_NAME_CC).setStyle(sProvider.getBoldStyle(14).setVerticalTextAlignment(alignment));
+		return componentBuilder.text(Constants.APP_NAME_CC)
+				.setStyle(styleProvider.getBoldStyle(14).setVerticalTextAlignment(alignment));
 	}
-
 
 	/**
 	 * This method will return the application name using the font size
@@ -138,8 +144,9 @@ public abstract class ExpenseTrackerReport {
 	 * @return {@link TextFieldBuilder}
 	 */
 	public TextFieldBuilder<String> getApplicationName(Integer fontSize) {
-		TextFieldBuilder<String> appName = cBuilders.text(Constants.APP_NAME_CC);
-		StyleBuilder appNameStyle = sProvider.getStyle(fontSize).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
+		TextFieldBuilder<String> appName = componentBuilder.text(Constants.APP_NAME_CC);
+		StyleBuilder appNameStyle = styleProvider.getStyle(fontSize)
+				.setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 		return appName.setStyle(appNameStyle);
 	}
 
@@ -151,7 +158,7 @@ public abstract class ExpenseTrackerReport {
 	 */
 	@SuppressWarnings("rawtypes")
 	public void addColumns(ValueColumnBuilder... columns) {
-		for (ValueColumnBuilder c : columns) {			
+		for (ValueColumnBuilder c : columns) {
 			this.columns.add(c);
 		}
 	}
@@ -198,6 +205,23 @@ public abstract class ExpenseTrackerReport {
 		AggregationSubtotalBuilder subtotal = DynamicReports.sbt.sum(getColumn(column));
 		subtotal.setLabel("Total : ").setLabelPosition(Position.LEFT);
 		return subtotal;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param fontSize
+	 *            {@link Integer} - Font size.
+	 * @param bold
+	 *            {@link Boolean} - True for bold style.
+	 * @param italic
+	 *            {@link Boolean} - True for Italic.
+	 * @return {@link FontBuilder}
+	 * 
+	 * 
+	 */
+	public FontBuilder getDefaultFont(Integer fontSize, boolean bold, boolean italic) {
+		return builder.getDefaultFont().setFontSize(fontSize).setBold(bold).setItalic(italic);
 	}
 
 	/**
