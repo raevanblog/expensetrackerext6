@@ -13,14 +13,21 @@ public class Rupee extends Currency {
 
 	private static final String CURRENCY_SYMBOL = "₹";
 
+	private static final String CURRENCY_NAME = "INR";
+
 	@Override
 	public String getPattern() {
-		return "₹ #,###.##";
+		return CURRENCY_SYMBOL + " #,###.##";
 	}
 
 	@Override
 	public String currencySymbol() {
 		return CURRENCY_SYMBOL;
+	}
+
+	@Override
+	public String currenyName() {
+		return CURRENCY_NAME;
 	}
 
 }

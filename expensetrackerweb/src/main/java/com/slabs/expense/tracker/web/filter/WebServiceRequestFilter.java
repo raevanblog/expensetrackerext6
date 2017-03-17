@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import com.slabs.expense.tracker.common.constants.Constants;
-import com.slabs.expense.tracker.util.FileUtil;
 import com.slabs.expense.tracker.util.MarkerEngine;
 import com.slabs.expense.tracker.util.exception.UtilityException;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;

@@ -13,6 +13,8 @@ public class Dollar extends Currency {
 
 	private static final String CURRENCY_SYMBOL = "$";
 
+	private static final String CURRENCY_NAME = "USD";
+
 	@Override
 	public String getPattern() {
 		return CURRENCY_SYMBOL + " #,###.##";
@@ -21,6 +23,11 @@ public class Dollar extends Currency {
 	@Override
 	public String currencySymbol() {
 		return CURRENCY_SYMBOL;
+	}
+
+	@Override
+	public String currenyName() {
+		return CURRENCY_NAME;
 	}
 
 }

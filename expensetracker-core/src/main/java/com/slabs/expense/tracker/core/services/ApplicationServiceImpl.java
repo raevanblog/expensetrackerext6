@@ -11,7 +11,6 @@ import com.slabs.expense.tracker.common.database.entity.Currency;
 import com.slabs.expense.tracker.common.database.entity.ExpenseType;
 import com.slabs.expense.tracker.common.database.entity.Income;
 import com.slabs.expense.tracker.common.database.entity.IncomeType;
-import com.slabs.expense.tracker.common.database.entity.UserSettings;
 import com.slabs.expense.tracker.common.database.mapper.ApplicationDAO;
 import com.slabs.expense.tracker.common.services.ApplicationService;
 

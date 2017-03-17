@@ -13,5 +13,7 @@ public abstract class Currency extends DoubleType {
 	private static final long serialVersionUID = 1L;
 
 	public abstract String currencySymbol();
+	
+	public abstract String currenyName();
 
 }

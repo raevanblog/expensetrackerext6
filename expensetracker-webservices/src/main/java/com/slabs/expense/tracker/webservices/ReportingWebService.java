@@ -58,42 +58,35 @@ public class ReportingWebService {
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response monthlyReport(@QueryParam("username") String username,
-			@QueryParam("year") Integer year, @QueryParam("month") Integer month)
+	public Response monthlyReport(@QueryParam("username") String username, @QueryParam("year") Integer year, @QueryParam("month") Integer month)
 			throws ExpenseTrackerException {
 		try {
 
 			String monthName = null;
 
 			if (year == null) {
-				throw new WebServiceException("Year is a required parameter",
-						ResponseStatus.BAD_REQUEST);
+				throw new WebServiceException("Year is a required parameter", ResponseStatus.BAD_REQUEST);
 			}
 
 			if (month != null) {
 				monthName = Month.getMonth(month).getName();
 			}
 
-			ReportingService service = ServiceFactory.getInstance()
-					.getService(Services.REPORTING_SERVICE, ReportingService.class);
+			ReportingService service = ServiceFactory.getInstance().getService(Services.REPORTING_SERVICE, ReportingService.class);
 
-			UserService userService = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
+			UserService userService = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 
 			UserSettings settings = userService.getUserSettings(username);
 
-			JasperReportBuilder report = service.generateReport(username, year, month,
-					settings.getCurrency().getCurrtxt());
+			JasperReportBuilder report = service.generateReport(username, year, month, settings.getCurrency().getCurrtxt());
 
 			if (report != null) {
-				return ResponseGenerator.getSuccessResponse(new StreamingResponse(report),
-						getFileName(username, monthName, year), ContentType.APPLICATION_PDF_TYPE);
+				return ResponseGenerator.getSuccessResponse(new StreamingResponse(report), getFileName(username, monthName, year),
+						ContentType.APPLICATION_PDF_TYPE);
 			} else {
 				Map<String, String> model = new HashMap<String, String>();
 				model.put("response", "Report not available.");
-				return ResponseGenerator.getSuccessResponse(
-						new StreamingResponse(
-								MarkerEngine.process(Constants.RESPONSE_TEMPLATE, model)),
+				return ResponseGenerator.getSuccessResponse(new StreamingResponse(MarkerEngine.process(Constants.RESPONSE_TEMPLATE, model)),
 						"Response.html", ContentType.TEXT_HTML_TYPE);
 			}
 		} catch (WebServiceException e) {
