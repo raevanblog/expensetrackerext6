@@ -5,6 +5,9 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 	controller : 'expensecategorycontroller',
 	requires : [ 'expensetracker.store.ExpenseCategory', 'expensetracker.view.expense.ExpenseCategoryController' ],
 	store : 'ExpenseCategory',
+	listeners : {
+		render : 'onRenderCategoryGrid'
+	},
 	bbar : [ '->', {
 		xtype : 'button',
 		text : 'Save',

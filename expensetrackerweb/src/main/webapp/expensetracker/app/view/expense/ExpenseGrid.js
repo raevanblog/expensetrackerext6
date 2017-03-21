@@ -4,7 +4,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	xtype : 'expensegrid',
 	scrollable : true,
 	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'Ext.grid.column.Widget', 'expensetracker.component.grid.column.CheckColumn', 'Ext.grid.column.Number' ],
-	layout : 'fit',
+	layout : 'fit',	
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1,

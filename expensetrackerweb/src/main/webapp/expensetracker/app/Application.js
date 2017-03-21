@@ -17,7 +17,7 @@ Ext.define('expensetracker.Application', {
 			'Ext.form.FieldContainer', 'expensetracker.util.Calendar', 'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category', 'Ext.chart.series.Bar',
 			'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line',
 			'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border', 'Ext.form.field.File', 'Ext.form.field.Number', 'Ext.form.field.HtmlEditor', 'Ext.util.Cookies', 'Ext.window.Window', 'Ext.window.Toast',
-			'Ext.menu.Menu', 'Ext.window.MessageBox','Ext.selection.CheckboxModel' ],
+			'Ext.menu.Menu', 'Ext.window.MessageBox','Ext.selection.CheckboxModel', 'Ext.util.KeyMap' ],
 	defaultToken : 'login',
 	init : function() {
 		Ext.getBody().mask('Loading Expense Tracker....');

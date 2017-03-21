@@ -143,8 +143,5 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 				}
 			}
 		});
-	},
-	refreshGridView : function(grid) {
-		grid.getView().refresh();
-	}
+	}	
 });

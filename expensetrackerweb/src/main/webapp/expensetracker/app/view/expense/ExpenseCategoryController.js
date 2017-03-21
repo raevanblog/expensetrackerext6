@@ -10,15 +10,43 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 			store.sync({
 				success : function(batch) {
 					categorygrid.setLoading(false);
-					me.refreshGridView(categorygrid);
+					expensetracker.util.Grid.reload(categorygrid)
 				},
 				failure : function(batch) {
 					categorygrid.setLoading(false);
-					me.refreshGridView(categorygrid);
+					expensetracker.util.Grid.refresh(categorygrid);
 				}
 			});
 		}
 
+	},
+	onRenderCategoryGrid : function(categorygrid) {
+		var me = this;
+		me.keyMap = Ext.create('Ext.util.KeyMap', categorygrid.el, [{
+			key : 'n',
+			fn : function() {
+				me.onAddCategory();
+			},
+			ctrl : true,
+			alt : true,
+			scope :  me
+		}, {
+			key : 'r',
+			fn : function() {
+				expensetracker.util.Grid.refresh(categorygrid);
+			},
+			ctrl : true,
+			alt : true,
+			scope :  me
+		}, {
+			key : 's',
+			fn : function() {
+				me.onCategorySaveOrUpdate();
+			},
+			ctrl : true,
+			alt : true,
+			scope : me
+		}]);
 	},
 	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
 		var me = this;
@@ -53,7 +81,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 							failure : function(batch) {
 								categorygrid.setLoading(false);
 								store.rejectChanges();
-								me.refreshGridView(categorygrid);
+								expensetracker.util.Grid.refresh(categorygrid);
 							}
 						});
 					}
@@ -75,24 +103,21 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 	},
 	onAddCategory : function(addCategBtn) {
 		var me = this;
-		var categoryGrid = me.getView();
-		var store = categoryGrid.getStore();
+		var categorygrid = me.getView();
+		var store = categorygrid.getStore();
 		var model = new expensetracker.model.ExpenseCategory({
 			category : 'New Category',
 			description : '',
 			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);
-		me.refreshGridView(categoryGrid);
+		expensetracker.util.Grid.refresh(categorygrid);
 	},
 	onDeleteCategory : function(view, rowIndex, colIndex, item, e, record, row) {
 		var me = this;
 		var grid = me.getView();
 		var store = grid.getStore();
 		store.remove(record);
-		me.refreshGridView(grid);
-	},
-	refreshGridView : function(grid) {
-		grid.getView().refresh();
-	}
+		expensetracker.util.Grid.refresh(grid);
+	}	
 });

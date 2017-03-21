@@ -8,7 +8,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		if (expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
 			model.set('isLatestExpense', true);
 		}
-	},
+	},	
 	onCloseExpenseWindow : function(expenseWindow) {
 		var me = this;
 		var view = me.getView();
@@ -64,6 +64,32 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 			}
 		});
+		
+		me.keyMap = Ext.create('Ext.util.KeyMap', expensegrid.el, [{
+			key : 'n',
+			fn : function() {
+				me.onAddExpenseRecord();
+			},
+			ctrl : true,
+			alt : true,
+			scope :  me
+		}, {
+			key : 'r',
+			fn : function() {
+				expensetracker.util.Grid.refresh(expensegrid);
+			},
+			ctrl : true,
+			alt : true,
+			scope :  me
+		},{
+			key : 's',
+			fn : function() {
+				me.onSaveOrUpdateExpense();
+			},
+			ctrl : true,
+			alt : true,
+			scope : me
+		}]);
 	},
 	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
 		var me = this;
@@ -74,7 +100,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			store.filter('itemName', newValue);
 		}
 	},
-	onAddExpenseRecord : function(addexpenseBtn) {
+	onAddExpenseRecord : function() {
 		var me = this;
 		var grid = me.lookup('expensegrid');
 		var store = grid.getStore();
@@ -113,7 +139,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			selection[0].set('pricePerUnit', pricePerUnit);
 		}
 	},
-	onSaveOrUpdateExpense : function(saveBtn) {
+	onSaveOrUpdateExpense : function() {
 		var me = this;
 		var model = me.getView().getViewModel();
 		var grid = me.lookup('expensegrid');
@@ -288,8 +314,5 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 			});
 		}
-	},
-	refreshGridView : function(grid) {
-		grid.getView().refresh();
-	}
+	}	
 });

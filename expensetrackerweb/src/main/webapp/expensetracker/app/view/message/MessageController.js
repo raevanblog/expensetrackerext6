@@ -36,7 +36,7 @@ Ext.define('expensetracker.view.message.MessageController', {
 			var params = [];		
 			params.push({
 					id: record.get('id'),
-					isNew : record.get('isNew'),
+					isNew : 'N',
 					msgto : record.get('msgto')
 			});
 			Ext.Ajax.request({
@@ -44,7 +44,8 @@ Ext.define('expensetracker.view.message.MessageController', {
 				method : 'PUT',
 				jsonData : Ext.JSON.encode(params),
 				success : function(response, opts) {				
-					view.setLoading(false);					
+					view.setLoading(false);
+					me.setCurrentView('messagedetails', {record: record});					
 				},
 				failure : function(response, opts) {
 					view.setLoading(false);
