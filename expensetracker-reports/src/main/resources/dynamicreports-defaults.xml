@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <DynamicReports>
-  <font fontName="Times-Roman" fontSize="10" pdfFontName="Times-Roman" pdfEncoding="UTF-8" pdfEmbedded="false"/>
+	<font fontName="Calibri" fontSize="11"/>
 </DynamicReports>

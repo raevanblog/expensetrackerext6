@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+	<fontFamily name="Calibri">
+		<normal>
+			<ttf>fonts/Calibri.ttf</ttf>
+		</normal>
+		<bold>
+			<ttf>fonts/Calibri_Bold.ttf</ttf>
+		</bold>
+		<italic>
+			<ttf>fonts/Calibri_Italic.ttf</ttf>
+		</italic>
+		<boldItalic>
+			<ttf>fonts/Calibri_Bold_Italic.ttf</ttf>
+		</boldItalic>
+		<pdfEncoding>Cp1252</pdfEncoding>
+		<pdfEmbedded>true</pdfEmbedded>
+	</fontFamily>
+</fontFamilies>
