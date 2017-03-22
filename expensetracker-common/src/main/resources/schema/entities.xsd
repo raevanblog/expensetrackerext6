@@ -167,8 +167,7 @@
 			<element name="exptype" type="string" />
 			<element name="price" type="double" minOccurs="0" />
 			<element name="qty" type="double" minOccurs="0" />
-			<element name="pricePerUnit" type="double" minOccurs="0" />
-			<element name="inventoryInd" type="string" />
+			<element name="pricePerUnit" type="double" minOccurs="0" />			
 		</sequence>
 	</complexType>
 
@@ -186,8 +185,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="id" type="long" />
-			<element name="expId" type="long" minOccurs="0" />
+			<element name="id" type="long" />			
 			<element name="itemName" type="string" />
 			<element ref="et:username" />
 			<element name="category" type="string" />

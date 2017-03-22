@@ -46,6 +46,13 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 			ctrl : true,
 			alt : true,
 			scope : me
+		}, {
+			key : 46,
+			ctrl : true,
+			fn : function() {
+				me.onDeleteCategoryBySelection();
+			},
+			scope : me
 		}]);
 	},
 	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
@@ -119,5 +126,17 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 		var store = grid.getStore();
 		store.remove(record);
 		expensetracker.util.Grid.refresh(grid);
-	}	
+	},
+	onDeleteCategoryBySelection : function() {
+		var me = this;
+		var categorygrid = me.getView();
+		var view = categorygrid.getView();
+		var selectedRecords = view.getSelectionModel().getSelection();
+		
+		if(selectedRecords != null && selectedRecords.length > 0) {
+			var store = categorygrid.getStore();
+			store.remove(selectedRecords);
+			expensetracker.util.Grid.refresh(categorygrid);
+		}
+	}
 });

@@ -81,13 +81,20 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			ctrl : true,
 			alt : true,
 			scope :  me
-		},{
+		}, {
 			key : 's',
 			fn : function() {
 				me.onSaveOrUpdateExpense();
 			},
 			ctrl : true,
 			alt : true,
+			scope : me
+		}, {
+			key : 46,
+			ctrl : true,
+			fn : function() {
+				me.onDeleteExpenseBySelection();
+			},
 			scope : me
 		}]);
 	},
@@ -110,8 +117,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			itemName : '',
 			price : 0,
 			expdate : viewmodel.get('expenseDate'),
-			qty : 0,
-			inventoryInd: 'N',
+			qty : 0,			
 			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);
@@ -154,6 +160,18 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var store = grid.getStore();
 		store.remove(record);
 		expensetracker.util.Grid.refresh(grid);
+	},
+	onDeleteExpenseBySelection : function() {
+		var me = this;
+		var expensegrid = me.lookup('expensegrid');		
+		var view = expensegrid.getView();
+		var selectedRecords = view.getSelectionModel().getSelection();
+		
+		if(selectedRecords != null && selectedRecords.length > 0) {
+			var store = expensegrid.getStore();			
+			store.remove(selectedRecords);			
+			expensetracker.util.Grid.refresh(expensegrid);
+		}
 	},
 	onShowCategory : function(addCategBtn) {
 		var me = this;
@@ -278,16 +296,13 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var record = btn.getWidgetRecord();		
 		
 		if(undefined === record.get('id') || null === record.get('id') || !Number.isInteger(record.get('id'))) {
-			expensetracker.util.Message.toast('Save expense before adding to Inventory.');
-		} else if('Y' === record.get('inventoryInd')) {
-			expensetracker.util.Message.toast(record.get('itemName') + " is already in Inventory");
+			expensetracker.util.Message.toast('Save item before adding to Inventory.');
 		} else {
 			var grid = me.lookup('expensegrid');
 			var view = me.getView();
 			var viewModel = view.getViewModel();
 			var requestArray = new Array();		
-			requestArray.push({
-				expId : record.get('id'),
+			requestArray.push({				
 				itemName : record.get('itemName'),
 				username : record.get('username'),
 				category : record.get('category'),
@@ -310,7 +325,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				},
 				failure : function(response, opts) {
 					view.setLoading(false);
-					expensetracker.util.Message.toast('Expense Tracker', 'Server Error');
+					expensetracker.util.Message.toast('Server Error');
 				}
 			});
 		}

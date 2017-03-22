@@ -187,7 +187,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	@Override
 	public Integer deleteExpense(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
-		for (Expense record : records) {
+		for (Expense record : records) {			
 			noOfRecords = noOfRecords + mapper.deleteExpense(record);
 		}
 		return noOfRecords;

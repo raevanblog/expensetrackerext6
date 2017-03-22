@@ -54,7 +54,41 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 					}
 				}
 			}
-		});	
+		});
+		
+		me.keyMap = Ext.create('Ext.util.KeyMap', inventorygrid.el, [{
+			key : 'n',
+			fn : function() {
+				me.onAddInventory();
+			},
+			ctrl : true,
+			alt : true,
+			scope :  me
+		}, {
+			key : 'r',
+			fn : function() {
+				expensetracker.util.Grid.refresh(inventorygrid);
+			},
+			ctrl : true,
+			alt : true,
+			scope :  me
+		},{
+			key : 's',
+			fn : function() {
+				me.onSaveInventory();
+			},
+			ctrl : true,
+			alt : true,
+			scope : me
+		}, {
+			key : 46,
+			ctrl : true,
+			fn : function() {
+				me.onDeleteInventoryBySelection();
+			},
+			scope : me
+		}]);
+			
 	},
 	onReload : function() {
 		var me = this;
@@ -77,6 +111,19 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 		var store = grid.getStore();
 		store.remove(record);
 		expensetracker.util.Grid.refresh(grid);
+	},
+	onDeleteInventoryBySelection : function() {
+		var me = this;
+		var inventorygrid = me.lookup('inventorygrid');		
+		var view = inventorygrid.getView();
+		var selectedRecords = view.getSelectionModel().getSelection();
+		
+		if(selectedRecords != null && selectedRecords.length > 0) {
+			var store = inventorygrid.getStore();
+			store.remove(selectedRecords);
+			expensetracker.util.Grid.refresh(inventorygrid);
+		}
+		
 	},
 	syncData : function(grid, closeWindow) {
 		var me = this;
@@ -139,8 +186,7 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 		var view = me.getView();
 		var viewmodel = view.getViewModel();
 		var model = new expensetracker.model.Inventory({
-			itemName : '',
-			expId : null,
+			itemName : '',			
 			qty : 0,
 			category : '',
 			mth : viewmodel.get('month'),

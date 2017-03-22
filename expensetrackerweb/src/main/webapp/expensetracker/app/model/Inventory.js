@@ -6,10 +6,6 @@ Ext.define('expensetracker.model.Inventory', {
 		type : 'int',
 		persist : false
 	}, {
-		name : 'expId',
-		allowNull : true,
-		type : 'int'
-	}, {
 		name : 'itemName',
 		type : 'string'
 	}, {
@@ -17,7 +13,7 @@ Ext.define('expensetracker.model.Inventory', {
 		type : 'string'
 	}, {
 		name : 'qty',
-		type : 'float',
+		type : 'float'
 	}, {
 		name : 'mth',
 		type : 'int'

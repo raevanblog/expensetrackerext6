@@ -6,6 +6,7 @@ Ext.define('expensetracker.view.inventory.InventoryWindow', {
 	iconCls : 'x-fa fa-file-text-o',
 	viewModel : 'inventorymodel',
 	closeToolText : 'Close',
+	animateTarget : true,
 	requires : [ 'expensetracker.view.inventory.InventoryGrid', 'expensetracker.view.inventory.InventoryWindowController', 'expensetracker.view.inventory.InventoryWindowModel' ],
 	bind : {
 		title : '{title}'

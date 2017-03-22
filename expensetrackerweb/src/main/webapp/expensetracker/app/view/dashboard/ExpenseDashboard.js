@@ -21,6 +21,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		xtype : 'container',		
 		height : 150,
 		layout : {
+			type : 'fit'			
+		},
+		cls : 'big-20 small-100 dash-panel shadow',		
+		items : [ {
+			xtype : 'summarypie',
+			reference : 'summarypie'
+		} ]
+	}, {
+		xtype : 'container',		
+		height : 150,
+		layout : {
 			type : 'hbox',
 			pack : 'middle'
 		},
@@ -63,6 +74,22 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			icontype : 'inventory',
 			listeners : {
 				itemclick : 'onOpenInventory'
+			}
+		} ]
+	}, {
+		xtype : 'container',		
+		height : 150,
+		layout : {
+			type : 'hbox',
+			pack : 'middle'
+		},
+		cls : 'big-20 small-100 dash-panel shadow',		
+		items : [ {
+			xtype : 'thumnailcontainer',
+			reference : 'reportdash',
+			icontype : 'pdf',
+			listeners : {
+				itemclick : 'onOpenReport'
 			}
 		} ]
 	}, {

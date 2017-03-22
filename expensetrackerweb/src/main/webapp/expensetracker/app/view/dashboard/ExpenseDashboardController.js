@@ -14,15 +14,18 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var expenseSheet = me.lookup('expsheetdash');
 		var incomeSheet = me.lookup('incomesheetdash');
 		var inventorySheet = me.lookup('inventorydash');
+		var report = me.lookup('reportdash');
 		
 		var expSheetStore = Ext.create('expensetracker.store.Thumbnail');
 		var incSheetStore = Ext.create('expensetracker.store.Thumbnail');
 		var invSheetStore = Ext.create('expensetracker.store.Thumbnail');
+		var reportStore = Ext.create('expensetracker.store.Thumbnail');
 		
 		
 		expSheetStore.removeAll();
 		incSheetStore.removeAll();
 		invSheetStore.removeAll();
+		reportStore.removeAll();
 		
 		expSheetStore.add({
 			title : 'Expense Sheet',
@@ -42,10 +45,17 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
+		
+		reportStore.add({
+			title : 'Expense Report',
+			month : expensetracker.util.Calendar.getCurrentMonth(),
+			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
+		});
 
 		expenseSheet.bindStore(expSheetStore);
 		incomeSheet.bindStore(incSheetStore);		
 		inventorySheet.bindStore(invSheetStore);
+		report.bindStore(reportStore);
 		
 		if(expensetracker.util.Session.isFirstLogin()) {
 			var settingsWindow = Ext.create('expensetracker.view.main.Settings', {
@@ -57,16 +67,16 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			settingsWindow.show();
 		}
 		
+		
+		
 		me.updateDashBoardSummary();
 	},
 
 	onOpenExpenseSheet : function(thumbnailcont, record, item, index, e) {
 
 		var me = this;
-		var model = me.getView().getViewModel();
-		var currentYear = expensetracker.util.Calendar.getCurrentYear();
-		var currentMonth = expensetracker.util.Calendar.getCurrentMonthNo();
-		var date = new Date(currentYear, currentMonth - 1);
+		var model = me.getView().getViewModel();		
+		var date = new Date(expensetracker.util.Calendar.getCurrentYear(), expensetracker.util.Calendar.getCurrentMonthNo() - 1);
 
 		var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
 			height : Ext.Element.getViewportHeight(),
@@ -79,10 +89,9 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		model.set('expenseStartDate', Ext.Date.getFirstDateOfMonth(date));
 		model.set('expenseDate', Ext.Date.getFirstDateOfMonth(date));
 		model.set('expenseEndDate', Ext.Date.getLastDateOfMonth(date));
-		model.set('month', currentMonth);
-		model.set('year', currentYear);
-		model.set('title', record.get('month') + ' - ' + currentYear);
-
+		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());
+		model.set('year', expensetracker.util.Calendar.getCurrentYear());
+		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
 		expenseWindow.show();
 	},
 	onOpenIncomeSheet : function() {
@@ -115,6 +124,16 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		
 		inventoryWindow.show();
 	},
+	onOpenReport : function() {
+		var me = this;
+		var pdfWindow = Ext.create('expensetracker.view.report.ReportWindow',{
+			height : 500,
+			width : 700,
+			modal : true,
+			reportUrl : expensetracker.util.Url.getReportingService() + '?username='+ expensetracker.util.Session.getUsername() + '&year=' + expensetracker.util.Calendar.getCurrentYear() + '&month=' + expensetracker.util.Calendar.getCurrentMonthNo()
+		});
+		pdfWindow.show();
+	},
 	updateDashBoardSummary : function() {
 		var me = this;		
 		var summaryContainer = me.lookup('summary');		
@@ -130,20 +149,41 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			success : function(response, opts) {
 				summaryContainer.setLoading(false);
 				var response = Ext.decode(response.responseText);
-				var dashData = response.result.any[0];
+				var dashData = response.result.any[0];				
 				if (dashData != null || dashData != undefined) {
 					var summary = dashData.summary;
+					var totalIncome = summary.totalIncome;
+					var totalExpense = summary.totalExpense;
+					var cashInHand = summary.cashInHand;
 					var data = [{
 						category : 'Total Income',
-						value : summary.totalIncome + ''
+						value : totalIncome + ''
 					},{
 						category : 'Total Expense',
-						value : summary.totalExpense + ''
+						value : totalExpense + ''
 					}, {
 						category : 'Balance',
-						value : summary.cashInHand + ''
+						value : cashInHand + ''
 					}];
 					summaryContainer.down('#summary-component').setData(data);
+					if(totalIncome !== 0.0)  {
+						var summaryPie = me.lookup('summarypie');
+						var polarChart = summaryPie.down('[itemId=summaryPolar]');
+						var pieStore = polarChart.getStore();
+						pieStore.removeAll();
+						
+						var expPerc = (totalExpense/totalIncome)*100;
+						var cashPerc = (cashInHand/totalIncome)*100;
+						
+						pieStore.add({
+							item : 'Expense',
+							value : expPerc
+						}, {
+							item : 'Cash in Hand',
+							value : cashPerc
+						});	
+						polarChart.bindStore(pieStore);
+					}
 				}
 			},
 			failure : function(response, opts) {

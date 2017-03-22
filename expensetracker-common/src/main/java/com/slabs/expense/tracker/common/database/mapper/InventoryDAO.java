@@ -5,8 +5,6 @@ import java.util.List;
 import com.slabs.expense.tracker.common.database.entity.Inventory;
 
 public interface InventoryDAO {
-
-	public Integer createInventoryByExpenseId(List<Inventory> records);
 	
 	public Integer createInventory(List<Inventory> records);
 

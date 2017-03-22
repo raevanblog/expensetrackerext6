@@ -7,7 +7,7 @@
 
 
 	<insert id="insertExpense" parameterType="java.util.List">
-		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT, INVENTORYIND) values
+		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
 		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.itemName},
 			#{record.category},
@@ -16,8 +16,7 @@
 			#{record.price},
 			#{record.expdate},
 			#{record.username},
-			#{record.pricePerUnit},
-			#{record.inventoryInd}
+			#{record.pricePerUnit}			
 		</foreach>
 	</insert>
 
@@ -44,10 +43,7 @@
 			</if>
 			<if test="pricePerUnit != null">
 				pricePerUnit=#{pricePerUnit},
-			</if>
-			<if test="inventoryInd != null">
-				inventoryInd=#{inventoryInd}
-			</if>
+			</if>			
 		</set>
 		where id=#{id}
 	</update>

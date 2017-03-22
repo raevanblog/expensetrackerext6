@@ -6,10 +6,6 @@ Ext.define('expensetracker.model.Expense', {
 		type : 'int',
 		persist : false
 	}, {
-		name : 'inventoryInd',
-		type : 'string',
-		defaultValue : 'N'
-	},{
 		name : 'itemName',
 		type : 'string'
 	}, {

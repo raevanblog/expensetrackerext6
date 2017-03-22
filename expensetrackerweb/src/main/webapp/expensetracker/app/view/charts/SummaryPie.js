@@ -6,14 +6,11 @@ Ext.define('expensetracker.view.charts.SummaryPie', {
 	items : [ {
 		xtype : 'polar',
 		itemId : 'summaryPolar',
-		theme : 'default-gradients',
+		colors : ['#FF0000', '#00FF22'],
 		store : Ext.create('Ext.data.Store'),
 		insetPadding : 10,
 		innerPadding : 20,
-		interactions : [ 'rotate' ],
-		legend : {
-			docked : 'bottom'
-		},
+		interactions : [ 'rotate' ],		
 		series : [ {
 			type : 'pie',
 			angleField : 'value',

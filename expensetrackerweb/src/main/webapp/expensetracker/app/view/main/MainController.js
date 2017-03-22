@@ -88,8 +88,7 @@ Ext.define('expensetracker.view.main.MainController', {
 	onMainViewRender : function() {
 		var me = this;
 		var model = me.getView().getViewModel();
-		var name = me.lookup('tbUserName');
-		var profileImg = me.lookup('tbProfileImage');		
+		var name = me.lookup('tbUserName');		
 		me.updateProfile();
 		me.setCurrentView('expensedashboard');
 	},
@@ -201,17 +200,25 @@ Ext.define('expensetracker.view.main.MainController', {
 		var model = me.getView().getViewModel();
 		model.set('usrname', expensetracker.util.Session.getName());
 		var picture = expensetracker.util.Session.getProfilePicture();
-
+		var profileImg = me.lookup('tbProfileImage');				
 		if (picture === null) {
 			var sex = expensetracker.util.Session.getUserSex();
 			if ('M' === sex) {
-				model.set('profileimg', 'resources/images/male-profile.png');
+				picture = 'resources/images/male-profile.png';			
 			} else {
-				model.set('profileimg', 'resources/images/female-profile.png');
+				picture = 'resources/images/female-profile.png';			
 			}
+			model.set('profileimg', picture);
 		} else {
 			model.set('profileimg', picture);
 		}
+		
+		me.tips = new Ext.tip.ToolTip({
+			target : profileImg.el,
+			anchor : 'bottom',
+			width : 165,
+			html : '<img style="height:150px; width:150px; border-radius: 75px;" src="' + picture + '"/>'
+		});	
 	},
 	onMessage : function(messageBtn) {
 		var me = this;
