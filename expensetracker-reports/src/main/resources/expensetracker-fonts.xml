@@ -13,7 +13,7 @@
 		<boldItalic>
 			<ttf>fonts/Calibri_Bold_Italic.ttf</ttf>
 		</boldItalic>
-		<pdfEncoding>Cp1252</pdfEncoding>
+		<pdfEncoding>Identity-H</pdfEncoding>
 		<pdfEmbedded>true</pdfEmbedded>
 	</fontFamily>
 </fontFamilies>

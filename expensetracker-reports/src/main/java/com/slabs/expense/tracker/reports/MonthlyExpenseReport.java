@@ -118,25 +118,26 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 
 		TextFieldBuilder<String> title = componentBuilder.text("Income Details")
 				.setStyle(styleProvider.getBoldStyle(12).setUnderline(Boolean.TRUE));
-		
+
 		TextFieldBuilder<String> expenseTitle = componentBuilder.text("Expense Details")
 				.setStyle(styleProvider.getBoldStyle(12).setUnderline(Boolean.TRUE));
-		
+
 		HorizontalListBuilder detailContainer = componentBuilder.horizontalList();
 
 		for (Income income : monthlyIncome) {
-			TextFieldBuilder<String> data = componentBuilder
-					.text(income.getIncometype() + " : " + getCurrency().currencySymbol() + " " + income.getIncome());
+			TextFieldBuilder<String> data = componentBuilder.text(income.getIncometype() + " : "
+					+ getCurrency().currencySymbol() + " " + income.getIncome());
 			detailContainer.add(data).newRow();
 			totalIncome = totalIncome + income.getIncome();
 		}
-		
+
 		TextFieldBuilder<String> totIncome = componentBuilder
 				.text("Total Income : " + getCurrency().currencySymbol() + " " + totalIncome);
 		detailContainer.add(totIncome).newRow();
-		
-		verticalContainer.add(title, componentBuilder.verticalGap(5), detailContainer, componentBuilder.verticalGap(10), expenseTitle, componentBuilder.verticalGap(5));
-		
+
+		verticalContainer.add(title, componentBuilder.verticalGap(5), detailContainer,
+				componentBuilder.verticalGap(10), expenseTitle, componentBuilder.verticalGap(5));
+
 		report.title(verticalContainer);
 	}
 
@@ -158,10 +159,10 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 				String.class);
 		TextColumnBuilder<BigDecimal> qty = columnProvider.getColumn(Column.QTY, BigDecimal.class)
 				.setFixedColumns(5);
-		TextColumnBuilder<Double> price = columnProvider.getColumn(Column.PRICE, Double.class)
-				.setDataType(this.currency);
-		TextColumnBuilder<Double> pricePerUnit = columnProvider
-				.getColumn(Column.PRICEPERUNIT, Double.class).setDataType(this.currency);
+		TextColumnBuilder<BigDecimal> price = columnProvider
+				.getColumn(Column.PRICE, BigDecimal.class).setDataType(this.currency);
+		TextColumnBuilder<BigDecimal> pricePerUnit = columnProvider
+				.getColumn(Column.PRICEPERUNIT, BigDecimal.class).setDataType(this.currency);
 
 		addColumns(rowNum, expDate, itemName, expenseType, expenseCategory, qty, price,
 				pricePerUnit);

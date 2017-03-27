@@ -1,6 +1,6 @@
 package com.slabs.expense.tracker.reports.column.data.type;
 
-import net.sf.dynamicreports.report.builder.datatype.DoubleType;
+import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
 
 /**
  * {@link Currency} is an abstract class extending {@link DoubleType}.
@@ -8,7 +8,7 @@ import net.sf.dynamicreports.report.builder.datatype.DoubleType;
  * @author Shyam Natarajan
  *
  */
-public abstract class Currency extends DoubleType {
+public abstract class Currency extends BigDecimalType {
 
 	private static final long serialVersionUID = 1L;
 
