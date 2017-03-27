@@ -134,30 +134,7 @@ public class ExpenseWebService {
 		}
 
 	}
-
-	/**
-	 * This method will return a list of item names for which expenses have been
-	 * recorded, in the
-	 * {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * 
-	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
-	 * @throws WebServiceException
-	 *             throws {@link WebServiceException}
-	 */
-	@Path("expense/expensenames/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getItemNames() throws ExpenseTrackerException {
-		try {
-			ExpenseService service = ServiceFactory.getInstance()
-					.getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-			return ResponseGenerator.getSuccessResponse(service.selectExpenseNames(),
-					Operation.SELECT);
-		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
-		}
-	}
+	
 	
 	/**
 	 * 

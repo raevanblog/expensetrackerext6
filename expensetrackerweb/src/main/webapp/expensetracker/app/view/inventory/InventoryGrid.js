@@ -61,7 +61,7 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 			xtype : 'combobox',
 			allowBlank : false,
 			focusOnToFront : true,
-			store : 'ExpenseName',
+			store : 'Dictionary',
 			displayField : 'itemName',
 			valueField : 'itemName',
 			typeAhead : true,

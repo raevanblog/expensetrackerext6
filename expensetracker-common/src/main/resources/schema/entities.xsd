@@ -207,7 +207,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="itemName" type="string" />
+			<element name="name" type="string" />
 		</sequence>
 	</complexType>
 

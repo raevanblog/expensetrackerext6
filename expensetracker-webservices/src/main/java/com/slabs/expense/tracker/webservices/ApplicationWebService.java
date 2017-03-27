@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.webservices;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
@@ -89,6 +90,36 @@ public class ApplicationWebService {
 			ApplicationService service = ServiceFactory.getInstance()
 					.getService(Services.APPLICATION_SERVICE, ApplicationService.class);
 			return ResponseGenerator.getSuccessResponse(service.getCurrency(), Operation.SELECT);
+		} catch (Exception e) {
+			L.error("Exception occurred, {}", e);
+			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+		}
+	}
+
+	/**
+	 * This method will return a list of item names for which expenses have been
+	 * recorded, in the
+	 * {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * 
+	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
+	 * @throws WebServiceException
+	 *             throws {@link WebServiceException}
+	 */
+	@Path("application/dictionary/")
+	@GET
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getItemNames(@QueryParam("type") String type)
+			throws ExpenseTrackerException {
+		try {
+			ApplicationService service = ServiceFactory.getInstance()
+					.getService(Services.APPLICATION_SERVICE, ApplicationService.class);
+
+			if ("items".equals(type)) {
+				return ResponseGenerator.getSuccessResponse(service.getExpenseNames(), Operation.SELECT);
+			}
+
+			return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST,
+					"Invalid dictionary type");
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);

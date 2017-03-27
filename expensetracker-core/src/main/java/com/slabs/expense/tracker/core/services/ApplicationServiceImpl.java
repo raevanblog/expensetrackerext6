@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.Currency;
+import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.ExpenseType;
 import com.slabs.expense.tracker.common.database.entity.Income;
 import com.slabs.expense.tracker.common.database.entity.IncomeType;
@@ -132,6 +133,19 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	public Integer createCurrency(List<Currency> records) throws Exception {
 		return dao.createCurrency(records);
+	}
+	
+	
+	/**
+	 * 
+	 * @return {@link Dictionary} - List of Item Names in the EXPENSE
+	 *         table
+	 * @throws Exception
+	 *             throws {@link Exception}
+	 */
+	@Override
+	public List<Dictionary> getExpenseNames() throws Exception {
+		return dao.getExpenseNames();
 	}
 	
 }

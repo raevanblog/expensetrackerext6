@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
@@ -192,17 +191,5 @@ public class ExpenseServiceImpl implements ExpenseService {
 		}
 		return noOfRecords;
 	}
-
-	/**
-	 * 
-	 * @return {@link Dictionary} - List of Item Name recorded in the EXPENSE
-	 *         table
-	 * @throws Exception
-	 *             throws {@link Exception}
-	 */
-	@Override
-	public List<Dictionary> selectExpenseNames() throws Exception {
-		return mapper.selectExpenseNames();
-	}
-	
+		
 }

@@ -91,7 +91,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'combobox',
 			allowBlank : false,
 			focusOnToFront : true,
-			store : 'ExpenseName',
+			store : 'Dictionary',
 			displayField : 'itemName',
 			valueField : 'itemName',
 			typeAhead : true,

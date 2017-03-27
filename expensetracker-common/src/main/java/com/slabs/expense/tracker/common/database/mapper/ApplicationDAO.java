@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.common.database.mapper;
 import java.util.List;
 
 import com.slabs.expense.tracker.common.database.entity.Currency;
+import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.ExpenseType;
 import com.slabs.expense.tracker.common.database.entity.IncomeType;
 
@@ -31,5 +32,7 @@ public interface ApplicationDAO {
 	public Integer updateCurrency(Currency record);
 
 	public Integer deleteCurrency(Currency record);
+	
+	public List<Dictionary> getExpenseNames();
 	
 }

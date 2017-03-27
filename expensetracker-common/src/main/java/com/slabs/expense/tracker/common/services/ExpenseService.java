@@ -2,7 +2,6 @@ package com.slabs.expense.tracker.common.services;
 
 import java.util.List;
 
-import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.Graph;
 
@@ -24,8 +23,6 @@ public interface ExpenseService {
 
 	public List<Expense> selectExpenseById(Integer id) throws Exception;
 
-	public Integer deleteExpense(List<Expense> records) throws Exception;
-
-	public List<Dictionary> selectExpenseNames() throws Exception;
+	public Integer deleteExpense(List<Expense> records) throws Exception;	
 	
 }

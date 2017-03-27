@@ -5,6 +5,14 @@
 
 <mapper namespace="com.slabs.expense.tracker.common.database.mapper.ApplicationDAO">
 
+	<resultMap type="com.slabs.expense.tracker.common.database.entity.Dictionary" id="Dictionary">
+		<result column="ITEMNAME" property="name" />
+	</resultMap>
+
+	<select id="getExpenseNames" resultMap="Dictionary">
+		select distinct ITEMNAME from EXPENSETRACKER.EXPENSE
+	</select>
+
 	<select id="getExpenseType" resultType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
 		select * from EXPENSETRACKER.EXPENSETYPE
 	</select>
@@ -88,5 +96,5 @@
 	<delete id="deleteCurrency" parameterType="com.slabs.expense.tracker.common.database.entity.IncomeType">
 		delete from EXPENSETRACKER.CURRENCY where id=#{id}
 	</delete>
-	
+
 </mapper>

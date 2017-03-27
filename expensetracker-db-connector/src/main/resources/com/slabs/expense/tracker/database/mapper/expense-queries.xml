@@ -4,8 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.slabs.expense.tracker.common.database.mapper.ExpenseDAO">
 
-
-
 	<insert id="insertExpense" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
 		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
@@ -16,7 +14,7 @@
 			#{record.price},
 			#{record.expdate},
 			#{record.username},
-			#{record.pricePerUnit}			
+			#{record.pricePerUnit}
 		</foreach>
 	</insert>
 
@@ -43,7 +41,7 @@
 			</if>
 			<if test="pricePerUnit != null">
 				pricePerUnit=#{pricePerUnit},
-			</if>			
+			</if>
 		</set>
 		where id=#{id}
 	</update>
@@ -107,11 +105,7 @@
 		select * from EXPENSETRACKER.EXPENSE where
 		id=#{param1}
 	</select>
-
-	<select id="selectExpenseNames" resultType="com.slabs.expense.tracker.common.database.entity.Dictionary">
-		select distinct itemname from EXPENSETRACKER.EXPENSE
-	</select>
-
+	
 	<delete id="deleteExpense">
 		delete from EXPENSETRACKER.EXPENSE
 		where id=#{id}
@@ -151,5 +145,5 @@
 			where categoryId=#{categoryId}
 		</if>
 	</delete>
-	
+
 </mapper>
