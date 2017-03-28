@@ -96,7 +96,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		xtype : 'linechart',
 		reference : 'expensevsincome',
 		title : 'Expense vs Income',
-		height : 400,
+		height : 500,
 		iconCls : 'x-fa fa-line-chart',
 		listeners : {
 			afterrender : 'onRenderExpenseVsIncome'
@@ -106,7 +106,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		xtype : 'expensechart',
 		reference : 'categorychartpanel',
 		title : 'Expense',
-		height : 400,
+		height : 500,
 		iconCls : 'x-fa fa-line-chart',
 		listeners : {
 			afterrender : 'onRenderCategoryExpense'

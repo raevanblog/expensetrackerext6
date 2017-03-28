@@ -31,7 +31,7 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	}, '->', {
 		xtype : 'button',
 		ui : 'toolbar',
-		text : 'Message',
+		text : 'Notification',
 		handler : 'onMessage',
 		iconCls : 'x-fa fa-envelope fa-2x'
 	}, {

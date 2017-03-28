@@ -15,8 +15,7 @@ Ext.define('expensetracker.view.profile.ChangePassword', {
 	items : [ {
 		xtype : 'form',
 		method : 'PUT',
-		jsonSubmit : true,
-		cls : 'grey-border shadow',		
+		jsonSubmit : true,		
 		url : expensetracker.util.Url.getPasswordService(),
 		reference : 'changepwdform',
 		bodyPadding : '10 10 10 10',
@@ -84,13 +83,6 @@ Ext.define('expensetracker.view.profile.ChangePassword', {
 			},
 			inputType : 'password'
 		}, {
-			xtype : 'label',			
-			reference : 'chgPwdErrorLbl',
-			text : '  ',
-			style : {
-				color : 'red'
-			}
-		},{
 			xtype : 'button',
 			scale : 'large',
 			margin : '10 0 10 0',
@@ -98,6 +90,12 @@ Ext.define('expensetracker.view.profile.ChangePassword', {
 			text : 'Submit',
 			handler : 'onSubmitPwd',
 			formBind : true
-		} ]		
+		}, {
+            xtype: 'errorstate',
+			height : 50,
+			padding : '15 0 0 20',
+            reference: 'chgPwdErrorLbl',                      
+            flex: 1            
+        } ]		
 	} ]
 });

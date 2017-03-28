@@ -17,7 +17,8 @@ Ext.define('expensetracker.view.message.MessageController', {
 		var me = this;
 		var details = replyBtn.up('panel');
 		var replywin = Ext.apply({
-			xtype : 'emailcompose'
+			xtype : 'emailcompose',
+			reference : 'compose'
 		}, {
 			modal : true,
 			title : 'Reply',
@@ -71,7 +72,8 @@ Ext.define('expensetracker.view.message.MessageController', {
 
 		if(params && params.isWindow) {
 			var win = Ext.apply({
-				xtype : view
+				xtype : view,
+				reference : params.reference
 			},params);
 			Ext.create(win);			
 		}else {
@@ -127,6 +129,13 @@ Ext.define('expensetracker.view.message.MessageController', {
 			
 			compose.down('#messagesubject').setValue('Reply: ' + record.get('subject'));
 			compose.down('#messageeditor').setValue(message);
+		}
+	},
+	onDiscardMessage : function(button) {
+		var me = this;
+		var compose = button.up('#compose');
+		if(null != compose) {
+			compose.close();
 		}
 	}
 });

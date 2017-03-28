@@ -3,6 +3,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 	xtype : 'expensechart',
 	alias : 'view.expensechart',
 	layout : 'fit',
+	requires: ['Ext.chart.theme.Muted'],
 	tbar : [ '->', {
 		iconCls : 'x-fa fa-eye',
 		tooltip : 'Preview',
@@ -12,10 +13,10 @@ Ext.define('expensetracker.view.charts.Expense', {
 	items : [ {
 		xtype : 'cartesian',
 		itemId : 'expensechart',
-		reference : 'expensechart',
-		legend : {
-			docked : 'top'
-		},
+		reference : 'expensechart',		
+		theme: {
+            type: 'muted'
+        },
 		insetPadding : {
 			top : 30,
 			bottom : 10,
@@ -23,22 +24,32 @@ Ext.define('expensetracker.view.charts.Expense', {
 			right : 20
 		},
 		axes : [ {
-			type : 'numeric',
+			type : 'numeric3d',
 			minimum : 100,
 			position : 'left',
 			titleMargin : 20,
+			majorTickSteps: 10,
 			title : {
 				text : 'Expense'
-			}
+			},
+			grid: {
+                odd: {
+                    fillStyle: 'rgba(255, 255, 255, 0.06)'
+                },
+                even: {
+                    fillStyle: 'rgba(0, 0, 0, 0.03)'
+                }
+            }
 		}, {
-			type : 'category',
+			type : 'category3d',
 			position : 'bottom',
+			grid: true,
 			label : {
 				rotate : -45
 			}
 		} ],
 		series : {
-			type : 'bar',
+			type : 'bar3d',
 			title : 'Expense',
 			xField : 'category',
 			yField : 'expense',
@@ -53,7 +64,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 				field : 'expense',
 				display : 'insideEnd',
 				renderer : function(value) {
-					return value.toFixed(2);
+					return expensetracker.util.Session.getCurrencySymbol() + ' ' + Ext.util.Format.number(value, '0,000.00');
 				}
 			},
 			tooltip : {

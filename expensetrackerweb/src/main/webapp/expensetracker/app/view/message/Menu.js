@@ -12,6 +12,7 @@ Ext.define('expensetracker.view.message.Menu', {
 		params : {
 			isWindow : true,
 			type : 'NEW',
+			reference : 'compose',
 			modal : true,
 			contrain : true,
 			height : '85%',

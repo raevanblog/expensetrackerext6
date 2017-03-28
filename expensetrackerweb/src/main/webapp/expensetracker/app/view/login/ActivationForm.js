@@ -3,24 +3,22 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 	alias : 'view.activationform',
 	xtype : 'activationform',
 	scrollable : 'y',
-	layout : 'responsivecolumn',
+	layout : {
+		type : 'hbox',
+		pack : 'middle'
+	},
 	items : [ {
-		xtype : 'component',
-		padding : '10 10 10 10',
-		html : '<h1>Activate Your Account</h1><br><p>Before you can login,you must active your account with the activation email sent to your email address.</p><p>If you did not receive this e-mail, please check your junk/spam folder.</p><p>Click <a href="javascript:void(0);">here</a> to resend the activation email</p>',
-		cls : 'big-100 small-100',
-		listeners : {
-			el : {
-				delegate : 'a',
-				click : function() {
-					expensetracker.util.Message.toast('Sending Activation E-mail');
-				}
+		xtype : 'form',		
+		platformConfig : {
+			desktop : {
+				width : 600
+			},
+
+			'!desktop' : {
+				width : '80%'
 			}
-		}
-	}, {
-		xtype : 'form',
-		cls : 'big-40 small-100',
-		padding : '5 10 10 10',
+		},
+		padding : '100 0 0 0',
 		bodyPadding : '10 10 10 10',
 		layout : {
 			type : 'vbox',
@@ -31,6 +29,8 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 			fieldLabel : 'Username',
 			reference : 'activationuser',
 			labelAlign : 'top',
+			height : 75,
+			flex : 1,
 			bind : {
 				value : '{username}'
 			},
@@ -40,23 +40,26 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 			fieldLabel : 'Activation Key',
 			reference : 'activationkey',
 			labelAlign : 'top',
+			height : 75,
+			flex : 1,
 			bind : {
 				value : '{key}'
 			},
 			labelSeparator : ''
-		} ],
-		buttons : [ {
+		},{
+			xtype: 'button',
 			text : 'Activate',
-			iconCls : 'x-fa fa-check',
+			scale : 'large',
+			ui : 'soft-green',
+			formBind : true,
+			iconCls : 'x-fa fa-check',			
 			handler : 'onActivate'
-		} ]
-	}, {
-		xtype : 'component',
-		reference : 'activateerrorlbl',
-		padding : '5 10 10 10',
-		cls : 'big-100 small-100',
-		style : {
-			color : 'red'
-		}
-	} ]
+		},{
+            xtype: 'errorstate',
+			height : 50,
+			padding : '15 0 0 20',
+            reference: 'formerrorlabel',                      
+            flex: 1            
+        }]		
+	}]
 });

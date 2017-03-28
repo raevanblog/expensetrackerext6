@@ -46,12 +46,19 @@ Ext.define('expensetracker.view.login.LoginController', {
 				},
 				failure : function(form, action) {
 					view.setLoading(false);
-					var errorlbl = me.lookup('errorlbl');
-					var message = action.result.message;
-					errorlbl.update('<p>* ' + message);
+					me.updateErrorLbl(action.result.message);
 				}
 			})
 		}
+	},
+	updateErrorLbl : function(error) {
+		var me = this;
+		var errorlabel = me.lookup('errorlbl');
+		var errors = [];
+			
+		errors.push({name : 'Error', error: error});
+
+		errorlabel.setErrors(errors);
 	},
 	onEnter : function(textfield, e) {
 		var me = this;

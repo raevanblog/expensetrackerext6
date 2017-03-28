@@ -220,3 +220,11 @@
   border-width: 1px;
   border-color: $base-border-color;
 }
+
+.form-error-state {
+    line-height: 1;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    cursor: default;    
+    font-size: $panel-header-font-size
+}

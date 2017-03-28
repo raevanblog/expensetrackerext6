@@ -108,14 +108,12 @@ Ext.define('expensetracker.view.login.LoginForm', {
 			reference : 'loginBtn',
 			handler : 'onLogin'
 		}, {
-			xtype : 'label',
-			padding : '10 10 10 10',
-			reference : 'errorlbl',
-			text : '  ',
-			style : {
-				color : 'red'
-			}
-		} ]
+            xtype: 'errorstate',
+			height : 50,
+			padding : '15 0 0 20',
+            reference: 'errorlbl',                      
+            flex: 1            
+        }]
 	} ]
 
 });

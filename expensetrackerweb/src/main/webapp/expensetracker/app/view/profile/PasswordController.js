@@ -5,8 +5,7 @@ Ext.define('expensetracker.view.profile.PasswordController', {
 		var me = this;
 		var view = me.getView();
 		var chgPwdForm = me.lookup('changepwdform');
-		var errorLbl = me.lookup('chgPwdErrorLbl');
-		errorLbl.setText('');
+		var errorLbl = me.lookup('chgPwdErrorLbl');		
 		if (chgPwdForm.isValid()) {
 			view.setLoading('Updating...');
 			chgPwdForm.submit({
@@ -31,13 +30,22 @@ Ext.define('expensetracker.view.profile.PasswordController', {
 							view.close();
 						}
 						expensetracker.util.Message.toast(resObj.status_Message);
-					} else if (400 === resObj.status_Code) {
-						errorLbl.setText('* ' + resObj.exception);
+					} else if (400 === resObj.status_Code) {						
+						me.updateErrorLbl(resObj.exception);
 					} else {
 						expensetracker.util.Message.toast('* ' + resObj.status_Message);
 					}
 				}
 			});
 		}
-	}
+	},
+	updateErrorLbl : function(error) {
+		var me = this;
+		var errorlabel = me.lookup('chgPwdErrorLbl');
+		var errors = [];
+			
+		errors.push({name : 'Error', error: error});
+
+		errorlabel.setErrors(errors);
+	},
 });

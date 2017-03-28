@@ -20,10 +20,9 @@ Ext.define('expensetracker.view.message.Message', {
 			align : 'stretch'
 		}
 	},
-	items : [ {
+	items : [ /*{
 		xtype : 'emailmenu',
-		cls : 'shadow',
-		style : 'border-width:1px;',
+		cls : 'shadow',		
 		margin : '20 20 20 20',
 		platformConfig : {
 			desktop : {
@@ -39,7 +38,7 @@ Ext.define('expensetracker.view.message.Message', {
 			click : 'onEmailMenuClick'
 		},
 		height : '100%'
-	}, {
+	},*/ {
 		xtype : 'container',
 		itemId : 'viewer',
 		margin : '20 20 20 20',

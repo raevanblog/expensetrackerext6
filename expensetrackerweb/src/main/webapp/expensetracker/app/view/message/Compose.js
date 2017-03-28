@@ -3,7 +3,8 @@ Ext.define('expensetracker.view.message.Compose', {
 	xtype : 'emailcompose',
 	alias : 'view.emailcompose',
 	closeToolText : 'Close',
-	title : 'New Message',
+	itemId : 'compose',
+	title : 'New Message',	
 	autoShow : true,
 	layout : {
 		type : 'anchor',
@@ -48,11 +49,13 @@ Ext.define('expensetracker.view.message.Compose', {
 	bbar : ['->',{
 		xtype : 'button',
 		ui : 'soft-red',		
-		text : 'Discard'
+		text : 'Discard',
+		handler : 'onDiscardMessage'
 	}, {
 		xtype : 'button',
 		ui : 'soft-green',
 		formBind : true,
-		text : 'Send'
+		text : 'Send',
+		handler : 'onSendMessage'
 	}]
 });

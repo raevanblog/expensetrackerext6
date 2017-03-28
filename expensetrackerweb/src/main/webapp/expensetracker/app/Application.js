@@ -14,9 +14,9 @@ Ext.define('expensetracker.Application', {
 			'expensetracker.view.login.Activation', 'expensetracker.view.message.ContactUs', 'expensetracker.util.Message', 'expensetracker.view.main.Main', 'Ext.data.validator.Presence',
 			'Ext.form.FieldSet', 'Ext.form.FieldContainer', 'Ext.form.SliderField', 'Ext.form.field.ComboBox', 'Ext.form.Panel', 'Ext.form.field.Text', 'Ext.layout.container.HBox',
 			'Ext.layout.container.VBox', 'Ext.list.Tree', 'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.form.field.Display', 'Ext.plugin.Viewport', 'Ext.form.field.TextArea',
-			'Ext.form.FieldContainer', 'expensetracker.util.Calendar', 'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Category', 'Ext.chart.series.Bar',
-			'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line',
-			'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border', 'Ext.form.field.File', 'Ext.form.field.Number', 'Ext.form.field.HtmlEditor', 'Ext.util.Cookies', 'Ext.window.Window', 'Ext.window.Toast',
+			'Ext.form.FieldContainer', 'expensetracker.util.Calendar', 'Ext.chart.CartesianChart', 'Ext.chart.axis.Numeric', 'Ext.chart.axis.Numeric3D', 'Ext.chart.grid.HorizontalGrid3D', 'Ext.chart.axis.Category', 'Ext.chart.series.Bar',
+			'Ext.chart.interactions.ItemHighlight', 'Ext.chart.theme.DefaultGradients', 'Ext.chart.PolarChart', 'Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate', 'Ext.chart.series.Line', 'Ext.chart.axis.Category3D', 'Ext.chart.grid.VerticalGrid3D', 'Ext.chart.series.Bar3D', 'Ext.ux.PreviewPlugin',
+			'Ext.chart.interactions.PanZoom', 'Ext.layout.container.Border', 'Ext.form.field.File', 'Ext.form.field.Number', 'Ext.form.field.HtmlEditor', 'Ext.util.Cookies', 'Ext.window.Window', 'Ext.window.Toast', 'expensetracker.component.ErrorState',
 			'Ext.menu.Menu', 'Ext.window.MessageBox','Ext.selection.CheckboxModel', 'Ext.util.KeyMap' ],
 	defaultToken : 'login',
 	init : function() {

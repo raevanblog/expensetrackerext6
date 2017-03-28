@@ -27,13 +27,11 @@ Ext.define('expensetracker.view.login.Activation', {
 		reference : 'formcard',
 		region : 'center',
 		layout : {
-			type : 'fit'
+			type : 'card'
 		},
 		items : [ {
 			xtype : 'activationform',
-			style : {
-				backgroundColor : '#FFFFFF'
-			}
+			cls : 'container-background'
 		} ]
 	} ]
 });

@@ -215,9 +215,9 @@ Ext.define('expensetracker.view.main.MainController', {
 		
 		me.tips = new Ext.tip.ToolTip({
 			target : profileImg.el,
-			anchor : 'bottom',
+			anchor : 'top',
 			width : 165,
-			html : '<img style="height:150px; width:150px; border-radius: 75px;" src="' + picture + '"/>'
+			html : '<img alt="Profile Picture" style="height:150px; width:150px; border-radius: 75px;" src="' + picture + '"/>'
 		});	
 	},
 	onMessage : function(messageBtn) {

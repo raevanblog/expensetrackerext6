@@ -17,12 +17,7 @@ Ext.define('expensetracker.view.message.Details', {
 		ui : 'toolbar',
 		iconCls : 'x-fa fa-backward',
 		handler : 'onDetailsBack'
-	}, {
-		text : 'Reply',
-		ui : 'toolbar',
-		iconCls : 'x-fa fa-mail-reply',
-		handler : 'onDetailsReply'
-	} ],
+	}],
 	items : [ {
 		xtype : 'container',
 		height : 85,

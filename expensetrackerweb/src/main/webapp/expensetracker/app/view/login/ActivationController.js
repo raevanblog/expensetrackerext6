@@ -15,8 +15,7 @@ Ext.define('expensetracker.view.login.ActivationController', {
 				activationkey : activationkey
 			}),
 			success : function(response, opts) {
-				view.setLoading(false);
-				var errorLbl = me.lookup('activateerrorlbl');
+				view.setLoading(false);				
 				var response = Ext.decode(response.responseText);
 				if (response.success) {
 					expensetracker.util.Message.toast('Activation Successful');
@@ -24,14 +23,22 @@ Ext.define('expensetracker.view.login.ActivationController', {
 					window.location = "#login";
 					Ext.widget('login');
 				} else {
-					errorLbl.update('<p>* ' + response.message + ' Mail To :' + expensetracker.util.Message.getMailTo('Activation failed for ' + username) + '</p>');
+					me.updateErrorLbl(response.message);
 				}
 			},
 			failure : function(response, opts) {
 				view.setLoading(false);
-				var errorLbl = me.lookup('activateerrorlbl');
-				errorLbl.update('<p>* ' + response.message + ' Mail To :' + expensetracker.util.Message.getMailTo() + '</p>');
+				me.updateErrorLbl(response.message);
 			}
 		});
+	},
+	updateErrorLbl : function(error) {
+		var me = this;
+		var errorlabel = me.lookup('formerrorlabel');
+		var errors = [];
+			
+		errors.push({name : 'Error', error: error.message});
+
+		errorlabel.setErrors(errors);
 	}
 });
