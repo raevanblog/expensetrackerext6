@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+# Expense Tracker
 
-You can use the [editor on GitHub](https://github.com/raevanblog/expensetrackerext6/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Expense Tracker is a open source web application developed using EXT-JS 6. This application provides the UI to track daily expenses, generate expense reports, review spending trend etc.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This tool will generate monthly and yearly reports for the user based on the expenses they have recorded. Reports are generated using [Dynamic Reports](http://dynamicreports.org/).
 
-### Markdown
+# Developers
+1. Shyam Natarajan [(Linked-IN)](https://in.linkedin.com/in/shyam-natarajan-33b10421) [(GitHub)](https://github.com/raevanblog)
+2. Shri Priya S [(Linked-IN)](https://in.linkedin.com/in/shri-priya-s-a6a90714)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# Blog
+* [Raevan Blog](https://raevanblog.blogspot.in/)
 
-```markdown
-Syntax highlighted code block
+# Project Modules
+* ### expensetrackerweb
+  Web module provides the rich UI for Expense Tracker application. UI is developed using EXT-JS 6.
 
-# Header 1
-## Header 2
-### Header 3
+* ### expensetracker-core
+  Core module provides the core components to process the expense. 
 
-- Bulleted
-- List
+* ### expensetracker-db-connector
+  Database connector module will make use of MyBatis framework to communicate with database.
 
-1. Numbered
-2. List
+* ### expensetracker-common
+  Common module will provide the entities and common interfaces that are used for implementing the Expense Tracker  services
 
-**Bold** and _Italic_ and `Code` text
+* ### expensetracker-reports
+  Reporting module will generate the reports using Dynamic Reports.
 
-[Link](url) and ![Image](src)
-```
+* ### expensetracker-util
+  Utility module will have the Utility API's for processing XML, JSON, sending email etc.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+  ![Architecture](https://s18.postimg.org/e02oyicgp/diag.png)
 
-### Jekyll Themes
+  
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/raevanblog/expensetrackerext6/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+   
+  
