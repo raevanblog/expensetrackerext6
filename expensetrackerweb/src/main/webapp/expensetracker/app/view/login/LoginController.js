@@ -55,7 +55,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var errorlabel = me.lookup('errorlbl');
 		var errors = [];
-			
+			errorlabel.setHidden(false);
 		errors.push({name : 'Error', error: error});
 
 		errorlabel.setErrors(errors);
@@ -117,17 +117,22 @@ Ext.define('expensetracker.view.login.LoginController', {
 						url : expensetracker.util.Url.getUserNameAvailability(),
 						method : 'GET',
 						params : {
-							checkAvailable : username
+							isAvailable : username
 						},
 						success : function(response, opts) {
 							registercontainer.setLoading(false);
 							var response = Ext.decode(response.responseText);
 							var isAvailable = response.isAvailable;
 							textfield.isAvailable = isAvailable;
-							if (isAvailable) {
-								usrNmeAvailInd.update('<img src="resources/images/check.ico"/> ' + response.message);
+							if (isAvailable) {										
+								usrNmeAvailInd.setErrors(null);
 							} else {
-								usrNmeAvailInd.update('<img src="resources/images/cross.ico"/> ' + response.message);
+								var errors = [];
+								errors.push({
+									name : 'Username',
+									error : response.message
+								});
+								usrNmeAvailInd.setErrors(errors);
 							}
 						},
 						failure : function(response, opts) {

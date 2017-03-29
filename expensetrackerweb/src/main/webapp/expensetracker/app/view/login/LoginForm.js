@@ -110,6 +110,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 		}, {
             xtype: 'errorstate',
 			height : 50,
+			hidden : true,
 			padding : '15 0 0 20',
             reference: 'errorlbl',                      
             flex: 1            

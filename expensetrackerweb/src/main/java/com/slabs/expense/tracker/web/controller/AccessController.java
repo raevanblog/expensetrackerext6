@@ -145,7 +145,7 @@ public class AccessController {
 			UserServiceImpl service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 					UserServiceImpl.class);
 
-			String username = request.getParameter("checkAvailable");
+			String username = request.getParameter("isAvailable");
 			Boolean availability = service.isUserNameAvailable(username);
 
 			output.put(WebConstants.SUCCESS, Boolean.TRUE);

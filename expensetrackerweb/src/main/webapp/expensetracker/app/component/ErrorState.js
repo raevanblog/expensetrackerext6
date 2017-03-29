@@ -6,6 +6,7 @@ Ext.define('expensetracker.component.ErrorState', {
 	validCls: Ext.baseCSSPrefix + 'dd-drop-icon',
 	baseCls: 'form-error-state',
 	validText: '',
+	closable : false,
     invalidText: 'Exception',
 	constructor : function(config) {
 		var me = this;
@@ -37,7 +38,7 @@ Ext.define('expensetracker.component.ErrorState', {
 				anchor: 'top',
 				title : 'Details',
 				mouseOffset: [-11, -2],
-				closable: true,
+				closable: me.closable,
 				constrainPosition: false,
 				cls: 'errors-tip'
 			});

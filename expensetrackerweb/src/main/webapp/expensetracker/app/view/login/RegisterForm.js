@@ -132,7 +132,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				labelSeparator : '',
 				maxLength : 30,
 				vtype : 'username',
-				flex : 0.8,
+				flex : 0.6,
 				triggers : {
 					glyph : {
 						cls : 'textfield-trigger-icon user-trigger'
@@ -143,11 +143,13 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 					change : 'onUserNameChage'
 				}
 			}, {
-				xtype : 'component',
-				reference : 'usrNmeAvailInd',
-				padding : '35 0 0 10',
-				flex : 0.2
-			} ]
+				xtype: 'errorstate',
+				height : 50,
+				margin : '0 0 0 5',
+				padding : '15 0 0 20',
+				reference: 'usrNmeAvailInd',				
+				flex: 0.4
+			}]
 		}, {
 			xtype : 'fieldcontainer',
 			layout : {
