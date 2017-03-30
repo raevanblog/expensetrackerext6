@@ -47,5 +47,5 @@ Ext.define('expensetracker.view.profile.PasswordController', {
 		errors.push({name : 'Error', error: error});
 
 		errorlabel.setErrors(errors);
-	},
+	}
 });
