@@ -112,7 +112,8 @@ public class AccessController {
 				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 						UserService.class);
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
-				List<UserInfo> list = service.selectUser(user.getUsername(), Boolean.TRUE, Boolean.FALSE);
+				List<UserInfo> list = service.selectUser(user.getUsername(), Boolean.TRUE,
+						Boolean.FALSE);
 				if (list != null && !list.isEmpty()) {
 					user = list.get(0);
 					session.removeAttribute(WebConstants.LOGGED_IN_USER);
@@ -137,30 +138,35 @@ public class AccessController {
 		}
 	}
 
-	@RequestMapping(value = "username", method = { RequestMethod.GET })
-	public ModelAndView isUserNameAvailable(HttpServletRequest request,
+	@RequestMapping(value = "checkAvailability", method = { RequestMethod.GET })
+	public ModelAndView checkAvailability(HttpServletRequest request,
 			HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserServiceImpl service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 					UserServiceImpl.class);
 
-			String username = request.getParameter("isAvailable");
-			Boolean availability = service.isUserNameAvailable(username);
+			String type = request.getParameter("type");
+			String value = request.getParameter("value");
 
-			output.put(WebConstants.SUCCESS, Boolean.TRUE);
-			output.put(WebConstants.MESSAGE, MessageConstants.AVAILABLE);
+			Boolean availability = service.checkAvailability(type, value, Boolean.FALSE);
+
+			output.put(WebConstants.SUCCESS, Boolean.TRUE);		
 			output.put(WebConstants.IS_AVAILABLE, availability);
+			
 			if (availability) {
 				output.put(WebConstants.MESSAGE, MessageConstants.AVAILABLE);
 			} else {
-				output.put(WebConstants.MESSAGE, MessageConstants.NOT_AVAILABLE);
+				if ("username".equals(type)) {
+					output.put(WebConstants.MESSAGE, MessageConstants.USERNAME_NOT_AVAILABLE);
+				} else if ("email".equals(type)) {
+					output.put(WebConstants.MESSAGE, MessageConstants.EMAIL_ALREADY_REGISTERED);
+				}
 			}
-
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
-			output.put(WebConstants.MESSAGE, MessageConstants.SERVER_ERROR);
+			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
 			return new ModelAndView(WebConstants.JSON, output);
 		}
 		return new ModelAndView(WebConstants.JSON, output);

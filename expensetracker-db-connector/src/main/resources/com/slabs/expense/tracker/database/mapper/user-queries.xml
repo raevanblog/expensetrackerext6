@@ -107,6 +107,24 @@
 		</if>
 	</select>
 
+	<select id="getUserBy" resultMap="UserInfo">
+		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE, ADDRESS, PROFILEPIC, ISADMIN, ISFTLOGIN, ISVERIFIED, ISLOCKED, ACTIVATIONKEY
+		<if test="param3">
+			,PASSWORD
+		</if>
+		from EXPENSETRACKER.USERINFO
+		<where>
+			<choose>
+				<when test="param1 == 'username'">
+					USERNAME = #{param2}
+				</when>
+				<when test="param1 == 'email'">
+					EMAIL = #{param2}
+				</when>
+			</choose>
+		</where>
+	</select>
+
 	<delete id="deleteUser">
 		delete from EXPENSETRACKER.USERINFO where username=#{username}
 	</delete>
@@ -122,7 +140,8 @@
 	</select>
 
 	<insert id="createUserSettings" parameterType="com.slabs.expense.tracker.common.database.entity.UserSettings">
-		insert into EXPENSETRACKER.USER_SETTINGS(USERNAME, CURRENCY, RCVRYEMAIL) values (#{username}, #{currency.id},
+		insert into EXPENSETRACKER.USER_SETTINGS(USERNAME, CURRENCY, RCVRYEMAIL) values (#{username},
+		#{currency.id},
 		#{rcvryemail})
 	</insert>
 

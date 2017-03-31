@@ -11,6 +11,10 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 	items : [ {
 		xtype : 'form',
 		reference : 'registerform',
+		listeners: {
+			validitychange: 'updateErrorState',
+			errorchange: 'updateErrorState'
+		},
 		platformConfig : {
 			desktop : {
 				width : 600
@@ -82,21 +86,25 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			forceSelection : true,
 			store : [ [ 'M', 'Male' ], [ 'F', 'Female' ] ]
 		}, {
-			xtype : 'textfield',
-			height : 51,
-			allowBlank : false,
-			emptyText : 'Email',
-			vtype : 'email',
-			name : 'email',
-			allowBlank : false,
-			maxLength : 50,
-			reference : 'email',
-			triggers : {
-				glyph : {
-					cls : 'textfield-trigger-icon email-trigger'
+			xtype : 'fieldcontainer',
+			layout : 'hbox',
+			items : [{
+				xtype : 'textfield',
+				height : 51,
+				allowBlank : false,
+				emptyText : 'Email',
+				vtype : 'email',
+				name : 'email',
+				allowBlank : false,
+				maxLength : 50,
+				reference : 'email',				
+				flex : 0.6,
+				labelSeparator : '',
+				listeners : {
+					blur : 'onFocusOut',
+					change : 'onChange'
 				}
-			},
-			labelSeparator : ''
+			}]
 		}, {
 			xtype : 'numberfield',
 			height : 51,
@@ -139,16 +147,9 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 					}
 				},
 				listeners : {
-					blur : 'onFocusOutUserName',
-					change : 'onUserNameChage'
+					blur : 'onFocusOut',
+					change : 'onChange'
 				}
-			}, {
-				xtype: 'errorstate',
-				height : 50,
-				margin : '0 0 0 5',
-				padding : '15 0 0 20',
-				reference: 'usrNmeAvailInd',				
-				flex: 0.4
 			}]
 		}, {
 			xtype : 'fieldcontainer',
@@ -198,6 +199,13 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				},
 				flex : 1
 			} ]
+		},{
+			xtype: 'errorstate',
+			height : 50,
+			margin : '0 0 0 5',
+			padding : '15 0 0 20',
+			anchor : 'left',			
+			reference: 'errorInd'
 		}, {
 			xtype : 'button',
 			text : 'Register',

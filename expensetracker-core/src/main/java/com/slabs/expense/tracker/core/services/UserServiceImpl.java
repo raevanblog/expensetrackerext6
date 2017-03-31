@@ -59,8 +59,8 @@ public class UserServiceImpl implements UserService {
 	 *             throws {@link Exception}
 	 */
 	@Override
-	public Boolean isUserNameAvailable(String username) throws Exception {
-		List<UserInfo> list = dao.getUser(username, Boolean.FALSE);
+	public Boolean checkAvailability(String type, String value, boolean includePassword) throws Exception {
+		List<UserInfo> list = dao.getUserBy(type, value, includePassword);
 		if (list != null && list.isEmpty()) {
 			return true;
 		}

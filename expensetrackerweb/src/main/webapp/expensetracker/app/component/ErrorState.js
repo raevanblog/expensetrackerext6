@@ -8,6 +8,7 @@ Ext.define('expensetracker.component.ErrorState', {
 	validText: '',
 	closable : false,
     invalidText: 'Exception',
+	anchor : 'top',
 	constructor : function(config) {
 		var me = this;
 		me.callParent([ config ]);
@@ -35,7 +36,7 @@ Ext.define('expensetracker.component.ErrorState', {
 				target: me.el,                        
 				minWidth: 200,
 				autoHide: false,
-				anchor: 'top',
+				anchor: me.anchor,
 				title : 'Details',
 				mouseOffset: [-11, -2],
 				closable: me.closable,

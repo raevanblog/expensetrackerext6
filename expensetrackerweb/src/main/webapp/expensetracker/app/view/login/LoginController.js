@@ -95,18 +95,16 @@ Ext.define('expensetracker.view.login.LoginController', {
 		});
 		window.show();
 	},
-	onUserNameChage : function(textfield, newvalue, oldvalue) {
-		var me = this;
-		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');
-		textfield.isChanged = true;
+	onChange : function(textfield, newvalue, oldvalue) {
+		var me = this;									
+		textfield.isChanged = true;		
 		if (!newvalue) {
-			usrNmeAvailInd.update('');
+			textfield.clearInvalid();
 		}
 	},
-	onFocusOutUserName : function(textfield, event) {
-		var me = this;
+	onFocusOut : function(textfield, event) {
+		var me = this;		
 		var registercontainer = me.lookup('registercontainer');
-		var usrNmeAvailInd = me.lookup('usrNmeAvailInd');
 		var username = textfield.getValue();
 		if (textfield.isValid()) {
 			if (textfield.isChanged) {
@@ -114,10 +112,11 @@ Ext.define('expensetracker.view.login.LoginController', {
 				if (username) {
 					registercontainer.setLoading('Checking Availability...');
 					Ext.Ajax.request({
-						url : expensetracker.util.Url.getUserNameAvailability(),
+						url : expensetracker.util.Url.getCheckAvailability(),
 						method : 'GET',
 						params : {
-							isAvailable : username
+							type : textfield.name,
+							value : username
 						},
 						success : function(response, opts) {
 							registercontainer.setLoading(false);
@@ -125,14 +124,9 @@ Ext.define('expensetracker.view.login.LoginController', {
 							var isAvailable = response.isAvailable;
 							textfield.isAvailable = isAvailable;
 							if (isAvailable) {										
-								usrNmeAvailInd.setErrors(null);
+								textfield.clearInvalid();
 							} else {
-								var errors = [];
-								errors.push({
-									name : 'Username',
-									error : response.message
-								});
-								usrNmeAvailInd.setErrors(errors);
+								textfield.markInvalid(response.message);
 							}
 						},
 						failure : function(response, opts) {
@@ -143,6 +137,30 @@ Ext.define('expensetracker.view.login.LoginController', {
 			}
 		}
 	},
+	 updateErrorState: function(cmp, state) {
+        var me = this,
+            errorCmp = me.lookupReference('errorInd'),
+            view, form, fields, errors;
+
+        view = me.lookup('registerform');
+        form = view.getForm();
+		
+        if (state === false || (typeof state === 'string')) {
+            fields = form.getFields();
+            errors = [];
+
+            fields.each(function(field) {
+                Ext.Array.forEach(field.getErrors(), function(error) {
+                    errors.push({name: field.emptyText, error: error});
+                });
+            });
+
+            errorCmp.setErrors(errors);
+            me.hasBeenDirty = true;
+        } else if (state === true) {
+            errorCmp.setErrors();
+        }
+    },
 	onRegisterUser : function(registerBtn) {
 		var me = this;
 		var card = me.lookup('formcard');
