@@ -228,7 +228,9 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 	public void subTotalPrice() {
 		AggregationSubtotalBuilder subtotal = getSubTotalBuilder(Column.PRICE);
 		subtotal.setStyle(styleProvider.getBoldStyle());
-		report.addSubtotalAtSummary(subtotalBuilder.text("Total", getColumn(Column.QTY)), subtotal);
+		AggregationSubtotalBuilder<String> label = subtotalBuilder.text("Total", getColumn(Column.PRICEPERUNIT));
+		label.setStyle(styleProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
+		report.addSubtotalAtSummary(label, subtotal);
 	}
 
 }
