@@ -70,7 +70,7 @@ Ext.define('expensetracker.view.charts.Expense', {
 			tooltip : {
 				trackMouse : true,
 				renderer : function(tooltip, record) {
-					var tip = expensetracker.util.Session.getCurrencySymbol() + ' ' + record.get('expense');
+					var tip = expensetracker.util.Session.getCurrencySymbol() + ' ' + Ext.util.Format.number(record.get('expense'), '0,000.00');
 					tooltip.setHtml(tip);
 				}
 			}
