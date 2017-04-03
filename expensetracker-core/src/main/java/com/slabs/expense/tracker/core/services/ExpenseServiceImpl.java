@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.Graph;
+import com.slabs.expense.tracker.common.database.entity.Units;
 import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
 import com.slabs.expense.tracker.common.services.ExpenseService;
 
@@ -75,8 +76,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 *             throws {@link Exception}
 	 */
 	@Override
-	public List<Expense> selectExpense(String username, Integer year, Integer month,
-			boolean fetchTopExpense) throws Exception {
+	public List<Expense> selectExpense(String username, Integer year, Integer month, boolean fetchTopExpense) throws Exception {
 		if (fetchTopExpense) {
 			return mapper.getTopExpense(username, year, month);
 		} else {
@@ -157,8 +157,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 *             throws {@link Exception}
 	 */
 	@Override
-	public List<Graph> getCategoryWiseTotalExpense(String username, Integer year, Integer month)
-			throws Exception {
+	public List<Graph> getCategoryWiseTotalExpense(String username, Integer year, Integer month) throws Exception {
 		return mapper.getCategoryWiseTotalExpense(username, year, month);
 	}
 
@@ -186,10 +185,51 @@ public class ExpenseServiceImpl implements ExpenseService {
 	@Override
 	public Integer deleteExpense(List<Expense> records) throws Exception {
 		int noOfRecords = 0;
-		for (Expense record : records) {			
+		for (Expense record : records) {
 			noOfRecords = noOfRecords + mapper.deleteExpense(record);
 		}
 		return noOfRecords;
 	}
-		
+
+	/**
+	 * 
+	 */
+	@Override
+	public List<Units> getExpenseUnits(String username) throws Exception {
+		return mapper.getExpenseUnits(username);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public Integer updateExpenseUnits(List<Units> records) throws Exception {
+		int noOfRecords = 0;
+		for (Units record : records) {
+			noOfRecords = noOfRecords + mapper.updateExpenseUnits(record);
+		}
+		return noOfRecords;
+
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public Integer deleteExpenseUnits(List<Units> records) throws Exception {
+		int noOfRecords = 0;
+		for (Units record : records) {
+			noOfRecords = noOfRecords + mapper.deleteExpenseUnits(record);
+		}
+		return noOfRecords;
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public Integer createExpenseUnits(List<Units> records) throws Exception {
+		return mapper.createExpenseUnits(records);
+	}
+
 }

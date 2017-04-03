@@ -6,6 +6,7 @@ import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
 import com.slabs.expense.tracker.common.database.entity.Graph;
+import com.slabs.expense.tracker.common.database.entity.Units;
 
 /**
  * {@link ExpenseDAO} is an interface providing mapper methods for executing
@@ -36,12 +37,20 @@ public interface ExpenseDAO {
 
 	public List<Dictionary> selectExpenseNames();
 
-	public Integer insertExpenseCategory(List<ExpenseCategory> records) throws Exception;
+	public Integer insertExpenseCategory(List<ExpenseCategory> records);
 
 	public Integer updateExpenseCategory(ExpenseCategory record);
 
-	public List<ExpenseCategory> retrieveExpenseCategory(String username) throws Exception;
+	public List<ExpenseCategory> retrieveExpenseCategory(String username);
 
 	public Integer deleteExpenseCategory(ExpenseCategory record);
-	
+
+	public List<Units> getExpenseUnits(String username);
+
+	public Integer createExpenseUnits(List<Units> records);
+
+	public Integer updateExpenseUnits(Units record);
+
+	public Integer deleteExpenseUnits(Units record);
+
 }

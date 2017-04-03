@@ -10,11 +10,18 @@
 
 	<mybatis:scan base-package="com.slabs.expense.tracker.common.database.mapper" />
 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
 		<property name="url" value="jdbc:derby://localhost:1527/EXPENSETRACKER" />
 		<property name="username" value="expensetracker" />
 		<property name="password" value="expensetracker" />
+	</bean> -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/expensetracker" />
+		<property name="username" value="expensetracker" />
+		<property name="password" value="password" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

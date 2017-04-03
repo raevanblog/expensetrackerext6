@@ -80,7 +80,7 @@
 			<element name="isFtLogin" type="string" default="Y" />
 			<element name="isLocked" type="string" default="N" />
 			<element name="activationKey" type="string" />
-			<element name="settings" type="et:UserSettings" minOccurs="0"/>
+			<element name="settings" type="et:UserSettings" minOccurs="0" />
 		</sequence>
 	</complexType>
 
@@ -167,9 +167,32 @@
 			<element name="exptype" type="string" />
 			<element name="price" type="double" minOccurs="0" />
 			<element name="qty" type="double" minOccurs="0" />
-			<element name="pricePerUnit" type="double" minOccurs="0" />			
+			<element name="unit" type="string" />
+			<element name="pricePerUnit" type="double" minOccurs="0" />
 		</sequence>
 	</complexType>
+
+	<complexType name="Units">
+		<annotation>
+			<documentation source="https://raevanblog.blogspot.in/">
+				Schema: EXPENSETRACKER
+				Table: UNIT
+				Units will hold the data for table UNITS
+			</documentation>
+			<appinfo>
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
+				</annox:annotate>
+			</appinfo>
+		</annotation>
+		<sequence>
+			<element name="id" type="long" />
+			<element name="unit" type="string" />
+			<element name="description" type="string" />
+			<element ref="et:username" />
+		</sequence>
+	</complexType>
+
 
 	<complexType name="Inventory">
 		<annotation>
@@ -185,7 +208,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="id" type="long" />			
+			<element name="id" type="long" />
 			<element name="itemName" type="string" />
 			<element ref="et:username" />
 			<element name="category" type="string" />

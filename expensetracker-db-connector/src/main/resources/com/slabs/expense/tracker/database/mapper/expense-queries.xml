@@ -5,12 +5,13 @@
 <mapper namespace="com.slabs.expense.tracker.common.database.mapper.ExpenseDAO">
 
 	<insert id="insertExpense" parameterType="java.util.List">
-		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
+		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,UNIT,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
 		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.itemName},
 			#{record.category},
 			#{record.exptype},
 			#{record.qty},
+			#{record.unit},
 			#{record.price},
 			#{record.expdate},
 			#{record.username},
@@ -38,6 +39,9 @@
 			</if>
 			<if test="qty != null">
 				qty=#{qty},
+			</if>
+			<if test="unit != null">
+				unit=#{unit},
 			</if>
 			<if test="pricePerUnit != null">
 				pricePerUnit=#{pricePerUnit},
@@ -86,7 +90,8 @@
 	<select id="getMonthWiseTotalExpense" resultType="com.slabs.expense.tracker.common.database.entity.Graph">
 		select month(expdate) as MONTH, sum(price) as EXPENSE from EXPENSE where
 		username =
-		#{param1} and
+		#{param1}
+		and
 		year(expdate) = #{param2}
 		group by month(expdate)
 	</select>
@@ -105,7 +110,7 @@
 		select * from EXPENSETRACKER.EXPENSE where
 		id=#{param1}
 	</select>
-	
+
 	<delete id="deleteExpense">
 		delete from EXPENSETRACKER.EXPENSE
 		where id=#{id}
@@ -131,7 +136,7 @@
 				description=#{description}
 			</if>
 		</set>
-		where categoryId=#{categoryId}
+		where id=#{id}
 
 	</update>
 
@@ -141,8 +146,43 @@
 
 	<delete id="deleteExpenseCategory">
 		delete from EXPENSETRACKER.EXPENSE_CATEGORY
-		<if test="categoryId != null">
-			where categoryId=#{categoryId}
+		<if test="id != null">
+			where id=#{id}
+		</if>
+	</delete>
+
+	<insert id="createExpenseUnits" parameterType="java.util.List">
+		insert into EXPENSETRACKER.UNITS(UNIT, DESCRIPTION, USERNAME) values
+		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
+			#{record.unit},
+			#{record.description},
+			#{record.username}
+		</foreach>
+	</insert>
+
+	<update id="updateExpenseUnits" parameterType="com.slabs.expense.tracker.common.database.entity.Units">
+
+		update EXPENSETRACKER.UNITS
+		<set>
+			<if test="unit != null">
+				unit=#{unit},
+			</if>
+			<if test="description != null">
+				description=#{description}
+			</if>
+		</set>
+		where id=#{id}
+
+	</update>
+
+	<select id="getExpenseUnits" resultType="com.slabs.expense.tracker.common.database.entity.Units">
+		select * from EXPENSETRACKER.UNITS where username=#{param1}
+	</select>
+
+	<delete id="deleteExpenseUnits">
+		delete from EXPENSETRACKER.UNITS
+		<if test="id != null">
+			where id=#{id}
 		</if>
 	</delete>
 
