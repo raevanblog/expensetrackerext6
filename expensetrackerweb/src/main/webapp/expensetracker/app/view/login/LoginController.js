@@ -40,6 +40,9 @@ Ext.define('expensetracker.view.login.LoginController', {
 						expensetracker.util.Store.loadStore(Ext.getStore('ExpenseCategory'), {
 							username : expensetracker.util.Session.getUsername()
 						});
+						expensetracker.util.Store.loadStore(Ext.getStore('Units'), {
+							username : expensetracker.util.Session.getUsername()
+						});
 					}
 					me.getView().destroy();
 					Ext.widget('app-main');

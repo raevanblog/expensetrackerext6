@@ -4,17 +4,20 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	xtype : 'expensegrid',
 	scrollable : true,
 	requires : [ 'expensetracker.store.Expense', 'Ext.grid.column.Column', 'Ext.grid.column.Widget', 'expensetracker.component.grid.column.CheckColumn', 'Ext.grid.column.Number' ],
-	layout : 'fit',	
-	plugins : {
+	layout : 'fit',
+	collapseFirst : false,
+	plugins : [ {
 		ptype : 'cellediting',
 		clicksToEdit : 1,
-		listeners: {
-				beforeedit: function(editor, context, eOpts){
+		listeners : {
+			beforeedit : function(editor, context, eOpts) {
 				if (context.column.widget)
-				return false;
+					return false;
 			}
 		}
-	},
+	}, {
+		ptype : 'gridfilters'
+	} ],
 	initComponent : function() {
 		this.store = Ext.create('expensetracker.store.Expense');
 		this.callParent();
@@ -22,6 +25,10 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	features : [ {
 		ftype : 'summary',
 		dock : 'bottom'
+	}, {
+		ftype : 'grouping',
+		startCollapsed : false,
+		groupHeaderTpl : 'Date : {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})'
 	} ],
 	dockedItems : [ {
 		xtype : 'toolbar',
@@ -76,11 +83,11 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 75
 	}, {
 		xtype : 'widgetcolumn',
-		editor: {}, 
+		editor : {},
 		widget : {
 			xtype : 'button',
 			text : 'Add to Inventory',
-			handler : 'addExpenseToInventory'			
+			handler : 'addExpenseToInventory'
 		},
 		width : 150
 	}, {
@@ -117,6 +124,9 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			triggerAction : 'all'
 		},
 		dataIndex : 'category',
+		filter : {
+			type : 'list'
+		},
 		width : 150
 	}, {
 		text : 'Expense Type',
@@ -133,8 +143,11 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			selectOnFocus : true,
 			triggerAction : 'all'
 		},
+		filter : {
+			type : 'list'
+		},
 		dataIndex : 'exptype',
-		width : 150		
+		width : 150
 	}, {
 		xtype : 'datecolumn',
 		align : 'left',
@@ -169,6 +182,23 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			}
 		},
 		width : 100
+	}, {
+		text : 'Units',
+		align : 'left',
+		editor : {
+			xtype : 'combobox',
+			displayField : 'display',
+			valueField : 'unit',
+			store : 'Units',
+			forceSelection : true,
+			allowBlank : false,
+			typeAhead : true,
+			queryMode : 'local',
+			selectOnFocus : true,
+			triggerAction : 'all'
+		},
+		dataIndex : 'unit',
+		width : 150
 	}, {
 		xtype : 'numbercolumn',
 		align : 'center',

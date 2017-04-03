@@ -25,6 +25,9 @@ Ext.define('expensetracker.model.Expense', {
 		name : 'qty',
 		type : 'float'
 	}, {
+		name : 'unit',
+		type : 'string'
+	}, {
 		name : 'pricePerUnit',
 		type : 'float'
 	}, {

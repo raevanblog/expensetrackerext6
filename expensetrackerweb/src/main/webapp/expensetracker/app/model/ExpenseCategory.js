@@ -2,7 +2,7 @@ Ext.define('expensetracker.model.ExpenseCategory', {
 	extend : 'Ext.data.Model',
 	alias : 'model.expensecategory',
 	fields : [ {
-		name : 'categoryId',
+		name : 'id',
 		type : 'int',
 		persist : false
 	}, {
@@ -21,5 +21,5 @@ Ext.define('expensetracker.model.ExpenseCategory', {
 			message : 'Category cannot be empty'
 		}
 	},
-	idProperty : 'categoryId'
+	idProperty : 'id'
 });

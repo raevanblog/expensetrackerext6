@@ -16,6 +16,7 @@ Ext.define('expensetracker.util.Url', {
 		userSettings : '/expensetrackerweb/api/exptr-web/user/settings',
 		passwordService : '/expensetrackerweb/api/exptr-web/user/password',
 		categoryService : '/expensetrackerweb/api/exptr-web/expensecategory',
+		unitService : '/expensetrackerweb/api/exptr-web/expenseunits',
 		expenseService : '/expensetrackerweb/api/exptr-web/expense',
 		incomeService : '/expensetrackerweb/api/exptr-web/income',
 		incomeTypeService : '/expensetrackerweb/api/exptr-web/application/incometype',
