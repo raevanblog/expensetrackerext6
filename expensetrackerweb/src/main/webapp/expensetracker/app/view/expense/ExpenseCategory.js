@@ -29,6 +29,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		dataIndex : 'category',
 		editor : {
 			xtype : 'textfield',
+			selectOnFocus : true,
 			maxLength : 15,
 			allowBlank : false
 		},
@@ -39,6 +40,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		dataIndex : 'description',
 		editor : {
 			xtype : 'textfield',
+			selectOnFocus : true,
 			allowBlank : true,
 			maxLength : 100
 		},

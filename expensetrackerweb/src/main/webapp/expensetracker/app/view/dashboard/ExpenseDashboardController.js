@@ -154,16 +154,20 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 					var summary = dashData.summary;
 					var totalIncome = summary.totalIncome;
 					var totalExpense = summary.totalExpense;
+					var creditExpense = summary.creditExpense;
 					var cashInHand = summary.cashInHand;
 					var data = [{
 						category : 'Total Income',
-						value : totalIncome + ''
+						value : totalIncome.toString()
 					},{
 						category : 'Total Expense',
-						value : totalExpense + ''
+						value : totalExpense.toString()
 					}, {
+						category : 'Credit Card Expense',
+						value : creditExpense.toString()
+					},{
 						category : 'Balance',
-						value : cashInHand + ''
+						value : cashInHand.toString()
 					}];
 					summaryContainer.down('#summary-component').setData(data);
 					if(totalIncome !== 0.0)  {

@@ -28,8 +28,8 @@ import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
+import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilders;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
-import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -53,6 +53,8 @@ public abstract class ExpenseTrackerReport {
 	protected StyleBuilders styleBuilder = builder.getStyleBuilders();
 
 	protected GridBuilders gridBuilder = builder.getGridBuilders();
+	
+	protected SubtotalBuilders subtotalBuilder = builder.getSubtotalBuilders();
 
 	protected ChartBuilders chartBuilder = builder.getChartBuilders();
 
@@ -202,8 +204,7 @@ public abstract class ExpenseTrackerReport {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AggregationSubtotalBuilder getSubTotalBuilder(final Column column) {
-		AggregationSubtotalBuilder subtotal = DynamicReports.sbt.sum(getColumn(column));
-		subtotal.setLabel("Total : ").setLabelPosition(Position.LEFT);
+		AggregationSubtotalBuilder subtotal = subtotalBuilder.sum(getColumn(column));			
 		return subtotal;
 	}
 

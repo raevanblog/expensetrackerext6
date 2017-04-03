@@ -226,7 +226,8 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 	@SuppressWarnings({ "rawtypes" })
 	public void subTotalPrice() {
 		AggregationSubtotalBuilder subtotal = getSubTotalBuilder(Column.PRICE);
-		report.addSubtotalAtSummary(subtotal);
+		subtotal.setStyle(styleProvider.getBoldStyle());
+		report.addSubtotalAtSummary(subtotalBuilder.text("Total", getColumn(Column.QTY)), subtotal);
 	}
 
 }

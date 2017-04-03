@@ -10,6 +10,7 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.grid.GridBuilders;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
+import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilders;
 
 /**
  * {@link ReportBuilder} is a singleton class which provides support for
@@ -87,6 +88,15 @@ public class ReportBuilder {
 	 */
 	public ChartBuilders getChartBuilders() {
 		return DynamicReports.cht;
+	}
+
+	/**
+	 * This method will provide the {@link SubtotalBuilders} for the report
+	 * 
+	 * @return {@link SubtotalBuilders}
+	 */
+	public SubtotalBuilders getSubtotalBuilders() {
+		return DynamicReports.sbt;
 	}
 
 	/**

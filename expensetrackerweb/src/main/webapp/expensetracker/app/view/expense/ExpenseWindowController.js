@@ -1,6 +1,11 @@
 Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.expensewindowcontroller',
+	init : function(view) {
+		var me = this;
+		var grid = me.lookup('expensegrid');
+		me.expenseGrouping = grid.view.findFeature('grouping');		
+	},
 	onRender : function(expenseWindow) {
 		var me = this;
 		var view = me.getView();
@@ -8,7 +13,34 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		if (expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
 			model.set('isLatestExpense', true);
 		}
+	},
+	groupExpense : function(checkbox, isChecked) {
+		var me = this;
+		var grid = me.lookup('expensegrid');
+		var groupByBtn = me.lookup('expensegridgroupby');
+		var items = groupByBtn.getMenu().getChildItemsToDisable();
+		if(isChecked) {
+			me.toggleGroupByMenuItems(items, checkbox, true);
+			if('Date' === checkbox.boxLabel) {
+				grid.getStore().setGroupField('expdate');
+			} else if('Category' === checkbox.boxLabel) {
+				grid.getStore().setGroupField('category');
+			} else if('Expense Type' === checkbox.boxLabel) {
+				grid.getStore().setGroupField('exptype');
+			}
+			me.expenseGrouping.enable();			
+		} else {
+			me.toggleGroupByMenuItems(items, checkbox, false);
+			me.expenseGrouping.disable();
+		}		
 	},	
+	toggleGroupByMenuItems : function(items, exception, disable) {
+		Ext.Array.each(items, function(item) {
+			if(item.boxLabel !== exception.boxLabel) {
+				item.setDisabled(disable);
+			}
+		});
+	},
 	onCloseExpenseWindow : function(expenseWindow) {
 		var me = this;
 		var view = me.getView();

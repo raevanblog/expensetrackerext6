@@ -46,6 +46,7 @@
 			<element name="year" type="int" />
 			<element name="totalIncome" type="double" />
 			<element name="totalExpense" type="double" />
+			<element name="creditExpense" type="double" />
 			<element name="cashInHand" type="double" />
 			<element name="username" type="string" />
 		</sequence>
@@ -138,7 +139,7 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="categoryId" type="long" />
+			<element name="id" type="long" />
 			<element name="category" type="string" />
 			<element ref="et:username" />
 			<element name="description" type="string" />

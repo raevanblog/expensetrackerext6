@@ -40,10 +40,15 @@ public class DashboardServiceImpl implements DashboardService {
 	@Override
 	public Dashboard getDashboardData(String username, Integer year, Integer month) throws Exception {
 		Double totalExpense = eMapper.getTotalExpense(username, year, month);
+		Double creditExpense = eMapper.getCreditExpense(username, year, month);
 		Double totalIncome = iMapper.getTotalIncome(username, year, month);
 
 		if (totalExpense == null) {
 			totalExpense = 0.0;
+		}
+		
+		if(creditExpense == null) {
+			creditExpense = 0.0;
 		}
 
 		if (totalIncome == null) {
@@ -55,6 +60,7 @@ public class DashboardServiceImpl implements DashboardService {
 		Dashboard dashboard = new Dashboard();
 		Summary summary = new Summary();
 		summary.setTotalExpense(totalExpense);
+		summary.setCreditExpense(creditExpense);
 		summary.setTotalIncome(totalIncome);
 		summary.setCashInHand(cashInHand);
 		summary.setMonth(month);

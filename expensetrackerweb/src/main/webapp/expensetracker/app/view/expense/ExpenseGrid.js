@@ -28,7 +28,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 	}, {
 		ftype : 'grouping',
 		startCollapsed : false,
-		groupHeaderTpl : 'Date : {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})'
+		groupHeaderTpl : '{columnName} : {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})'
 	} ],
 	dockedItems : [ {
 		xtype : 'toolbar',
@@ -42,6 +42,24 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			listeners : {
 				change : 'filterGrid'
 			}
+		}, {
+			xtype : 'button',
+			reference : 'expensegridgroupby',
+			text : 'Group By',
+			ui : 'soft-green',
+			menu : [ {
+				xtype : 'checkbox',
+				boxLabel : 'Date',
+				handler : 'groupExpense'
+			}, {
+				xtype : 'checkbox',
+				boxLabel : 'Category',
+				handler : 'groupExpense'
+			}, {
+				xtype : 'checkbox',
+				boxLabel : 'Expense Type',
+				handler : 'groupExpense'
+			} ]
 		}, '-', {
 			xtype : 'button',
 			ui : 'toolbar',
@@ -82,14 +100,13 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		text : 'S.No',
 		width : 75
 	}, {
-		xtype : 'widgetcolumn',
-		editor : {},
+		xtype : 'widgetcolumn',		
 		widget : {
 			xtype : 'button',
-			text : 'Add to Inventory',
+			iconCls : 'x-fa fa-plus-square-o',
+			tooltip : 'Add to Inventory',
 			handler : 'addExpenseToInventory'
-		},
-		width : 150
+		},		
 	}, {
 		text : 'Item Name',
 		dataIndex : 'itemName',

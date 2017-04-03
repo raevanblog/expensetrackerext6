@@ -2,8 +2,7 @@ Ext.define('expensetracker.store.Expense', {
 	extend : 'Ext.data.Store',
 	alias : 'store.expense',
 	storeId : 'Expense',
-	model : 'expensetracker.model.Expense',
-	groupField : 'expdate',
+	model : 'expensetracker.model.Expense',	
 	proxy : {
 		type : 'rest',
 		batchActions : true,

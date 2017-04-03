@@ -24,7 +24,9 @@ public interface ExpenseDAO {
 	public List<Expense> getTopExpense(String username, Integer year, Integer month);
 
 	public Double getTotalExpense(String username, Integer year, Integer month);
-
+	
+	public Double getCreditExpense(String username, Integer year, Integer month);	
+	
 	public List<Graph> getMonthWiseTotalExpense(String username, Integer year);
 
 	public List<Graph> getCategoryWiseTotalExpense(String username, Integer year, Integer month);
