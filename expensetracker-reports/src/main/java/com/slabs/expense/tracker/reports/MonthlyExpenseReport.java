@@ -159,13 +159,14 @@ public class MonthlyExpenseReport extends ExpenseTrackerReport {
 				String.class);
 		TextColumnBuilder<BigDecimal> qty = columnProvider.getColumn(Column.QTY, BigDecimal.class)
 				.setFixedColumns(5);
+		TextColumnBuilder<String> unit = columnProvider.getColumn(Column.UNIT, String.class);
 		TextColumnBuilder<BigDecimal> price = columnProvider
 				.getColumn(Column.PRICE, BigDecimal.class).setDataType(this.currency);
 		TextColumnBuilder<BigDecimal> pricePerUnit = columnProvider
 				.getColumn(Column.PRICEPERUNIT, BigDecimal.class).setDataType(this.currency);
 
-		addColumns(rowNum, expDate, itemName, expenseType, expenseCategory, qty, price,
-				pricePerUnit);
+		addColumns(rowNum, expDate, itemName, expenseType, expenseCategory, qty, unit, pricePerUnit,
+				price);
 	}
 
 	private void addSummary() {
