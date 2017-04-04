@@ -4,7 +4,7 @@ Ext.define('expensetracker.util.Session', {
 	setUser : function(user) {
 		var me = this;
 		expensetracker.util.Storage.put('user', user);
-		if(user.settings !== undefined && user.settings !== null) {
+		if (user.settings !== undefined && user.settings !== null) {
 			me.setPreferences(user.settings);
 			me.setCurrency(user.settings.currency);
 		}
@@ -31,7 +31,7 @@ Ext.define('expensetracker.util.Session', {
 		return this.getUser().profilePic;
 	},
 	isFirstLogin : function() {
-		if('N' === this.getUser().isFtLogin) {
+		if ('N' === this.getUser().isFtLogin) {
 			return false;
 		}
 		return true;
@@ -43,25 +43,25 @@ Ext.define('expensetracker.util.Session', {
 		return expensetracker.util.Storage.get('preferences');
 	},
 	setCurrency : function(currency) {
-		if(currency !== undefined || currency !== null) {
+		if (currency !== undefined || currency !== null) {
 			expensetracker.util.Storage.put('currency', currency);
 			expensetracker.util.Storage.put('currencyname', currency.currtxt);
 			expensetracker.util.Storage.put('currencysymbol', currency.currsymb);
 		}
-	},	
+	},
 	getCurrency : function() {
 		return expensetracker.util.Storage.get('currency');
 	},
 	getCurrencyName : function() {
 		var currencyname = expensetracker.util.Storage.get('currencyname');
-		if(currencyname === null || currencyname === undefined) {
+		if (currencyname === null || currencyname === undefined) {
 			return '';
 		}
 		return currencyname;
 	},
 	getCurrencySymbol : function() {
 		var currencySymbol = expensetracker.util.Storage.get('currencysymbol');
-		if(currencySymbol === null || currencySymbol === undefined) {
+		if (currencySymbol === null || currencySymbol === undefined) {
 			return '';
 		}
 		return currencySymbol;

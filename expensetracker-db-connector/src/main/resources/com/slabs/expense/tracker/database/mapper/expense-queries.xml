@@ -164,11 +164,10 @@
 	</delete>
 
 	<insert id="createExpenseUnits" parameterType="java.util.List">
-		insert into EXPENSETRACKER.UNITS(UNIT, DESCRIPTION, USERNAME) values
+		insert into EXPENSETRACKER.UNITS(UNIT, DESCRIPTION) values
 		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.unit},
-			#{record.description},
-			#{record.username}
+			#{record.description}			
 		</foreach>
 	</insert>
 
@@ -188,7 +187,7 @@
 	</update>
 
 	<select id="getExpenseUnits" resultType="com.slabs.expense.tracker.common.database.entity.Units">
-		select * from EXPENSETRACKER.UNITS where username in (#{param1}, 'admin')
+		select * from EXPENSETRACKER.UNITS
 	</select>
 
 	<delete id="deleteExpenseUnits">

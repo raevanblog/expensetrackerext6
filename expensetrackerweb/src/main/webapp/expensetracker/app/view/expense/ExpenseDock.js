@@ -1,6 +1,6 @@
 Ext.define('expensetracker.view.expense.ExpenseDock', {
 	extend : 'Ext.panel.Panel',
-	xtype : 'expensedock',	
+	xtype : 'expensedock',
 	alias : 'view.expensedock',
 	iconCls : 'x-fa fa-file-text-o',
 	requires : [ 'expensetracker.store.Thumbnail', 'expensetracker.view.expense.ThumbnailContainer' ],

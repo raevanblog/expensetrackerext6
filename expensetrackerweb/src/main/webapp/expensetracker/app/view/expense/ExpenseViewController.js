@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 	alias : 'controller.expenseviewcontroller',
 	onThumbnailClick : function(thumbnailcont, record, item, index, e) {
 		var me = this;
-		var model = me.getView().getViewModel();		
+		var model = me.getView().getViewModel();
 		var currentYear = expensetracker.util.Calendar.getCurrentYear();
 		var currentMonth = expensetracker.util.Calendar.getCurrentMonthNo();
 		var year = me.lookup('expenseyear').getValue();

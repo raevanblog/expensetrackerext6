@@ -6,6 +6,7 @@ Ext.define('expensetracker.util.Store', {
 		Ext.getStore('Dictionary').load();
 		Ext.getStore('IncomeType').load();
 		Ext.getStore('Currency').load();
+		Ext.getStore('Units').load();
 	},
 	loadStore : function(store, params, callback) {
 		store.load({

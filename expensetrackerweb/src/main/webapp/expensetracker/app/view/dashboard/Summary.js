@@ -3,18 +3,11 @@ Ext.define('expensetracker.view.dashboard.Summary', {
 	xtype : 'summary',
 	alias : 'view.summary',
 	layout : 'fit',
-	items : [{
+	items : [ {
 		xtype : 'component',
 		itemId : 'summary-component',
-		cls: 'summary-tiles',
-		tpl:[
-            '<div class="summary">',
-                '<tpl for=".">',
-                    '<span>',
-                        '<div>{value:currency([expensetracker.util.Session.getCurrencySymbol()], 2, false, " ")}</div> {category}',
-                    '</span>',
-                '</tpl>',
-            '</div>'
-        ]
-	}]
+		cls : 'summary-tiles',
+		tpl : [ '<div class="summary">', '<tpl for=".">', '<span>', '<div>{value:currency([expensetracker.util.Session.getCurrencySymbol()], 2, false, " ")}</div> {category}', '</span>', '</tpl>',
+				'</div>' ]
+	} ]
 });

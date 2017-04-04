@@ -24,7 +24,7 @@ public interface ExpenseService {
 
 	public Integer deleteExpense(List<Expense> records) throws Exception;
 
-	public List<Units> getExpenseUnits(String username) throws Exception;
+	public List<Units> getExpenseUnits() throws Exception;
 
 	public Integer updateExpenseUnits(List<Units> records) throws Exception;
 

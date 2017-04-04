@@ -12,9 +12,6 @@ Ext.define('expensetracker.model.Units', {
 		name : 'description',
 		type : 'string'
 	}, {
-		name : 'username',
-		type : 'string'
-	}, {
 		name : 'display',
 		type : 'string',
 		persist : false,

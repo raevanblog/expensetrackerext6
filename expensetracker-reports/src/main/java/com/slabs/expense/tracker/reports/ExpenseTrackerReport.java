@@ -16,7 +16,6 @@ import com.slabs.expense.tracker.reports.provider.ColumnProvider;
 import com.slabs.expense.tracker.reports.provider.StyleProvider;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;

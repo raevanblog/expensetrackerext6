@@ -5,47 +5,45 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		controller : {
 			'*' : {
 				updatedashboard : 'updateDashBoard',
-				updatesummary : 'updateDashBoardSummary'				
+				updatesummary : 'updateDashBoardSummary'
 			}
 		}
 	},
 	onRender : function(dashboard) {
-		var me = this;		
+		var me = this;
 		var expenseSheet = me.lookup('expsheetdash');
 		var incomeSheet = me.lookup('incomesheetdash');
 		var inventorySheet = me.lookup('inventorydash');
 		var report = me.lookup('reportdash');
-		
+
 		var expSheetStore = Ext.create('expensetracker.store.Thumbnail');
 		var incSheetStore = Ext.create('expensetracker.store.Thumbnail');
 		var invSheetStore = Ext.create('expensetracker.store.Thumbnail');
 		var reportStore = Ext.create('expensetracker.store.Thumbnail');
-		
-		
+
 		expSheetStore.removeAll();
 		incSheetStore.removeAll();
 		invSheetStore.removeAll();
 		reportStore.removeAll();
-		
+
 		expSheetStore.add({
 			title : 'Expense Sheet',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
-		
-		
+
 		incSheetStore.add({
 			title : 'Income Sheet',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
-		
+
 		invSheetStore.add({
 			title : 'Inventory',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
-		
+
 		reportStore.add({
 			title : 'Expense Report',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
@@ -53,11 +51,11 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		});
 
 		expenseSheet.bindStore(expSheetStore);
-		incomeSheet.bindStore(incSheetStore);		
+		incomeSheet.bindStore(incSheetStore);
 		inventorySheet.bindStore(invSheetStore);
 		report.bindStore(reportStore);
-		
-		if(expensetracker.util.Session.isFirstLogin()) {
+
+		if (expensetracker.util.Session.isFirstLogin()) {
 			var settingsWindow = Ext.create('expensetracker.view.main.Settings', {
 				modal : true,
 				closable : false
@@ -66,16 +64,14 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			model.set('buttonText', 'Save & Close');
 			settingsWindow.show();
 		}
-		
-		
-		
+
 		me.updateDashBoardSummary();
 	},
 
 	onOpenExpenseSheet : function(thumbnailcont, record, item, index, e) {
 
 		var me = this;
-		var model = me.getView().getViewModel();		
+		var model = me.getView().getViewModel();
 		var date = new Date(expensetracker.util.Calendar.getCurrentYear(), expensetracker.util.Calendar.getCurrentMonthNo() - 1);
 
 		var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
@@ -95,7 +91,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		expenseWindow.show();
 	},
 	onOpenIncomeSheet : function() {
-		var me = this;		
+		var me = this;
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
 			height : Ext.Element.getViewportHeight(),
 			width : Ext.Element.getViewportWidth(),
@@ -106,11 +102,11 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());
 		model.set('year', expensetracker.util.Calendar.getCurrentYear());
 		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
-		
+
 		incomeWindow.show();
 	},
 	onOpenInventory : function() {
-		var me = this;		
+		var me = this;
 		var inventoryWindow = Ext.create('expensetracker.view.inventory.InventoryWindow', {
 			height : Ext.Element.getViewportHeight(),
 			width : Ext.Element.getViewportWidth(),
@@ -121,22 +117,23 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		model.set('month', expensetracker.util.Calendar.getCurrentMonthNo());
 		model.set('year', expensetracker.util.Calendar.getCurrentYear());
 		model.set('title', expensetracker.util.Calendar.getCurrentMonth() + ' - ' + expensetracker.util.Calendar.getCurrentYear());
-		
+
 		inventoryWindow.show();
 	},
 	onOpenReport : function() {
 		var me = this;
-		var pdfWindow = Ext.create('expensetracker.view.report.ReportWindow',{
+		var pdfWindow = Ext.create('expensetracker.view.report.ReportWindow', {
 			height : 500,
 			width : 700,
 			modal : true,
-			reportUrl : expensetracker.util.Url.getReportingService() + '?username='+ expensetracker.util.Session.getUsername() + '&year=' + expensetracker.util.Calendar.getCurrentYear() + '&month=' + expensetracker.util.Calendar.getCurrentMonthNo()
+			reportUrl : expensetracker.util.Url.getReportingService() + '?username=' + expensetracker.util.Session.getUsername() + '&year=' + expensetracker.util.Calendar.getCurrentYear() + '&month='
+					+ expensetracker.util.Calendar.getCurrentMonthNo()
 		});
 		pdfWindow.show();
 	},
 	updateDashBoardSummary : function() {
-		var me = this;		
-		var summaryContainer = me.lookup('summary');		
+		var me = this;
+		var summaryContainer = me.lookup('summary');
 		summaryContainer.setLoading('Loading...');
 		Ext.Ajax.request({
 			url : expensetracker.util.Url.getDashboardService(),
@@ -149,43 +146,43 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			success : function(response, opts) {
 				summaryContainer.setLoading(false);
 				var response = Ext.decode(response.responseText);
-				var dashData = response.result.any[0];				
+				var dashData = response.result.any[0];
 				if (dashData != null || dashData != undefined) {
 					var summary = dashData.summary;
 					var totalIncome = summary.totalIncome;
 					var totalExpense = summary.totalExpense;
 					var creditExpense = summary.creditExpense;
 					var cashInHand = summary.cashInHand;
-					var data = [{
+					var data = [ {
 						category : 'Total Income',
 						value : totalIncome.toString()
-					},{
+					}, {
 						category : 'Total Expense',
 						value : totalExpense.toString()
 					}, {
 						category : 'Credit Card Expense',
 						value : creditExpense.toString()
-					},{
+					}, {
 						category : 'Balance',
 						value : cashInHand.toString()
-					}];
+					} ];
 					summaryContainer.down('#summary-component').setData(data);
-					if(totalIncome !== 0.0)  {
+					if (totalIncome !== 0.0) {
 						var summaryPie = me.lookup('summarypie');
 						var polarChart = summaryPie.down('[itemId=summaryPolar]');
 						var pieStore = polarChart.getStore();
 						pieStore.removeAll();
-						
-						var expPerc = (totalExpense/totalIncome)*100;
-						var cashPerc = (cashInHand/totalIncome)*100;
-						
+
+						var expPerc = (totalExpense / totalIncome) * 100;
+						var cashPerc = (cashInHand / totalIncome) * 100;
+
 						pieStore.add({
 							item : 'Expense',
 							value : expPerc
 						}, {
 							item : 'Cash in Hand',
 							value : cashPerc
-						});	
+						});
 						polarChart.bindStore(pieStore);
 					}
 				}
@@ -195,7 +192,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 			}
 		});
 
-	},	
+	},
 	updateExpVsIncomeChart : function() {
 		var me = this;
 		var expvsincome = me.lookup('expensevsincome');
@@ -209,7 +206,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		expensechart.getStore().reload();
 	},
 	updateDashBoard : function() {
-		var me = this;		
+		var me = this;
 		me.updateDashBoardSummary();
 		me.updateExpVsIncomeChart();
 		me.updateExpenseChart();

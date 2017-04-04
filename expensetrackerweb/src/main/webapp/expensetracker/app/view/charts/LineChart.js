@@ -80,7 +80,7 @@ Ext.define('expensetracker.view.charts.LineChart', {
 				hideDelay : 0,
 				renderer : function(tooltip, record, item) {
 					var title = item.series.getTitle();
-					tooltip.setHtml(title + ' : ' + expensetracker.util.Session.getCurrencySymbol() + ' ' + record.get(item.series.getYField()));
+					tooltip.setHtml(title + ' : ' + expensetracker.util.Session.getCurrencySymbol() + ' ' +  Ext.util.Format.number(record.get(item.series.getYField()), '0,000.00'));
 				}
 			}
 		}, {
@@ -108,7 +108,7 @@ Ext.define('expensetracker.view.charts.LineChart', {
 				hideDelay : 0,
 				renderer : function(tooltip, record, item) {
 					var title = item.series.getTitle();
-					tooltip.setHtml(title + ' : ' + expensetracker.util.Session.getCurrencySymbol() + ' ' + record.get(item.series.getYField()));
+					tooltip.setHtml(title + ' : ' + expensetracker.util.Session.getCurrencySymbol() + ' ' + Ext.util.Format.number(record.get(item.series.getYField()), '0,000.00'));
 				}
 			}
 		} ]

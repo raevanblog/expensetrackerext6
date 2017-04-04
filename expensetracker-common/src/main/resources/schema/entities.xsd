@@ -190,7 +190,6 @@
 			<element name="id" type="long" />
 			<element name="unit" type="string" />
 			<element name="description" type="string" />
-			<element ref="et:username" />
 		</sequence>
 	</complexType>
 
@@ -213,9 +212,8 @@
 			<element name="itemName" type="string" />
 			<element ref="et:username" />
 			<element name="category" type="string" />
-			<element name="qty" type="double" minOccurs="0" />
-			<element name="yr" type="int" minOccurs="0" />
-			<element name="mth" type="int" minOccurs="0" />
+			<element name="qty" type="string" />
+			<element name="unit" type="string" />
 		</sequence>
 	</complexType>
 

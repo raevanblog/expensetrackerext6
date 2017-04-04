@@ -14,7 +14,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		ui : 'soft-green',
 		iconCls : 'x-fa fa-save',
 		handler : 'onCategorySaveOrUpdate'
-	} ],	
+	} ],
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1

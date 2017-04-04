@@ -29,7 +29,7 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 			}
 			return true;
 		}
-		return false;		
+		return false;
 	},
 	onRenderInventoryGrid : function(inventorygrid) {
 		var me = this;
@@ -38,32 +38,30 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 		var store = inventorygrid.getStore();
 		store.load({
 			params : {
-				username : expensetracker.util.Session.getUsername(),
-				month : viewmodel.get('month'),
-				year : viewmodel.get('year')
+				username : expensetracker.util.Session.getUsername()
 			},
 			callback : function(records, operation, success) {
-				if (!success) {					
+				if (!success) {
 					var response = Ext.JSON.decode(operation.getError().response.responseText)
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
 						me.fireEvent('navigatelogin');
-						if(view !== null) {
+						if (view !== null) {
 							view.close();
 						}
 					}
 				}
 			}
 		});
-		
-		me.keyMap = Ext.create('Ext.util.KeyMap', inventorygrid.el, [{
+
+		me.keyMap = Ext.create('Ext.util.KeyMap', inventorygrid.el, [ {
 			key : 'n',
 			fn : function() {
 				me.onAddInventory();
 			},
 			ctrl : true,
 			alt : true,
-			scope :  me
+			scope : me
 		}, {
 			key : 'r',
 			fn : function() {
@@ -71,8 +69,8 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 			},
 			ctrl : true,
 			alt : true,
-			scope :  me
-		},{
+			scope : me
+		}, {
 			key : 's',
 			fn : function() {
 				me.onSaveInventory();
@@ -87,8 +85,8 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 				me.onDeleteInventoryBySelection();
 			},
 			scope : me
-		}]);
-			
+		} ]);
+
 	},
 	onReload : function() {
 		var me = this;
@@ -114,16 +112,16 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 	},
 	onDeleteInventoryBySelection : function() {
 		var me = this;
-		var inventorygrid = me.lookup('inventorygrid');		
+		var inventorygrid = me.lookup('inventorygrid');
 		var view = inventorygrid.getView();
 		var selectedRecords = view.getSelectionModel().getSelection();
-		
-		if(selectedRecords != null && selectedRecords.length > 0) {
+
+		if (selectedRecords != null && selectedRecords.length > 0) {
 			var store = inventorygrid.getStore();
 			store.remove(selectedRecords);
 			expensetracker.util.Grid.refresh(inventorygrid);
 		}
-		
+
 	},
 	syncData : function(grid, closeWindow) {
 		var me = this;
@@ -132,7 +130,7 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 		grid.setLoading("Saving...");
 		grid.getStore().sync({
 			success : function(batch) {
-				grid.setLoading(false);				
+				grid.setLoading(false);
 				if (closeWindow) {
 					me.getView().close();
 				} else {
@@ -156,14 +154,14 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 				}
 				if (isUnauthorizedAccess) {
 					expensetracker.util.Message.toast('Unauthorized Access');
-					if(model.get('source') != null) {
+					if (model.get('source') != null) {
 						model.get('source').destroy();
 					}
 					me.fireEvent('navigatelogin');
-					if(view !== null) {
+					if (view !== null) {
 						view.clearListeners();
 						view.close();
-					}					
+					}
 				} else {
 					expensetracker.util.Message.toast('Server Error');
 				}
@@ -186,13 +184,11 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 		var view = me.getView();
 		var viewmodel = view.getViewModel();
 		var model = new expensetracker.model.Inventory({
-			itemName : '',			
+			itemName : '',
 			qty : 0,
 			category : '',
-			mth : viewmodel.get('month'),
-			yr : viewmodel.get('year'),
 			username : expensetracker.util.Session.getUsername()
-		});		
+		});
 		store.insert(0, model);
 		expensetracker.util.Grid.refresh(grid);
 	}

@@ -8,7 +8,7 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 		pack : 'middle'
 	},
 	items : [ {
-		xtype : 'form',		
+		xtype : 'form',
 		platformConfig : {
 			desktop : {
 				width : 600
@@ -46,20 +46,20 @@ Ext.define('expensetracker.view.login.ActivationForm', {
 				value : '{key}'
 			},
 			labelSeparator : ''
-		},{
-			xtype: 'button',
+		}, {
+			xtype : 'button',
 			text : 'Activate',
 			scale : 'large',
 			ui : 'soft-green',
 			formBind : true,
-			iconCls : 'x-fa fa-check',			
+			iconCls : 'x-fa fa-check',
 			handler : 'onActivate'
-		},{
-            xtype: 'errorstate',
+		}, {
+			xtype : 'errorstate',
 			height : 50,
 			padding : '15 0 0 20',
-            reference: 'formerrorlabel',                      
-            flex: 1            
-        }]		
-	}]
+			reference : 'formerrorlabel',
+			flex : 1
+		} ]
+	} ]
 });

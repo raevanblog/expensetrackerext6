@@ -36,8 +36,8 @@
 	<servlet>
 		<description>
     	</description>
-		<display-name>Initialization</display-name>
-		<servlet-name>InitializationServlet</servlet-name>
+		<display-name>ApplicationLoader</display-name>
+		<servlet-name>ApplicationLoader</servlet-name>
 		<servlet-class>com.slabs.expense.tracker.web.servlet.ApplicationLoader</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

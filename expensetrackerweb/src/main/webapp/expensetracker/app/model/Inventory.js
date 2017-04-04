@@ -15,11 +15,8 @@ Ext.define('expensetracker.model.Inventory', {
 		name : 'qty',
 		type : 'float'
 	}, {
-		name : 'mth',
-		type : 'int'
-	},{
-		name : 'yr',
-		type : 'int'
+		name : 'unit',
+		type : 'string'
 	}, {
 		name : 'username',
 		type : 'string'

@@ -35,12 +35,9 @@ Ext.define('expensetracker.view.login.LoginController', {
 					}
 					var response = Ext.decode(action.response.responseText);
 					if (response.user !== null) {
-						expensetracker.util.Session.setUser(response.user);						
+						expensetracker.util.Session.setUser(response.user);
 						expensetracker.util.Store.loadStaticStore();
 						expensetracker.util.Store.loadStore(Ext.getStore('ExpenseCategory'), {
-							username : expensetracker.util.Session.getUsername()
-						});
-						expensetracker.util.Store.loadStore(Ext.getStore('Units'), {
 							username : expensetracker.util.Session.getUsername()
 						});
 					}
@@ -58,8 +55,11 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var errorlabel = me.lookup('errorlbl');
 		var errors = [];
-			errorlabel.setHidden(false);
-		errors.push({name : 'Error', error: error});
+		errorlabel.setHidden(false);
+		errors.push({
+			name : 'Error',
+			error : error
+		});
 
 		errorlabel.setErrors(errors);
 	},
@@ -99,14 +99,14 @@ Ext.define('expensetracker.view.login.LoginController', {
 		window.show();
 	},
 	onChange : function(textfield, newvalue, oldvalue) {
-		var me = this;									
-		textfield.isChanged = true;		
+		var me = this;
+		textfield.isChanged = true;
 		if (!newvalue) {
 			textfield.clearInvalid();
 		}
 	},
 	onFocusOut : function(textfield, event) {
-		var me = this;		
+		var me = this;
 		var registercontainer = me.lookup('registercontainer');
 		var username = textfield.getValue();
 		if (textfield.isValid()) {
@@ -126,7 +126,7 @@ Ext.define('expensetracker.view.login.LoginController', {
 							var response = Ext.decode(response.responseText);
 							var isAvailable = response.isAvailable;
 							textfield.isAvailable = isAvailable;
-							if (isAvailable) {										
+							if (isAvailable) {
 								textfield.clearInvalid();
 							} else {
 								textfield.markInvalid(response.message);
@@ -140,30 +140,31 @@ Ext.define('expensetracker.view.login.LoginController', {
 			}
 		}
 	},
-	 updateErrorState: function(cmp, state) {
-        var me = this,
-            errorCmp = me.lookupReference('errorInd'),
-            view, form, fields, errors;
+	updateErrorState : function(cmp, state) {
+		var me = this, errorCmp = me.lookupReference('errorInd'), view, form, fields, errors;
 
-        view = me.lookup('registerform');
-        form = view.getForm();
-		
-        if (state === false || (typeof state === 'string')) {
-            fields = form.getFields();
-            errors = [];
+		view = me.lookup('registerform');
+		form = view.getForm();
 
-            fields.each(function(field) {
-                Ext.Array.forEach(field.getErrors(), function(error) {
-                    errors.push({name: field.emptyText, error: error});
-                });
-            });
+		if (state === false || (typeof state === 'string')) {
+			fields = form.getFields();
+			errors = [];
 
-            errorCmp.setErrors(errors);
-            me.hasBeenDirty = true;
-        } else if (state === true) {
-            errorCmp.setErrors();
-        }
-    },
+			fields.each(function(field) {
+				Ext.Array.forEach(field.getErrors(), function(error) {
+					errors.push({
+						name : field.emptyText,
+						error : error
+					});
+				});
+			});
+
+			errorCmp.setErrors(errors);
+			me.hasBeenDirty = true;
+		} else if (state === true) {
+			errorCmp.setErrors();
+		}
+	},
 	onRegisterUser : function(registerBtn) {
 		var me = this;
 		var card = me.lookup('formcard');

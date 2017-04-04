@@ -1,6 +1,6 @@
 Ext.define('expensetracker.view.income.IncomeWindowController', {
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.incomecontroller',	
+	alias : 'controller.incomecontroller',
 	onRender : function(window) {
 		var me = this;
 		var view = me.getView();
@@ -72,7 +72,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 					expensetracker.util.Message.toast(response.status_Message);
 					if (401 === response.status_Code) {
 						me.fireEvent('navigatelogin');
-						if(view !== null) {
+						if (view !== null) {
 							view.close();
 						}
 					}
@@ -130,18 +130,18 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 				}
 				if (isUnauthorizedAccess) {
 					expensetracker.util.Message.toast('Unauthorized Access');
-					if(model.get('source') != null) {
+					if (model.get('source') != null) {
 						model.get('source').destroy();
 					}
 					me.fireEvent('navigatelogin');
-					if(view !== null) {
+					if (view !== null) {
 						view.clearListeners();
 						view.close();
-					}					
+					}
 				} else {
 					expensetracker.util.Message.toast('Server Error');
 				}
 			}
 		});
-	}	
+	}
 });

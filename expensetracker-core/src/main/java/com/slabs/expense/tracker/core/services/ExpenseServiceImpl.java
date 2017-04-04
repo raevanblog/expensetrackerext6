@@ -195,8 +195,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 * 
 	 */
 	@Override
-	public List<Units> getExpenseUnits(String username) throws Exception {
-		return mapper.getExpenseUnits(username);
+	public List<Units> getExpenseUnits() throws Exception {
+		return mapper.getExpenseUnits();
 	}
 
 	/**

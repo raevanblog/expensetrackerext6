@@ -36,11 +36,9 @@ public class InventoryWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response addInventory(List<Inventory> records) throws ExpenseTrackerException {
 		try {
-			InventoryService service = ServiceFactory.getInstance()
-					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
+			InventoryService service = ServiceFactory.getInstance().getService(Services.INVENTORY_SERVICE, InventoryService.class);
 
-			return ResponseGenerator.getSuccessResponse(service.createInventory(records),
-					Operation.INSERT);
+			return ResponseGenerator.getSuccessResponse(service.createInventory(records), Operation.INSERT);
 
 		} catch (Exception e) {
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -52,11 +50,9 @@ public class InventoryWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteInventory(List<Inventory> records) throws ExpenseTrackerException {
 		try {
-			InventoryService service = ServiceFactory.getInstance()
-					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
+			InventoryService service = ServiceFactory.getInstance().getService(Services.INVENTORY_SERVICE, InventoryService.class);
 
-			return ResponseGenerator.getSuccessResponse(service.deleteInventory(records),
-					Operation.DELETE);
+			return ResponseGenerator.getSuccessResponse(service.deleteInventory(records), Operation.DELETE);
 		} catch (Exception e) {
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
@@ -67,11 +63,9 @@ public class InventoryWebService {
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response updateInventory(List<Inventory> records) throws ExpenseTrackerException {
 		try {
-			InventoryService service = ServiceFactory.getInstance()
-					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
+			InventoryService service = ServiceFactory.getInstance().getService(Services.INVENTORY_SERVICE, InventoryService.class);
 
-			return ResponseGenerator.getSuccessResponse(service.updateInventory(records),
-					Operation.UPDATE);
+			return ResponseGenerator.getSuccessResponse(service.updateInventory(records), Operation.UPDATE);
 		} catch (Exception e) {
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
@@ -80,15 +74,11 @@ public class InventoryWebService {
 	@Path("inventory/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getInventory(@QueryParam("username") String username,
-			@QueryParam("year") Integer year, @QueryParam("month") Integer month)
-			throws ExpenseTrackerException {
+	public Response getInventory(@QueryParam("username") String username) throws ExpenseTrackerException {
 		try {
-			InventoryService service = ServiceFactory.getInstance()
-					.getService(Services.INVENTORY_SERVICE, InventoryService.class);
+			InventoryService service = ServiceFactory.getInstance().getService(Services.INVENTORY_SERVICE, InventoryService.class);
 
-			return ResponseGenerator.getSuccessResponse(service.getInventory(username, year, month),
-					Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.getInventory(username), Operation.SELECT);
 		} catch (Exception e) {
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}

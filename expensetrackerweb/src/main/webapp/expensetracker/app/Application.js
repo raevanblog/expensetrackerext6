@@ -55,10 +55,7 @@ Ext.define('expensetracker.Application', {
 						expensetracker.util.Store.loadStaticStore();
 						expensetracker.util.Store.loadStore(Ext.getStore('ExpenseCategory'), {
 							username : expensetracker.util.Session.getUsername()
-						});
-						expensetracker.util.Store.loadStore(Ext.getStore('Units'), {
-							username : expensetracker.util.Session.getUsername()
-						});
+						});						
 						Ext.widget('app-main');
 					} else {
 						window.location = '#login';

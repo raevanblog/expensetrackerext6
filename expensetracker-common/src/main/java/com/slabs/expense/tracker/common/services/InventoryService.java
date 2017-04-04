@@ -10,8 +10,8 @@ public interface InventoryService {
 
 	public Integer deleteInventory(List<Inventory> records) throws Exception;
 
-	public List<Inventory> getInventory(String username, Integer year, Integer month) throws Exception;
+	public List<Inventory> getInventory(String username) throws Exception;
 
 	public Integer updateInventory(List<Inventory> records) throws Exception;
-	
+
 }

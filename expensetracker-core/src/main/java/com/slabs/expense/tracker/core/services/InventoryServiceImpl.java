@@ -35,9 +35,9 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public List<Inventory> getInventory(String username, Integer year, Integer month)
+	public List<Inventory> getInventory(String username)
 			throws Exception {
-		return inventoryDao.getInventory(username, year, month);
+		return inventoryDao.getInventory(username);
 	}
 
 	@Override

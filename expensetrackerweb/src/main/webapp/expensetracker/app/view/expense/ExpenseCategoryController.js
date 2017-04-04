@@ -1,6 +1,6 @@
 Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.expensecategorycontroller',	
+	alias : 'controller.expensecategorycontroller',
 	onCategorySaveOrUpdate : function(saveCategoryBtn) {
 		var me = this;
 		var categorygrid = me.getView();
@@ -22,14 +22,14 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 	},
 	onRenderCategoryGrid : function(categorygrid) {
 		var me = this;
-		me.keyMap = Ext.create('Ext.util.KeyMap', categorygrid.el, [{
+		me.keyMap = Ext.create('Ext.util.KeyMap', categorygrid.el, [ {
 			key : 'n',
 			fn : function() {
 				me.onAddCategory();
 			},
 			ctrl : true,
 			alt : true,
-			scope :  me
+			scope : me
 		}, {
 			key : 'r',
 			fn : function() {
@@ -37,7 +37,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 			},
 			ctrl : true,
 			alt : true,
-			scope :  me
+			scope : me
 		}, {
 			key : 's',
 			fn : function() {
@@ -53,7 +53,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 				me.onDeleteCategoryBySelection();
 			},
 			scope : me
-		}]);
+		} ]);
 	},
 	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
 		var me = this;
@@ -132,8 +132,8 @@ Ext.define('expensetracker.view.expense.ExpenseCategoryController', {
 		var categorygrid = me.getView();
 		var view = categorygrid.getView();
 		var selectedRecords = view.getSelectionModel().getSelection();
-		
-		if(selectedRecords != null && selectedRecords.length > 0) {
+
+		if (selectedRecords != null && selectedRecords.length > 0) {
 			var store = categorygrid.getStore();
 			store.remove(selectedRecords);
 			expensetracker.util.Grid.refresh(categorygrid);

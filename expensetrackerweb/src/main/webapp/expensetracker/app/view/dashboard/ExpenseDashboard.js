@@ -4,8 +4,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	alias : 'view.expensedashboard',
 	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController', 'expensetracker.view.dashboard.TopExpense',
 			'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie', 'expensetracker.view.charts.LineChart', 'expensetracker.view.income.IncomeWindow',
-			'expensetracker.view.inventory.InventoryWindow',
-			'expensetracker.store.Graph', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
+			'expensetracker.view.inventory.InventoryWindow', 'expensetracker.store.Graph', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
 	layout : 'responsivecolumn',
 	controller : 'expensedashboardcontroller',
 	viewModel : 'expensedashboard',
@@ -13,29 +12,29 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		afterrender : 'onRender'
 	},
 	items : [ {
-		xtype : 'summary',				
-		reference : 'summary',		
-		height : 100,		
-		cls : 'big-100 small-100 dash-panel shadow'		
+		xtype : 'summary',
+		reference : 'summary',
+		height : 100,
+		cls : 'big-100 small-100 dash-panel shadow'
 	}, {
-		xtype : 'container',		
+		xtype : 'container',
 		height : 150,
 		layout : {
-			type : 'fit'			
+			type : 'fit'
 		},
-		cls : 'big-20 small-100 dash-panel shadow',		
+		cls : 'big-20 small-100 dash-panel shadow',
 		items : [ {
 			xtype : 'summarypie',
 			reference : 'summarypie'
 		} ]
 	}, {
-		xtype : 'container',		
+		xtype : 'container',
 		height : 150,
 		layout : {
 			type : 'hbox',
 			pack : 'middle'
 		},
-		cls : 'big-20 small-100 dash-panel shadow',		
+		cls : 'big-20 small-100 dash-panel shadow',
 		items : [ {
 			xtype : 'thumnailcontainer',
 			reference : 'incomesheetdash',
@@ -45,13 +44,13 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			}
 		} ]
 	}, {
-		xtype : 'container',		
+		xtype : 'container',
 		height : 150,
 		layout : {
 			type : 'hbox',
 			pack : 'middle'
 		},
-		cls : 'big-20 small-100 dash-panel shadow',		
+		cls : 'big-20 small-100 dash-panel shadow',
 		items : [ {
 			xtype : 'thumnailcontainer',
 			reference : 'expsheetdash',
@@ -61,13 +60,13 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			}
 		} ]
 	}, {
-		xtype : 'container',		
+		xtype : 'container',
 		height : 150,
 		layout : {
 			type : 'hbox',
 			pack : 'middle'
 		},
-		cls : 'big-20 small-100 dash-panel shadow',		
+		cls : 'big-20 small-100 dash-panel shadow',
 		items : [ {
 			xtype : 'thumnailcontainer',
 			reference : 'inventorydash',
@@ -77,13 +76,13 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			}
 		} ]
 	}, {
-		xtype : 'container',		
+		xtype : 'container',
 		height : 150,
 		layout : {
 			type : 'hbox',
 			pack : 'middle'
 		},
-		cls : 'big-20 small-100 dash-panel shadow',		
+		cls : 'big-20 small-100 dash-panel shadow',
 		items : [ {
 			xtype : 'thumnailcontainer',
 			reference : 'reportdash',

@@ -95,10 +95,10 @@ public class ExpenseWebService {
 	@Path("expenseunits/")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getExpenseUnits(@QueryParam("username") String username) throws ExpenseTrackerException {
+	public Response getExpenseUnits() throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-			return ResponseGenerator.getSuccessResponse(service.getExpenseUnits(username), Operation.SELECT);
+			return ResponseGenerator.getSuccessResponse(service.getExpenseUnits(), Operation.SELECT);
 
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);

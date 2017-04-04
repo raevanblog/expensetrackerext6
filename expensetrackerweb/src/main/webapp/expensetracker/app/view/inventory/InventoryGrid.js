@@ -2,7 +2,7 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 	extend : 'Ext.grid.Panel',
 	xtype : 'inventorygrid',
 	alias : 'view.inventorygrid',
-	requires : ['expensetracker.store.Inventory'],
+	requires : [ 'expensetracker.store.Inventory' ],
 	initComponent : function() {
 		var me = this;
 		me.store = Ext.create('expensetracker.store.Inventory');
@@ -12,9 +12,9 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 		ptype : 'cellediting',
 		clicksToEdit : 1,
 		listeners : {
-			beforeedit : function(editor , context , options) {
+			beforeedit : function(editor, context, options) {
 				var expenseId = context.record.get('expId');
-				if(expenseId === undefined || expenseId === 0 || expenseId === null) {
+				if (expenseId === undefined || expenseId === 0 || expenseId === null) {
 					return true;
 				}
 				return false;
@@ -47,9 +47,9 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 			iconCls : 'x-fa fa-plus-square',
 			handler : 'onAddInventory',
 			tooltip : 'Add Inventory'
-		}]
+		} ]
 	} ],
-	columns : [{
+	columns : [ {
 		xtype : 'rownumberer',
 		text : 'S.No',
 		width : 75
@@ -74,7 +74,7 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 	}, {
 		text : 'Category',
 		align : 'left',
-		dataIndex : 'category',		
+		dataIndex : 'category',
 		editor : {
 			xtype : 'combobox',
 			displayField : 'category',
@@ -88,7 +88,7 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 			triggerAction : 'all'
 		},
 		width : 200
-	},{
+	}, {
 		xtype : 'numbercolumn',
 		text : 'Available Units',
 		dataIndex : 'qty',
@@ -97,10 +97,27 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 		editor : {
 			xtype : 'numberfield',
 			hideTrigger : true,
-			allowBlank : false,			
-			selectOnFocus : true			
+			allowBlank : false,
+			selectOnFocus : true
 		},
 		width : 200
+	}, {
+		text : 'Units',
+		align : 'left',
+		editor : {
+			xtype : 'combobox',
+			displayField : 'display',
+			valueField : 'unit',
+			store : 'Units',
+			forceSelection : true,
+			allowBlank : false,
+			typeAhead : true,
+			queryMode : 'local',
+			selectOnFocus : true,
+			triggerAction : 'all'
+		},
+		dataIndex : 'unit',
+		width : 150
 	}, {
 		xtype : 'actioncolumn',
 		align : 'center',
@@ -108,5 +125,5 @@ Ext.define('expensetracker.view.inventory.InventoryGrid', {
 		handler : 'onDeleteInventory',
 		iconCls : 'x-fa fa-trash-o',
 		flex : 1
-	}]
+	} ]
 });

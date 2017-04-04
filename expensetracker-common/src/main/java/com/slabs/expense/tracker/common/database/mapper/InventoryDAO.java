@@ -5,12 +5,12 @@ import java.util.List;
 import com.slabs.expense.tracker.common.database.entity.Inventory;
 
 public interface InventoryDAO {
-	
+
 	public Integer createInventory(List<Inventory> records);
 
 	public Integer deleteInventory(Inventory record);
 
-	public List<Inventory> getInventory(String username, int year, int month);
+	public List<Inventory> getInventory(String username);
 
 	public Integer updateInventory(Inventory record);
 

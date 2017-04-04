@@ -15,7 +15,7 @@ Ext.define('expensetracker.view.login.ActivationController', {
 				activationkey : activationkey
 			}),
 			success : function(response, opts) {
-				view.setLoading(false);				
+				view.setLoading(false);
 				var response = Ext.decode(response.responseText);
 				if (response.success) {
 					expensetracker.util.Message.toast('Activation Successful');
@@ -36,8 +36,11 @@ Ext.define('expensetracker.view.login.ActivationController', {
 		var me = this;
 		var errorlabel = me.lookup('formerrorlabel');
 		var errors = [];
-			
-		errors.push({name : 'Error', error: error.message});
+
+		errors.push({
+			name : 'Error',
+			error : error.message
+		});
 
 		errorlabel.setErrors(errors);
 	}

@@ -4,7 +4,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	init : function(view) {
 		var me = this;
 		var grid = me.lookup('expensegrid');
-		me.expenseGrouping = grid.view.findFeature('grouping');		
+		me.expenseGrouping = grid.view.findFeature('grouping');
 	},
 	onRender : function(expenseWindow) {
 		var me = this;
@@ -19,24 +19,24 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		var grid = me.lookup('expensegrid');
 		var groupByBtn = me.lookup('expensegridgroupby');
 		var items = groupByBtn.getMenu().getChildItemsToDisable();
-		if(isChecked) {
+		if (isChecked) {
 			me.toggleGroupByMenuItems(items, checkbox, true);
-			if('Date' === checkbox.boxLabel) {
+			if ('Date' === checkbox.boxLabel) {
 				grid.getStore().setGroupField('expdate');
-			} else if('Category' === checkbox.boxLabel) {
+			} else if ('Category' === checkbox.boxLabel) {
 				grid.getStore().setGroupField('category');
-			} else if('Expense Type' === checkbox.boxLabel) {
+			} else if ('Expense Type' === checkbox.boxLabel) {
 				grid.getStore().setGroupField('exptype');
 			}
-			me.expenseGrouping.enable();			
+			me.expenseGrouping.enable();
 		} else {
 			me.toggleGroupByMenuItems(items, checkbox, false);
 			me.expenseGrouping.disable();
-		}		
-	},	
+		}
+	},
 	toggleGroupByMenuItems : function(items, exception, disable) {
 		Ext.Array.each(items, function(item) {
-			if(item.boxLabel !== exception.boxLabel) {
+			if (item.boxLabel !== exception.boxLabel) {
 				item.setDisabled(disable);
 			}
 		});
@@ -96,15 +96,15 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 			}
 		});
-		
-		me.keyMap = Ext.create('Ext.util.KeyMap', expensegrid.el, [{
+
+		me.keyMap = Ext.create('Ext.util.KeyMap', expensegrid.el, [ {
 			key : 'n',
 			fn : function() {
 				me.onAddExpenseRecord();
 			},
 			ctrl : true,
 			alt : true,
-			scope :  me
+			scope : me
 		}, {
 			key : 'r',
 			fn : function() {
@@ -112,7 +112,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			},
 			ctrl : true,
 			alt : true,
-			scope :  me
+			scope : me
 		}, {
 			key : 's',
 			fn : function() {
@@ -128,7 +128,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				me.onDeleteExpenseBySelection();
 			},
 			scope : me
-		}]);
+		} ]);
 	},
 	filterGrid : function(gridsearchtext, newValue, oldValue, options) {
 		var me = this;
@@ -149,7 +149,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			itemName : '',
 			price : 0,
 			expdate : viewmodel.get('expenseDate'),
-			qty : 0,			
+			qty : 0,
 			username : expensetracker.util.Session.getUsername()
 		});
 		store.insert(0, model);
@@ -195,21 +195,21 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	},
 	onDeleteExpenseBySelection : function() {
 		var me = this;
-		var expensegrid = me.lookup('expensegrid');		
+		var expensegrid = me.lookup('expensegrid');
 		var view = expensegrid.getView();
 		var selectedRecords = view.getSelectionModel().getSelection();
-		
-		if(selectedRecords != null && selectedRecords.length > 0) {
-			var store = expensegrid.getStore();			
-			store.remove(selectedRecords);			
+
+		if (selectedRecords != null && selectedRecords.length > 0) {
+			var store = expensegrid.getStore();
+			store.remove(selectedRecords);
 			expensetracker.util.Grid.refresh(expensegrid);
 		}
 	},
 	onShowCategory : function(addCategBtn) {
 		var me = this;
-		var view = me.getView();		
+		var view = me.getView();
 		var component = view.getLayout().getActiveItem();
-		
+
 		var store = component.getStore();
 		if (store.getModifiedRecords().length > 0 || store.getRemovedRecords().length > 0) {
 			Ext.Msg.show({
@@ -230,7 +230,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			});
 		} else {
 			view.getLayout().next();
-		}		
+		}
 	},
 	onReload : function(event) {
 		var me = this;
@@ -251,14 +251,14 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 				if (closeWindow) {
 					view.close();
-				} else {					
+				} else {
 					expensetracker.util.Grid.reload(grid);
 				}
-				
-				if(!closeWindow && callback !== undefined && callback !== null) {
+
+				if (!closeWindow && callback !== undefined && callback !== null) {
 					callback.call(this);
 				}
-				
+
 			},
 			failure : function(batch) {
 				var isUnauthorizedAccess = false;
@@ -305,42 +305,41 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		incomeWindowModel.set('title', model.get('title'));
 		incomeWindow.show();
 	},
-	onOpenInventory	:  function() {
+	onOpenInventory : function() {
 		var me = this;
 		var view = me.getView();
 		var model = view.getViewModel();
-		
+
 		var inventoryWindow = Ext.create('expensetracker.view.inventory.InventoryWindow', {
 			height : Ext.Element.getViewportHeight(),
 			width : Ext.Element.getViewportWidth(),
 			modal : true
 		});
-		
+
 		var inventoryWindowModel = inventoryWindow.getViewModel();
 		inventoryWindowModel.set('month', model.get('month'));
 		inventoryWindowModel.set('year', model.get('year'));
 		inventoryWindowModel.set('title', 'Inventory ' + model.get('title'));
-		
+
 		inventoryWindow.show();
 	},
 	addExpenseToInventory : function(btn) {
-		var me = this;		
-		var record = btn.getWidgetRecord();		
-		
-		if(undefined === record.get('id') || null === record.get('id') || !Number.isInteger(record.get('id'))) {
+		var me = this;
+		var record = btn.getWidgetRecord();
+
+		if (undefined === record.get('id') || null === record.get('id') || !Number.isInteger(record.get('id'))) {
 			expensetracker.util.Message.toast('Save item before adding to Inventory.');
 		} else {
 			var grid = me.lookup('expensegrid');
 			var view = me.getView();
 			var viewModel = view.getViewModel();
-			var requestArray = new Array();		
-			requestArray.push({				
+			var requestArray = new Array();
+			requestArray.push({
 				itemName : record.get('itemName'),
 				username : record.get('username'),
 				category : record.get('category'),
 				qty : record.get('qty'),
-				yr : viewModel.get('year'),
-				mth : viewModel.get('month')
+				unit : record.get('unit')
 			});
 			view.setLoading('Adding to Inventory...');
 			Ext.Ajax.request({
@@ -350,9 +349,9 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				success : function(response, opts) {
 					view.setLoading(false);
 					var response = Ext.decode(response.responseText);
-					if(200 === response.status_Code) {						
+					if (200 === response.status_Code) {
 						grid.getStore().reload();
-						expensetracker.util.Message.toast( record.get('itemName') + ' added to Inventory');
+						expensetracker.util.Message.toast(record.get('itemName') + ' added to Inventory');
 					}
 				},
 				failure : function(response, opts) {
@@ -361,5 +360,5 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				}
 			});
 		}
-	}	
+	}
 });
