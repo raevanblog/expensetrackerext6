@@ -29,7 +29,7 @@ import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 import com.slabs.expense.tracker.webservices.response.StreamingResponse;
 
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 
 /**
  * {@link ReportingWebService} - Web Service for generating reports
@@ -78,7 +78,7 @@ public class ReportingWebService {
 
 			UserSettings settings = userService.getUserSettings(username);
 
-			JasperReportBuilder report = service.generateReport(username, year, month, settings.getCurrency().getCurrtxt());
+			JasperConcatenatedReportBuilder report = service.generateMonthlyExpenseReport(username, year, month, settings.getCurrency().getCurrtxt());
 
 			if (report != null) {
 				return ResponseGenerator.getSuccessResponse(new StreamingResponse(report), getFileName(username, monthName, year),

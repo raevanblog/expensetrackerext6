@@ -15,6 +15,7 @@ import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 
+import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 
@@ -53,8 +54,8 @@ public class ReportingService {
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
-	public JasperReportBuilder generateReport(String username, Integer year, Integer month,
-			String currencyName) throws Exception {
+	public JasperConcatenatedReportBuilder generateMonthlyExpenseReport(String username, Integer year, Integer month, String currencyName)
+			throws Exception {
 		List<UserInfo> info = userDao.getUser(username, Boolean.FALSE);
 		if (info != null && !info.isEmpty()) {
 			List<Expense> expenses = expenseDao.getExpense(username, year, month);
@@ -62,12 +63,12 @@ public class ReportingService {
 			if (year != null) {
 				if (month != null) {
 					if (!expenses.isEmpty()) {
-						MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0), income,
-								Month.getMonth(month), year,
+						MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0), Month.getMonth(month), year,
 								CurrencyType.getCurrency(currencyName));
-						report.addPageNumber();
-						report.subTotalPrice();
-						report.setDataSource(expenses);
+						report.enablePageNumber();
+						report.enableSubTotal();
+						report.setDataSourceForExpense(expenses);
+						report.setDataSourceForIncome(income);
 						return report.buildReport();
 					}
 				}

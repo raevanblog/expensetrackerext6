@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.reports.builder;
 import com.slabs.expense.tracker.reports.provider.ColumnProvider;
 import com.slabs.expense.tracker.reports.provider.StyleProvider;
 
+import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
@@ -52,6 +53,16 @@ public class ReportBuilder {
 	 */
 	public JasperReportBuilder createJasperReportBuilder() {
 		return DynamicReports.report();
+	}
+
+	/**
+	 * This method will provide the {@link JasperConcatenatedReportBuilder} for building
+	 * report
+	 * 
+	 * @return {@link JasperConcatenatedReportBuilder}
+	 */
+	public JasperConcatenatedReportBuilder createJasperConcatenatedReportBuilder() {
+		return DynamicReports.concatenatedReport();
 	}
 
 	/**

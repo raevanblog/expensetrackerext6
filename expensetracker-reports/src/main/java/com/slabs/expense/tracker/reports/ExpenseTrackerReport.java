@@ -22,6 +22,7 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.ImageBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.grid.GridBuilders;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
@@ -52,7 +53,7 @@ public abstract class ExpenseTrackerReport {
 	protected StyleBuilders styleBuilder = builder.getStyleBuilders();
 
 	protected GridBuilders gridBuilder = builder.getGridBuilders();
-	
+
 	protected SubtotalBuilders subtotalBuilder = builder.getSubtotalBuilders();
 
 	protected ChartBuilders chartBuilder = builder.getChartBuilders();
@@ -110,8 +111,7 @@ public abstract class ExpenseTrackerReport {
 	 */
 	public void addPageNumber() {
 		HorizontalListBuilder hList = componentBuilder.horizontalFlowList();
-		hList.add(getApplicationName(10), componentBuilder.pageXslashY()
-				.setStyle(styleProvider.getStyle(HorizontalTextAlignment.LEFT)));
+		hList.add(getApplicationName(10), componentBuilder.pageXslashY().setStyle(styleProvider.getStyle(HorizontalTextAlignment.LEFT)));
 		report.pageFooter(styleProvider.getDefaultFillerLine(10), hList);
 	}
 
@@ -121,8 +121,7 @@ public abstract class ExpenseTrackerReport {
 	 * @return {@link ImageBuilder}
 	 */
 	public ImageBuilder getLogo() {
-		return componentBuilder.image(getClass().getResourceAsStream("/images/logo-blue.png"))
-				.setFixedDimension(50, 50);
+		return componentBuilder.image(getClass().getResourceAsStream("/images/logo-blue.png")).setFixedDimension(50, 50);
 	}
 
 	/**
@@ -133,8 +132,7 @@ public abstract class ExpenseTrackerReport {
 	 * @return {@link TextFieldBuilder}
 	 */
 	public TextFieldBuilder<String> getLogoTitle(VerticalTextAlignment alignment) {
-		return componentBuilder.text(Constants.APP_NAME_CC)
-				.setStyle(styleProvider.getBoldStyle(14).setVerticalTextAlignment(alignment));
+		return componentBuilder.text(Constants.APP_NAME_CC).setStyle(styleProvider.getBoldStyle(14).setVerticalTextAlignment(alignment));
 	}
 
 	/**
@@ -146,9 +144,64 @@ public abstract class ExpenseTrackerReport {
 	 */
 	public TextFieldBuilder<String> getApplicationName(Integer fontSize) {
 		TextFieldBuilder<String> appName = componentBuilder.text(Constants.APP_NAME_CC);
-		StyleBuilder appNameStyle = styleProvider.getStyle(fontSize)
-				.setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
+		StyleBuilder appNameStyle = styleProvider.getStyle(fontSize).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 		return appName.setStyle(appNameStyle);
+	}
+
+	/**
+	 * This method will add the title to the report
+	 * 
+	 */
+	public void addTitle() {
+
+		HorizontalListBuilder titleContainer = componentBuilder.horizontalList();
+		TextFieldBuilder<String> logoTitle = getLogoTitle(VerticalTextAlignment.BOTTOM).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
+
+		TextFieldBuilder<String> reportTitle = componentBuilder.text(Constants.MONTHLY_REPORT).setStyle(styleProvider.getBoldStyle());
+
+		TextFieldBuilder<String> monthAnYear = componentBuilder.text(new StringBuilder(month.getName()).append(",").append(year).toString())
+				.setStyle(styleProvider.getBoldStyle(12).setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT));
+		titleContainer.add(getLogo(), monthAnYear).newFlowRow(2);
+		titleContainer.add(logoTitle, reportTitle.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT)).newRow();
+
+		report.title(titleContainer, componentBuilder.verticalGap(5), styleProvider.getDefaultFillerLine(10));
+	}
+
+	/**
+	 * This method will add report owner details to the report
+	 * 
+	 */
+	public void addReportOwnner() {
+		VerticalListBuilder verticalContainer = componentBuilder.verticalList();
+
+		TextFieldBuilder<String> title = componentBuilder.text("Report Owner").setStyle(styleProvider.getBoldStyle(14).setUnderline(Boolean.TRUE));
+
+		HorizontalListBuilder detailContainer = componentBuilder.horizontalList();
+
+		TextFieldBuilder<String> name = componentBuilder.text("Name : " + userInfo.getFirstName() + " " + userInfo.getLastName())
+				.setStyle(styleProvider.getStyle());
+		TextFieldBuilder<String> email = componentBuilder.text("Email : " + userInfo.getEmail()).setStyle(styleProvider.getStyle());
+		TextFieldBuilder<String> address = componentBuilder.text("Address : " + userInfo.getAddress()).setStyle(styleProvider.getStyle());
+
+		detailContainer.add(name).newRow();
+		detailContainer.add(email).newRow();
+		detailContainer.add(address).newRow(5);
+
+		verticalContainer.add(title, componentBuilder.verticalGap(5), detailContainer);
+
+		report.title(verticalContainer);
+	}
+
+	/**
+	 * This method will apply sub total to the column {@code Column.PRICE}
+	 */
+	@SuppressWarnings({ "rawtypes" })
+	public void subTotal(Column subtotalColumn, Column labelColumn) {
+		AggregationSubtotalBuilder subtotal = getSubTotalBuilder(subtotalColumn);
+		subtotal.setStyle(styleProvider.getBoldStyle(HorizontalTextAlignment.CENTER));
+		AggregationSubtotalBuilder<String> label = subtotalBuilder.text("Total", getColumn(labelColumn));
+		label.setStyle(styleProvider.getBoldStyle(HorizontalTextAlignment.RIGHT));
+		report.addSubtotalAtSummary(label, subtotal);
 	}
 
 	/**
@@ -162,6 +215,15 @@ public abstract class ExpenseTrackerReport {
 		for (ValueColumnBuilder c : columns) {
 			this.columns.add(c);
 		}
+	}
+
+	/**
+	 * This method will add all the columns to the Jasper Report
+	 * 
+	 */
+	public void addColumnsToReport() {
+		report.columns(getAllColumns());
+		report.highlightDetailOddRows();
 	}
 
 	/**
@@ -203,7 +265,7 @@ public abstract class ExpenseTrackerReport {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AggregationSubtotalBuilder getSubTotalBuilder(final Column column) {
-		AggregationSubtotalBuilder subtotal = subtotalBuilder.sum(getColumn(column));			
+		AggregationSubtotalBuilder subtotal = subtotalBuilder.sum(getColumn(column));
 		return subtotal;
 	}
 
@@ -223,7 +285,7 @@ public abstract class ExpenseTrackerReport {
 	public FontBuilder getDefaultFont(Integer fontSize, boolean bold, boolean italic) {
 		return builder.getDefaultFont().setFontSize(fontSize).setBold(bold).setItalic(italic);
 	}
-		
+
 	/**
 	 * 
 	 * @return
@@ -242,6 +304,7 @@ public abstract class ExpenseTrackerReport {
 
 	/**
 	 * s
+	 * 
 	 * @return
 	 */
 	public Currency getCurrency() {

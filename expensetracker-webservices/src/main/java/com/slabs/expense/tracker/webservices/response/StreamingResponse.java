@@ -10,6 +10,7 @@ import javax.ws.rs.core.StreamingOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -25,6 +26,8 @@ public class StreamingResponse implements StreamingOutput {
 
 	private JasperReportBuilder builder;
 
+	private JasperConcatenatedReportBuilder concatenatedBuilder;
+
 	private String html;
 
 	public StreamingResponse(String html) {
@@ -35,11 +38,17 @@ public class StreamingResponse implements StreamingOutput {
 		this.builder = builder;
 	}
 
+	public StreamingResponse(JasperConcatenatedReportBuilder builder) {
+		this.concatenatedBuilder = builder;
+	}
+
 	@Override
 	public void write(OutputStream output) throws IOException, WebApplicationException {
 		try {
 			if (builder != null) {
 				builder.toPdf(output);
+			} else if (concatenatedBuilder != null) {
+				concatenatedBuilder.toPdf(output);
 			} else if (html != null) {
 				PrintStream ps = new PrintStream(output);
 				ps.print(html);
