@@ -2,6 +2,7 @@ package com.slabs.expense.tracker.reports;
 
 import java.util.Collection;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
@@ -22,9 +23,11 @@ public class MonthlyExpenseReport {
 
 	private JasperConcatenatedReportBuilder report;
 
-	private ExpenseReport expenseReport;
+	private IndexReport indexReport;
 
 	private IncomeReport incomeReport;
+
+	private ExpenseReport expenseReport;
 
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year) throws InstantiationException, IllegalAccessException {
 		this(userInfo, month, year, CurrencyType.USD);
@@ -32,13 +35,15 @@ public class MonthlyExpenseReport {
 
 	public MonthlyExpenseReport(UserInfo userInfo, Month month, Integer year, CurrencyType currency)
 			throws InstantiationException, IllegalAccessException {
-		this.expenseReport = new ExpenseReport(userInfo, month, year, currency);
+		this.indexReport = new IndexReport(userInfo, month, year, currency);
 		this.incomeReport = new IncomeReport(userInfo, month, year, currency);
+		this.expenseReport = new ExpenseReport(userInfo, month, year, currency);
 	}
 
 	public JasperConcatenatedReportBuilder buildReport() throws DRException {
 		this.report = ReportBuilder.getInstance().createJasperConcatenatedReportBuilder();
-		report.concatenate(incomeReport.buildReport(), expenseReport.buildReport());
+		report.concatenate(indexReport.buildReport(Constants.MONTHLY_REPORT), incomeReport.buildReport(Constants.INCOME_REPORT),
+				expenseReport.buildReport(Constants.EXPENSE_REPORT));
 		report.continuousPageNumbering();
 		return this.report;
 	}
@@ -49,11 +54,6 @@ public class MonthlyExpenseReport {
 
 	public void setDataSourceForIncome(Collection<? extends Object> dataSource) {
 		this.incomeReport.setDataSource(dataSource);
-	}
-
-	public void enablePageNumber() {
-		this.expenseReport.addPageNumber();
-		this.incomeReport.addPageNumber();
 	}
 
 	public void enableSubTotal() {

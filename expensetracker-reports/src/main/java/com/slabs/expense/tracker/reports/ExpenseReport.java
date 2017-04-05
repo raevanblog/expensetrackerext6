@@ -3,6 +3,7 @@ package com.slabs.expense.tracker.reports;
 import java.awt.Color;
 import java.math.BigDecimal;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.BarChartCustomizer;
@@ -36,15 +37,16 @@ public class ExpenseReport extends ExpenseTrackerReport {
 	}
 
 	@Override
-	public JasperReportBuilder buildReport() throws DRException {
-		addTitle();
+	public JasperReportBuilder buildReport(String reportName) throws DRException {
+		addTitle(reportName);
 		addGridTitle();
 		addColumnsToReport();
 		addSummary();
 		return report;
 	}
-
-	private void addGridTitle() {
+	
+	@Override
+	public void addGridTitle() {
 		TextFieldBuilder<String> expenseTitle = componentBuilder.text("Expense Details")
 				.setStyle(styleProvider.getBoldStyle(14).setUnderline(Boolean.TRUE));
 
@@ -72,7 +74,7 @@ public class ExpenseReport extends ExpenseTrackerReport {
 	}
 
 	private void addSummary() {
-		report.summary(getExpenseChart());
+		report.summary(componentBuilder.verticalGap(25), getExpenseChart());
 	}
 
 	private BarChartBuilder getExpenseChart() {

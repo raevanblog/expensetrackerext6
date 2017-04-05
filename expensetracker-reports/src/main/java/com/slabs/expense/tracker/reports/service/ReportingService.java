@@ -64,8 +64,7 @@ public class ReportingService {
 				if (month != null) {
 					if (!expenses.isEmpty()) {
 						MonthlyExpenseReport report = new MonthlyExpenseReport(info.get(0), Month.getMonth(month), year,
-								CurrencyType.getCurrency(currencyName));
-						report.enablePageNumber();
+								CurrencyType.getCurrency(currencyName));						
 						report.enableSubTotal();
 						report.setDataSourceForExpense(expenses);
 						report.setDataSourceForIncome(income);

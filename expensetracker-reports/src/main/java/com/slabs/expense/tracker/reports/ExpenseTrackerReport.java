@@ -9,6 +9,7 @@ import java.util.List;
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
 import com.slabs.expense.tracker.reports.column.data.type.Currency;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
@@ -152,12 +153,12 @@ public abstract class ExpenseTrackerReport {
 	 * This method will add the title to the report
 	 * 
 	 */
-	public void addTitle() {
+	public void addTitle(String reportName) {
 
 		HorizontalListBuilder titleContainer = componentBuilder.horizontalList();
 		TextFieldBuilder<String> logoTitle = getLogoTitle(VerticalTextAlignment.BOTTOM).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 
-		TextFieldBuilder<String> reportTitle = componentBuilder.text(Constants.MONTHLY_REPORT).setStyle(styleProvider.getBoldStyle());
+		TextFieldBuilder<String> reportTitle = componentBuilder.text(reportName).setStyle(styleProvider.getBoldStyle(16));
 
 		TextFieldBuilder<String> monthAnYear = componentBuilder.text(new StringBuilder(month.getName()).append(",").append(year).toString())
 				.setStyle(styleProvider.getBoldStyle(12).setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT));
@@ -317,7 +318,7 @@ public abstract class ExpenseTrackerReport {
 	 * @return
 	 * @throws DRException
 	 */
-	public abstract JasperReportBuilder buildReport() throws DRException;
+	public abstract JasperReportBuilder buildReport(String reportName) throws DRException;
 
 	/**
 	 * 
@@ -329,6 +330,11 @@ public abstract class ExpenseTrackerReport {
 	 *            {@link Boolean} - True to apply subtotal for the group.
 	 *            Default is false
 	 */
-	public abstract void groupBy(Column column, boolean enableSubtotal);
+	public abstract void groupBy(Column column, boolean enableSubtotal) throws ExpenseTrackerException;
+	
+	/**
+	 * This method will add title to grid.
+	 */
+	public abstract void addGridTitle() throws ExpenseTrackerException;
 
 }

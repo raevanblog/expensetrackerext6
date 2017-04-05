@@ -3,12 +3,16 @@ package com.slabs.expense.tracker.common.constants;
 public class Constants {
 
 	public static final String APP_NAME = "expensetracker";
-	
+
 	public static final String APP_NAME_CC = "Expense Tracker";
-	
+
 	public static final String APP_NAME_UC = "EXPENSE TRACKER";
-	
+
 	public static final String MONTHLY_REPORT = "Monthly Report";
+
+	public static final String EXPENSE_REPORT = "Expense Report";
+
+	public static final String INCOME_REPORT = "Income Report";
 
 	public static final String MAIL_PROPERTIES = "email.properties";
 
