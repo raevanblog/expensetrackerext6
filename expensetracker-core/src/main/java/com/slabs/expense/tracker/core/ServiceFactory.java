@@ -50,12 +50,16 @@ public class ServiceFactory {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public synchronized <T extends Object> T getService(Services service, Class<T> cls) {
+		return (T) getBean(service.toString(), cls);
+	}
+
+	@SuppressWarnings("unchecked")
+	public synchronized <T extends Object> T getBean(String beanName, Class<T> cls) {
 
 		if (context == null) {
 			initialize();
 		}
-		return (T) context.getBean(service.toString());
+		return (T) context.getBean(beanName);
 	}
 }

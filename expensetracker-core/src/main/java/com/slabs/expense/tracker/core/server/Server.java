@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.constants.Constants;
+import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.core.scheduler.ReportingScheduler;
 import com.slabs.expense.tracker.util.Mailer;
 import com.slabs.expense.tracker.util.MarkerEngine;
 import com.slabs.expense.tracker.util.PropertiesUtil;
@@ -45,16 +47,23 @@ public class Server {
 			L.info("Initializing Service Factory...");
 			ServiceFactory.getInstance().initialize();
 
+			L.info("Initializing Reporting Scheduler...");
+			ReportingScheduler.getInstance().initialize();
+			ReportingScheduler.getInstance().startScheduler();
+			ReportingScheduler.getInstance().scheduleMonthlyReportDispatcher();
+
 			L.info("Initializing Marker Engine...");
 			MarkerEngine.initialize();
 
 			L.info("Initializing Url Utility...");
 			URLUtil.initialize(ip, port, appName, isSecured);
 
-			Mailer.initialize(PropertiesUtil.getFromClassPath(Constants.MAIL_PROPERTIES),
-					Constants.APP_NAME);
+			Mailer.initialize(PropertiesUtil.getFromClassPath(Constants.MAIL_PROPERTIES), Constants.APP_NAME);
 
 		} catch (UtilityException e) {
+			L.error("Exception occurred while starting the application, {}", e);
+			System.exit(1);
+		} catch (ExpenseTrackerException e) {
 			L.error("Exception occurred while starting the application, {}", e);
 			System.exit(1);
 		}
