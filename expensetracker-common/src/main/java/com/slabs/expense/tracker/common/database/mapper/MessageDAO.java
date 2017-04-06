@@ -2,8 +2,11 @@ package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.slabs.expense.tracker.common.database.entity.Message;
 
+@Component(value = "MessageDAO")
 public interface MessageDAO {
 
 	public Integer insertMessage(List<Message> records);

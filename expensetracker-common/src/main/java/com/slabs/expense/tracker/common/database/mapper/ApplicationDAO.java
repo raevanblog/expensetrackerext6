@@ -2,11 +2,14 @@ package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.slabs.expense.tracker.common.database.entity.Currency;
 import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.ExpenseType;
 import com.slabs.expense.tracker.common.database.entity.IncomeType;
 
+@Component(value = "ApplicationDAO")
 public interface ApplicationDAO {
 
 	public List<ExpenseType> getExpenseType();

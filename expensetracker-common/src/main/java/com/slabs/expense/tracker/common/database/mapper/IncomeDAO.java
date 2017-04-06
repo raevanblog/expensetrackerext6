@@ -2,6 +2,8 @@ package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.database.entity.Income;
 import com.slabs.expense.tracker.common.database.entity.IncomeType;
@@ -13,6 +15,7 @@ import com.slabs.expense.tracker.common.database.entity.IncomeType;
  * @author Shyam Natarajan
  *
  */
+@Component(value = "IncomeDAO")
 public interface IncomeDAO {
 
 	public Integer insertIncome(List<Income> records);

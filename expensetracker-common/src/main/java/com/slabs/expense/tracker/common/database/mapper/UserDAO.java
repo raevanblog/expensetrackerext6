@@ -2,6 +2,8 @@ package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.database.entity.UserSettings;
 
@@ -12,10 +14,11 @@ import com.slabs.expense.tracker.common.database.entity.UserSettings;
  * @author Shyam Natarajan
  *
  */
+@Component(value = "UserDAO")
 public interface UserDAO {
 
 	public List<UserInfo> getUser(String username, boolean includePassword);
-	
+
 	public List<UserInfo> getUserBy(String type, String value, boolean includePassword);
 
 	public Integer createUser(UserInfo record);

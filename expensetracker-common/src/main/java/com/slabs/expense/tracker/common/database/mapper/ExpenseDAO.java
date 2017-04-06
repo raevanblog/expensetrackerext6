@@ -2,6 +2,8 @@ package com.slabs.expense.tracker.common.database.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
@@ -15,6 +17,7 @@ import com.slabs.expense.tracker.common.database.entity.Units;
  * @author Shyam Natarajan
  *
  */
+@Component(value = "ExpenseDAO")
 public interface ExpenseDAO {
 
 	public Integer insertExpense(List<Expense> records);
