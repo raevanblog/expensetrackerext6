@@ -102,7 +102,19 @@
 			,PASSWORD
 		</if>
 		from EXPENSETRACKER.USERINFO
-		where username != 'admin'		
+		where ISADMIN = 'N'
+		<if test="param1 != null">
+			and USERNAME=#{param1}
+		</if>
+	</select>
+
+	<select id="getAdminUser" resultMap="UserInfo">
+		select FIRSTNAME, LASTNAME, SEX, USERNAME, EMAIL, MOBILE, ADDRESS, PROFILEPIC, ISADMIN, ISFTLOGIN, ISVERIFIED, ISLOCKED, ACTIVATIONKEY
+		<if test="param2">
+			,PASSWORD
+		</if>
+		from EXPENSETRACKER.USERINFO
+		where ISADMIN = 'Y'
 		<if test="param1 != null">
 			and USERNAME=#{param1}
 		</if>

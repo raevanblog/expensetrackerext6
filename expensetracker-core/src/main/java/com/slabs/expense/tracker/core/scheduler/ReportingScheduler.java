@@ -1,10 +1,7 @@
 package com.slabs.expense.tracker.core.scheduler;
 
-import org.quartz.CalendarIntervalScheduleBuilder;
-import org.quartz.CalendarIntervalTrigger;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
-import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;

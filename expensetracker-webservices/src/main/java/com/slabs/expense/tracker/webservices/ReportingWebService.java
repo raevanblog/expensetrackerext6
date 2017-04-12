@@ -81,8 +81,8 @@ public class ReportingWebService {
 			JasperConcatenatedReportBuilder report = service.generateMonthlyExpenseReport(username, year, month, settings.getCurrency().getCurrtxt());
 
 			if (report != null) {
-				return ResponseGenerator.getSuccessResponse(new StreamingResponse(report), getFileName(username, monthName, year),
-						ContentType.APPLICATION_PDF_TYPE);
+				return ResponseGenerator.getSuccessResponse(new StreamingResponse(report),
+						getFileName(username, monthName, String.valueOf(year), "pdf"), ContentType.APPLICATION_PDF_TYPE);
 			} else {
 				Map<String, String> model = new HashMap<String, String>();
 				model.put("response", "Report not available.");
@@ -98,12 +98,17 @@ public class ReportingWebService {
 		}
 	}
 
-	private String getFileName(String username, String month, Integer year) {
+	private String getFileName(String username, String month, String year, String type) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(username);
 		if (month != null) {
-			return username + "_" + month + "_" + year + ".pdf";
-		} else {
-			return username + "_" + year + ".pdf";
+			buffer.append(Constants.UNDERSCORE).append(month);
 		}
+
+		if (year != null) {
+			buffer.append(Constants.UNDERSCORE).append(year);
+		}
+		return buffer.append(".").append(type).toString();
 	}
 
 }

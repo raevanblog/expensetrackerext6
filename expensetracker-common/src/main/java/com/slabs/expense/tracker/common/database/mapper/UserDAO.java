@@ -18,6 +18,8 @@ import com.slabs.expense.tracker.common.database.entity.UserSettings;
 public interface UserDAO {
 
 	public List<UserInfo> getUser(String username, boolean includePassword);
+	
+	public List<UserInfo> getAdminUser(String username, boolean includePassword);
 
 	public List<UserInfo> getUserBy(String type, String value, boolean includePassword);
 

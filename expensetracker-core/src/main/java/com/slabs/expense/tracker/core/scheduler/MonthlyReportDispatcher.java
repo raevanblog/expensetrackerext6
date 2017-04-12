@@ -5,12 +5,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.database.entity.UserSettings;
 import com.slabs.expense.tracker.common.database.mapper.UserDAO;
@@ -20,6 +22,7 @@ import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.service.ReportingService;
 import com.slabs.expense.tracker.util.Mailer;
 import com.slabs.expense.tracker.util.entities.MailAttachment;
+import com.slabs.expense.tracker.util.exception.UtilityException;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -41,17 +44,16 @@ public class MonthlyReportDispatcher implements Job {
 				String username = user.getUsername();
 				int year = calendar.get(Calendar.YEAR);
 				int month = calendar.get(Calendar.MONTH);
-				String fileName = username + "_" + Month.getMonth(month).getName() + "_" + year + ".pdf";
+				String fileName = getAttachmentName(username, Month.getMonth(month).getName(), String.valueOf(year));
 
 				UserSettings settings = userDAO.getUserSettings(username);
 
 				JasperConcatenatedReportBuilder report = service.generateMonthlyExpenseReport(username, year, month,
-						settings.getCurrency().getCurrtxt());
-				byte[] attachment = getAttachmentContent(report);
-
-				MailAttachment mailAttachment = new MailAttachment("application/pdf", fileName, attachment, "Monthly Expense Report");
-				Email email = Mailer.createMultiPartEmail("Your Monthly Expense Report", "Monthly Expense Report", mailAttachment, user.getEmail());
-				email.send();
+						settings.getCurrency().getCurrtxt());				
+				MailAttachment mailAttachment = new MailAttachment("application/pdf", fileName,  getAttachmentContent(report), "Monthly Expense Report");
+				
+				L.info("Dispacthing monthly report to {} : {}", user.getUsername(), user.getEmail());
+				dispatchReport("Your Monthly Expense Report", "Monthly Expense Report", mailAttachment, user.getEmail());
 			}
 
 		} catch (Exception e) {
@@ -60,6 +62,19 @@ public class MonthlyReportDispatcher implements Job {
 			throw new JobExecutionException(e);
 
 		}
+	}
+
+	private void dispatchReport(String mailContent, String subject, MailAttachment attachment, String toEmail) throws UtilityException, EmailException {
+		Email email = Mailer.createMultiPartEmail(mailContent, subject, attachment,toEmail);
+		email.send();
+	}
+
+	private String getAttachmentName(String username, String month, String year) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(username).append(Constants.UNDERSCORE);
+		buffer.append(month).append(Constants.UNDERSCORE);
+		buffer.append(year).append(".pdf");
+		return buffer.toString();
 	}
 
 	private byte[] getAttachmentContent(JasperConcatenatedReportBuilder report) throws DRException {
