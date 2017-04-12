@@ -2,6 +2,9 @@ package com.slabs.expense.tracker.core.scheduler;
 
 import org.quartz.CalendarIntervalScheduleBuilder;
 import org.quartz.CalendarIntervalTrigger;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
+import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -64,15 +67,10 @@ public class ReportingScheduler {
 	public void scheduleMonthlyReportDispatcher() throws ExpenseTrackerException {
 		try {
 			L.info("Scheduling Monthly Report Dispatcher...");
-
 			JobDetail job = JobBuilder.newJob(MonthlyReportDispatcher.class).withIdentity("MonthlyReport", "ReportingJobs").build();
-
 			TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger().withIdentity("MonthlyReportTrigger", "ReportingJobs");
-			CalendarIntervalScheduleBuilder scheduleBuilder = CalendarIntervalScheduleBuilder.calendarIntervalSchedule();
-			scheduleBuilder.withIntervalInSeconds(15);
-
-			CalendarIntervalTrigger trigger = triggerBuilder.startNow().withSchedule(scheduleBuilder).build();
-
+			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0 0 0 1 * ?");
+			CronTrigger trigger = triggerBuilder.startNow().withSchedule(scheduleBuilder).build();
 			quartzScheduler.scheduleJob(job, trigger);
 		} catch (SchedulerException e) {
 			throw new ExpenseTrackerException(e);

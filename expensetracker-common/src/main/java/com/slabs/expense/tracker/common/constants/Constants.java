@@ -15,6 +15,8 @@ public class Constants {
 	public static final String INCOME_REPORT = "Income Report";
 
 	public static final String MAIL_PROPERTIES = "email.properties";
+	
+	public static final String EXPENSETRACKER_PROPERTIES = "expensetracker.properties";
 
 	public static final String YES = "YES";
 

@@ -102,8 +102,9 @@
 			,PASSWORD
 		</if>
 		from EXPENSETRACKER.USERINFO
+		where username != 'admin'		
 		<if test="param1 != null">
-			where USERNAME=#{param1}
+			and USERNAME=#{param1}
 		</if>
 	</select>
 

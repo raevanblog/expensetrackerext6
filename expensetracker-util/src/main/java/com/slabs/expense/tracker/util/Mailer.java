@@ -1,16 +1,22 @@
 package com.slabs.expense.tracker.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+
+import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.slabs.expense.tracker.util.entities.MailAttachment;
 import com.slabs.expense.tracker.util.exception.UtilityException;
 
 public class Mailer {
@@ -65,22 +71,19 @@ public class Mailer {
 		}
 	}
 
-	public static Email createSimpleEmail(String content, String subject, String toEmail)
-			throws UtilityException {
+	public static Email createSimpleEmail(String content, String subject, String toEmail) throws UtilityException {
 
 		String[] email = { toEmail };
 		return createSimpleEmail(content, subject, email);
 	}
 
-	public static Email createSimpleEmail(String content, String subject, Set<String> toEmailList)
-			throws UtilityException {
+	public static Email createSimpleEmail(String content, String subject, Set<String> toEmailList) throws UtilityException {
 
 		String[] toEmails = (String[]) toEmailList.toArray();
 		return createSimpleEmail(content, subject, toEmails);
 	}
 
-	private static Email createSimpleEmail(String content, String subject, String... toEmails)
-			throws UtilityException {
+	private static Email createSimpleEmail(String content, String subject, String... toEmails) throws UtilityException {
 
 		Email email = null;
 		try {
@@ -98,22 +101,19 @@ public class Mailer {
 		return createHtmlEmail(content, subject, properties.getProperty(EMAIL_ADMIN));
 	}
 
-	public static Email createHtmlEmail(String content, String subject, String toEmail)
-			throws UtilityException {
+	public static Email createHtmlEmail(String content, String subject, String toEmail) throws UtilityException {
 
 		String[] email = { toEmail };
 		return createHtmlEmail(content, subject, email);
 	}
 
-	public static Email createHtmlEmail(String content, String subject, Set<String> toEmailList)
-			throws UtilityException {
+	public static Email createHtmlEmail(String content, String subject, Set<String> toEmailList) throws UtilityException {
 
 		String[] toEmails = (String[]) toEmailList.toArray();
 		return createHtmlEmail(content, subject, toEmails);
 	}
 
-	private static Email createHtmlEmail(String content, String subject, String... toEmails)
-			throws UtilityException {
+	private static Email createHtmlEmail(String content, String subject, String... toEmails) throws UtilityException {
 
 		Email email = null;
 		try {
@@ -128,6 +128,34 @@ public class Mailer {
 		return email;
 	}
 
+	public static Email createMultiPartEmail(String content, String subject, MailAttachment attachment, String... toEmails) throws UtilityException {
+		List<MailAttachment> attachments = new ArrayList<MailAttachment>();
+		attachments.add(attachment);
+		return createMultiPartEmail(content, subject, attachments, toEmails);
+	}
+
+	public static Email createMultiPartEmail(String content, String subject, List<MailAttachment> attachments, String... toEmails)
+			throws UtilityException {
+		Email email = null;
+		try {
+			email = configure(new MultiPartEmail());
+			email.setMsg(content);
+			email.setSubject(subject);
+			email.addTo(toEmails);
+
+			for (MailAttachment attachment : attachments) {
+				ByteArrayDataSource attachmentData = new ByteArrayDataSource(attachment.getAttachment(), attachment.getAttachmentType());
+				((MultiPartEmail) email).attach(attachmentData, attachment.getAttachmentName(), attachment.getDescription());
+			}
+
+		} catch (EmailException e) {
+			throw new UtilityException("Exception occurred while creating email", e);
+		}
+
+		return email;
+
+	}
+
 	private static Email configure(Email email) throws UtilityException {
 
 		if (properties == null) {
@@ -135,12 +163,10 @@ public class Mailer {
 		}
 
 		try {
-			email.setAuthenticator(new DefaultAuthenticator(properties.getProperty(EMAIL_USERNAME),
-					properties.getProperty(EMAIL_PASSWORD)));
+			email.setAuthenticator(new DefaultAuthenticator(properties.getProperty(EMAIL_USERNAME), properties.getProperty(EMAIL_PASSWORD)));
 			email.setSmtpPort(Integer.parseInt(properties.getProperty(EMAIL_SMTP_PORT)));
 			email.setHostName(properties.getProperty(EMAIL_HOST));
-			email.setFrom(properties.getProperty(EMAIL_ADMIN),
-					properties.getProperty(EMAIL_ADMIN_NAME));
+			email.setFrom(properties.getProperty(EMAIL_ADMIN), properties.getProperty(EMAIL_ADMIN_NAME));
 			email.setStartTLSRequired(true);
 			email.setStartTLSEnabled(true);
 		} catch (EmailException e) {

@@ -1,5 +1,7 @@
 package com.slabs.expense.tracker.core.server;
 
+import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,10 +49,14 @@ public class Server {
 			L.info("Initializing Service Factory...");
 			ServiceFactory.getInstance().initialize();
 
-			L.info("Initializing Reporting Scheduler...");
-			ReportingScheduler.getInstance().initialize();
-			ReportingScheduler.getInstance().startScheduler();
-			ReportingScheduler.getInstance().scheduleMonthlyReportDispatcher();
+			Properties properties = PropertiesUtil.getFromClassPath(Constants.EXPENSETRACKER_PROPERTIES);
+
+			if (Boolean.valueOf(properties.getProperty("expensetracker.enable.report.dispatcher"))) {
+				L.info("Initializing Reporting Scheduler...");
+				ReportingScheduler.getInstance().initialize();
+				ReportingScheduler.getInstance().startScheduler();
+				ReportingScheduler.getInstance().scheduleMonthlyReportDispatcher();
+			}
 
 			L.info("Initializing Marker Engine...");
 			MarkerEngine.initialize();
