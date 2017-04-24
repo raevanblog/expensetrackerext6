@@ -100,13 +100,13 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		text : 'S.No',
 		width : 75
 	}, {
-		xtype : 'widgetcolumn',		
+		xtype : 'widgetcolumn',
 		widget : {
 			xtype : 'button',
 			iconCls : 'x-fa fa-plus-square-o',
 			tooltip : 'Add to Inventory',
 			handler : 'addExpenseToInventory'
-		},		
+		},
 	}, {
 		text : 'Item Name',
 		dataIndex : 'itemName',
@@ -201,7 +201,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		width : 100
 	}, {
 		text : 'Units',
-		align : 'left',
+		align : 'center',
 		editor : {
 			xtype : 'combobox',
 			displayField : 'display',
@@ -215,7 +215,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			triggerAction : 'all'
 		},
 		dataIndex : 'unit',
-		width : 150
+		width : 75
 	}, {
 		xtype : 'numbercolumn',
 		align : 'center',

@@ -123,8 +123,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	onOpenReport : function() {
 		var me = this;
 		var pdfWindow = Ext.create('expensetracker.view.report.ReportWindow', {
-			height : 500,
-			width : 700,
+			height : Ext.Element.getViewportHeight(),
+			width : Ext.Element.getViewportWidth(),
 			modal : true,
 			reportUrl : expensetracker.util.Url.getReportingService() + '?username=' + expensetracker.util.Session.getUsername() + '&year=' + expensetracker.util.Calendar.getCurrentYear() + '&month='
 					+ expensetracker.util.Calendar.getCurrentMonthNo()
