@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices;
+package com.slabs.expense.tracker.webservices.impl;
 
 import java.util.List;
 
@@ -22,6 +22,7 @@ import com.slabs.expense.tracker.common.services.AdminService;
 import com.slabs.expense.tracker.common.services.EmailService;
 import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.common.services.UserService;
+import com.slabs.expense.tracker.common.webservices.UserWebService;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
@@ -30,15 +31,15 @@ import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
 /**
- * {@link UserWebService} - Web Service for retrieving/updating User information
+ * {@link UserWebServiceImpl} - Web Service for retrieving/updating User information
  * 
  * @author Shyam Natarajan
  *
  */
 @Path("exptr-web")
-public class UserWebService {
+public class UserWebServiceImpl implements UserWebService {
 
-	private static final Logger L = LoggerFactory.getLogger(UserWebService.class);
+	private static final Logger L = LoggerFactory.getLogger(UserWebServiceImpl.class);
 
 	/**
 	 * 
@@ -52,6 +53,7 @@ public class UserWebService {
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response createUser(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
@@ -82,6 +84,7 @@ public class UserWebService {
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response updateUser(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
@@ -106,6 +109,7 @@ public class UserWebService {
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response changePassword(UserInfo record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
@@ -137,6 +141,7 @@ public class UserWebService {
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response deleteUser(List<UserInfo> records) throws ExpenseTrackerException {
 		try {
 			AdminService service = ServiceFactory.getInstance().getService(Services.ADMIN_SERVICE,
@@ -161,8 +166,8 @@ public class UserWebService {
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getUser(@QueryParam("username") String username)
-			throws ExpenseTrackerException {
+	@Override
+	public Response getUser(@QueryParam("username") String username) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
 					UserService.class);
@@ -185,6 +190,7 @@ public class UserWebService {
 	@Path("user")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response getUsers() throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
@@ -208,6 +214,7 @@ public class UserWebService {
 	@Path("user/settings")
 	@GET
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response getUserSettings(@QueryParam("username") String username)
 			throws ExpenseTrackerException {
 		try {
@@ -232,6 +239,7 @@ public class UserWebService {
 	@Path("user/settings")
 	@POST
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response createUserSettings(UserSettings record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
@@ -255,6 +263,7 @@ public class UserWebService {
 	@Path("user/settings")
 	@PUT
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response updateUserSettings(UserSettings record) throws ExpenseTrackerException {
 		try {
 			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,

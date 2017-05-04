@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices;
+package com.slabs.expense.tracker.webservices.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,15 +32,15 @@ import com.slabs.expense.tracker.webservices.response.StreamingResponse;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 
 /**
- * {@link ReportingWebService} - Web Service for generating reports
+ * {@link ReportingWebServiceImpl} - Web Service for generating reports
  * 
  * @author Shyam Natarajan
  *
  */
 @Path("exptr-web")
-public class ReportingWebService {
+public class ReportingWebServiceImpl {
 
-	private static final Logger L = LoggerFactory.getLogger(ReportingWebService.class);
+	private static final Logger L = LoggerFactory.getLogger(ReportingWebServiceImpl.class);
 
 	/**
 	 * 

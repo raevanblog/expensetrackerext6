@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices;
+package com.slabs.expense.tracker.webservices.impl;
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ import com.slabs.expense.tracker.common.database.entity.Message;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.MessageService;
 import com.slabs.expense.tracker.common.services.Services;
+import com.slabs.expense.tracker.common.webservices.MessagingWebService;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
@@ -27,16 +28,16 @@ import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
 /**
- * {@link MessagingWebService} - Web Service for sending and recieving
+ * {@link MessagingWebServiceImpl} - Web Service for sending and recieving
  * Message/Queries
  * 
  * @author Shyam Natarajan
  *
  */
 @Path("exptr-web")
-public class MessagingWebService {
+public class MessagingWebServiceImpl implements MessagingWebService {
 
-	private static final Logger L = LoggerFactory.getLogger(MessagingWebService.class);
+	private static final Logger L = LoggerFactory.getLogger(MessagingWebServiceImpl.class);
 
 	/**
 	 * 
@@ -52,13 +53,11 @@ public class MessagingWebService {
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getMessages(@QueryParam("username") String username,
-			@QueryParam("isNew") Boolean isNew) throws ExpenseTrackerException {
+	@Override
+	public Response getMessages(@QueryParam("username") String username, @QueryParam("isNew") Boolean isNew) throws ExpenseTrackerException {
 		try {
-			MessageService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
-			return ResponseGenerator.getSuccessResponse(service.getMessages(username, isNew),
-					Operation.SELECT);
+			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
+			return ResponseGenerator.getSuccessResponse(service.getMessages(username, isNew), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -77,18 +76,17 @@ public class MessagingWebService {
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response createMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
-			MessageService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
-			return ResponseGenerator.getSuccessResponse(service.createMessage(messages),
-					Operation.INSERT);
+			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
+			return ResponseGenerator.getSuccessResponse(service.createMessage(messages), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param messages
@@ -101,12 +99,11 @@ public class MessagingWebService {
 	@PUT
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response updateMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
-			MessageService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
-			return ResponseGenerator.getSuccessResponse(service.updateMessage(messages),
-					Operation.UPDATE);
+			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
+			return ResponseGenerator.getSuccessResponse(service.updateMessage(messages), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -125,12 +122,11 @@ public class MessagingWebService {
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response deleteMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
-			MessageService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
-			return ResponseGenerator.getSuccessResponse(service.deleteMessage(messages),
-					Operation.INSERT);
+			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
+			return ResponseGenerator.getSuccessResponse(service.deleteMessage(messages), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -150,12 +146,11 @@ public class MessagingWebService {
 	@GET
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response getQueries(@QueryParam("isNew") Boolean isNew) throws ExpenseTrackerException {
 		try {
-			MessageService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
-			return ResponseGenerator.getSuccessResponse(service.getQueries(isNew),
-					Operation.SELECT);
+			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
+			return ResponseGenerator.getSuccessResponse(service.getQueries(isNew), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -174,12 +169,11 @@ public class MessagingWebService {
 	@POST
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response createQuery(Message message) throws ExpenseTrackerException {
 		try {
-			MessageService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
-			return ResponseGenerator.getSuccessResponse(service.createQuery(message),
-					Operation.INSERT);
+			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
+			return ResponseGenerator.getSuccessResponse(service.createQuery(message), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
@@ -198,12 +192,11 @@ public class MessagingWebService {
 	@DELETE
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Override
 	public Response deleteQuery(List<Message> messages) throws ExpenseTrackerException {
 		try {
-			MessageService service = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
-			return ResponseGenerator.getSuccessResponse(service.deleteQuery(messages),
-					Operation.DELETE);
+			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
+			return ResponseGenerator.getSuccessResponse(service.deleteQuery(messages), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
