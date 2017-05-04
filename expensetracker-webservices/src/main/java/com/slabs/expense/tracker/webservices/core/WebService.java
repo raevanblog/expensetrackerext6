@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.core.server.Server;
-import com.slabs.expense.tracker.webservices.ExpenseTrackerServices;
+import com.slabs.expense.tracker.webservices.impl.ExpenseTrackerServices;
 
 public class WebService {
 
