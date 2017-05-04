@@ -27,13 +27,13 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		reportStore.removeAll();
 
 		expSheetStore.add({
-			title : 'Expense Sheet',
+			title : 'Expense',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
 
 		incSheetStore.add({
-			title : 'Income Sheet',
+			title : 'Opening Balance',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
@@ -45,7 +45,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		});
 
 		reportStore.add({
-			title : 'Expense Report',
+			title : 'Report',
 			month : expensetracker.util.Calendar.getCurrentMonth(),
 			monthNo : expensetracker.util.Calendar.getCurrentMonthNo()
 		});
@@ -154,7 +154,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 					var creditExpense = summary.creditExpense;
 					var cashInHand = summary.cashInHand;
 					var data = [ {
-						category : 'Total Income',
+						category : 'Opening Balance',
 						value : totalIncome.toString()
 					}, {
 						category : 'Total Expense',
