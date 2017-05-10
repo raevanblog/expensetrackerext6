@@ -4,14 +4,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
@@ -22,7 +20,6 @@ import com.slabs.expense.tracker.common.webservices.GraphWebService;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
@@ -33,7 +30,8 @@ import com.slabs.expense.tracker.webservices.response.ResponseStatus;
  * @author Shyam Natarajan
  *
  */
-@Path("exptr-web")
+@RestController
+@RequestMapping(value = "api")
 public class GraphWebServiceImpl implements GraphWebService {
 
 	private static final Logger L = LoggerFactory.getLogger(GraphWebServiceImpl.class);
@@ -52,12 +50,10 @@ public class GraphWebServiceImpl implements GraphWebService {
 	 * @throws ExpenseTrackerException
 	 *             throws {@link ExpenseTrackerException}
 	 */
-	@Path("graph")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "graph", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getGraph(@QueryParam("username") String username, @QueryParam("year") Integer year, @QueryParam("month") Integer month,
-			@QueryParam("type") String type) throws ExpenseTrackerException {
+	public Response getGraph(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year,
+			@RequestParam(name = "month") Integer month, @RequestParam(name = "type") String type) throws ExpenseTrackerException {
 		try {
 			if (EXPENSE_VS_INCOME_MONTHLY.equals(type)) {
 				return ResponseGenerator.getSuccessResponse(getMonthlyExpenseVsIncome(username, year), Operation.SELECT);
@@ -68,7 +64,7 @@ public class GraphWebServiceImpl implements GraphWebService {
 			}
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -97,8 +93,8 @@ public class GraphWebServiceImpl implements GraphWebService {
 		return eGraph;
 	}
 
-	private List<Graph> getCategoryWiseTotalExpense(@QueryParam("username") String username, @QueryParam("year") Integer year,
-			@QueryParam("month") Integer month) throws Exception {
+	private List<Graph> getCategoryWiseTotalExpense(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year,
+			@RequestParam(name = "month", required = false) Integer month) throws Exception {
 		ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
 		return service.getCategoryWiseTotalExpense(username, year, month);
 	}

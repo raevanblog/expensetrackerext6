@@ -1,13 +1,11 @@
 package com.slabs.expense.tracker.webservices.impl;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.ApplicationService;
@@ -16,7 +14,6 @@ import com.slabs.expense.tracker.common.webservices.ApplicationWebService;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
@@ -26,7 +23,8 @@ import com.slabs.expense.tracker.webservices.response.ResponseStatus;
  * @author Shyam Natarajan
  *
  */
-@Path("exptr-web")
+@RestController
+@RequestMapping(value = "api")
 public class ApplicationWebServiceImpl implements ApplicationWebService {
 
 	private static final Logger L = LoggerFactory.getLogger(ApplicationWebServiceImpl.class);
@@ -39,9 +37,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("application/expensetype/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "application/expensetype", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
 	public Response getExpenseType() throws ExpenseTrackerException {
 		try {
@@ -49,7 +45,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			return ResponseGenerator.getSuccessResponse(service.getExpenseType(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -61,9 +57,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("application/incometype/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "application/incometype", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
 	public Response getIncomeType() throws ExpenseTrackerException {
 		try {
@@ -71,7 +65,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			return ResponseGenerator.getSuccessResponse(service.getIncomeType(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -83,9 +77,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("application/currencytype/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "application/currencytype", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
 	public Response getCurrencyType() throws ExpenseTrackerException {
 		try {
@@ -93,7 +85,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			return ResponseGenerator.getSuccessResponse(service.getCurrency(), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -106,11 +98,9 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("application/dictionary/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "application/dictionary", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getItemNames(@QueryParam("type") String type) throws ExpenseTrackerException {
+	public Response getItemNames(@RequestParam(name = "type") String type) throws ExpenseTrackerException {
 		try {
 			ApplicationService service = ServiceFactory.getInstance().getService(Services.APPLICATION_SERVICE, ApplicationService.class);
 
@@ -121,7 +111,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Invalid dictionary type");
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 

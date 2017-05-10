@@ -2,18 +2,14 @@ package com.slabs.expense.tracker.webservices.impl;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import javax.xml.ws.WebServiceException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
@@ -26,7 +22,6 @@ import com.slabs.expense.tracker.common.webservices.ExpenseWebService;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
@@ -36,7 +31,8 @@ import com.slabs.expense.tracker.webservices.response.ResponseStatus;
  * @author Shyam Natarajan
  *
  */
-@Path("exptr-web")
+@RestController
+@RequestMapping(value = "api")
 public class ExpenseWebServiceImpl implements ExpenseWebService {
 
 	private static final Logger L = LoggerFactory.getLogger(ExpenseWebServiceImpl.class);
@@ -49,10 +45,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expenseunits/")
-	@POST
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expenseunits", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response createExpenseUnits(List<Units> records) throws ExpenseTrackerException {
 		try {
@@ -60,7 +54,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.createExpenseUnits(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -72,10 +66,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expenseunits/")
-	@PUT
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expenseunits", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response updateExpenseUnits(List<Units> records) throws ExpenseTrackerException {
 		try {
@@ -83,7 +75,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.updateExpenseUnits(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -95,9 +87,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expenseunits/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expenseunits", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
 	public Response getExpenseUnits() throws ExpenseTrackerException {
 		try {
@@ -106,7 +96,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -118,9 +108,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expenseunits/")
-	@DELETE
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expenseunits", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response deleteExpenseUnits(List<Units> records) throws ExpenseTrackerException {
 		try {
@@ -128,7 +117,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.deleteExpenseUnits(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 
 	}
@@ -141,10 +130,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expensecategory/")
-	@POST
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expensecategory", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response insertExpenseCategory(List<ExpenseCategory> records) throws ExpenseTrackerException {
 		try {
@@ -152,7 +139,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.createCategory(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -164,10 +151,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expensecategory/")
-	@PUT
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expensecategory", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response updateExpenseCategory(List<ExpenseCategory> records) throws ExpenseTrackerException {
 		try {
@@ -175,7 +160,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.updateCategory(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -187,18 +172,16 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expensecategory/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expensecategory", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getExpenseCategory(@QueryParam("username") String username) throws ExpenseTrackerException {
+	public Response getExpenseCategory(@RequestParam(name = "username") String username) throws ExpenseTrackerException {
 		try {
 			ExpenseCategoryService service = ServiceFactory.getInstance().getService(Services.EXPENSE_CATEGORY_SERVICE, ExpenseCategoryService.class);
 			return ResponseGenerator.getSuccessResponse(service.selectCategory(username), Operation.SELECT);
 
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -210,9 +193,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expensecategory/")
-	@DELETE
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expensecategory", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response deleteExpenseCategory(List<ExpenseCategory> records) throws ExpenseTrackerException {
 		try {
@@ -220,7 +202,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.deleteCategory(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 
 	}
@@ -240,12 +222,11 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expense/")
-	@GET
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expense", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getExpense(@QueryParam("username") String username, @QueryParam("year") Integer year, @QueryParam("month") Integer month,
-			@QueryParam("fetchTopExpense") boolean fetchTopExpense) throws ExpenseTrackerException {
+	public Response getExpense(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year,
+			@RequestParam(name = "month", required = false) Integer month,
+			@RequestParam(name = "fetchTopExpense", required = false) boolean fetchTopExpense) throws ExpenseTrackerException {
 		try {
 			ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
 			if (username == null) {
@@ -254,7 +235,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.selectExpense(username, year, month, fetchTopExpense), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -266,10 +247,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expense/")
-	@POST
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expense", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response createExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {
@@ -277,7 +256,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.createExpense(records), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -289,10 +268,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expense")
-	@PUT
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expense", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response updateExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {
@@ -300,7 +277,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.updateExpense(records), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -312,10 +289,8 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("expense/")
-	@DELETE
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "expense", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response deleteExpense(List<Expense> records) throws ExpenseTrackerException {
 		try {
@@ -323,7 +298,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			return ResponseGenerator.getSuccessResponse(service.deleteExpense(records), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 

@@ -7,29 +7,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:expensetracker-web-spring.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet>
-		<servlet-name>ExpenseTrackerWebService</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-		<init-param>
-			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>               
-                com.slabs.expense.tracker.web.filter;
-                org.glassfish.jersey.filter;
-            </param-value>
-		</init-param>
-		<init-param>
-			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>com.slabs.expense.tracker.webservices.impl.ExpenseTrackerServices</param-value>
-		</init-param>
-		<init-param>
-			<param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
-			<param-value>
-               com.slabs.expense.tracker.web.filter.WebServiceRequestFilter                
-            </param-value>
+			<param-value>classpath:expensetracker-web-spring.xml, classpath:expensetracker-webservices-spring.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -44,10 +22,6 @@
 	<servlet-mapping>
 		<servlet-name>ExpenseTracker</servlet-name>
 		<url-pattern>/web/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ExpenseTrackerWebService</servlet-name>
-		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

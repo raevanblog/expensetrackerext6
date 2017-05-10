@@ -10,10 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.entity.Message;
@@ -32,27 +33,24 @@ import com.slabs.expense.tracker.util.JSONUtil;
 import com.slabs.expense.tracker.web.MessageConstants;
 import com.slabs.expense.tracker.web.WebConstants;
 
-@Controller
+@RestController
 @RequestMapping("request")
 public class AccessController {
 
 	private static final Logger L = LoggerFactory.getLogger(AccessController.class);
 
-	@RequestMapping(value = "login", method = { RequestMethod.POST })
-	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "login", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> doLogin(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
-			Map<String, String> parameters = JSONUtil
-					.getMapFromInputStream(request.getInputStream());
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			Map<String, String> parameters = JSONUtil.getMapFromInputStream(request.getInputStream());
 			String[] credentials = Base64Encoder.decode(parameters.get("credential"), ":");
 			List<UserInfo> users = service.selectUser(credentials[0], Boolean.TRUE, Boolean.TRUE);
 			if (users != null && !users.isEmpty()) {
 				UserInfo info = users.get(0);
 				if (info.getPassword().equals(credentials[1])) {
-					if (info.getIsLocked().equals(Constants.N)
-							&& info.getIsVerified().equals(Constants.Y)) {
+					if (info.getIsLocked().equals(Constants.N) && info.getIsVerified().equals(Constants.Y)) {
 						HttpSession session = request.getSession(true);
 						info.setPassword("");
 						session.setAttribute(WebConstants.LOGGED_IN_USER, info);
@@ -80,18 +78,18 @@ public class AccessController {
 				output.put(WebConstants.MESSAGE, MessageConstants.CHECK_USRNME_PWD);
 				output.put(WebConstants.USER, null);
 			}
-			return new ModelAndView(WebConstants.JSON, output);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
 			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
 			output.put(WebConstants.USER, null);
-			return new ModelAndView(WebConstants.JSON, output);
+			return new ResponseEntity<Object>(output, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		return new ResponseEntity<Object>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "logout", method = { RequestMethod.POST })
-	public ModelAndView doLogout(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "logout", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> doLogout(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		HttpSession session = request.getSession(Boolean.FALSE);
 		if (session != null) {
@@ -100,20 +98,18 @@ public class AccessController {
 		}
 		output.put(WebConstants.SUCCESS, Boolean.TRUE);
 		output.put(WebConstants.MESSAGE, MessageConstants.LOGD_OFF);
-		return new ModelAndView(WebConstants.JSON, output);
+		return new ResponseEntity<Object>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "session", method = { RequestMethod.GET })
-	public ModelAndView getSession(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "session", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> getSession(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
 			HttpSession session = request.getSession(Boolean.FALSE);
 			if (session != null) {
-				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-						UserService.class);
+				UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
 				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
-				List<UserInfo> list = service.selectUser(user.getUsername(), Boolean.TRUE,
-						Boolean.FALSE);
+				List<UserInfo> list = service.selectUser(user.getUsername(), Boolean.TRUE, Boolean.FALSE);
 				if (list != null && !list.isEmpty()) {
 					user = list.get(0);
 					session.removeAttribute(WebConstants.LOGGED_IN_USER);
@@ -128,32 +124,30 @@ public class AccessController {
 				output.put(WebConstants.USER, null);
 
 			}
-			return new ModelAndView("json", output);
+			return new ResponseEntity<Object>(output, HttpStatus.OK);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
 			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
 			output.put(WebConstants.USER, null);
-			return new ModelAndView("json", output);
+			return new ResponseEntity<Object>(output, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@RequestMapping(value = "checkAvailability", method = { RequestMethod.GET })
-	public ModelAndView checkAvailability(HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = "checkAvailability", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> checkAvailability(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserServiceImpl.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserServiceImpl.class);
 
 			String type = request.getParameter("type");
 			String value = request.getParameter("value");
 
 			Boolean availability = service.checkAvailability(type, value, Boolean.FALSE);
 
-			output.put(WebConstants.SUCCESS, Boolean.TRUE);		
+			output.put(WebConstants.SUCCESS, Boolean.TRUE);
 			output.put(WebConstants.IS_AVAILABLE, availability);
-			
+
 			if (availability) {
 				output.put(WebConstants.MESSAGE, MessageConstants.AVAILABLE);
 			} else {
@@ -167,19 +161,17 @@ public class AccessController {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
 			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
-			return new ModelAndView(WebConstants.JSON, output);
+			return new ResponseEntity<Object>(output, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ModelAndView(WebConstants.JSON, output);
+		return new ResponseEntity<Object>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "user/create", method = { RequestMethod.POST })
-	public ModelAndView register(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "user/create", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> register(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
-			EmailServiceImpl emailService = ServiceFactory.getInstance()
-					.getService(Services.EMAIL_SERVICE, EmailServiceImpl.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			EmailServiceImpl emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailServiceImpl.class);
 			UserInfo user = JSONUtil.getObjectFromJSON(request.getInputStream(), UserInfo.class);
 			Integer isCreated = service.createUser(user);
 			output.put(WebConstants.SUCCESS, Boolean.TRUE);
@@ -196,25 +188,21 @@ public class AccessController {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
 			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
-			return new ModelAndView(WebConstants.JSON, output);
+			return new ResponseEntity<Object>(output, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ModelAndView(WebConstants.JSON, output);
+		return new ResponseEntity<Object>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "user/activate", method = { RequestMethod.POST })
-	public ModelAndView activateUser(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "user/activate", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> activateUser(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserServiceImpl.class);
-			EmailService emailService = ServiceFactory.getInstance()
-					.getService(Services.EMAIL_SERVICE, EmailService.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserServiceImpl.class);
+			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
 
-			AdminService adminService = ServiceFactory.getInstance()
-					.getService(Services.ADMIN_SERVICE, AdminService.class);
+			AdminService adminService = ServiceFactory.getInstance().getService(Services.ADMIN_SERVICE, AdminService.class);
 
-			MessageService messagingService = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageService.class);
+			MessageService messagingService = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
 
 			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
 			String activationKey = map.get("activationkey");
@@ -228,8 +216,7 @@ public class AccessController {
 					if (user.getActivationKey().equals(activationKey)) {
 						if (adminService.activateUser(username, Constants.Y)) {
 							output.put(WebConstants.SUCCESS, Boolean.TRUE);
-							output.put(WebConstants.MESSAGE,
-									MessageConstants.ACTIVATION_SUCCESSFUL);
+							output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_SUCCESSFUL);
 							emailService.sendRegSuccessMail(user);
 							messagingService.sendWelcomeMessage(user);
 						} else {
@@ -238,8 +225,7 @@ public class AccessController {
 						}
 					} else {
 						output.put(WebConstants.SUCCESS, Boolean.FALSE);
-						output.put(WebConstants.MESSAGE,
-								MessageConstants.ACTIVATION_FAILED_INVALID_KEY);
+						output.put(WebConstants.MESSAGE, MessageConstants.ACTIVATION_FAILED_INVALID_KEY);
 					}
 				} else {
 					output.put(WebConstants.SUCCESS, Boolean.FALSE);
@@ -254,20 +240,17 @@ public class AccessController {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
 			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
-			return new ModelAndView(WebConstants.JSON, output);
+			return new ResponseEntity<Object>(output, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ModelAndView(WebConstants.JSON, output);
+		return new ResponseEntity<Object>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "user/email/activate", method = { RequestMethod.POST })
-	public ModelAndView sendActivationMail(HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = "user/email/activate", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> sendActivationMail(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE,
-					UserService.class);
-			EmailService emailService = ServiceFactory.getInstance()
-					.getService(Services.EMAIL_SERVICE, EmailService.class);
+			UserService service = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
+			EmailService emailService = ServiceFactory.getInstance().getService(Services.EMAIL_SERVICE, EmailService.class);
 
 			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
 
@@ -294,17 +277,16 @@ public class AccessController {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
 			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
-			return new ModelAndView(WebConstants.JSON, output);
+			return new ResponseEntity<Object>(output, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ModelAndView(WebConstants.JSON, output);
+		return new ResponseEntity<Object>(output, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "query", method = { RequestMethod.POST })
-	public ModelAndView sendMail(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "query", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Object> sendMail(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> output = new HashMap<String, Object>();
 		try {
-			MessageServiceImpl messagingService = ServiceFactory.getInstance()
-					.getService(Services.MESSAGING_SERVICE, MessageServiceImpl.class);
+			MessageServiceImpl messagingService = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageServiceImpl.class);
 
 			Message message = JSONUtil.getObjectFromJSON(request.getInputStream(), Message.class);
 			messagingService.createQuery(message);
@@ -316,9 +298,9 @@ public class AccessController {
 			L.error("Exception occurred, {}", e);
 			output.put(WebConstants.SUCCESS, Boolean.FALSE);
 			output.put(WebConstants.MESSAGE, MessageConstants.EXCEPTION);
-			return new ModelAndView(WebConstants.JSON, output);
+			return new ResponseEntity<Object>(output, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ModelAndView(WebConstants.JSON, output);
+		return new ResponseEntity<Object>(output, HttpStatus.OK);
 	}
 
 }

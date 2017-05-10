@@ -2,18 +2,14 @@ package com.slabs.expense.tracker.webservices.impl;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import javax.xml.ws.WebServiceException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.database.entity.Message;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
@@ -23,9 +19,7 @@ import com.slabs.expense.tracker.common.webservices.MessagingWebService;
 import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.exception.WebServiceException;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
-import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
 /**
  * {@link MessagingWebServiceImpl} - Web Service for sending and recieving
@@ -34,7 +28,8 @@ import com.slabs.expense.tracker.webservices.response.ResponseStatus;
  * @author Shyam Natarajan
  *
  */
-@Path("exptr-web")
+@RestController
+@RequestMapping(value = "api")
 public class MessagingWebServiceImpl implements MessagingWebService {
 
 	private static final Logger L = LoggerFactory.getLogger(MessagingWebServiceImpl.class);
@@ -49,18 +44,16 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("/message")
-	@GET
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "message", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getMessages(@QueryParam("username") String username, @QueryParam("isNew") Boolean isNew) throws ExpenseTrackerException {
+	public Response getMessages(@RequestParam(name = "username") String username, @RequestParam(name = "isNew", required = false) Boolean isNew)
+			throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.getMessages(username, isNew), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -72,10 +65,8 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("/message")
-	@POST
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "message", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response createMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
@@ -83,7 +74,7 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 			return ResponseGenerator.getSuccessResponse(service.createMessage(messages), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -95,10 +86,8 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("/message")
-	@PUT
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "message", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response updateMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
@@ -106,7 +95,7 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 			return ResponseGenerator.getSuccessResponse(service.updateMessage(messages), Operation.UPDATE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -118,10 +107,8 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("/message")
-	@DELETE
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "message", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response deleteMessage(List<Message> messages) throws ExpenseTrackerException {
 		try {
@@ -129,7 +116,7 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 			return ResponseGenerator.getSuccessResponse(service.deleteMessage(messages), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -142,18 +129,15 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("/query")
-	@GET
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "query", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getQueries(@QueryParam("isNew") Boolean isNew) throws ExpenseTrackerException {
+	public Response getQueries(@RequestParam(name = "isNew", required = false) Boolean isNew) throws ExpenseTrackerException {
 		try {
 			MessageService service = ServiceFactory.getInstance().getService(Services.MESSAGING_SERVICE, MessageService.class);
 			return ResponseGenerator.getSuccessResponse(service.getQueries(isNew), Operation.SELECT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -165,10 +149,8 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("/query")
-	@POST
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "query", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response createQuery(Message message) throws ExpenseTrackerException {
 		try {
@@ -176,7 +158,7 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 			return ResponseGenerator.getSuccessResponse(service.createQuery(message), Operation.INSERT);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 
@@ -188,10 +170,8 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@Path("/query")
-	@DELETE
-	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@RequestMapping(value = "query", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
+			"application/json", "application/xml" })
 	@Override
 	public Response deleteQuery(List<Message> messages) throws ExpenseTrackerException {
 		try {
@@ -199,7 +179,7 @@ public class MessagingWebServiceImpl implements MessagingWebService {
 			return ResponseGenerator.getSuccessResponse(service.deleteQuery(messages), Operation.DELETE);
 		} catch (Exception e) {
 			L.error("Exception occurred, {}", e);
-			throw new WebServiceException(e, ResponseStatus.SERVER_ERROR);
+			throw new ExpenseTrackerException(e);
 		}
 	}
 

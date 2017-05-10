@@ -1,14 +1,20 @@
 package com.slabs.expense.tracker.webservices.response;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.StreamingOutput;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservice.response.Result;
+
+import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * {@link ResponseGenerator} will generate a {@link Response} or
@@ -152,24 +158,25 @@ public class ResponseGenerator {
 		return response;
 	}
 
-	/**
-	 * This method will create {@link javax.ws.rs.core.Response} for the stream
-	 * output. For example, return attachment as response.
-	 * 
-	 * @param output
-	 *            {@link StreamingOutput} - Output stream containing the
-	 *            file. @see {@link StreamingResponse}
-	 * 
-	 * @param fileName
-	 *            - Name of the file.
-	 * @param type
-	 *            - Content Type @see {@link ContentType}
-	 * @return {@link javax.ws.rs.core.Response}
-	 */
-	public static javax.ws.rs.core.Response getSuccessResponse(StreamingOutput output,
-			String fileName, MediaType type) {
-		return javax.ws.rs.core.Response.ok(output, type)
-				.header("content-disposition", "inline; filename = " + fileName).build();
+	public static void writeResponse(JasperConcatenatedReportBuilder builder, OutputStream outputStream, MediaType type, String fileName)
+			throws DRException, IOException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("content-disposition", "inline; filename = " + fileName);
+		headers.add("content-type", type.toString());
+		builder.toPdf(outputStream);
+		outputStream.flush();
+	}
+
+	public static void writeResponse(String html, OutputStream outputStream, String fileName) throws DRException, IOException {
+		PrintStream stream = new PrintStream(outputStream);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("content-disposition", "inline; filename = " + fileName);
+		headers.add("content-type", MediaType.TEXT_HTML.toString());
+
+		stream.print(html);
+		stream.flush();
+		stream.close();
 	}
 
 }
