@@ -4,8 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,9 +14,7 @@ import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.ExpenseService;
 import com.slabs.expense.tracker.common.services.IncomeService;
-import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.common.webservices.GraphWebService;
-import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
@@ -34,11 +31,15 @@ import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 @RequestMapping(value = "api")
 public class GraphWebServiceImpl implements GraphWebService {
 
-	private static final Logger L = LoggerFactory.getLogger(GraphWebServiceImpl.class);
-
 	private static final String EXPENSE_VS_INCOME_MONTHLY = "EXPENSE_VS_INCOME_MONTHLY";
 
 	private static final String CATEGORY_EXPENSE_TOTAL = "CATEGORY_EXPENSE_TOTAL";
+
+	@Autowired
+	private ExpenseService eService;
+
+	@Autowired
+	private IncomeService iService;
 
 	/**
 	 * 
@@ -53,7 +54,7 @@ public class GraphWebServiceImpl implements GraphWebService {
 	@RequestMapping(value = "graph", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
 	public Response getGraph(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year,
-			@RequestParam(name = "month") Integer month, @RequestParam(name = "type") String type) throws ExpenseTrackerException {
+			@RequestParam(name = "month", required = false) Integer month, @RequestParam(name = "type") String type) throws ExpenseTrackerException {
 		try {
 			if (EXPENSE_VS_INCOME_MONTHLY.equals(type)) {
 				return ResponseGenerator.getSuccessResponse(getMonthlyExpenseVsIncome(username, year), Operation.SELECT);
@@ -63,14 +64,11 @@ public class GraphWebServiceImpl implements GraphWebService {
 				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Requested graph type is Wrong");
 			}
 		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e);
 		}
 	}
 
 	private List<Graph> getMonthlyExpenseVsIncome(String username, Integer year) throws Exception {
-		ExpenseService eService = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-		IncomeService iService = ServiceFactory.getInstance().getService(Services.INCOME_SERVICE, IncomeService.class);
 
 		List<Graph> eGraph = eService.getMonthWiseTotalExpense(username, year);
 		List<Graph> iGraph = iService.getMonthWiseTotalIncome(username, year);
@@ -95,8 +93,7 @@ public class GraphWebServiceImpl implements GraphWebService {
 
 	private List<Graph> getCategoryWiseTotalExpense(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year,
 			@RequestParam(name = "month", required = false) Integer month) throws Exception {
-		ExpenseService service = ServiceFactory.getInstance().getService(Services.EXPENSE_SERVICE, ExpenseService.class);
-		return service.getCategoryWiseTotalExpense(username, year, month);
+		return eService.getCategoryWiseTotalExpense(username, year, month);
 	}
 
 }

@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.core.scheduler.ReportingScheduler;
 import com.slabs.expense.tracker.util.Mailer;
 import com.slabs.expense.tracker.util.MarkerEngine;
@@ -46,9 +45,6 @@ public class Server {
 	public void initialize(String ip, int port, String appName, boolean isSecured) {
 
 		try {
-			L.info("Initializing Service Factory...");
-			ServiceFactory.getInstance().initialize();
-
 			Properties properties = PropertiesUtil.getFromClassPath(Constants.EXPENSETRACKER_PROPERTIES);
 
 			if (Boolean.valueOf(properties.getProperty("expensetracker.enable.report.dispatcher"))) {

@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.web;
+package com.slabs.expense.tracker.webservices.core;
 
 public class WebConstants {
 

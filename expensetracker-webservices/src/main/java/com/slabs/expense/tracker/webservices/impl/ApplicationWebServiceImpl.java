@@ -1,19 +1,36 @@
 package com.slabs.expense.tracker.webservices.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebServiceException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.slabs.expense.tracker.common.constants.Constants;
+import com.slabs.expense.tracker.common.database.entity.Message;
+import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
+import com.slabs.expense.tracker.common.services.AdminService;
 import com.slabs.expense.tracker.common.services.ApplicationService;
-import com.slabs.expense.tracker.common.services.Services;
+import com.slabs.expense.tracker.common.services.EmailService;
+import com.slabs.expense.tracker.common.services.MessageService;
+import com.slabs.expense.tracker.common.services.UserService;
 import com.slabs.expense.tracker.common.webservices.ApplicationWebService;
-import com.slabs.expense.tracker.core.ServiceFactory;
+import com.slabs.expense.tracker.util.Base64Encoder;
+import com.slabs.expense.tracker.util.JSONUtil;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
+import com.slabs.expense.tracker.webservices.core.MessageConstants;
+import com.slabs.expense.tracker.webservices.core.WebConstants;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
@@ -27,7 +44,20 @@ import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 @RequestMapping(value = "api")
 public class ApplicationWebServiceImpl implements ApplicationWebService {
 
-	private static final Logger L = LoggerFactory.getLogger(ApplicationWebServiceImpl.class);
+	@Autowired
+	private ApplicationService service;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private EmailService emailService;
+
+	@Autowired
+	private AdminService adminService;
+
+	@Autowired
+	private MessageService messageService;
 
 	/**
 	 * This method will return a list of expense type in the
@@ -41,10 +71,8 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	@Override
 	public Response getExpenseType() throws ExpenseTrackerException {
 		try {
-			ApplicationService service = ServiceFactory.getInstance().getService(Services.APPLICATION_SERVICE, ApplicationService.class);
 			return ResponseGenerator.getSuccessResponse(service.getExpenseType(), Operation.SELECT);
 		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e);
 		}
 	}
@@ -61,10 +89,8 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	@Override
 	public Response getIncomeType() throws ExpenseTrackerException {
 		try {
-			ApplicationService service = ServiceFactory.getInstance().getService(Services.APPLICATION_SERVICE, ApplicationService.class);
 			return ResponseGenerator.getSuccessResponse(service.getIncomeType(), Operation.SELECT);
 		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e);
 		}
 	}
@@ -81,10 +107,8 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	@Override
 	public Response getCurrencyType() throws ExpenseTrackerException {
 		try {
-			ApplicationService service = ServiceFactory.getInstance().getService(Services.APPLICATION_SERVICE, ApplicationService.class);
 			return ResponseGenerator.getSuccessResponse(service.getCurrency(), Operation.SELECT);
 		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e);
 		}
 	}
@@ -102,15 +126,184 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	@Override
 	public Response getItemNames(@RequestParam(name = "type") String type) throws ExpenseTrackerException {
 		try {
-			ApplicationService service = ServiceFactory.getInstance().getService(Services.APPLICATION_SERVICE, ApplicationService.class);
-
 			if ("items".equals(type)) {
 				return ResponseGenerator.getSuccessResponse(service.getExpenseNames(), Operation.SELECT);
 			}
-
 			return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Invalid dictionary type");
 		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
+			throw new ExpenseTrackerException(e);
+		}
+	}
+
+	@RequestMapping(value = "application/login", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public Response doLogin(HttpServletRequest request, HttpServletResponse response) throws ExpenseTrackerException {
+		try {
+			Map<String, String> parameters = JSONUtil.getMapFromInputStream(request.getInputStream());
+			String[] credentials = Base64Encoder.decode(parameters.get("credential"), ":");
+			List<UserInfo> users = userService.selectUser(credentials[0], Boolean.TRUE, Boolean.TRUE);
+			if (users != null && !users.isEmpty()) {
+				UserInfo info = users.get(0);
+				if (info.getPassword().equals(credentials[1])) {
+					if (info.getIsLocked().equals(Constants.N) && info.getIsVerified().equals(Constants.Y)) {
+						HttpSession session = request.getSession(true);
+						info.setPassword("");
+						session.setAttribute(WebConstants.LOGGED_IN_USER, info);
+						session.setMaxInactiveInterval(600);
+						return ResponseGenerator.getSuccessResponse(info, MessageConstants.LOGIN_SUCCESS);
+					} else if (info.getIsLocked().equals(Constants.Y)) {
+						return ResponseGenerator.getExceptionResponse(ResponseStatus.FORBIDDEN, MessageConstants.ACCOUNT_LOCKED);
+					} else if (info.getIsVerified().equals(Constants.N)) {
+						return ResponseGenerator.getExceptionResponse(ResponseStatus.FORBIDDEN, MessageConstants.ACCOUNT_NOT_VERIFIED);
+					}
+				} else {
+					return ResponseGenerator.getExceptionResponse(ResponseStatus.UNAUTHORIZED, MessageConstants.CHECK_PWD);
+				}
+
+			} else {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.UNAUTHORIZED, MessageConstants.CHECK_USRNME_PWD);
+			}
+		} catch (Exception e) {
+			throw new ExpenseTrackerException(e);
+		}
+		return ResponseGenerator.getExceptionResponse(ResponseStatus.SERVICE_UNAVAILABLE, MessageConstants.SERVICE_UNAVAILABLE);
+	}
+
+	@RequestMapping(value = "application/logout", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public Response doLogout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(Boolean.FALSE);
+		if (session != null) {
+			session.removeAttribute(WebConstants.LOGGED_IN_USER);
+			session.invalidate();
+		}
+		return ResponseGenerator.getSuccessResponse(MessageConstants.LOGD_OFF);
+	}
+
+	@RequestMapping(value = "application/session", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
+	public Response getSession(HttpServletRequest request, HttpServletResponse response) throws ExpenseTrackerException {
+		try {
+			HttpSession session = request.getSession(Boolean.FALSE);
+			if (session != null) {
+				UserInfo user = (UserInfo) session.getAttribute(WebConstants.LOGGED_IN_USER);
+				List<UserInfo> list = userService.selectUser(user.getUsername(), Boolean.TRUE, Boolean.FALSE);
+				if (list != null && !list.isEmpty()) {
+					user = list.get(0);
+					session.removeAttribute(WebConstants.LOGGED_IN_USER);
+					session.setAttribute(WebConstants.LOGGED_IN_USER, user);
+				}
+				return ResponseGenerator.getSuccessResponse(user, MessageConstants.SESSION_ACTIVE);
+			} else {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.LOGIN_TIMEOUT, MessageConstants.INVALID_SESSION);
+			}
+		} catch (Exception e) {
+			throw new ExpenseTrackerException(e);
+		}
+	}
+
+	@RequestMapping(value = "application/checkAvailability", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
+	public Response checkAvailability(@RequestParam(name = "type") String type, @RequestParam(name = "value") String value)
+			throws ExpenseTrackerException {
+		try {
+			Boolean isAvailable = userService.checkAvailability(type, value, Boolean.FALSE);
+			if (isAvailable) {
+				return ResponseGenerator.getSuccessResponse(isAvailable, MessageConstants.AVAILABLE);
+			} else {
+				if ("username".equals(type)) {
+					return ResponseGenerator.getSuccessResponse(isAvailable, MessageConstants.USERNAME_NOT_AVAILABLE);
+				} else if ("email".equals(type)) {
+					return ResponseGenerator.getSuccessResponse(isAvailable, MessageConstants.EMAIL_ALREADY_REGISTERED);
+				} else {
+					throw new ExpenseTrackerException("Invalid Type : " + type);
+				}
+			}
+		} catch (Exception e) {
+			throw new ExpenseTrackerException(e);
+		}
+	}
+
+	@RequestMapping(value = "application/user/create", method = { RequestMethod.POST }, produces = { "application/json",
+			"application/xml" }, consumes = { "application/json", "application/xml" })
+	public Response register(@RequestBody UserInfo user) throws ExpenseTrackerException {
+		try {
+			Integer isCreated = userService.createUser(user);
+			if (isCreated > 0) {
+				emailService.sendActivationEmail(user);
+				return ResponseGenerator.getSuccessResponse(MessageConstants.USER_REGISTERED);
+			} else {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.SERVICE_UNAVAILABLE, MessageConstants.USER_NOT_REGISTERED);
+			}
+
+		} catch (Exception e) {
+			throw new ExpenseTrackerException(e);
+		}
+	}
+
+	@RequestMapping(value = "application/user/activate", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public Response activateUser(HttpServletRequest request, HttpServletResponse response) throws ExpenseTrackerException {
+		try {
+			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
+			String activationKey = map.get("activationkey");
+			String username = map.get("username");
+
+			List<UserInfo> info = userService.selectUser(username, Boolean.FALSE, Boolean.FALSE);
+
+			if (info != null && !info.isEmpty()) {
+				UserInfo user = info.get(0);
+				if (Constants.N.equals(user.getIsVerified())) {
+					if (user.getActivationKey().equals(activationKey)) {
+						if (adminService.activateUser(username, Constants.Y)) {
+							emailService.sendRegSuccessMail(user);
+							messageService.sendWelcomeMessage(user);
+							return ResponseGenerator.getSuccessResponse(MessageConstants.ACTIVATION_SUCCESSFUL);
+						} else {
+							return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.ACTIVATION_FAILED);
+						}
+					} else {
+						return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED,
+								MessageConstants.ACTIVATION_FAILED_INVALID_KEY);
+					}
+				} else {
+					return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_ACTIVATED_ALREADY);
+				}
+			} else {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_NOT_FOUND);
+			}
+
+		} catch (Exception e) {
+			throw new ExpenseTrackerException(e);
+		}
+	}
+
+	@RequestMapping(value = "application/user/email/activate", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public Response sendActivationMail(HttpServletRequest request, HttpServletResponse response) throws ExpenseTrackerException {
+		try {
+			Map<String, String> map = JSONUtil.getMapFromInputStream(request.getInputStream());
+
+			String username = map.get("username");
+			List<UserInfo> info = userService.selectUser(username, Boolean.FALSE, Boolean.FALSE);
+
+			if (info != null && !info.isEmpty()) {
+				UserInfo user = info.get(0);
+				if (Constants.N.equals(user.getIsVerified())) {
+					emailService.sendActivationEmail(user);
+					return ResponseGenerator.getSuccessResponse(MessageConstants.ACTIVATION_MAILED);
+				} else {
+					return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_ACTIVATED_ALREADY);
+				}
+			} else {
+				return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_NOT_FOUND);
+			}
+
+		} catch (Exception e) {
+			throw new ExpenseTrackerException(e);
+		}
+	}
+
+	@RequestMapping(value = "application/query", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
+	public Response sendMail(@RequestBody Message message) throws ExpenseTrackerException {
+		try {
+			messageService.createQuery(message);
+			return ResponseGenerator.getSuccessResponse(MessageConstants.MAILED);
+		} catch (Exception e) {
 			throw new ExpenseTrackerException(e);
 		}
 	}

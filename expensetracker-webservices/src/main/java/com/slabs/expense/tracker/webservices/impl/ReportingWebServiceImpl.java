@@ -6,8 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.entity.UserSettings;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.common.services.UserService;
-import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.service.ReportingService;
 import com.slabs.expense.tracker.util.MarkerEngine;
@@ -37,7 +34,11 @@ import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 @RequestMapping(value = "api")
 public class ReportingWebServiceImpl {
 
-	private static final Logger L = LoggerFactory.getLogger(ReportingWebServiceImpl.class);
+	@Autowired
+	private ReportingService service;
+
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 
@@ -66,10 +67,6 @@ public class ReportingWebServiceImpl {
 				monthName = Month.getMonth(month).getName();
 			}
 
-			ReportingService service = ServiceFactory.getInstance().getService(Services.REPORTING_SERVICE, ReportingService.class);
-
-			UserService userService = ServiceFactory.getInstance().getService(Services.USER_SERVICE, UserService.class);
-
 			UserSettings settings = userService.getUserSettings(username);
 
 			JasperConcatenatedReportBuilder report = service.generateMonthlyExpenseReport(username, year, month, settings.getCurrency().getCurrtxt());
@@ -86,7 +83,6 @@ public class ReportingWebServiceImpl {
 		} catch (ExpenseTrackerException e) {
 			throw e;
 		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e);
 
 		}

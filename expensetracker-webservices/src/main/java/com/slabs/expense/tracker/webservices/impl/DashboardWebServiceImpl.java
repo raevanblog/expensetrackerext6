@@ -1,7 +1,6 @@
 package com.slabs.expense.tracker.webservices.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,9 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.DashboardService;
-import com.slabs.expense.tracker.common.services.Services;
 import com.slabs.expense.tracker.common.webservices.DashboardWebService;
-import com.slabs.expense.tracker.core.ServiceFactory;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
@@ -27,7 +24,8 @@ import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 @RequestMapping(value = "api")
 public class DashboardWebServiceImpl implements DashboardWebService {
 
-	private static final Logger L = LoggerFactory.getLogger(DashboardWebServiceImpl.class);
+	@Autowired
+	private DashboardService service;
 
 	/**
 	 * This method will retrieve the summary of income and expense
@@ -47,10 +45,8 @@ public class DashboardWebServiceImpl implements DashboardWebService {
 	public Response getSummary(@RequestParam(name = "username") String username, @RequestParam(name = "year") int year,
 			@RequestParam(name = "month", required = true) int month) throws ExpenseTrackerException {
 		try {
-			DashboardService service = ServiceFactory.getInstance().getService(Services.DASHBOARD_SERVICE, DashboardService.class);
 			return ResponseGenerator.getSuccessResponse(service.getDashboardData(username, year, month), Operation.SELECT);
 		} catch (Exception e) {
-			L.error("Exception occurred, {}", e);
 			throw new ExpenseTrackerException(e);
 		}
 	}

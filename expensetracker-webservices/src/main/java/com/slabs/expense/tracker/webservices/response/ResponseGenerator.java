@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import com.slabs.expense.tracker.webservice.response.Operation;
 import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservice.response.Result;
+import com.slabs.expense.tracker.webservices.core.MessageConstants;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -25,14 +26,6 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class ResponseGenerator {
 
-	private static final String NO_DATA_FOUND = "NO_DATA_FOUND";
-
-	private static final String DATA_FOUND = "DATA_FOUND";
-
-	private static final String DATA_INSERTED = "DATA_INSERTED";
-
-	private static final String NO_DATA_INSERTED = "NO_DATA_INSERTED";
-
 	/**
 	 * 
 	 * @param status
@@ -44,12 +37,12 @@ public class ResponseGenerator {
 	 * 
 	 */
 	public static Response getExceptionResponse(ResponseStatus status, Throwable cause) {
-		Response resp = new Response();
-		resp.setStatus_Code(status.getStatusCode());
-		resp.setStatus_Message(status.getMessage());
-		resp.setSuccess(false);
-		resp.setException(cause.getMessage());
-		return resp;
+		Response response = new Response();
+		response.setStatusCode(status.getStatusCode());
+		response.setStatus(status.getMessage());
+		response.setSuccess(Boolean.FALSE);
+		response.setMessage(cause.getMessage());
+		return response;
 	}
 
 	/**
@@ -61,19 +54,49 @@ public class ResponseGenerator {
 	 * @return {@link Response}
 	 */
 	public static Response getExceptionResponse(ResponseStatus status, String message) {
-		Response resp = new Response();
-		resp.setStatus_Code(status.getStatusCode());
-		resp.setStatus_Message(status.getMessage());
-		resp.setSuccess(false);
-		resp.setException(message);
-		return resp;
+		Response response = new Response();
+		response.setStatusCode(status.getStatusCode());
+		response.setStatus(status.getMessage());
+		response.setSuccess(Boolean.FALSE);
+		response.setMessage(message);
+		return response;
 	}
 
 	private static Response getSuccessResponse() {
 		Response response = new Response();
-		response.setStatus_Code(ResponseStatus.OK.getStatusCode());
-		response.setStatus_Message(ResponseStatus.OK.getMessage());
-		response.setSuccess(true);
+		response.setStatusCode(ResponseStatus.OK.getStatusCode());
+		response.setStatus(ResponseStatus.OK.getMessage());
+		response.setSuccess(Boolean.TRUE);
+		return response;
+	}
+
+	/**
+	 * 
+	 * @param o
+	 *            - {@link Object}
+	 * @param message
+	 *            - {@link String}
+	 * @return {@link Response}
+	 */
+	public static Response getSuccessResponse(Object o, String message) {
+		Response response = getSuccessResponse();
+		Result result = new Result();
+		result.getAny().add(o);
+		response.setMessage(message);
+		response.setResult(result);
+		return response;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param message
+	 *            - {@link String}
+	 * @return {@link Response}
+	 */
+	public static Response getSuccessResponse(String message) {
+		Response response = getSuccessResponse();
+		response.setMessage(message);
 		return response;
 	}
 
@@ -83,6 +106,9 @@ public class ResponseGenerator {
 	 *            - {@link Object}
 	 * @param operation
 	 *            - {@link Operation}
+	 * @param message
+	 *            - {@link String}
+	 * 
 	 * @return {@link Response}
 	 */
 	public static Response getSuccessResponse(Object o, Operation operation) {
@@ -107,15 +133,15 @@ public class ResponseGenerator {
 			result.setNoOfRecords(list.size());
 			result.getAny().addAll(list);
 			if (Operation.INSERT == operation) {
-				result.setMessage(DATA_INSERTED);
+				result.setMessage(MessageConstants.DATA_INSERTED);
 			} else {
-				result.setMessage(DATA_FOUND);
+				result.setMessage(MessageConstants.DATA_FOUND);
 			}
 		} else {
 			if (Operation.INSERT == operation) {
-				result.setMessage(NO_DATA_INSERTED);
+				result.setMessage(MessageConstants.NO_DATA_INSERTED);
 			} else {
-				result.setMessage(NO_DATA_FOUND);
+				result.setMessage(MessageConstants.NO_DATA_FOUND);
 			}
 			result.setNoOfRecords(0);
 		}
@@ -142,15 +168,15 @@ public class ResponseGenerator {
 
 		if (noOfRecords == 0) {
 			if (Operation.INSERT == operation) {
-				result.setMessage(NO_DATA_INSERTED);
+				result.setMessage(MessageConstants.NO_DATA_INSERTED);
 			} else {
-				result.setMessage(NO_DATA_FOUND);
+				result.setMessage(MessageConstants.NO_DATA_FOUND);
 			}
 		} else {
 			if (Operation.INSERT == operation) {
-				result.setMessage(DATA_INSERTED);
+				result.setMessage(MessageConstants.DATA_INSERTED);
 			} else {
-				result.setMessage(DATA_FOUND);
+				result.setMessage(MessageConstants.DATA_FOUND);
 			}
 		}
 

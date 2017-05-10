@@ -1,10 +1,10 @@
-package com.slabs.expense.tracker.web;
+package com.slabs.expense.tracker.webservices.core;
 
 public class MessageConstants {
-	
+
 	public static final String CONTACT_CUST_SUPPORT = "please contact customer support";
 
-	public static final String EXCEPTION = "Exception occurred, "+ CONTACT_CUST_SUPPORT;
+	public static final String EXCEPTION = "Exception occurred, " + CONTACT_CUST_SUPPORT;
 
 	public static final String CHECK_USRNME_PWD = "Please check your username/password";
 
@@ -16,13 +16,13 @@ public class MessageConstants {
 
 	public static final String ACCOUNT_NOT_VERIFIED = "Your account is not activated, please check your registered email for activation link";
 
-	public static final String INVALID_SESSION = "Session Expired";	
+	public static final String INVALID_SESSION = "Session Expired";
 
 	public static final String AVAILABLE = "Available";
 
 	public static final String USERNAME_NOT_AVAILABLE = "Username is already registered";
-	
-	public static final String EMAIL_ALREADY_REGISTERED ="Email address is already registered";
+
+	public static final String EMAIL_ALREADY_REGISTERED = "Email address is already registered";
 
 	public static final String LOGD_OFF = "Successfully Logged Off";
 
@@ -38,11 +38,22 @@ public class MessageConstants {
 
 	public static final String ACTIVATION_FAILED = "Activation Failed, " + CONTACT_CUST_SUPPORT;
 
-	public static final String ACTIVATION_FAILED_INVALID_KEY = "Activation failed, invalid activation key";	
+	public static final String ACTIVATION_FAILED_INVALID_KEY = "Activation failed, invalid activation key";
 
 	public static final String ACTIVATION_MAILED = "Activation link has been mailed to your registered email";
-	
+
 	public static final String MAILED = "Your query has been mailed to Administrator";
 
 	public static final String USER_NOT_FOUND = "We are unable to verify your username, " + CONTACT_CUST_SUPPORT;
+
+	public static final String NO_DATA_FOUND = "NO_DATA_FOUND";
+
+	public static final String DATA_FOUND = "DATA_FOUND";
+
+	public static final String DATA_INSERTED = "DATA_INSERTED";
+
+	public static final String NO_DATA_INSERTED = "NO_DATA_INSERTED";
+
+	public static final String SERVICE_UNAVAILABLE = "Service Unavailable";
+
 }

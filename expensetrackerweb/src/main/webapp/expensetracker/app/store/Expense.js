@@ -21,7 +21,7 @@ Ext.define('expensetracker.store.Expense', {
 		},
 		reader : {
 			type : 'json',
-			messageProperty : 'exception',
+			messageProperty : 'message',
 			rootProperty : 'result.any'
 		},
 		writer : {

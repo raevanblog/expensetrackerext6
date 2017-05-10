@@ -34,8 +34,8 @@ Ext.define('expensetracker.view.login.LoginController', {
 						expensetracker.util.Session.setCookie(cookie);
 					}
 					var response = Ext.decode(action.response.responseText);
-					if (response.user !== null) {
-						expensetracker.util.Session.setUser(response.user);
+					if (response.result.any !== null && response.result.any.length === 1) {
+						expensetracker.util.Session.setUser(response.result.any[0]);
 						expensetracker.util.Store.loadStaticStore();
 						expensetracker.util.Store.loadStore(Ext.getStore('ExpenseCategory'), {
 							username : expensetracker.util.Session.getUsername()

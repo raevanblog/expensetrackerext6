@@ -14,8 +14,9 @@
 			</appinfo>
 		</annotation>
 		<sequence>
-			<element name="status_code" type="int" />
-			<element name="status_message" type="string" />
+			<element name="statusCode" type="int" />
+			<element name="status" type="string" />
+			<element name="message" type="string" />		
 			<element name="exception" type="string" />
 			<element name="success" type="boolean"/>
 			<element name="result" type="et:result" />
