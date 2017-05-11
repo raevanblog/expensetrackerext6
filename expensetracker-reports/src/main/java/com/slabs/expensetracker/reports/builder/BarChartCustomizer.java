@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports.builder;
+package com.slabs.expensetracker.reports.builder;
 
 import java.awt.Color;
 import java.io.Serializable;

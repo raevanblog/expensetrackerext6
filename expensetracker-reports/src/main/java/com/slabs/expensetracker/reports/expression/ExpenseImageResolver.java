@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports.expression;
+package com.slabs.expensetracker.reports.expression;
 
 import java.io.InputStream;
 

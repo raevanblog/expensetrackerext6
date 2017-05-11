@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports.column;
+package com.slabs.expensetracker.reports.column;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

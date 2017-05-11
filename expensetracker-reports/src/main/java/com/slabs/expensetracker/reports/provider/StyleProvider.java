@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports.provider;
+package com.slabs.expensetracker.reports.provider;
 
 import java.awt.Color;
 

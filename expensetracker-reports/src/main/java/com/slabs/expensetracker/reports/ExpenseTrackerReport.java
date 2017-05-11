@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports;
+package com.slabs.expensetracker.reports;
 
 import java.awt.Color;
 import java.sql.Connection;
@@ -7,14 +7,14 @@ import java.util.Collection;
 import java.util.List;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.reports.builder.ReportBuilder;
-import com.slabs.expense.tracker.reports.column.data.type.Currency;
-import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
-import com.slabs.expense.tracker.reports.provider.ColumnProvider;
-import com.slabs.expense.tracker.reports.provider.StyleProvider;
 import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.database.column.Column;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
+import com.slabs.expensetracker.reports.builder.ReportBuilder;
+import com.slabs.expensetracker.reports.column.data.type.Currency;
+import com.slabs.expensetracker.reports.column.data.type.CurrencyType;
+import com.slabs.expensetracker.reports.provider.ColumnProvider;
+import com.slabs.expensetracker.reports.provider.StyleProvider;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;

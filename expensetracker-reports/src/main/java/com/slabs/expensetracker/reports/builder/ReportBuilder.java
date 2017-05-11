@@ -1,7 +1,7 @@
-package com.slabs.expense.tracker.reports.builder;
+package com.slabs.expensetracker.reports.builder;
 
-import com.slabs.expense.tracker.reports.provider.ColumnProvider;
-import com.slabs.expense.tracker.reports.provider.StyleProvider;
+import com.slabs.expensetracker.reports.provider.ColumnProvider;
+import com.slabs.expensetracker.reports.provider.StyleProvider;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;

@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports;
+package com.slabs.expensetracker.reports;
 
 /**
  * 

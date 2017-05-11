@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.reports.column.data.type;
+package com.slabs.expensetracker.reports.column.data.type;
 
 import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
 

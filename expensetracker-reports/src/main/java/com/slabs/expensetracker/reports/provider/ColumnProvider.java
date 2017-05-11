@@ -1,7 +1,7 @@
-package com.slabs.expense.tracker.reports.provider;
+package com.slabs.expensetracker.reports.provider;
 
-import com.slabs.expense.tracker.reports.column.DateFormatter;
 import com.slabs.expensetracker.common.database.column.Column;
+import com.slabs.expensetracker.reports.column.DateFormatter;
 
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
