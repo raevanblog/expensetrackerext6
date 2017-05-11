@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.scheduler;
+package com.slabs.expensetracker.core.scheduler;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.database.entity.UserSettings;
+import com.slabs.expensetracker.common.database.entity.UserInfo;
+import com.slabs.expensetracker.common.database.entity.UserSettings;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.service.ReportingService;
 import com.slabs.expense.tracker.util.Mailer;

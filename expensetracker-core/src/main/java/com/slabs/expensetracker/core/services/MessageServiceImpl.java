@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.services;
+package com.slabs.expensetracker.core.services;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.database.entity.Message;
-import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.util.MarkerEngine;
+import com.slabs.expensetracker.common.database.entity.Message;
+import com.slabs.expensetracker.common.database.entity.UserInfo;
+import com.slabs.expensetracker.util.MarkerEngine;
 import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.database.mapper.MessageDAO;
 import com.slabs.expensetracker.common.services.MessageService;

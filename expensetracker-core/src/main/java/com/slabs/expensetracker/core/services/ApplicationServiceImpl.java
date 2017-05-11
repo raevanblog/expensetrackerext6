@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.services;
+package com.slabs.expensetracker.core.services;
 
 import java.util.List;
 
@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.database.entity.Currency;
-import com.slabs.expense.tracker.common.database.entity.Dictionary;
-import com.slabs.expense.tracker.common.database.entity.ExpenseType;
-import com.slabs.expense.tracker.common.database.entity.Income;
-import com.slabs.expense.tracker.common.database.entity.IncomeType;
+import com.slabs.expensetracker.common.database.entity.Currency;
+import com.slabs.expensetracker.common.database.entity.Dictionary;
+import com.slabs.expensetracker.common.database.entity.ExpenseType;
+import com.slabs.expensetracker.common.database.entity.Income;
+import com.slabs.expensetracker.common.database.entity.IncomeType;
 import com.slabs.expensetracker.common.database.mapper.ApplicationDAO;
 import com.slabs.expensetracker.common.services.ApplicationService;
 

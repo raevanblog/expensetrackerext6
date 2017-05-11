@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.services;
+package com.slabs.expensetracker.core.services;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.database.mapper.UserDAO;
 import com.slabs.expensetracker.common.services.AdminService;
 

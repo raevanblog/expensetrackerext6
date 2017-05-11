@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.core.scheduler;
+package com.slabs.expensetracker.core.scheduler;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;

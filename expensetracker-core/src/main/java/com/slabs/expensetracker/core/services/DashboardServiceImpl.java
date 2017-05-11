@@ -1,10 +1,10 @@
-package com.slabs.expense.tracker.core.services;
+package com.slabs.expensetracker.core.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.slabs.expense.tracker.common.database.entity.Dashboard;
-import com.slabs.expense.tracker.common.database.entity.Summary;
+import com.slabs.expensetracker.common.database.entity.Dashboard;
+import com.slabs.expensetracker.common.database.entity.Summary;
 import com.slabs.expensetracker.common.database.mapper.ExpenseDAO;
 import com.slabs.expensetracker.common.database.mapper.IncomeDAO;
 import com.slabs.expensetracker.common.services.DashboardService;
