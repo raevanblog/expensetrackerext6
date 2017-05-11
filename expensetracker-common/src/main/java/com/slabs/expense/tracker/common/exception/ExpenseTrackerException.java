@@ -14,8 +14,7 @@ public class ExpenseTrackerException extends Exception {
 		super();
 	}
 
-	public ExpenseTrackerException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
+	public ExpenseTrackerException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
@@ -30,5 +29,4 @@ public class ExpenseTrackerException extends Exception {
 	public ExpenseTrackerException(Throwable cause) {
 		super(cause);
 	}
-
 }
