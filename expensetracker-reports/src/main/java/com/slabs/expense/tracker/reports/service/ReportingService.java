@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.Income;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
-import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
-import com.slabs.expense.tracker.common.database.mapper.UserDAO;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.MonthlyExpenseReport;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
+import com.slabs.expensetracker.common.database.mapper.ExpenseDAO;
+import com.slabs.expensetracker.common.database.mapper.IncomeDAO;
+import com.slabs.expensetracker.common.database.mapper.UserDAO;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
