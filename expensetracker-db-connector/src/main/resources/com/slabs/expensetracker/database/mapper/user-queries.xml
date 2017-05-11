@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slabs.expense.tracker.common.database.mapper.UserDAO">
+<mapper namespace="com.slabs.expensetracker.common.database.mapper.UserDAO">
 
-	<resultMap type="com.slabs.expense.tracker.common.database.entity.UserInfo" id="UserInfo">
+	<resultMap type="com.slabs.expensetracker.common.database.entity.UserInfo" id="UserInfo">
 		<result column="FIRSTNAME" property="firstName" />
 		<result column="LASTNAME" property="lastName" />
 		<result column="SEX" property="sex" />
@@ -22,17 +22,17 @@
 		<result column="ACTIVATIONKEY" property="activationKey" />
 	</resultMap>
 
-	<resultMap id="Settings" type="com.slabs.expense.tracker.common.database.entity.UserSettings">
+	<resultMap id="Settings" type="com.slabs.expensetracker.common.database.entity.UserSettings">
 		<result column="USERNAME" property="username" />
 		<result column="RCVRYEMAIL" property="rcvryemail" />
-		<association property="currency" javaType="com.slabs.expense.tracker.common.database.entity.Currency">
+		<association property="currency" javaType="com.slabs.expensetracker.common.database.entity.Currency">
 			<id column="ID" property="id" />
 			<result column="CURRSYMB" property="currsymb" />
 			<result column="CURRTXT" property="currtxt" />
 		</association>
 	</resultMap>
 
-	<insert id="createUser" parameterType="com.slabs.expense.tracker.common.database.entity.UserInfo">
+	<insert id="createUser" parameterType="com.slabs.expensetracker.common.database.entity.UserInfo">
 		insert into EXPENSETRACKER.USERINFO(FIRSTNAME, LASTNAME, SEX, USERNAME,PASSWORD,EMAIL,MOBILE,ADDRESS)
 		values(
 		#{firstName},
@@ -152,13 +152,13 @@
 		s.currency = c.id
 	</select>
 
-	<insert id="createUserSettings" parameterType="com.slabs.expense.tracker.common.database.entity.UserSettings">
+	<insert id="createUserSettings" parameterType="com.slabs.expensetracker.common.database.entity.UserSettings">
 		insert into EXPENSETRACKER.USER_SETTINGS(USERNAME, CURRENCY, RCVRYEMAIL) values (#{username},
 		#{currency.id},
 		#{rcvryemail})
 	</insert>
 
-	<update id="updateUserSettings" parameterType="com.slabs.expense.tracker.common.database.entity.UserSettings">
+	<update id="updateUserSettings" parameterType="com.slabs.expensetracker.common.database.entity.UserSettings">
 		update EXPENSETRACKER.USER_SETTINGS
 		<set>
 			<if test="currency != null">

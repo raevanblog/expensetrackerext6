@@ -8,7 +8,7 @@
       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
 
-	<mybatis:scan base-package="com.slabs.expense.tracker.common.database.mapper" />
+	<mybatis:scan base-package="com.slabs.expensetracker.common.database.mapper" />
 
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
@@ -32,7 +32,7 @@
 
 	<bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:com/slabs/expense/tracker/database/mapper/*.xml" />		
+		<property name="mapperLocations" value="classpath*:com/slabs/expensetracker/database/mapper/*.xml" />		
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slabs.expense.tracker.common.database.mapper.ApplicationDAO">
+<mapper namespace="com.slabs.expensetracker.common.database.mapper.ApplicationDAO">
 
-	<resultMap type="com.slabs.expense.tracker.common.database.entity.Dictionary" id="Dictionary">
+	<resultMap type="com.slabs.expensetracker.common.database.entity.Dictionary" id="Dictionary">
 		<result column="ITEMNAME" property="name" />
 	</resultMap>
 
@@ -13,7 +13,7 @@
 		select distinct ITEMNAME from EXPENSETRACKER.EXPENSE
 	</select>
 
-	<select id="getExpenseType" resultType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
+	<select id="getExpenseType" resultType="com.slabs.expensetracker.common.database.entity.ExpenseType">
 		select * from EXPENSETRACKER.EXPENSETYPE
 	</select>
 
@@ -25,7 +25,7 @@
 		</foreach>
 	</insert>
 
-	<update id="updateExpenseType" parameterType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
+	<update id="updateExpenseType" parameterType="com.slabs.expensetracker.common.database.entity.ExpenseType">
 		update EXPENSETRACKER.EXPENSETYPE
 		<set>
 			<if test="exptype != null">
@@ -37,11 +37,11 @@
 		</set>
 	</update>
 
-	<delete id="deleteExpenseType" parameterType="com.slabs.expense.tracker.common.database.entity.ExpenseType">
+	<delete id="deleteExpenseType" parameterType="com.slabs.expensetracker.common.database.entity.ExpenseType">
 		delete from EXPENSETRACKER.EXPENSETYPE where id=#{id}
 	</delete>
 
-	<select id="getIncomeType" resultType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+	<select id="getIncomeType" resultType="com.slabs.expensetracker.common.database.entity.IncomeType">
 		select * from EXPENSETRACKER.INCOMETYPE
 	</select>
 
@@ -53,7 +53,7 @@
 		</foreach>
 	</insert>
 
-	<update id="updateIncomeType" parameterType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+	<update id="updateIncomeType" parameterType="com.slabs.expensetracker.common.database.entity.IncomeType">
 		update EXPENSETRACKER.INCOMETYPE
 		<set>
 			<if test="incometype != null">
@@ -65,11 +65,11 @@
 		</set>
 	</update>
 
-	<delete id="deleteIncomeType" parameterType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+	<delete id="deleteIncomeType" parameterType="com.slabs.expensetracker.common.database.entity.IncomeType">
 		delete from EXPENSETRACKER.EXPENSETYPE where id=#{id}
 	</delete>
 
-	<select id="getCurrency" resultType="com.slabs.expense.tracker.common.database.entity.Currency">
+	<select id="getCurrency" resultType="com.slabs.expensetracker.common.database.entity.Currency">
 		select * from EXPENSETRACKER.CURRENCY
 	</select>
 
@@ -81,7 +81,7 @@
 		</foreach>
 	</insert>
 
-	<update id="updateCurrency" parameterType="com.slabs.expense.tracker.common.database.entity.Currency">
+	<update id="updateCurrency" parameterType="com.slabs.expensetracker.common.database.entity.Currency">
 		update EXPENSETRACKER.CURRENCY
 		<set>
 			<if test="currsymb != null">
@@ -93,7 +93,7 @@
 		</set>
 	</update>
 
-	<delete id="deleteCurrency" parameterType="com.slabs.expense.tracker.common.database.entity.IncomeType">
+	<delete id="deleteCurrency" parameterType="com.slabs.expensetracker.common.database.entity.IncomeType">
 		delete from EXPENSETRACKER.CURRENCY where id=#{id}
 	</delete>
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.slabs.expense.tracker.common.database.mapper.ExpenseDAO">
+<mapper namespace="com.slabs.expensetracker.common.database.mapper.ExpenseDAO">
 
 	<insert id="insertExpense" parameterType="java.util.List">
 		insert into EXPENSETRACKER.EXPENSE(ITEMNAME,CATEGORY,EXPTYPE,QTY,UNIT,PRICE,EXPDATE,USERNAME,PRICEPERUNIT) values
@@ -50,7 +50,7 @@
 		where id=#{id}
 	</update>
 
-	<select id="getExpense" resultType="com.slabs.expense.tracker.common.database.entity.Expense">
+	<select id="getExpense" resultType="com.slabs.expensetracker.common.database.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
 		username=#{param1}
 		<if test="param2 != null">
@@ -62,7 +62,7 @@
 		order by expdate
 	</select>
 
-	<select id="getTopExpense" resultType="com.slabs.expense.tracker.common.database.entity.Expense">
+	<select id="getTopExpense" resultType="com.slabs.expensetracker.common.database.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where price in (
 		select max(price) from expense where username=#{param1}
 		and YEAR(expdate) = #{param2}
@@ -99,7 +99,7 @@
 		</if>
 	</select>
 
-	<select id="getMonthWiseTotalExpense" resultType="com.slabs.expense.tracker.common.database.entity.Graph">
+	<select id="getMonthWiseTotalExpense" resultType="com.slabs.expensetracker.common.database.entity.Graph">
 		select month(expdate) as MONTH, sum(price) as EXPENSE from EXPENSE where
 		username =
 		#{param1}
@@ -108,7 +108,7 @@
 		group by month(expdate)
 	</select>
 
-	<select id="getCategoryWiseTotalExpense" resultType="com.slabs.expense.tracker.common.database.entity.Graph">
+	<select id="getCategoryWiseTotalExpense" resultType="com.slabs.expensetracker.common.database.entity.Graph">
 		select category, sum(price) as EXPENSE from EXPENSE
 		where username=#{param1} and year(expdate) = #{param2}
 		<if test="param3 != null">
@@ -118,7 +118,7 @@
 	</select>
 
 
-	<select id="getExpenseById" resultType="com.slabs.expense.tracker.common.database.entity.Expense">
+	<select id="getExpenseById" resultType="com.slabs.expensetracker.common.database.entity.Expense">
 		select * from EXPENSETRACKER.EXPENSE where
 		id=#{param1}
 	</select>
@@ -137,7 +137,7 @@
 		</foreach>
 	</insert>
 
-	<update id="updateExpenseCategory" parameterType="com.slabs.expense.tracker.common.database.entity.ExpenseCategory">
+	<update id="updateExpenseCategory" parameterType="com.slabs.expensetracker.common.database.entity.ExpenseCategory">
 
 		update EXPENSETRACKER.EXPENSE_CATEGORY
 		<set>
@@ -152,7 +152,7 @@
 
 	</update>
 
-	<select id="retrieveExpenseCategory" resultType="com.slabs.expense.tracker.common.database.entity.ExpenseCategory">
+	<select id="retrieveExpenseCategory" resultType="com.slabs.expensetracker.common.database.entity.ExpenseCategory">
 		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username=#{param1}
 	</select>
 
@@ -171,7 +171,7 @@
 		</foreach>
 	</insert>
 
-	<update id="updateExpenseUnits" parameterType="com.slabs.expense.tracker.common.database.entity.Units">
+	<update id="updateExpenseUnits" parameterType="com.slabs.expensetracker.common.database.entity.Units">
 
 		update EXPENSETRACKER.UNITS
 		<set>
@@ -186,7 +186,7 @@
 
 	</update>
 
-	<select id="getExpenseUnits" resultType="com.slabs.expense.tracker.common.database.entity.Units">
+	<select id="getExpenseUnits" resultType="com.slabs.expensetracker.common.database.entity.Units">
 		select * from EXPENSETRACKER.UNITS
 	</select>
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.slabs.expense.tracker.common.database.mapper.InventoryDAO">
+<mapper namespace="com.slabs.expensetracker.common.database.mapper.InventoryDAO">
 
 	<insert id="createInventory" parameterType="java.util.List">
 		insert into EXPENSETRACKER.INVENTORY(ITEMNAME, CATEGORY, QTY, UNIT, USERNAME) values
@@ -31,7 +31,7 @@
 		where id=#{id}
 	</update>
 
-	<select id="getInventory" resultType="com.slabs.expense.tracker.common.database.entity.Inventory">
+	<select id="getInventory" resultType="com.slabs.expensetracker.common.database.entity.Inventory">
 		select * from EXPENSETRACKER.INVENTORY where
 		username=#{param1}
 	</select>
