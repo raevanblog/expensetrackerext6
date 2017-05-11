@@ -16,7 +16,7 @@
     	</description>
 		<display-name>ApplicationLoader</display-name>
 		<servlet-name>ApplicationLoader</servlet-name>
-		<servlet-class>com.slabs.expense.tracker.web.servlet.ApplicationLoader</servlet-class>
+		<servlet-class>com.slabs.expensetracker.web.servlet.ApplicationLoader</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>

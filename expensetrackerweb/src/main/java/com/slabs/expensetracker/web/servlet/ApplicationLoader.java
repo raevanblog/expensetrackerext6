@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.web.servlet;
+package com.slabs.expensetracker.web.servlet;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
