@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.common.services.DashboardService;
 import com.slabs.expense.tracker.common.webservices.DashboardWebService;
-import com.slabs.expense.tracker.webservice.response.Operation;
-import com.slabs.expense.tracker.webservice.response.Response;
+import com.slabs.expense.tracker.common.webservice.response.Operation;
+import com.slabs.expense.tracker.common.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 
 /**

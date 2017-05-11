@@ -24,11 +24,11 @@ import com.slabs.expense.tracker.common.services.ApplicationService;
 import com.slabs.expense.tracker.common.services.EmailService;
 import com.slabs.expense.tracker.common.services.MessageService;
 import com.slabs.expense.tracker.common.services.UserService;
+import com.slabs.expense.tracker.common.webservice.response.Operation;
+import com.slabs.expense.tracker.common.webservice.response.Response;
 import com.slabs.expense.tracker.common.webservices.ApplicationWebService;
 import com.slabs.expense.tracker.util.Base64Encoder;
 import com.slabs.expense.tracker.util.JSONUtil;
-import com.slabs.expense.tracker.webservice.response.Operation;
-import com.slabs.expense.tracker.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.core.MessageConstants;
 import com.slabs.expense.tracker.webservices.core.WebConstants;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
@@ -163,7 +163,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 				return ResponseGenerator.getExceptionResponse(ResponseStatus.UNAUTHORIZED, MessageConstants.CHECK_USRNME_PWD);
 			}
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
 		return ResponseGenerator.getExceptionResponse(ResponseStatus.SERVICE_UNAVAILABLE, MessageConstants.SERVICE_UNAVAILABLE);
 	}
@@ -195,7 +195,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 				return ResponseGenerator.getExceptionResponse(ResponseStatus.LOGIN_TIMEOUT, MessageConstants.INVALID_SESSION);
 			}
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
 	}
 
@@ -216,7 +216,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 				}
 			}
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
 	}
 
@@ -233,7 +233,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			}
 
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
 	}
 
@@ -269,7 +269,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			}
 
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
 	}
 
@@ -294,7 +294,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			}
 
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
 	}
 
@@ -304,7 +304,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			messageService.createQuery(message);
 			return ResponseGenerator.getSuccessResponse(MessageConstants.MAILED);
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
 	}
 

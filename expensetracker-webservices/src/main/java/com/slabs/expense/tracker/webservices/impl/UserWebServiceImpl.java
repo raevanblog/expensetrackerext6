@@ -18,8 +18,8 @@ import com.slabs.expense.tracker.common.services.AdminService;
 import com.slabs.expense.tracker.common.services.EmailService;
 import com.slabs.expense.tracker.common.services.UserService;
 import com.slabs.expense.tracker.common.webservices.UserWebService;
-import com.slabs.expense.tracker.webservice.response.Operation;
-import com.slabs.expense.tracker.webservice.response.Response;
+import com.slabs.expense.tracker.common.webservice.response.Operation;
+import com.slabs.expense.tracker.common.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 
