@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.impl;
+package com.slabs.expensetracker.webservices.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expensetracker.common.database.entity.UserSettings;
-import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.UserService;
 import com.slabs.expensetracker.reports.Month;
 import com.slabs.expensetracker.reports.service.ReportingService;
 import com.slabs.expensetracker.util.MarkerEngine;
+import com.slabs.expensetracker.webservices.response.ResponseGenerator;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 

@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.impl;
+package com.slabs.expensetracker.webservices.impl;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.AdminService;
 import com.slabs.expensetracker.common.webservices.AdminWebService;
+import com.slabs.expensetracker.webservices.response.ResponseGenerator;
 
 /**
  * {@link AdminWebServiceImpl} - Webservice for Administrator

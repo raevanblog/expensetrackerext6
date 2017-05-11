@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.impl;
+package com.slabs.expensetracker.webservices.impl;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import com.slabs.expensetracker.common.database.entity.ExpenseCategory;
 import com.slabs.expensetracker.common.database.entity.Units;
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
-import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.ExpenseCategoryService;
 import com.slabs.expensetracker.common.services.ExpenseService;
 import com.slabs.expensetracker.common.webservices.ExpenseWebService;
+import com.slabs.expensetracker.webservices.response.ResponseGenerator;
+import com.slabs.expensetracker.webservices.response.ResponseStatus;
 
 /**
  * {@link ExpenseWebServiceImpl} - Web Service for retrieving/updating Expense

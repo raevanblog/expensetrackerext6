@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.impl;
+package com.slabs.expensetracker.webservices.impl;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expensetracker.common.database.entity.Graph;
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
-import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.ExpenseService;
 import com.slabs.expensetracker.common.services.IncomeService;
 import com.slabs.expensetracker.common.webservices.GraphWebService;
+import com.slabs.expensetracker.webservices.response.ResponseGenerator;
+import com.slabs.expensetracker.webservices.response.ResponseStatus;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.core;
+package com.slabs.expensetracker.webservices.core;
 
 public class MessageConstants {
 

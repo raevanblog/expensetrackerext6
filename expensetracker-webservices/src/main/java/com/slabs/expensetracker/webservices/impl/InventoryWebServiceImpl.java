@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.impl;
+package com.slabs.expensetracker.webservices.impl;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expensetracker.common.database.entity.Inventory;
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.InventoryService;
 import com.slabs.expensetracker.common.webservices.InventoryWebService;
+import com.slabs.expensetracker.webservices.response.ResponseGenerator;
 
 /**
  * {@link InventoryWebServiceImpl} - Web Service for retrieving/updating

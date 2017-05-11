@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.impl;
+package com.slabs.expensetracker.webservices.impl;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.database.entity.UserSettings;
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
-import com.slabs.expense.tracker.webservices.response.ResponseStatus;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.AdminService;
 import com.slabs.expensetracker.common.services.EmailService;
 import com.slabs.expensetracker.common.services.UserService;
 import com.slabs.expensetracker.common.webservices.UserWebService;
+import com.slabs.expensetracker.webservices.response.ResponseGenerator;
+import com.slabs.expensetracker.webservices.response.ResponseStatus;
 
 /**
  * {@link UserWebServiceImpl} - Web Service for retrieving/updating User

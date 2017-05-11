@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.webservices.impl;
+package com.slabs.expensetracker.webservices.impl;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expensetracker.common.database.entity.Message;
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.MessageService;
 import com.slabs.expensetracker.common.webservices.MessagingWebService;
+import com.slabs.expensetracker.webservices.response.ResponseGenerator;
 
 /**
  * {@link MessagingWebServiceImpl} - Web Service for sending and recieving
