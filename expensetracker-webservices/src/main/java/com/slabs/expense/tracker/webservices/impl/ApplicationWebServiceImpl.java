@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.slabs.expense.tracker.common.database.entity.Message;
-import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.webservice.response.Operation;
-import com.slabs.expense.tracker.common.webservice.response.Response;
+import com.slabs.expensetracker.common.database.entity.Message;
+import com.slabs.expensetracker.common.database.entity.UserInfo;
+import com.slabs.expensetracker.common.webservice.response.Operation;
+import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.core.MessageConstants;
 import com.slabs.expense.tracker.webservices.core.WebConstants;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;

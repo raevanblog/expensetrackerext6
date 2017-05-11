@@ -9,10 +9,10 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-import com.slabs.expense.tracker.common.webservice.response.Operation;
-import com.slabs.expense.tracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.common.webservice.response.Result;
-import com.slabs.expense.tracker.webservices.core.MessageConstants;
+import com.slabs.expensetracker.common.webservice.response.Operation;
+import com.slabs.expensetracker.common.webservice.response.Response;
+import com.slabs.expensetracker.common.webservice.response.Result;
+import com.slabs.expensetracker.webservices.core.MessageConstants;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
