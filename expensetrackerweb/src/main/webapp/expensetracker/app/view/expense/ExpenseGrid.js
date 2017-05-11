@@ -106,7 +106,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			iconCls : 'x-fa fa-plus-square-o',
 			tooltip : 'Add to Inventory',
 			handler : 'addExpenseToInventory'
-		},
+		}
 	}, {
 		text : 'Item Name',
 		dataIndex : 'itemName',
