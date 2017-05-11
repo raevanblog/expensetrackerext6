@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.slabs.expense.tracker.common.database.entity.Expense;
-import com.slabs.expense.tracker.common.database.entity.Income;
-import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expensetracker.common.database.entity.Expense;
+import com.slabs.expensetracker.common.database.entity.Income;
+import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.database.mapper.ExpenseDAO;
 import com.slabs.expensetracker.common.database.mapper.IncomeDAO;
 import com.slabs.expensetracker.common.database.mapper.UserDAO;
