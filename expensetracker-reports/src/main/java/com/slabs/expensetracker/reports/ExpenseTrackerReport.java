@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.database.column.Column;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;

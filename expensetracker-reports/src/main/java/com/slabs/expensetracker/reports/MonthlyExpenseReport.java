@@ -2,7 +2,7 @@ package com.slabs.expensetracker.reports;
 
 import java.util.Collection;
 
-import com.slabs.expense.tracker.common.database.entity.UserInfo;
+import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.database.column.Column;
 import com.slabs.expensetracker.reports.builder.ReportBuilder;
