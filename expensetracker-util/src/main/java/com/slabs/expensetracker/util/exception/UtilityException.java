@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.util.exception;
+package com.slabs.expensetracker.util.exception;
 
 public class UtilityException extends Exception {
 

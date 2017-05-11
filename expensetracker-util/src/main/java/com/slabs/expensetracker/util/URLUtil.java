@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.util;
+package com.slabs.expensetracker.util;
 
 public class URLUtil {
 

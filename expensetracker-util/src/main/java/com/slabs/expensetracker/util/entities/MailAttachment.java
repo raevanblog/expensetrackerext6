@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.util.entities;
+package com.slabs.expensetracker.util.entities;
 
 import java.util.Arrays;
 

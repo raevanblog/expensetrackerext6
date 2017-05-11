@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expensetracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.util.Mailer;
-import com.slabs.expense.tracker.util.MarkerEngine;
-import com.slabs.expense.tracker.util.RandomGenerator;
-import com.slabs.expense.tracker.util.URLUtil;
 import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.database.mapper.UserDAO;
 import com.slabs.expensetracker.common.services.EmailService;
+import com.slabs.expensetracker.util.Mailer;
+import com.slabs.expensetracker.util.MarkerEngine;
+import com.slabs.expensetracker.util.RandomGenerator;
+import com.slabs.expensetracker.util.URLUtil;
 
 /**
  * {@link EmailServiceImpl}

@@ -16,13 +16,13 @@ import org.springframework.stereotype.Component;
 
 import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.database.entity.UserSettings;
-import com.slabs.expense.tracker.util.Mailer;
-import com.slabs.expense.tracker.util.entities.MailAttachment;
-import com.slabs.expense.tracker.util.exception.UtilityException;
 import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.services.UserService;
 import com.slabs.expensetracker.reports.Month;
 import com.slabs.expensetracker.reports.service.ReportingService;
+import com.slabs.expensetracker.util.Mailer;
+import com.slabs.expensetracker.util.entities.MailAttachment;
+import com.slabs.expensetracker.util.exception.UtilityException;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;

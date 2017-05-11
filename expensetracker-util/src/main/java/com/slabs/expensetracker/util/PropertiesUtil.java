@@ -1,11 +1,11 @@
-package com.slabs.expense.tracker.util;
+package com.slabs.expensetracker.util;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.slabs.expense.tracker.util.exception.UtilityException;
+import com.slabs.expensetracker.util.exception.UtilityException;
 
 public class PropertiesUtil {
 

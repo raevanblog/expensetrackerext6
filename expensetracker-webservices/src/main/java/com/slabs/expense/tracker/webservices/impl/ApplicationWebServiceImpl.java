@@ -19,8 +19,6 @@ import com.slabs.expense.tracker.common.database.entity.Message;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.webservice.response.Operation;
 import com.slabs.expense.tracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.util.Base64Encoder;
-import com.slabs.expense.tracker.util.JSONUtil;
 import com.slabs.expense.tracker.webservices.core.MessageConstants;
 import com.slabs.expense.tracker.webservices.core.WebConstants;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
@@ -33,6 +31,8 @@ import com.slabs.expensetracker.common.services.EmailService;
 import com.slabs.expensetracker.common.services.MessageService;
 import com.slabs.expensetracker.common.services.UserService;
 import com.slabs.expensetracker.common.webservices.ApplicationWebService;
+import com.slabs.expensetracker.util.Base64Encoder;
+import com.slabs.expensetracker.util.JSONUtil;
 
 /**
  * {@link ApplicationWebServiceImpl} - Webservice to retrieve application data.

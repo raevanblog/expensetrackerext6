@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.util;
+package com.slabs.expensetracker.util;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
-import com.slabs.expense.tracker.util.exception.UtilityException;
+import com.slabs.expensetracker.util.exception.UtilityException;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

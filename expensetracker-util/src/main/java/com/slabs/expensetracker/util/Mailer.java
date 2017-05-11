@@ -1,4 +1,4 @@
-package com.slabs.expense.tracker.util;
+package com.slabs.expensetracker.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slabs.expense.tracker.util.entities.MailAttachment;
-import com.slabs.expense.tracker.util.exception.UtilityException;
+import com.slabs.expensetracker.util.entities.MailAttachment;
+import com.slabs.expensetracker.util.exception.UtilityException;
 
 public class Mailer {
 
