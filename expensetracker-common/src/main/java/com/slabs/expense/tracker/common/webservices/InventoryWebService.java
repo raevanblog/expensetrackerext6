@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.slabs.expense.tracker.common.database.entity.Inventory;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.webservice.response.Response;
+import com.slabs.expense.tracker.common.webservice.response.Response;
 
 public interface InventoryWebService {
 

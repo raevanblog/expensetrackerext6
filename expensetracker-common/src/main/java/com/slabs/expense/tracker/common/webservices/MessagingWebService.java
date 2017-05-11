@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.slabs.expense.tracker.common.database.entity.Message;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.webservice.response.Response;
+import com.slabs.expense.tracker.common.webservice.response.Response;
 
 public interface MessagingWebService {
 
@@ -21,5 +21,5 @@ public interface MessagingWebService {
 	public Response createQuery(Message message) throws ExpenseTrackerException;
 
 	public Response deleteQuery(List<Message> messages) throws ExpenseTrackerException;
-	
+
 }

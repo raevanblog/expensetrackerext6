@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.slabs.expense.tracker.common.database.entity.Income;
 import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.webservice.response.Response;
+import com.slabs.expense.tracker.common.webservice.response.Response;
 
 public interface IncomeWebService {
-	
+
 	public Response getIncome(String username, Integer year, Integer month) throws ExpenseTrackerException;
 
 	public Response addIncome(List<Income> records) throws ExpenseTrackerException;
