@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.database.entity.Units;
-import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
-import com.slabs.expense.tracker.common.services.ExpenseService;
+import com.slabs.expensetracker.common.database.mapper.ExpenseDAO;
+import com.slabs.expensetracker.common.services.ExpenseService;
 
 /**
  * {@link ExpenseServiceImpl} provides API for INSERT,SELECT,UPDATE, DELETE on

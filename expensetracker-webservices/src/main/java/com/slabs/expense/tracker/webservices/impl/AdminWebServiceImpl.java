@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.common.services.AdminService;
 import com.slabs.expense.tracker.common.webservice.response.Operation;
 import com.slabs.expense.tracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.common.webservices.AdminWebService;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
+import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
+import com.slabs.expensetracker.common.services.AdminService;
+import com.slabs.expensetracker.common.webservices.AdminWebService;
 
 /**
  * {@link AdminWebServiceImpl} - Webservice for Administrator

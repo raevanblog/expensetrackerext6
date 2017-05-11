@@ -15,24 +15,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.entity.Message;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.common.services.AdminService;
-import com.slabs.expense.tracker.common.services.ApplicationService;
-import com.slabs.expense.tracker.common.services.EmailService;
-import com.slabs.expense.tracker.common.services.MessageService;
-import com.slabs.expense.tracker.common.services.UserService;
 import com.slabs.expense.tracker.common.webservice.response.Operation;
 import com.slabs.expense.tracker.common.webservice.response.Response;
-import com.slabs.expense.tracker.common.webservices.ApplicationWebService;
 import com.slabs.expense.tracker.util.Base64Encoder;
 import com.slabs.expense.tracker.util.JSONUtil;
 import com.slabs.expense.tracker.webservices.core.MessageConstants;
 import com.slabs.expense.tracker.webservices.core.WebConstants;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
+import com.slabs.expensetracker.common.constants.Constants;
+import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
+import com.slabs.expensetracker.common.services.AdminService;
+import com.slabs.expensetracker.common.services.ApplicationService;
+import com.slabs.expensetracker.common.services.EmailService;
+import com.slabs.expensetracker.common.services.MessageService;
+import com.slabs.expensetracker.common.services.UserService;
+import com.slabs.expensetracker.common.webservices.ApplicationWebService;
 
 /**
  * {@link ApplicationWebServiceImpl} - Webservice to retrieve application data.

@@ -2,7 +2,7 @@ package com.slabs.expense.tracker.reports.expression;
 
 import java.io.InputStream;
 
-import com.slabs.expense.tracker.common.database.column.Column;
+import com.slabs.expensetracker.common.database.column.Column;
 
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.definition.ReportParameters;

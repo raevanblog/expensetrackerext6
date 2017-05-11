@@ -2,11 +2,11 @@ package com.slabs.expense.tracker.reports;
 
 import java.util.Collection;
 
-import com.slabs.expense.tracker.common.constants.Constants;
-import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.ReportBuilder;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
+import com.slabs.expensetracker.common.constants.Constants;
+import com.slabs.expensetracker.common.database.column.Column;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;

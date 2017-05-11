@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expense.tracker.common.database.entity.Income;
-import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.common.services.IncomeService;
-import com.slabs.expense.tracker.common.webservices.IncomeWebService;
 import com.slabs.expense.tracker.common.webservice.response.Operation;
 import com.slabs.expense.tracker.common.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
+import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
+import com.slabs.expensetracker.common.services.IncomeService;
+import com.slabs.expensetracker.common.webservices.IncomeWebService;
 
 /**
  * {@link IncomeWebServiceImpl} - Web Service for retrieving/updating Income

@@ -12,8 +12,8 @@ import com.slabs.expense.tracker.common.database.entity.Dictionary;
 import com.slabs.expense.tracker.common.database.entity.ExpenseType;
 import com.slabs.expense.tracker.common.database.entity.Income;
 import com.slabs.expense.tracker.common.database.entity.IncomeType;
-import com.slabs.expense.tracker.common.database.mapper.ApplicationDAO;
-import com.slabs.expense.tracker.common.services.ApplicationService;
+import com.slabs.expensetracker.common.database.mapper.ApplicationDAO;
+import com.slabs.expensetracker.common.services.ApplicationService;
 
 @Service(value = "ApplicationService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)

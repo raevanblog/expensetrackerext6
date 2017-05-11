@@ -1,6 +1,6 @@
 package com.slabs.expense.tracker.reports.column.data.type;
 
-import com.slabs.expense.tracker.common.constants.Constants;
+import com.slabs.expensetracker.common.constants.Constants;
 
 /**
  * {@link CurrencyType} is an {@link Enum} for curreny types

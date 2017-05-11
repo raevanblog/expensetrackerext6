@@ -5,14 +5,14 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slabs.expense.tracker.common.constants.Constants;
-import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.core.scheduler.ReportingScheduler;
 import com.slabs.expense.tracker.util.Mailer;
 import com.slabs.expense.tracker.util.MarkerEngine;
 import com.slabs.expense.tracker.util.PropertiesUtil;
 import com.slabs.expense.tracker.util.URLUtil;
 import com.slabs.expense.tracker.util.exception.UtilityException;
+import com.slabs.expensetracker.common.constants.Constants;
+import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 
 /**
  * {@link Server} is a singleton class, which will initialize the core of

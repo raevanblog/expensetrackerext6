@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.database.mapper.UserDAO;
-import com.slabs.expense.tracker.common.services.AdminService;
+import com.slabs.expensetracker.common.database.mapper.UserDAO;
+import com.slabs.expensetracker.common.services.AdminService;
 
 @Service(value = "AdminService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)

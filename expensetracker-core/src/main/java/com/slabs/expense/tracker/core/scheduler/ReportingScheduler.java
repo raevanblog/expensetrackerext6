@@ -12,7 +12,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
+import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 
 public class ReportingScheduler {
 

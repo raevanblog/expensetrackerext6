@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
-import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
-import com.slabs.expense.tracker.common.services.ExpenseCategoryService;
+import com.slabs.expensetracker.common.database.mapper.ExpenseDAO;
+import com.slabs.expensetracker.common.services.ExpenseCategoryService;
 
 /**
  * {@link ExpenseCategoryServiceImpl} provides API for INSERT, UPDATE, DELETE, SELECT on

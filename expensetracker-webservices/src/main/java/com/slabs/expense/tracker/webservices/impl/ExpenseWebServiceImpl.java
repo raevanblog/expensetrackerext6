@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expense.tracker.common.database.entity.Expense;
 import com.slabs.expense.tracker.common.database.entity.ExpenseCategory;
 import com.slabs.expense.tracker.common.database.entity.Units;
-import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
-import com.slabs.expense.tracker.common.services.ExpenseCategoryService;
-import com.slabs.expense.tracker.common.services.ExpenseService;
-import com.slabs.expense.tracker.common.webservices.ExpenseWebService;
 import com.slabs.expense.tracker.common.webservice.response.Operation;
 import com.slabs.expense.tracker.common.webservice.response.Response;
 import com.slabs.expense.tracker.webservices.response.ResponseGenerator;
 import com.slabs.expense.tracker.webservices.response.ResponseStatus;
+import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
+import com.slabs.expensetracker.common.services.ExpenseCategoryService;
+import com.slabs.expensetracker.common.services.ExpenseService;
+import com.slabs.expensetracker.common.webservices.ExpenseWebService;
 
 /**
  * {@link ExpenseWebServiceImpl} - Web Service for retrieving/updating Expense

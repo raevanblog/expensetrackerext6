@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.slabs.expense.tracker.common.database.entity.Dashboard;
 import com.slabs.expense.tracker.common.database.entity.Summary;
-import com.slabs.expense.tracker.common.database.mapper.ExpenseDAO;
-import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
-import com.slabs.expense.tracker.common.services.DashboardService;
+import com.slabs.expensetracker.common.database.mapper.ExpenseDAO;
+import com.slabs.expensetracker.common.database.mapper.IncomeDAO;
+import com.slabs.expensetracker.common.services.DashboardService;
 
 /**
  * {@link DashboardServiceImpl} provides API's for retrieving data for Expense

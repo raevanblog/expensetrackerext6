@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.Graph;
 import com.slabs.expense.tracker.common.database.entity.Income;
-import com.slabs.expense.tracker.common.database.mapper.IncomeDAO;
-import com.slabs.expense.tracker.common.services.IncomeService;
+import com.slabs.expensetracker.common.database.mapper.IncomeDAO;
+import com.slabs.expensetracker.common.services.IncomeService;
 
 /**
  * {@link IncomeServiceImpl} provides API for INSERT, DELETE, UPDATE, SELECT on

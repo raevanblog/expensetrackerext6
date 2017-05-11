@@ -14,15 +14,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.database.entity.UserSettings;
-import com.slabs.expense.tracker.common.services.UserService;
 import com.slabs.expense.tracker.reports.Month;
 import com.slabs.expense.tracker.reports.service.ReportingService;
 import com.slabs.expense.tracker.util.Mailer;
 import com.slabs.expense.tracker.util.entities.MailAttachment;
 import com.slabs.expense.tracker.util.exception.UtilityException;
+import com.slabs.expensetracker.common.constants.Constants;
+import com.slabs.expensetracker.common.services.UserService;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;

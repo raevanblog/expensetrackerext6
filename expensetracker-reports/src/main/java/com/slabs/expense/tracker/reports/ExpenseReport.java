@@ -3,11 +3,11 @@ package com.slabs.expense.tracker.reports;
 import java.awt.Color;
 import java.math.BigDecimal;
 
-import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.reports.builder.BarChartCustomizer;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
 import com.slabs.expense.tracker.reports.expression.ExpenseImageResolver;
+import com.slabs.expensetracker.common.database.column.Column;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;

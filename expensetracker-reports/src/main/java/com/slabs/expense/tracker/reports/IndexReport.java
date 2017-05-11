@@ -1,9 +1,9 @@
 package com.slabs.expense.tracker.reports;
 
-import com.slabs.expense.tracker.common.database.column.Column;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.exception.ExpenseTrackerException;
 import com.slabs.expense.tracker.reports.column.data.type.CurrencyType;
+import com.slabs.expensetracker.common.database.column.Column;
+import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;

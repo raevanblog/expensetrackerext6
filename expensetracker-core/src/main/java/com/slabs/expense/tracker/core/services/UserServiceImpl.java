@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
 import com.slabs.expense.tracker.common.database.entity.UserSettings;
-import com.slabs.expense.tracker.common.database.mapper.UserDAO;
-import com.slabs.expense.tracker.common.services.UserService;
+import com.slabs.expensetracker.common.database.mapper.UserDAO;
+import com.slabs.expensetracker.common.services.UserService;
 
 /**
  * {@link UserServiceImpl} provides API for INSERT, DELETE, UPDATE, SELECT on

@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expense.tracker.common.database.entity.Inventory;
-import com.slabs.expense.tracker.common.database.mapper.InventoryDAO;
-import com.slabs.expense.tracker.common.services.InventoryService;
+import com.slabs.expensetracker.common.database.mapper.InventoryDAO;
+import com.slabs.expensetracker.common.services.InventoryService;
 
 @Service(value = "InventoryService")
 @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 2000)

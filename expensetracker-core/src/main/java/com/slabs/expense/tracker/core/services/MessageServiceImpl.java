@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.slabs.expense.tracker.common.constants.Constants;
 import com.slabs.expense.tracker.common.database.entity.Message;
 import com.slabs.expense.tracker.common.database.entity.UserInfo;
-import com.slabs.expense.tracker.common.database.mapper.MessageDAO;
-import com.slabs.expense.tracker.common.services.MessageService;
 import com.slabs.expense.tracker.util.MarkerEngine;
+import com.slabs.expensetracker.common.constants.Constants;
+import com.slabs.expensetracker.common.database.mapper.MessageDAO;
+import com.slabs.expensetracker.common.services.MessageService;
 
 /**
  * {@link MessageServiceImpl} provides API for INSERT, DELETE, UPDATE, SELECT on
