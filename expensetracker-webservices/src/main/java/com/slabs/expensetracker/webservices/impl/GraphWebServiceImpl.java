@@ -5,20 +5,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expensetracker.common.database.entity.Graph;
-import com.slabs.expensetracker.common.webservice.response.Operation;
-import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.ExpenseService;
 import com.slabs.expensetracker.common.services.IncomeService;
+import com.slabs.expensetracker.common.webservice.response.Operation;
+import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.webservices.GraphWebService;
 import com.slabs.expensetracker.webservices.response.ResponseGenerator;
-import com.slabs.expensetracker.webservices.response.ResponseStatus;
 
 /**
  * 
@@ -61,7 +61,7 @@ public class GraphWebServiceImpl implements GraphWebService {
 			} else if (CATEGORY_EXPENSE_TOTAL.equals(type)) {
 				return ResponseGenerator.getSuccessResponse(getCategoryWiseTotalExpense(username, year, month), Operation.SELECT);
 			} else {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Requested graph type is Wrong");
+				return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Requested graph type is Wrong");
 			}
 		} catch (Exception e) {
 			throw new ExpenseTrackerException(e);

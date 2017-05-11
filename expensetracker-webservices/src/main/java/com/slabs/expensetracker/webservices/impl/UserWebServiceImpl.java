@@ -5,6 +5,7 @@ import java.util.List;
 import javax.xml.ws.WebServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,15 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.slabs.expensetracker.common.database.entity.UserInfo;
 import com.slabs.expensetracker.common.database.entity.UserSettings;
-import com.slabs.expensetracker.common.webservice.response.Operation;
-import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.AdminService;
 import com.slabs.expensetracker.common.services.EmailService;
 import com.slabs.expensetracker.common.services.UserService;
+import com.slabs.expensetracker.common.webservice.response.Operation;
+import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.webservices.UserWebService;
 import com.slabs.expensetracker.webservices.response.ResponseGenerator;
-import com.slabs.expensetracker.webservices.response.ResponseStatus;
 
 /**
  * {@link UserWebServiceImpl} - Web Service for retrieving/updating User
@@ -101,7 +101,7 @@ public class UserWebServiceImpl implements UserWebService {
 			List<UserInfo> list = service.selectUser(record.getUsername(), Boolean.FALSE, Boolean.TRUE);
 			UserInfo user = list.get(0);
 			if (!user.getPassword().equals(record.getPassword())) {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Password is wrong");
+				return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Password is wrong");
 			}
 			return ResponseGenerator.getSuccessResponse(service.updateUser(record), Operation.UPDATE);
 		} catch (Exception e) {

@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
@@ -36,10 +38,10 @@ public class ResponseGenerator {
 	 * 
 	 * 
 	 */
-	public static Response getExceptionResponse(ResponseStatus status, Throwable cause) {
+	public static Response getExceptionResponse(HttpStatus status, Throwable cause) {
 		Response response = new Response();
-		response.setStatusCode(status.getStatusCode());
-		response.setStatus(status.getMessage());
+		response.setStatusCode(status.value());
+		response.setStatus(status.getReasonPhrase());
 		response.setSuccess(Boolean.FALSE);
 		response.setMessage(cause.getMessage());
 		return response;
@@ -53,10 +55,10 @@ public class ResponseGenerator {
 	 *            - Message to be added to the response.
 	 * @return {@link Response}
 	 */
-	public static Response getExceptionResponse(ResponseStatus status, String message) {
+	public static Response getExceptionResponse(HttpStatus status, String message) {
 		Response response = new Response();
-		response.setStatusCode(status.getStatusCode());
-		response.setStatus(status.getMessage());
+		response.setStatusCode(status.value());
+		response.setStatus(status.getReasonPhrase());
 		response.setSuccess(Boolean.FALSE);
 		response.setMessage(message);
 		return response;
@@ -64,8 +66,8 @@ public class ResponseGenerator {
 
 	private static Response getSuccessResponse() {
 		Response response = new Response();
-		response.setStatusCode(ResponseStatus.OK.getStatusCode());
-		response.setStatus(ResponseStatus.OK.getMessage());
+		response.setStatusCode(HttpStatus.OK.value());
+		response.setStatus(HttpStatus.OK.getReasonPhrase());
 		response.setSuccess(Boolean.TRUE);
 		return response;
 	}

@@ -9,30 +9,30 @@ import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.database.entity.Message;
 import com.slabs.expensetracker.common.database.entity.UserInfo;
-import com.slabs.expensetracker.common.webservice.response.Operation;
-import com.slabs.expensetracker.common.webservice.response.Response;
-import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.AdminService;
 import com.slabs.expensetracker.common.services.ApplicationService;
 import com.slabs.expensetracker.common.services.EmailService;
 import com.slabs.expensetracker.common.services.MessageService;
 import com.slabs.expensetracker.common.services.UserService;
+import com.slabs.expensetracker.common.webservice.response.Operation;
+import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.webservices.ApplicationWebService;
 import com.slabs.expensetracker.util.Base64Encoder;
 import com.slabs.expensetracker.util.JSONUtil;
 import com.slabs.expensetracker.webservices.core.MessageConstants;
 import com.slabs.expensetracker.webservices.core.WebConstants;
 import com.slabs.expensetracker.webservices.response.ResponseGenerator;
-import com.slabs.expensetracker.webservices.response.ResponseStatus;
 
 /**
  * {@link ApplicationWebServiceImpl} - Webservice to retrieve application data.
@@ -129,7 +129,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 			if ("items".equals(type)) {
 				return ResponseGenerator.getSuccessResponse(service.getExpenseNames(), Operation.SELECT);
 			}
-			return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Invalid dictionary type");
+			return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Invalid dictionary type");
 		} catch (Exception e) {
 			throw new ExpenseTrackerException(e);
 		}
@@ -151,21 +151,21 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 						session.setMaxInactiveInterval(600);
 						return ResponseGenerator.getSuccessResponse(info, MessageConstants.LOGIN_SUCCESS);
 					} else if (info.getIsLocked().equals(Constants.Y)) {
-						return ResponseGenerator.getExceptionResponse(ResponseStatus.FORBIDDEN, MessageConstants.ACCOUNT_LOCKED);
+						return ResponseGenerator.getExceptionResponse(HttpStatus.FORBIDDEN, MessageConstants.ACCOUNT_LOCKED);
 					} else if (info.getIsVerified().equals(Constants.N)) {
-						return ResponseGenerator.getExceptionResponse(ResponseStatus.FORBIDDEN, MessageConstants.ACCOUNT_NOT_VERIFIED);
+						return ResponseGenerator.getExceptionResponse(HttpStatus.FORBIDDEN, MessageConstants.ACCOUNT_NOT_VERIFIED);
 					}
 				} else {
-					return ResponseGenerator.getExceptionResponse(ResponseStatus.UNAUTHORIZED, MessageConstants.CHECK_PWD);
+					return ResponseGenerator.getExceptionResponse(HttpStatus.UNAUTHORIZED, MessageConstants.CHECK_PWD);
 				}
 
 			} else {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.UNAUTHORIZED, MessageConstants.CHECK_USRNME_PWD);
+				return ResponseGenerator.getExceptionResponse(HttpStatus.UNAUTHORIZED, MessageConstants.CHECK_USRNME_PWD);
 			}
 		} catch (Exception e) {
 			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
-		return ResponseGenerator.getExceptionResponse(ResponseStatus.SERVICE_UNAVAILABLE, MessageConstants.SERVICE_UNAVAILABLE);
+		return ResponseGenerator.getExceptionResponse(HttpStatus.SERVICE_UNAVAILABLE, MessageConstants.SERVICE_UNAVAILABLE);
 	}
 
 	@RequestMapping(value = "application/logout", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" })
@@ -192,7 +192,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 				}
 				return ResponseGenerator.getSuccessResponse(user, MessageConstants.SESSION_ACTIVE);
 			} else {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.LOGIN_TIMEOUT, MessageConstants.INVALID_SESSION);
+				return ResponseGenerator.getExceptionResponse(HttpStatus.UNAUTHORIZED, MessageConstants.INVALID_SESSION);
 			}
 		} catch (Exception e) {
 			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
@@ -229,7 +229,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 				emailService.sendActivationEmail(user);
 				return ResponseGenerator.getSuccessResponse(MessageConstants.USER_REGISTERED);
 			} else {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.SERVICE_UNAVAILABLE, MessageConstants.USER_NOT_REGISTERED);
+				return ResponseGenerator.getExceptionResponse(HttpStatus.SERVICE_UNAVAILABLE, MessageConstants.USER_NOT_REGISTERED);
 			}
 
 		} catch (Exception e) {
@@ -255,17 +255,16 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 							messageService.sendWelcomeMessage(user);
 							return ResponseGenerator.getSuccessResponse(MessageConstants.ACTIVATION_SUCCESSFUL);
 						} else {
-							return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.ACTIVATION_FAILED);
+							return ResponseGenerator.getExceptionResponse(HttpStatus.OK, MessageConstants.ACTIVATION_FAILED);
 						}
 					} else {
-						return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED,
-								MessageConstants.ACTIVATION_FAILED_INVALID_KEY);
+						return ResponseGenerator.getExceptionResponse(HttpStatus.OK, MessageConstants.ACTIVATION_FAILED_INVALID_KEY);
 					}
 				} else {
-					return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_ACTIVATED_ALREADY);
+					return ResponseGenerator.getExceptionResponse(HttpStatus.OK, MessageConstants.USER_ACTIVATED_ALREADY);
 				}
 			} else {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_NOT_FOUND);
+				return ResponseGenerator.getExceptionResponse(HttpStatus.OK, MessageConstants.USER_NOT_FOUND);
 			}
 
 		} catch (Exception e) {
@@ -287,10 +286,10 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 					emailService.sendActivationEmail(user);
 					return ResponseGenerator.getSuccessResponse(MessageConstants.ACTIVATION_MAILED);
 				} else {
-					return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_ACTIVATED_ALREADY);
+					return ResponseGenerator.getExceptionResponse(HttpStatus.OK, MessageConstants.USER_ACTIVATED_ALREADY);
 				}
 			} else {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.ACTIVATION_FAILED, MessageConstants.USER_NOT_FOUND);
+				return ResponseGenerator.getExceptionResponse(HttpStatus.OK, MessageConstants.USER_NOT_FOUND);
 			}
 
 		} catch (Exception e) {

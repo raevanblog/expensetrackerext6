@@ -5,6 +5,7 @@ import java.util.List;
 import javax.xml.ws.WebServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slabs.expensetracker.common.database.entity.Expense;
 import com.slabs.expensetracker.common.database.entity.ExpenseCategory;
 import com.slabs.expensetracker.common.database.entity.Units;
-import com.slabs.expensetracker.common.webservice.response.Operation;
-import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.ExpenseCategoryService;
 import com.slabs.expensetracker.common.services.ExpenseService;
+import com.slabs.expensetracker.common.webservice.response.Operation;
+import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.webservices.ExpenseWebService;
 import com.slabs.expensetracker.webservices.response.ResponseGenerator;
-import com.slabs.expensetracker.webservices.response.ResponseStatus;
 
 /**
  * {@link ExpenseWebServiceImpl} - Web Service for retrieving/updating Expense
@@ -213,7 +213,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 			@RequestParam(name = "fetchTopExpense", required = false) boolean fetchTopExpense) throws ExpenseTrackerException {
 		try {
 			if (username == null) {
-				return ResponseGenerator.getExceptionResponse(ResponseStatus.BAD_REQUEST, "Parameter {username} is required");
+				return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Parameter {username} is required");
 			}
 			return ResponseGenerator.getSuccessResponse(service.selectExpense(username, year, month, fetchTopExpense), Operation.SELECT);
 		} catch (Exception e) {
