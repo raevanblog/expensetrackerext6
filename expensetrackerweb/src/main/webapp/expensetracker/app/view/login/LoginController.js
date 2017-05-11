@@ -46,7 +46,8 @@ Ext.define('expensetracker.view.login.LoginController', {
 				},
 				failure : function(form, action) {
 					view.setLoading(false);
-					me.updateErrorLbl(action.result.message);
+					var response = Ext.decode(action.response.responseText);
+					me.updateErrorLbl(response.message);
 				}
 			})
 		}
