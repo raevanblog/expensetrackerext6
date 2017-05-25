@@ -15,8 +15,8 @@ Ext.define('expensetracker.view.login.Login', {
 	},
 	items : [ {
 		xtype : 'toolbar',
-		border : 1,
-		height : 64,
+		border : 5,
+		height : expensetracker.util.Constants.getToolbarHeight(),
 		cls : 'maintoolbar shadow',
 		region : 'north',
 		overflowHandler : 'menu',
@@ -24,10 +24,17 @@ Ext.define('expensetracker.view.login.Login', {
 			xtype : 'component',
 			html : '<div class="main-logo"><img src="resources/images/logo.png">Expense Tracker</div>',
 			cls : 'logo-component',
-			width : 250
+			width : expensetracker.util.Constants.getNavBarExpandedWidth()
 		}, '->', {
 			xtype : 'button',
-			text : 'Register',
+			text : 'Sign In',
+			ui : 'toolbar',
+			handler : 'onOpenSignIn',
+			tooltip : 'Register',
+			iconCls : 'x-fa fa-user-plus'
+		}, {
+			xtype : 'button',
+			text : 'Sign Up',
 			ui : 'toolbar',
 			handler : 'onOpenRegistration',
 			tooltip : 'Register',
@@ -60,11 +67,9 @@ Ext.define('expensetracker.view.login.Login', {
 		},
 		items : [ {
 			xtype : 'logincontainer',
-			cls : 'container-background',
 			reference : 'logincontainer'
 		}, {
 			xtype : 'registercontainer',
-			cls : 'container-background',
 			reference : 'registercontainer'
 		} ]
 	} ]

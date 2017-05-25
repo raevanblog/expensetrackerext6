@@ -90,6 +90,10 @@
     @include box-shadow(0 1px 2px 0 rgba(0,0,0,0.2));
 }
 
+.shadow-medium {
+	@include box-shadow(0 1px 15px 0 rgba(0,0,0,0.5));
+}
+
 @include extjs-button-small-ui(
     $ui: 'soft-blue',
     $background-color: $color-soft-blue,
@@ -136,8 +140,6 @@
     $border-color:darken($color-soft-green, 5%)
 );
 
-
-
 @include extjs-button-small-ui(
     $ui: 'soft-red',
     $background-color: $color-soft-red,
@@ -167,18 +169,19 @@
     $border-color:darken($color-soft-purple, 5%)
 );
 
-
 @include extjs-button-small-ui(
     $ui: 'gray',
     $background-color: $color-gray,
     $border-color:darken($color-gray, 5%)
 );
+
 @include extjs-button-large-ui(
     $ui: 'gray',
     $line-height: 34px,
     $background-color: $color-gray,
     $border-color:darken($color-gray, 5%)
 );
+
 @include extjs-button-toolbar-small-ui(
     $ui: 'gray',
     $background-color: $color-gray,
@@ -190,12 +193,12 @@
     $background-color: $color-green,
     $border-color:darken($color-green, 5%)
 );
+
 @include extjs-button-toolbar-small-ui(
     $ui: 'green',
     $background-color: $color-green,
     $border-color:darken($color-green, 5%)
 );
-
 
 @include extjs-button-small-ui(
     $ui: 'blue',

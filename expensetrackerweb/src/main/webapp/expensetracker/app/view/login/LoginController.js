@@ -75,13 +75,15 @@ Ext.define('expensetracker.view.login.LoginController', {
 		var me = this;
 		var card = me.lookup('formcard');
 		card.getLayout().setActiveItem(1);
-	},
-	onCloseRegister : function(closeRegBtn) {
+	},	
+	onOpenSignIn : function(signInBtn) {
 		var me = this;
 		var card = me.lookup('formcard');
-		var registerform = me.lookup('registerform');
-		registerform.reset();
-		card.getLayout().setActiveItem(0);
+		var activeItem = card.getLayout().getActiveItem().xtype;
+		if('registercontainer' === activeItem) {			
+			me.lookup('registerform').reset();		
+			card.getLayout().setActiveItem(0);	
+		}
 	},
 	onActivateUser : function(actUserBtn) {
 		var me = this;

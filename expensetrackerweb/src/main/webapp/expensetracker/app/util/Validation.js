@@ -7,7 +7,7 @@ Ext.define('expensetracker.util.Validation', {
 		return true;
 	},
 	userNameReg : /^[a-zA-Z0-9]+$/,
-	usernameText : 'Username should not contain special characters',
+	usernameText : '<ul class="' + Ext.baseCSSPrefix + 'list-plain"><li>Username should not contain special characters</li></ul>',
 
 	password : function(value) {
 		if(value) {
@@ -16,7 +16,7 @@ Ext.define('expensetracker.util.Validation', {
 		return true;
 	},
 	passwordReg : /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/,
-	passwordText : 'Password should be atleast 8 characters<br>Password should contain one uppercase alphabet<br>Password should contain one lowercase alphabet<br>Password should contain one special character',
+	passwordText : '<ul class="' + Ext.baseCSSPrefix + 'list-plain"><li>Password should be atleast 8 characters</li><li>Password should contain one uppercase alphabet</li><li>Password should contain one lowercase alphabet</li><li>Password should contain one special character</li></ul>',
 	
 	match : function(value, field) {
 		if(value) {

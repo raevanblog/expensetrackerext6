@@ -14,9 +14,9 @@ Ext.define('expensetracker.component.ErrorState', {
 		me.callParent([ config ]);
 	},
 	tipTpl: [
-		'<ul class="' + Ext.baseCSSPrefix + 'list-plain">',
+		'<ul>',
 			'<tpl for=".">',
-				'<li><span class="field-name">{name}</span>: ',
+				'<li>',
 					'<span class="error">{error}</span>',
 				'</li>',
 			'</tpl>',

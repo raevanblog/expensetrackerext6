@@ -10,6 +10,8 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 	},
 	items : [ {
 		xtype : 'form',
+		cls : 'shadow-medium',
+		border : 1,
 		reference : 'registerform',
 		listeners : {
 			validitychange : 'updateErrorState',
@@ -26,7 +28,7 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 		},
 		method : 'POST',
 		jsonSubmit : true,
-		padding : '30 0 0 0',
+		margin : '30 0 0 0',
 		url : expensetracker.util.Url.getCreateUser(),
 		bodyPadding : 10,
 		layout : {
@@ -200,13 +202,6 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 				flex : 1
 			} ]
 		}, {
-			xtype : 'errorstate',
-			height : 50,
-			margin : '0 0 0 5',
-			padding : '15 0 0 20',
-			anchor : 'left',
-			reference : 'errorInd'
-		}, {
 			xtype : 'button',
 			text : 'Register',
 			scale : 'large',
@@ -215,16 +210,14 @@ Ext.define('expensetracker.view.login.RegisterForm', {
 			iconCls : 'x-fa  fa-user-plus',
 			reference : 'registerBtn',
 			handler : 'onRegisterUser'
-		}, {
-			xtype : 'button',
-			scale : 'large',
-			ui : 'soft-red',
-			margin : '10 0 0 0',
-			text : 'Cancel',
-			iconCls : 'x-fa  fa-close',
-			reference : 'closeRegisterBtn',
-			handler : 'onCloseRegister'
+		}]
+	}, {
+			xtype : 'errorstate',
+			height : 50,
+			margin : '0 0 0 5',
+			padding : '15 0 0 20',
+			anchor : 'left',
+			reference : 'errorInd'
 		} ]
-	} ]
 
 });

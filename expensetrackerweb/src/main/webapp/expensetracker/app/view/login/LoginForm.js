@@ -5,9 +5,11 @@ Ext.define('expensetracker.view.login.LoginForm', {
 	layout : {
 		type : 'hbox',
 		pack : 'middle'
-	},
+	},	
 	items : [ {
 		xtype : 'form',
+		cls : 'shadow-medium',
+		border : 1,
 		platformConfig : {
 			desktop : {
 				width : 350
@@ -20,7 +22,7 @@ Ext.define('expensetracker.view.login.LoginForm', {
 		reference : 'loginform',
 		method : 'POST',
 		jsonSubmit : true,
-		padding : '100 0 0 0',
+		margin : '100 0 0 20',
 		url : expensetracker.util.Url.getLogin(),
 		bodyPadding : 10,
 		layout : {
