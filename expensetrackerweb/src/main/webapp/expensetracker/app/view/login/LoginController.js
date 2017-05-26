@@ -111,23 +111,23 @@ Ext.define('expensetracker.view.login.LoginController', {
 	onFocusOut : function(textfield, event) {
 		var me = this;
 		var registercontainer = me.lookup('registercontainer');
-		var username = textfield.getValue();
+		var value = textfield.getValue();
 		if (textfield.isValid()) {
 			if (textfield.isChanged) {
 				textfield.isChanged = false;
-				if (username) {
+				if (value) {
 					registercontainer.setLoading('Checking Availability...');
 					Ext.Ajax.request({
 						url : expensetracker.util.Url.getCheckAvailability(),
 						method : 'GET',
 						params : {
 							type : textfield.name,
-							value : username
+							value : value
 						},
 						success : function(response, opts) {
 							registercontainer.setLoading(false);
 							var response = Ext.decode(response.responseText);
-							var isAvailable = response.isAvailable;
+							var isAvailable = response.result.any[0];
 							textfield.isAvailable = isAvailable;
 							if (isAvailable) {
 								textfield.clearInvalid();

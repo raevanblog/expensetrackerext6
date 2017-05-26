@@ -43,8 +43,8 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 			callback : function(records, operation, success) {
 				if (!success) {
 					var response = Ext.JSON.decode(operation.getError().response.responseText)
-					expensetracker.util.Message.toast(response.status_Message);
-					if (401 === response.status_Code) {
+					expensetracker.util.Message.toast(response.message);
+					if (401 === response.statusCode) {
 						me.fireEvent('navigatelogin');
 						if (view !== null) {
 							view.close();
@@ -147,7 +147,7 @@ Ext.define('expensetracker.view.inventory.InventoryWindowController', {
 				for (var i = 0; i < operations.length; i++) {
 					var operation = operations[i];
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
-					if (401 === response.status_Code) {
+					if (401 === response.statusCode) {
 						isUnauthorizedAccess = true;
 						break;
 					}

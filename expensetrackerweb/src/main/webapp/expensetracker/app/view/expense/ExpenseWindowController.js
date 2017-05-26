@@ -86,8 +86,8 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 			callback : function(records, operation, success) {
 				if (!success) {
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
-					expensetracker.util.Message.toast(response.status_Message);
-					if (401 === response.status_Code) {
+					expensetracker.util.Message.toast(response.message);
+					if (401 === response.statusCode) {
 						me.fireEvent('navigatelogin');
 						if (view !== null) {
 							view.close();
@@ -270,7 +270,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				for (var i = 0; i < operations.length; i++) {
 					var operation = operations[i];
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
-					if (401 === response.status_Code) {
+					if (401 === response.statusCode) {
 						isUnauthorizedAccess = true;
 						break;
 					}
@@ -349,7 +349,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 				success : function(response, opts) {
 					view.setLoading(false);
 					var response = Ext.decode(response.responseText);
-					if (200 === response.status_Code) {
+					if (200 === response.statusCode) {
 						grid.getStore().reload();
 						expensetracker.util.Message.toast(record.get('itemName') + ' added to Inventory');
 					}

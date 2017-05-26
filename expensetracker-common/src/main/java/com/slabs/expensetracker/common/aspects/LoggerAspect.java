@@ -17,7 +17,13 @@ public class LoggerAspect {
 
 	@AfterThrowing(pointcut = "within(@org.springframework.web.bind.annotation.RestController *)", throwing = "exception")
 	public void logException(JoinPoint point, ExpenseTrackerException exception) throws Throwable {
-		L.error("Exception occurred while executing {}:{} :: {}", point.getSignature().getDeclaringTypeName(), point.getSignature().getName(),
-				exception.getMessage());
+		Throwable cause = exception.getCause();
+		if (cause == null) {
+			L.error("Exception occurred while executing {}:{} :: {}", point.getSignature().getDeclaringTypeName(),
+					point.getSignature().getName(), exception.getMessage());
+		} else {
+			L.error("Exception occurred while executing {}:{} :: {}", point.getSignature().getDeclaringTypeName(),
+					point.getSignature().getName(), cause.getMessage());
+		}
 	}
 }
