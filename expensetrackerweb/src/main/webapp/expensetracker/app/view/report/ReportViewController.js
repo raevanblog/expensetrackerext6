@@ -15,7 +15,7 @@ Ext.define('expensetracker.view.report.ReportViewController', {
 		if (selectedYear.getValue() === currentYear && selectedMonth > currentMonth) {
 			Ext.Msg.show({
 				title : 'Expense Tracker',
-				message : 'Report cannot be generated for thee future',
+				message : 'Report cannot be generated for the future date',
 				buttons : Ext.Msg.OK,
 				icon : Ext.Msg.INFO
 			});
