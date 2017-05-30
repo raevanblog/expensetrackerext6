@@ -72,16 +72,16 @@ Ext.define('expensetracker.util.Session', {
 			url : expensetracker.util.Url.getSession(),
 			success : function(response, opts) {
 				var response = Ext.decode(response.responseText);
-				if (response.success) {
-					me.setUser(response.user);
+				if (200 === response.statusCode) {
+					me.setUser(response.result.any[0]);
 					controller.fireEvent('updateprofile');
 					controller.fireEvent('updatesummary');
 				} else {
-					Ext.widget('login');
+					controller.fireEvent('navigatelogin');
 				}
 			},
 			failure : function(response, opts) {
-				Ext.widget('app-main');
+				controller.fireEvent('navigatelogin');
 			}
 		});
 	},

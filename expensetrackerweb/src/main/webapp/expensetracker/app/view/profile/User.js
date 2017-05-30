@@ -54,6 +54,7 @@ Ext.define('expensetracker.view.profile.User', {
 		},
 		items : [ {
 			xtype : 'form',
+			cls : 'shadow-medium',
 			jsonSubmit : true,
 			url : expensetracker.util.Url.getUserService(),
 			bodyPadding : 10,

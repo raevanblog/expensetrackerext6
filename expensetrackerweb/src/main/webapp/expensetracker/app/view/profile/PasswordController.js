@@ -24,16 +24,16 @@ Ext.define('expensetracker.view.profile.PasswordController', {
 				failure : function(form, action) {
 					view.setLoading(false);
 					var resObj = Ext.decode(action.response.responseText);
-					if (401 === resObj.status_Code) {
+					if (401 === resObj.statusCode) {
 						me.fireEvent('navigatelogin');
 						if (view !== null) {
 							view.close();
 						}
-						expensetracker.util.Message.toast(resObj.status_Message);
-					} else if (400 === resObj.status_Code) {						
+						expensetracker.util.Message.toast(resObj.message);
+					} else if (400 === resObj.statusCode) {						
 						me.updateErrorLbl(resObj.exception);
 					} else {
-						expensetracker.util.Message.toast('* ' + resObj.status_Message);
+						expensetracker.util.Message.toast('* ' + resObj.message);
 					}
 				}
 			});

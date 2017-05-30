@@ -51,7 +51,7 @@ Ext.define('expensetracker.view.message.MessageController', {
 				failure : function(response, opts) {
 					view.setLoading(false);
 					var response = Ext.decode(response.responseText);
-					if (401 === response.status_Code) {
+					if (401 === response.statusCode) {
 						me.fireEvent('navigatelogin');						
 					}else{
 						expensetracker.util.Message.toast('* Server Error');
@@ -103,8 +103,8 @@ Ext.define('expensetracker.view.message.MessageController', {
 				inbox.setLoading(false);
 				if (!success) {
 					var response = Ext.JSON.decode(operation.getError().response.responseText);
-					expensetracker.util.Message.toast(response.status_Message);
-					if (401 === response.status_Code) {
+					expensetracker.util.Message.toast(response.message);
+					if (401 === response.statusCode) {
 						me.fireEvent('navigatelogin');
 						if (view != null) {
 							view.close();

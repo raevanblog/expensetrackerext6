@@ -36,7 +36,7 @@ Ext.define('expensetracker.view.main.SettingsController', {
 				success : function(response, opts) {
 					view.setLoading(false);
 					var resp = Ext.decode(response.responseText);
-					if(200 === resp.status_Code) {
+					if(200 === resp.statusCode) {
 						expensetracker.util.Session.reload(me);						
 						if(expensetracker.util.Session.isFirstLogin()) {						
 							view.close();
