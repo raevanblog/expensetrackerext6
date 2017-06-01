@@ -23,15 +23,13 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 									
 		me.renderThumbnails();
 		me.updateDashBoardSummary();
-	},
-	onChangeExpenseMonth : function(combobox, newValue, oldValue) {		
-		expensetracker.util.Session.setExpenseMonth(newValue);
-	},
-	onChangeExpenseYear : function(combobox, newValue, oldValue) {
-		expensetracker.util.Session.setExpenseYear(newValue);
-	},
+	},	
 	onLoadExpenseData : function() {
-		var me = this;		
+		var me = this;
+		var expenseyear = me.lookup('expenseyear');
+		var expensemonth = me.lookup('expensemonth');
+		expensetracker.util.Session.setExpenseMonth(expensemonth.getValue());
+		expensetracker.util.Session.setExpenseYear(expenseyear.getValue());
 		me.updateDashBoard();
 	},
 	onOpenExpenseSheet : function(thumbnailcont, record, item, index, e) {

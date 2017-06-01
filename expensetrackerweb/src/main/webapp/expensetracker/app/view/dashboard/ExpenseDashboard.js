@@ -28,10 +28,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			allowBlank : false,
 			store: 'Month',
 			margin : '5 5 5 5',
-			value : expensetracker.util.Session.getExpenseMonth(),
-			listeners : {
-				change : 'onChangeExpenseMonth'
-			}
+			reference : 'expensemonth',
+			value : expensetracker.util.Session.getExpenseMonth()			
 		}, {
 			xtype : 'combobox',
 			forceSelection : true,
@@ -42,10 +40,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			editable : false,
 			store : 'Year',
 			margin : '5 5 5 5',
-			value : expensetracker.util.Session.getExpenseYear(),
-			listeners : {
-				change : 'onChangeExpenseYear'
-			}
+			reference : 'expenseyear',
+			value : expensetracker.util.Session.getExpenseYear()
 		}, {
 			xtype : 'button',
 			text : 'Load',

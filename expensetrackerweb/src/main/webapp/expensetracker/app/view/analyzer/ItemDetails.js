@@ -1,8 +1,7 @@
 Ext.define('expensetracker.view.analyzer.ItemDetails', {
 	extend : 'Ext.grid.Panel',
 	alias : 'view.itemdetails',
-	xtype : 'itemdetails',
-	requires : ['expensetracker.view.analyzer.PriceGraph'],
+	xtype : 'itemdetails',	
 	scrollable : true,
 	layout : 'fit',
 	title : 'Item Detail',
