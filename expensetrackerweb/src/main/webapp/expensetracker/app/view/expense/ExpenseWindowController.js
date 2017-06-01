@@ -9,10 +9,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 	onRender : function(expenseWindow) {
 		var me = this;
 		var view = me.getView();
-		var model = view.getViewModel();
-		if (expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
-			model.set('isLatestExpense', true);
-		}
+		var model = view.getViewModel();		
 	},
 	groupExpense : function(checkbox, isChecked) {
 		var me = this;
@@ -246,7 +243,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindowController', {
 		grid.getStore().sync({
 			success : function(batch) {
 				grid.setLoading(false);
-				if (model.get('isLatestExpense')) {
+				if (model.get('origin') === 'dashboard') {
 					me.fireEvent('updatedashboard');
 				}
 				if (closeWindow) {

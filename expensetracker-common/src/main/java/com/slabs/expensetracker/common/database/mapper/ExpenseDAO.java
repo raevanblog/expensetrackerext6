@@ -1,6 +1,7 @@
 package com.slabs.expensetracker.common.database.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -57,5 +58,7 @@ public interface ExpenseDAO {
 	public Integer updateExpenseUnits(Units record);
 
 	public Integer deleteExpenseUnits(Units record);
+	
+	public Map<String, Integer> getExpenseRange(String username);
 
 }

@@ -18,6 +18,7 @@ Ext.define('expensetracker.util.Url', {
 		categoryService : '/expensetrackerweb/web/api/expensecategory',
 		unitService : '/expensetrackerweb/web/api/expenseunits',
 		expenseService : '/expensetrackerweb/web/api/expense',
+		expenseRange : '/expensetrackerweb/web/api/expenserange',
 		incomeService : '/expensetrackerweb/web/api/income',
 		incomeTypeService : '/expensetrackerweb/web/api/application/incometype',
 		expenseTypeService : '/expensetrackerweb/web/api/application/expensetype',

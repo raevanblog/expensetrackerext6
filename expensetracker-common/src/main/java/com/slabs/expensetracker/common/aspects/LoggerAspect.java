@@ -19,11 +19,9 @@ public class LoggerAspect {
 	public void logException(JoinPoint point, ExpenseTrackerException exception) throws Throwable {
 		Throwable cause = exception.getCause();
 		if (cause == null) {
-			L.error("Exception occurred while executing {}:{} :: {}", point.getSignature().getDeclaringTypeName(),
-					point.getSignature().getName(), exception.getMessage());
+			L.error("Exception occurred while executing {}:{} :: {}", point.getSignature().getDeclaringTypeName(), point.getSignature().getName(), exception.getMessage());
 		} else {
-			L.error("Exception occurred while executing {}:{} :: {}", point.getSignature().getDeclaringTypeName(),
-					point.getSignature().getName(), cause.getMessage());
+			L.error("Exception occurred while executing {}:{} :: {} :: Cause, {}", point.getSignature().getDeclaringTypeName(), point.getSignature().getName(), exception, cause.getMessage());
 		}
 	}
 }

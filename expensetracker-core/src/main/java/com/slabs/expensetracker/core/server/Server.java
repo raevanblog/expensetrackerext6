@@ -48,18 +48,11 @@ public class Server {
 			Properties properties = PropertiesUtil.getFromClassPath(Constants.EXPENSETRACKER_PROPERTIES);
 
 			if (Boolean.valueOf(properties.getProperty("expensetracker.enable.report.dispatcher"))) {
-				L.info("Initializing Reporting Scheduler...");
-				ReportingScheduler.getInstance().initialize();
-				ReportingScheduler.getInstance().startScheduler();
-				ReportingScheduler.getInstance().scheduleMonthlyReportDispatcher();
+				ReportingScheduler.getInstance().initialize().startScheduler().scheduleMonthlyReportDispatcher();
 			}
 
-			L.info("Initializing Marker Engine...");
 			MarkerEngine.initialize();
-
-			L.info("Initializing Url Utility...");
 			URLUtil.initialize(ip, port, appName, isSecured);
-
 			Mailer.initialize(PropertiesUtil.getFromClassPath(Constants.MAIL_PROPERTIES), Constants.APP_NAME);
 
 		} catch (UtilityException e) {

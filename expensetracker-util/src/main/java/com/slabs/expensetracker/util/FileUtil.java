@@ -36,8 +36,7 @@ public class FileUtil {
 	 * @throws FileNotFoundException
 	 *             - throws {@link FileNotFoundException}
 	 */
-	public static synchronized boolean isDirectoryAvailable(String directoryPath, boolean... create)
-			throws FileNotFoundException {
+	public static synchronized boolean isDirectoryAvailable(String directoryPath, boolean... create) throws FileNotFoundException {
 
 		File f = new File(directoryPath);
 		if (f.exists() && !f.isDirectory()) {
@@ -88,8 +87,7 @@ public class FileUtil {
 	 * @throws FileNotFoundException
 	 *             - throws {@link FileNotFoundException}
 	 */
-	public static synchronized File[] loadFiles(File directory, boolean includeDirectory)
-			throws FileNotFoundException {
+	public static synchronized File[] loadFiles(File directory, boolean includeDirectory) throws FileNotFoundException {
 
 		if (directory.exists() && directory.isDirectory()) {
 			return directory.listFiles(new DirectoryIncludeFilter(includeDirectory));
@@ -112,13 +110,11 @@ public class FileUtil {
 	 *             - throws {@link FileNotFoundException}
 	 * 
 	 */
-	public static synchronized File[] loadFilesWithExtension(File directory,
-			boolean includeExtension, String... extension) throws FileNotFoundException {
+	public static synchronized File[] loadFilesWithExtension(File directory, boolean includeExtension, String... extension) throws FileNotFoundException {
 
 		if (directory.exists() && directory.isDirectory()) {
 			if (extension != null && extension.length > 0) {
-				return directory
-						.listFiles(new FileExtensionIncludeFilter(includeExtension, extension));
+				return directory.listFiles(new FileExtensionIncludeFilter(includeExtension, extension));
 			} else {
 				return directory.listFiles();
 			}
@@ -137,8 +133,7 @@ public class FileUtil {
 	 * @throws FileNotFoundException
 	 *             - throws {@link FileNotFoundException}
 	 */
-	public static synchronized File loadFile(File directory, String fileName)
-			throws FileNotFoundException {
+	public static synchronized File loadFile(File directory, String fileName) throws FileNotFoundException {
 
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = loadFilesWithExtension(directory, true);
@@ -187,8 +182,7 @@ public class FileUtil {
 	 * @throws IOException
 	 *             - throws {@link IOException}
 	 */
-	public static synchronized boolean createDirectory(File directory, String directoryName)
-			throws IOException {
+	public static synchronized boolean createDirectory(File directory, String directoryName) throws IOException {
 
 		File f = new File(directory, directoryName);
 		if (!f.exists()) {
@@ -267,8 +261,7 @@ public class FileUtil {
 	 * @throws IOException
 	 *             - throws {@link IOException}
 	 */
-	public static synchronized File createFile(String directoryPath, String fileName)
-			throws IOException {
+	public static synchronized File createFile(String directoryPath, String fileName) throws IOException {
 
 		File dir = new File(directoryPath);
 		if (!dir.exists()) {

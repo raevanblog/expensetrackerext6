@@ -12,6 +12,48 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		afterrender : 'onRender'
 	},
 	items : [ {
+		xtype : 'container',
+		cls : 'big-100 small-100',
+		layout : {
+			type : 'hbox',
+			pack : 'end'		
+		},
+		items : [{
+			xtype : 'combobox',
+			forceSelection : true,
+			queryMode : 'local',
+			displayField : 'month',
+			valueField : 'monthNo',
+			editable : false,
+			allowBlank : false,
+			store: 'Month',
+			margin : '5 5 5 5',
+			value : expensetracker.util.Session.getExpenseMonth(),
+			listeners : {
+				change : 'onChangeExpenseMonth'
+			}
+		}, {
+			xtype : 'combobox',
+			forceSelection : true,
+			displayField : 'year',			
+			valueField : 'year',
+			queryMode : 'local',
+			allowBlank : false,
+			editable : false,
+			store : 'Year',
+			margin : '5 5 5 5',
+			value : expensetracker.util.Session.getExpenseYear(),
+			listeners : {
+				change : 'onChangeExpenseYear'
+			}
+		}, {
+			xtype : 'button',
+			text : 'Load',
+			margin : '5 5 5 5',
+			ui : 'soft-green',
+			handler : 'onLoadExpenseData'
+		}]
+	},{
 		xtype : 'summary',
 		reference : 'summary',
 		height : 100,

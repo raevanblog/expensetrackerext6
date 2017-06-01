@@ -1,7 +1,7 @@
 Ext.define('expensetracker.util.Store', {
 	singleton : true,
 	loadStaticStore : function() {
-		Ext.getStore('Thumbnail').load();
+		Ext.getStore('Month').load();
 		Ext.getStore('ExpenseType').load();
 		Ext.getStore('Dictionary').load();
 		Ext.getStore('IncomeType').load();

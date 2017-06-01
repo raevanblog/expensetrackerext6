@@ -5,7 +5,7 @@ Ext.define('expensetracker.view.income.IncomeWindowModel', {
 		month : '',
 		year : '',
 		title : '',
-		isLatestIncome : false,
+		origin : '',
 		source : null
 	} ]
 })

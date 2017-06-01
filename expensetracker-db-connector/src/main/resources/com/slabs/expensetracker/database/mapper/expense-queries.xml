@@ -196,5 +196,9 @@
 			where id=#{id}
 		</if>
 	</delete>
+	
+	<select id="getExpenseRange" resultType="map">
+		select MIN(YEAR(EXPDATE)), MAX(YEAR(EXPDATE)) from EXPENSETRACKER.EXPENSE
+	</select>
 
 </mapper>

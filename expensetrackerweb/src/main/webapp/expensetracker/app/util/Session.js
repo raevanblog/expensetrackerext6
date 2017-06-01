@@ -97,5 +97,25 @@ Ext.define('expensetracker.util.Session', {
 	setCookie : function(object) {
 		var cookie = Ext.encode(object);
 		Ext.util.Cookies.set('expensetracker', cookie);
-	}
+	},
+	setExpenseYear : function(year) {
+		expensetracker.util.Storage.put('year', year);
+	},
+	getExpenseYear : function() {
+		var year = expensetracker.util.Storage.get('year');
+		if(year === undefined) {
+			return expensetracker.util.Calendar.getCurrentYear();
+		}
+		return year;
+	},
+	setExpenseMonth : function(month) {
+		expensetracker.util.Storage.put('month', month);
+	},
+	getExpenseMonth : function() {
+		var month = expensetracker.util.Storage.get('month');
+		if(month === undefined) {
+			return expensetracker.util.Calendar.getCurrentMonthNo();
+		}
+		return month;
+	}	
 });

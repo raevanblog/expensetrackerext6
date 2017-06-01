@@ -44,8 +44,7 @@ public class IndexReport extends ExpenseTrackerReport {
 	}
 
 	@Override
-	public void addGridTitle() {
-		// TODO Auto-generated method stub
+	public void addGridTitle() {		
 
 	}
 

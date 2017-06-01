@@ -99,8 +99,7 @@ public class JAXBUtil {
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			m.marshal(o, w);
 			return w.toString();
-		} catch (JAXBException ex) {
-			// TODO Auto-generated catch block
+		} catch (JAXBException ex) {			
 			L.error("Error converting object to XML {}", ex);
 		}
 		return null;
@@ -232,8 +231,7 @@ public class JAXBUtil {
 			Marshaller m = jaxb.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			m.marshal(o, System.out);
-		} catch (JAXBException ex) {
-			// TODO Auto-generated catch block
+		} catch (JAXBException ex) {			
 			L.error("Error converting object to XML {}", ex);
 		}
 	}

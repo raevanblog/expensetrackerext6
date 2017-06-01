@@ -47,8 +47,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expenseunits", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expenseunits", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response createExpenseUnits(@RequestBody List<Units> records) throws ExpenseTrackerException {
 		try {
@@ -66,8 +65,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expenseunits", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expenseunits", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response updateExpenseUnits(@RequestBody List<Units> records) throws ExpenseTrackerException {
 		try {
@@ -103,8 +101,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expenseunits", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expenseunits", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response deleteExpenseUnits(@RequestBody List<Units> records) throws ExpenseTrackerException {
 		try {
@@ -123,8 +120,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expensecategory", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expensecategory", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response insertExpenseCategory(@RequestBody List<ExpenseCategory> records) throws ExpenseTrackerException {
 		try {
@@ -142,8 +138,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expensecategory", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expensecategory", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response updateExpenseCategory(@RequestBody List<ExpenseCategory> records) throws ExpenseTrackerException {
 		try {
@@ -179,8 +174,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expensecategory", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expensecategory", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response deleteExpenseCategory(@RequestBody List<ExpenseCategory> records) throws ExpenseTrackerException {
 		try {
@@ -208,8 +202,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 */
 	@RequestMapping(value = "expense", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getExpense(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year,
-			@RequestParam(name = "month", required = false) Integer month,
+	public Response getExpense(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year, @RequestParam(name = "month", required = false) Integer month,
 			@RequestParam(name = "fetchTopExpense", required = false) boolean fetchTopExpense) throws ExpenseTrackerException {
 		try {
 			if (username == null) {
@@ -229,8 +222,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expense", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expense", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response createExpense(@RequestBody List<Expense> records) throws ExpenseTrackerException {
 		try {
@@ -248,8 +240,7 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expense", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expense", method = { RequestMethod.PUT }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response updateExpense(@RequestBody List<Expense> records) throws ExpenseTrackerException {
 		try {
@@ -267,12 +258,21 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "expense", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "expense", method = { RequestMethod.DELETE }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	@Override
 	public Response deleteExpense(@RequestBody List<Expense> records) throws ExpenseTrackerException {
 		try {
 			return ResponseGenerator.getSuccessResponse(service.deleteExpense(records), Operation.DELETE);
+		} catch (Exception e) {
+			throw new ExpenseTrackerException(e);
+		}
+	}
+
+	@RequestMapping(value = "expenserange", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
+	@Override
+	public Response getExpenseRange(@RequestParam(name = "username") String username) throws ExpenseTrackerException {
+		try {
+			return ResponseGenerator.getSuccessResponse(service.getExpenseRange(username), Operation.SELECT);
 		} catch (Exception e) {
 			throw new ExpenseTrackerException(e);
 		}

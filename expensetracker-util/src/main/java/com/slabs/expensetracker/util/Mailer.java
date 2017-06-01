@@ -134,8 +134,7 @@ public class Mailer {
 		return createMultiPartEmail(content, subject, attachments, toEmails);
 	}
 
-	public static Email createMultiPartEmail(String content, String subject, List<MailAttachment> attachments, String... toEmails)
-			throws UtilityException {
+	public static Email createMultiPartEmail(String content, String subject, List<MailAttachment> attachments, String... toEmails) throws UtilityException {
 		Email email = null;
 		try {
 			email = configure(new MultiPartEmail());

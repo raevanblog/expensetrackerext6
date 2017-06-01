@@ -1,7 +1,9 @@
 package com.slabs.expensetracker.core.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -230,6 +232,36 @@ public class ExpenseServiceImpl implements ExpenseService {
 	@Override
 	public Integer createExpenseUnits(List<Units> records) throws Exception {
 		return mapper.createExpenseUnits(records);
+	}
+
+	@Override
+	public List<Integer> getExpenseRange(String username) throws Exception {
+		List<Integer> result = new ArrayList<Integer>();
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+		Map<String, Integer> expenseRange = mapper.getExpenseRange(username);
+
+		if (expenseRange != null && !expenseRange.isEmpty()) {
+			Integer minYear = expenseRange.get(String.valueOf(1));
+			Integer maxYear = expenseRange.get(String.valueOf(2));
+
+			if (minYear == maxYear) {
+				result.add(maxYear);
+			} else {
+
+				for (int i = minYear; i <= maxYear; i++) {
+					result.add(i);
+				}
+
+				if (!result.contains(currentYear)) {
+					result.add(currentYear);
+				}
+			}
+
+		} else {
+			result.add(currentYear);
+		}
+		return result;
 	}
 
 }

@@ -4,10 +4,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 	onRender : function(window) {
 		var me = this;
 		var view = me.getView();
-		var model = view.getViewModel();
-		if (expensetracker.util.Calendar.isCurrentMonth(model.get('month')) && expensetracker.util.Calendar.isCurrentYear(model.get('year'))) {
-			model.set('isLatestIncome', true);
-		}
+		var model = view.getViewModel();		
 	},
 	onCloseIncomeWindow : function(incomeWindow) {
 		var me = this;
@@ -104,7 +101,7 @@ Ext.define('expensetracker.view.income.IncomeWindowController', {
 		grid.getStore().sync({
 			success : function(batch) {
 				grid.setLoading(false);
-				if (model.get('isLatestIncome')) {
+				if (model.get('origin') === 'dashboard') {
 					me.fireEvent('updatedashboard');
 				}
 				if (closeWindow) {

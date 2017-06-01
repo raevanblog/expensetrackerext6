@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.slabs.expensetracker.util.exception.UtilityException;
 
 import freemarker.template.Configuration;
@@ -13,16 +16,17 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 public class MarkerEngine {
+	
+	private static final Logger L = LoggerFactory.getLogger(MarkerEngine.class);
 
 	private static Configuration configuration;
 
 	public static void initialize() {
-
+		L.info("Initializing Marker Engine...");
 		MarkerEngine.configuration = createDefaultConfig();
 	}
 
-	public static String process(String templateName, Map<String, ? extends Object> model)
-			throws UtilityException {
+	public static String process(String templateName, Map<String, ? extends Object> model) throws UtilityException {
 
 		StringWriter writer = null;
 		if (configuration == null) {
@@ -52,8 +56,7 @@ public class MarkerEngine {
 
 	}
 
-	public static void process(String templateName, Map<String, Object> model, File fileToWrite)
-			throws UtilityException {
+	public static void process(String templateName, Map<String, Object> model, File fileToWrite) throws UtilityException {
 
 		FileWriter writer = null;
 		if (configuration == null) {
@@ -84,8 +87,7 @@ public class MarkerEngine {
 	private static Configuration createDefaultConfig() {
 
 		Configuration configuration = new Configuration(Configuration.VERSION_2_3_25);
-		configuration.setClassLoaderForTemplateLoading(MarkerEngine.class.getClassLoader(),
-				"template");
+		configuration.setClassLoaderForTemplateLoading(MarkerEngine.class.getClassLoader(), "template");
 		return configuration;
 	}
 

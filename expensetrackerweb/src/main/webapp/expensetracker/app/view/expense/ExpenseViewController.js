@@ -34,6 +34,7 @@ Ext.define('expensetracker.view.expense.ExpenseViewController', {
 			model.set('expenseEndDate', Ext.Date.getLastDateOfMonth(date));
 			model.set('month', monthNo);
 			model.set('year', year);
+			model.origin('origin', 'expenseview');
 			model.set('title', month + ' - ' + year);
 
 			expenseWindow.show();

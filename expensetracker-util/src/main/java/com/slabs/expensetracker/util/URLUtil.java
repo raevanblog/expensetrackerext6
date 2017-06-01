@@ -1,6 +1,11 @@
 package com.slabs.expensetracker.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class URLUtil {
+	
+	private static final Logger L = LoggerFactory.getLogger(URLUtil.class);
 
 	private static String APP_NAME;
 
@@ -21,6 +26,7 @@ public class URLUtil {
 	private static String PROTOCOL = HTTP;
 
 	public static void initialize(String host, int port, String appName, boolean isSecured) {
+		L.info("Initializing URL Utility...");
 		HOST = host;
 		PORT = port;
 		APP_NAME = appName;

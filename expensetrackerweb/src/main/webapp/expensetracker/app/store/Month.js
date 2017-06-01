@@ -1,4 +1,4 @@
-Ext.define('expensetracker.store.Thumbnail', {
+Ext.define('expensetracker.store.Month', {
 	extend  : 'Ext.data.Store',	
 	fields : [ {
 		name : 'title',

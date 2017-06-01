@@ -40,6 +40,7 @@ public class ReportingScheduler {
 	public ReportingScheduler initialize() throws ExpenseTrackerException {
 
 		try {
+			L.info("Initializing Reporting Scheduler...");
 			quartzScheduler = StdSchedulerFactory.getDefaultScheduler();
 		} catch (SchedulerException e) {
 			throw new ExpenseTrackerException(e);

@@ -33,4 +33,6 @@ public interface ExpenseWebService {
 	public Response updateExpense(List<Expense> records) throws ExpenseTrackerException;
 
 	public Response deleteExpense(List<Expense> records) throws ExpenseTrackerException;
+
+	public Response getExpenseRange(String username) throws ExpenseTrackerException;
 }

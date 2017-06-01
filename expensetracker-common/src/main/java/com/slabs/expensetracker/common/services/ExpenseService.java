@@ -32,4 +32,6 @@ public interface ExpenseService {
 
 	public Integer createExpenseUnits(List<Units> records) throws Exception;
 
+	public List<Integer> getExpenseRange(String username) throws Exception;
+
 }
