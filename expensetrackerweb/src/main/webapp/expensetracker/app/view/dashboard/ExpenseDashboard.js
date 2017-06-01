@@ -14,10 +14,21 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	items : [ {
 		xtype : 'container',
 		cls : 'big-100 small-100',
-		layout : {
-			type : 'hbox',
-			pack : 'end'		
-		},
+		platformConfig : {
+			desktop : {
+				layout : {
+					type : 'hbox',
+					pack : 'end'		
+				}
+			},
+
+			'!desktop' : {
+				layout : {
+					type : 'vbox',
+					align : 'stretch'					
+				}
+			}
+		},		
 		items : [{
 			xtype : 'combobox',
 			forceSelection : true,
