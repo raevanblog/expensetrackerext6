@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://slabs.com/expensetracker/common/database/entity" xmlns:et="http://slabs.com/expensetracker/common/database/entity"
-	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" jaxb:extensionBindingPrefixes="annox" jaxb:version="2.1"
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://slabs.com/expensetracker/common/database/entity"
+	xmlns:et="http://slabs.com/expensetracker/common/database/entity"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net"
+	jaxb:extensionBindingPrefixes="annox" jaxb:version="2.1"
 	elementFormDefault="qualified">
 
 	<element name="ExpenseCategory" type="et:ExpenseCategory" />
@@ -56,7 +59,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: USERINFO
+				Table:
+				USERINFO
 				UserInfo will hold the data for table USERINFO
 			</documentation>
 			<appinfo>
@@ -89,7 +93,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: USER_SETTINGS
+				Table:
+				USER_SETTINGS
 				UserSettings will hold the data for table USER_SETTINGS
 			</documentation>
 			<appinfo>
@@ -109,7 +114,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: CURRENCY
+				Table:
+				CURRENCY
 				Currency will hold the data for table CURRENCY
 			</documentation>
 			<appinfo>
@@ -129,8 +135,10 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: EXPENSE_CATEGORY
-				Expense Category will hold the data for table EXPENSE_CATEGORY
+				Table:
+				EXPENSE_CATEGORY
+				Expense Category will hold the data for table
+				EXPENSE_CATEGORY
 			</documentation>
 			<appinfo>
 				<annox:annotate>
@@ -143,6 +151,7 @@
 			<element name="category" type="string" />
 			<element ref="et:username" />
 			<element name="description" type="string" />
+			<element name="isEditable" type="string" />
 		</sequence>
 	</complexType>
 
@@ -150,7 +159,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: EXPENSE
+				Table:
+				EXPENSE
 				Expense will hold the data for table EXPENSE
 			</documentation>
 			<appinfo>
@@ -198,7 +208,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: INVENTORY
+				Table:
+				INVENTORY
 				Inventory will hold the data for table INVENTORY
 			</documentation>
 			<appinfo>
@@ -220,7 +231,8 @@
 	<complexType name="Dictionary">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
-				Dictionary will hold dictionary data.
+				Dictionary will hold dictionary
+				data.
 			</documentation>
 			<appinfo>
 				<annox:annotate>
@@ -237,7 +249,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: EXPENSETYPE
+				Table:
+				EXPENSETYPE
 				ExpenseType will hold the data for table EXPENSETYPE
 			</documentation>
 			<appinfo>
@@ -257,7 +270,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: INCOME
+				Table:
+				INCOME
 				Income will hold the data for table INCOME
 			</documentation>
 			<appinfo>
@@ -280,7 +294,8 @@
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
 				Schema: EXPENSETRACKER
-				Table: INCOMETYPE
+				Table:
+				INCOMETYPE
 				IncomeType will hold the data for table INCOMETYPE
 			</documentation>
 			<appinfo>
@@ -299,7 +314,8 @@
 	<complexType name="Message">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
-				Message will hold data for MESSAGE table
+				Message will hold data for
+				MESSAGE table
 			</documentation>
 			<appinfo>
 				<annox:annotate>
@@ -325,7 +341,8 @@
 	<complexType name="Graph">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">
-				Graph will hold data for drawing charts
+				Graph will hold data for drawing
+				charts
 			</documentation>
 			<appinfo>
 				<annox:annotate>

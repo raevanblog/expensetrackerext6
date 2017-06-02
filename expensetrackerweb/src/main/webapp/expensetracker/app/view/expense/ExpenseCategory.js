@@ -7,14 +7,7 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 	store : 'ExpenseCategory',
 	listeners : {
 		render : 'onRenderCategoryGrid'
-	},
-	bbar : [ '->', {
-		xtype : 'button',
-		text : 'Save',
-		ui : 'soft-green',
-		iconCls : 'x-fa fa-save',
-		handler : 'onCategorySaveOrUpdate'
-	} ],
+	},	
 	plugins : {
 		ptype : 'cellediting',
 		clicksToEdit : 1
@@ -25,32 +18,13 @@ Ext.define('expensetracker.view.expense.ExpenseCategory', {
 		width : 75
 	}, {
 		text : 'Category',
-		align : 'center',
-		dataIndex : 'category',
-		editor : {
-			xtype : 'textfield',
-			selectOnFocus : true,
-			maxLength : 15,
-			allowBlank : false
-		},
-		width : 200
-	}, {
-		text : 'Description',
 		align : 'left',
-		dataIndex : 'description',
-		editor : {
-			xtype : 'textfield',
-			selectOnFocus : true,
-			allowBlank : true,
-			maxLength : 100
-		},
-		width : 200
+		dataIndex : 'category',		
+		width : 250
 	}, {
-		xtype : 'actioncolumn',
-		align : 'center',
-		tooltip : 'Delete',
-		handler : 'onDeleteCategory',
-		iconCls : 'x-fa fa-trash-o',
+		text : 'Example',
+		align : 'left',
+		dataIndex : 'description',		
 		flex : 1
-	} ]
+	}]
 });

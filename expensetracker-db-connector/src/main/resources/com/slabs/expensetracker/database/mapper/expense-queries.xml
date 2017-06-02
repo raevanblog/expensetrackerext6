@@ -129,11 +129,12 @@
 	</delete>
 
 	<insert id="insertExpenseCategory" parameterType="java.util.List">
-		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION,USERNAME) values
+		insert into EXPENSETRACKER.EXPENSE_CATEGORY(CATEGORY,DESCRIPTION,USERNAME, ISEDITABLE) values
 		<foreach collection="list" item="record" index="index" open="(" separator="),(" close=")">
 			#{record.category},
 			#{record.description},
-			#{record.username}
+			#{record.username},
+			#{record.isEditable}
 		</foreach>
 	</insert>
 
@@ -153,7 +154,7 @@
 	</update>
 
 	<select id="retrieveExpenseCategory" resultType="com.slabs.expensetracker.common.database.entity.ExpenseCategory">
-		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username=#{param1}
+		select * from EXPENSETRACKER.EXPENSE_CATEGORY where username in (#{param1}, 'admin')
 	</select>
 
 	<delete id="deleteExpenseCategory">

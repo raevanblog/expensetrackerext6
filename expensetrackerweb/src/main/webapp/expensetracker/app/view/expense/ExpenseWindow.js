@@ -49,13 +49,7 @@ Ext.define('expensetracker.view.expense.ExpenseWindow', {
 				listeners : {
 					change : 'filterGrid'
 				}
-			}, '->', {
-				xtype : 'button',
-				ui : 'toolbar',
-				text : 'Category',
-				iconCls : 'x-fa fa-plus-square',
-				handler : 'onAddCategory'
-			} ]
+			}]
 		} ]
 	} ]
 });

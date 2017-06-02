@@ -152,8 +152,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 		cls : 'big-100 small-100 dash-panel'
 	}, {
 		xtype : 'expensechart',
-		reference : 'categorychartpanel',
-		title : 'Expense',
+		reference : 'categorychartpanel',		
+		title : 'Expense',		
 		height : 500,
 		iconCls : 'x-fa fa-line-chart',
 		listeners : {

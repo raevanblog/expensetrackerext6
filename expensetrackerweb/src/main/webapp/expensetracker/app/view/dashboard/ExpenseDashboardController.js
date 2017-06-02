@@ -28,9 +28,19 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var me = this;
 		var expenseyear = me.lookup('expenseyear');
 		var expensemonth = me.lookup('expensemonth');
-		expensetracker.util.Session.setExpenseMonth(expensemonth.getValue());
-		expensetracker.util.Session.setExpenseYear(expenseyear.getValue());
-		me.updateDashBoard();
+		
+		if(expensetracker.util.Calendar.isCurrentYear(expenseyear.getValue()) && expensemonth.getValue() > expensetracker.util.Calendar.getCurrentMonthNo()) {		
+			Ext.Msg.show({
+				title : 'Expense Tracker',
+				message : 'Please select correct month',
+				buttons : Ext.Msg.OK,
+				icon : Ext.Msg.INFO
+			});		
+		} else  {
+			expensetracker.util.Session.setExpenseMonth(expensemonth.getValue());
+			expensetracker.util.Session.setExpenseYear(expenseyear.getValue());
+			me.updateDashBoard();
+		}				
 	},
 	onOpenExpenseSheet : function(thumbnailcont, record, item, index, e) {
 

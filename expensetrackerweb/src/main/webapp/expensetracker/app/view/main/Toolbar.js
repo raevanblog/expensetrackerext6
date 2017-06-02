@@ -25,7 +25,7 @@ Ext.define('expensetracker.view.main.Toolbar', {
 	}, {
 		xtype : 'displayfield',
 		bind : {
-			value : '{usrname}'
+			html : '<h3>{usrname}</h3>'
 		},
 		reference : 'tbUserName'
 	}, '->', {
@@ -33,13 +33,13 @@ Ext.define('expensetracker.view.main.Toolbar', {
 		ui : 'toolbar',
 		text : 'Notification',
 		handler : 'onMessage',
-		iconCls : 'x-fa fa-envelope fa-2x'
+		iconCls : 'x-fa fa-envelope'
 	}, {
 		xtype : 'button',
 		ui : 'toolbar',
 		text : 'Profile',
 		tooltip : 'Profile',
-		iconCls : 'x-fa fa-user fa-2x',
+		iconCls : 'x-fa fa-user',
 		menu : [ {
 			text : 'View Profile',
 			iconCls : 'x-fa fa-user',
