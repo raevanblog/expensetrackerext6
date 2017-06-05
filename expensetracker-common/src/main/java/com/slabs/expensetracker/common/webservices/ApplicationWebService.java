@@ -10,5 +10,6 @@ public interface ApplicationWebService {
 
 	public Response getCurrencyType() throws ExpenseTrackerException;
 
-	public Response getItemNames(String type) throws ExpenseTrackerException;
+	public Response getItemNames(String type, String username) throws ExpenseTrackerException;
+	
 }

@@ -7,5 +7,12 @@ Ext.define('expensetracker.view.analyzer.AnalyzerViewController', {
 			width : Ext.Element.getViewportWidth()
 		});
 		priceGraphWindow.show();
+	},
+	onRenderItemDetails : function(itemgrid) {
+		var store = expensetracker.util.Store.loadStore(Ext.create('expensetracker.store.Item'), {
+			type : 'trackitems',
+			username : expensetracker.util.Session.getUsername()
+		});
+		itemgrid.bindStore(store);
 	}
 });

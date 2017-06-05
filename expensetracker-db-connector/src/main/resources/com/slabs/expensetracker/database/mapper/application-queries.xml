@@ -5,12 +5,18 @@
 
 <mapper namespace="com.slabs.expensetracker.common.database.mapper.ApplicationDAO">
 
-	<resultMap type="com.slabs.expensetracker.common.database.entity.Dictionary" id="Dictionary">
-		<result column="ITEMNAME" property="name" />
-	</resultMap>
+	<select id="getExpenseNames" resultType="map">
+		select distinct ITEMNAME as "name"
+		from EXPENSETRACKER.EXPENSE
+	</select>
 
-	<select id="getExpenseNames" resultMap="Dictionary">
-		select distinct ITEMNAME from EXPENSETRACKER.EXPENSE
+	<select id="getItemNameForTracking" resultType="map">
+		select e.ITEMNAME as "name", e.CATEGORY as "category", min(year(e.EXPDATE)) as "start_year", max(year(e.EXPDATE))
+		as "end_year" from EXPENSE e
+		where e.USERNAME = #{param1}
+		and e.CATEGORY in ('Grocery', 'Food')
+		group by e.ITEMNAME,
+		e.CATEGORY order by e.CATEGORY
 	</select>
 
 	<select id="getExpenseType" resultType="com.slabs.expensetracker.common.database.entity.ExpenseType">

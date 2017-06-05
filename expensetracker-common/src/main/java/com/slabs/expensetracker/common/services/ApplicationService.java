@@ -1,9 +1,9 @@
 package com.slabs.expensetracker.common.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.slabs.expensetracker.common.database.entity.Currency;
-import com.slabs.expensetracker.common.database.entity.Dictionary;
 import com.slabs.expensetracker.common.database.entity.ExpenseType;
 import com.slabs.expensetracker.common.database.entity.IncomeType;
 
@@ -33,6 +33,8 @@ public interface ApplicationService {
 
 	public Integer createCurrency(List<Currency> records) throws Exception;
 
-	public List<Dictionary> getExpenseNames() throws Exception;
-	
+	public List<Map<String, String>> getExpenseNames() throws Exception;
+
+	public List<Map<String, String>> getItemNameForTracking(String username) throws Exception;
+
 }

@@ -122,12 +122,14 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	 * @throws WebServiceException
 	 *             throws {@link WebServiceException}
 	 */
-	@RequestMapping(value = "application/dictionary", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
+	@RequestMapping(value = "application/items", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getItemNames(@RequestParam(name = "type") String type) throws ExpenseTrackerException {
+	public Response getItemNames(@RequestParam(name = "type") String type, @RequestParam(name = "username", defaultValue = "") String username) throws ExpenseTrackerException {
 		try {
 			if ("items".equals(type)) {
 				return ResponseGenerator.getSuccessResponse(service.getExpenseNames(), Operation.SELECT);
+			} else if ("trackitems".equals(type)) {
+				return ResponseGenerator.getSuccessResponse(service.getItemNameForTracking(username), Operation.SELECT);
 			}
 			return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Invalid dictionary type");
 		} catch (Exception e) {
@@ -200,8 +202,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 	}
 
 	@RequestMapping(value = "application/checkAvailability", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
-	public Response checkAvailability(@RequestParam(name = "type") String type, @RequestParam(name = "value") String value)
-			throws ExpenseTrackerException {
+	public Response checkAvailability(@RequestParam(name = "type") String type, @RequestParam(name = "value") String value) throws ExpenseTrackerException {
 		try {
 			Boolean isAvailable = userService.checkAvailability(type, value, Boolean.FALSE);
 			if (isAvailable) {
@@ -220,8 +221,7 @@ public class ApplicationWebServiceImpl implements ApplicationWebService {
 		}
 	}
 
-	@RequestMapping(value = "application/user/create", method = { RequestMethod.POST }, produces = { "application/json",
-			"application/xml" }, consumes = { "application/json", "application/xml" })
+	@RequestMapping(value = "application/user/create", method = { RequestMethod.POST }, produces = { "application/json", "application/xml" }, consumes = { "application/json", "application/xml" })
 	public Response register(@RequestBody UserInfo user) throws ExpenseTrackerException {
 		try {
 			Integer isCreated = userService.createUser(user);

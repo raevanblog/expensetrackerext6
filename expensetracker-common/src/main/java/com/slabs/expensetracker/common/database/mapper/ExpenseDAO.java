@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.slabs.expensetracker.common.database.entity.Dictionary;
 import com.slabs.expensetracker.common.database.entity.Expense;
 import com.slabs.expensetracker.common.database.entity.ExpenseCategory;
 import com.slabs.expensetracker.common.database.entity.Graph;
@@ -40,9 +39,7 @@ public interface ExpenseDAO {
 	public List<Expense> getExpenseById(Integer id);
 
 	public Integer deleteExpense(Expense record);
-
-	public List<Dictionary> selectExpenseNames();
-
+	
 	public Integer insertExpenseCategory(List<ExpenseCategory> records);
 
 	public Integer updateExpenseCategory(ExpenseCategory record);

@@ -14,8 +14,7 @@
 	<element name="ExpenseType" type="et:ExpenseType" />
 	<element name="Income" type="et:Income" />
 	<element name="IncomeType" type="et:IncomeType" />
-	<element name="Message" type="et:Message" />
-	<element name="Dictionary" type="et:Dictionary" />
+	<element name="Message" type="et:Message" />	
 	<element name="Dashboard" type="et:Dashboard" />
 	<element name="Graph" type="et:Graph" />
 
@@ -227,24 +226,7 @@
 			<element name="unit" type="string" />
 		</sequence>
 	</complexType>
-
-	<complexType name="Dictionary">
-		<annotation>
-			<documentation source="https://raevanblog.blogspot.in/">
-				Dictionary will hold dictionary
-				data.
-			</documentation>
-			<appinfo>
-				<annox:annotate>
-					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" />
-				</annox:annotate>
-			</appinfo>
-		</annotation>
-		<sequence>
-			<element name="name" type="string" />
-		</sequence>
-	</complexType>
-
+	
 	<complexType name="ExpenseType">
 		<annotation>
 			<documentation source="https://raevanblog.blogspot.in/">

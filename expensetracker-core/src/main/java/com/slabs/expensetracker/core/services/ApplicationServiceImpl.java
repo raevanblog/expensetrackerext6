@@ -1,6 +1,8 @@
 package com.slabs.expensetracker.core.services;
 
+import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +10,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slabs.expensetracker.common.database.entity.Currency;
-import com.slabs.expensetracker.common.database.entity.Dictionary;
 import com.slabs.expensetracker.common.database.entity.ExpenseType;
 import com.slabs.expensetracker.common.database.entity.Income;
 import com.slabs.expensetracker.common.database.entity.IncomeType;
@@ -134,18 +135,21 @@ public class ApplicationServiceImpl implements ApplicationService {
 	public Integer createCurrency(List<Currency> records) throws Exception {
 		return dao.createCurrency(records);
 	}
-	
-	
+
 	/**
 	 * 
-	 * @return {@link Dictionary} - List of Item Names in the EXPENSE
-	 *         table
+	 * @return {@link Dictionary} - List of Item Names in the EXPENSE table
 	 * @throws Exception
 	 *             throws {@link Exception}
 	 */
 	@Override
-	public List<Dictionary> getExpenseNames() throws Exception {
+	public List<Map<String, String>> getExpenseNames() throws Exception {
 		return dao.getExpenseNames();
 	}
-	
+
+	@Override
+	public List<Map<String, String>> getItemNameForTracking(String username) throws Exception {
+		return dao.getItemNameForTracking(username);
+	}
+
 }

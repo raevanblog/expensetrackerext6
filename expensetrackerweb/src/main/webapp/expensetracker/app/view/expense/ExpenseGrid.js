@@ -71,9 +71,9 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'button',
 			ui : 'toolbar',
 			text : 'Category',
-			iconCls : 'x-fa fa-plus-square',
+			iconCls : 'x-fa fa-file-text',
 			handler : 'onShowCategory',
-			tooltip : 'Add Category'
+			tooltip : 'Expense Category'
 		}, {
 			xtype : 'button',
 			ui : 'toolbar',
@@ -115,7 +115,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'combobox',
 			allowBlank : false,
 			focusOnToFront : true,
-			store : 'Dictionary',
+			store : 'Item',
 			displayField : 'name',
 			valueField : 'name',
 			typeAhead : true,

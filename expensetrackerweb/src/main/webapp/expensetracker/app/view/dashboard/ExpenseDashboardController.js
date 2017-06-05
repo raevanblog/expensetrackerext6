@@ -146,6 +146,11 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 					if (totalIncome !== 0.0) {
 						var summaryPie = me.lookup('summarypie');
 						var polarChart = summaryPie.down('[itemId=summaryPolar]');
+						
+						if(polarChart.isHidden()) {
+							polarChart.setHidden(false);
+						}
+						
 						var pieStore = polarChart.getStore();
 						pieStore.removeAll();
 
@@ -158,8 +163,15 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 						}, {
 							item : 'Cash in Hand',
 							value : cashPerc
-						});
-						polarChart.bindStore(pieStore);
+						});						
+						polarChart.bindStore(pieStore);						
+						polarChart.redraw();
+					} else {
+						var summaryPie = me.lookup('summarypie');
+						var polarChart = summaryPie.down('[itemId=summaryPolar]');
+						var pieStore = polarChart.getStore();
+						pieStore.removeAll();
+						polarChart.setHidden(true);
 					}
 				}
 			},

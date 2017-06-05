@@ -2,7 +2,8 @@ Ext.define('expensetracker.view.charts.SummaryPie', {
 	extend : 'Ext.panel.Panel',
 	xtype : 'summarypie',
 	alias : 'view.summarypie',
-	layout : 'fit',
+	layout : 'fit',	
+	requires : ['expensetracker.view.charts.PieSeries3D'],
 	items : [ {
 		xtype : 'polar',
 		itemId : 'summaryPolar',
@@ -13,20 +14,7 @@ Ext.define('expensetracker.view.charts.SummaryPie', {
 		theme: 'Muted',
 		interactions : [ 'itemhighlight', 'rotate' ],		
 		series : [ {
-			type : 'pie3d',
-			angleField : 'value',
-			donut: 40,
-			distortion: 0.6,
-			highlight : {
-				margin: 40
-			},			
-			tooltip : {
-				trackMouse : true,
-				renderer : function(tooltip, record, item) {
-					var value = Ext.util.Format.number(record.get('value'), '0.00');
-					tooltip.setHtml(record.get('item') + ' : ' + value + ' %');
-				}
-			}
+			type : 'pieseries3d'
 		} ]
 	} ]
 });

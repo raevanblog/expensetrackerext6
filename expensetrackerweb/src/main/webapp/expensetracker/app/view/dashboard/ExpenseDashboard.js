@@ -4,7 +4,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 	alias : 'view.expensedashboard',
 	requires : [ 'Ext.ux.layout.ResponsiveColumn', 'expensetracker.view.charts.Expense', 'expensetracker.view.dashboard.ExpenseDashboardController', 'expensetracker.view.dashboard.TopExpense',
 			'expensetracker.view.dashboard.Summary', 'expensetracker.view.charts.SummaryPie', 'expensetracker.view.charts.LineChart', 'expensetracker.view.income.IncomeWindow',
-			'expensetracker.view.inventory.InventoryWindow', 'expensetracker.store.Graph', 'expensetracker.view.dashboard.ExpenseDashboardModel' ],
+			'expensetracker.view.inventory.InventoryWindow', 'expensetracker.store.Graph', 'expensetracker.view.dashboard.ExpenseDashboardModel'],
 	layout : 'responsivecolumn',
 	controller : 'expensedashboardcontroller',
 	viewModel : 'expensedashboard',
@@ -55,7 +55,8 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			value : expensetracker.util.Session.getExpenseYear()
 		}, {
 			xtype : 'button',
-			text : 'Load',
+			text : 'View',
+			iconCls : 'x-fa fa-eye',
 			margin : '5 5 5 5',
 			ui : 'soft-green',
 			handler : 'onLoadExpenseData'

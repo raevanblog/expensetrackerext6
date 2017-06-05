@@ -1,11 +1,11 @@
 package com.slabs.expensetracker.common.database.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import com.slabs.expensetracker.common.database.entity.Currency;
-import com.slabs.expensetracker.common.database.entity.Dictionary;
 import com.slabs.expensetracker.common.database.entity.ExpenseType;
 import com.slabs.expensetracker.common.database.entity.IncomeType;
 
@@ -36,6 +36,8 @@ public interface ApplicationDAO {
 
 	public Integer deleteCurrency(Currency record);
 	
-	public List<Dictionary> getExpenseNames();
+	public List<Map<String, String>> getExpenseNames();
+	
+	public List<Map<String, String>> getItemNameForTracking(String username);
 	
 }

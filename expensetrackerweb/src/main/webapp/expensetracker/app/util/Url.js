@@ -23,7 +23,7 @@ Ext.define('expensetracker.util.Url', {
 		incomeTypeService : '/expensetrackerweb/web/api/application/incometype',
 		expenseTypeService : '/expensetrackerweb/web/api/application/expensetype',
 		currencyTypeService : '/expensetrackerweb/web/api/application/currencytype',
-		dictionaryService : '/expensetrackerweb/web/api/application/dictionary?type=items',
+		itemService : '/expensetrackerweb/web/api/application/items',
 		inventoryService : '/expensetrackerweb/web/api/inventory',
 		reportingService : '/expensetrackerweb/web/api/reports',
 		graphService : '/expensetrackerweb/web/api/graph'
