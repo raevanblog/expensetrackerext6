@@ -8,11 +8,11 @@ Ext.define('expensetracker.view.analyzer.AnalyzerViewController', {
 		});
 		priceGraphWindow.show();
 	},
-	onRenderItemDetails : function(itemgrid) {
+	onRenderItemCombo : function(combobox) {
 		var store = expensetracker.util.Store.loadStore(Ext.create('expensetracker.store.Item'), {
 			type : 'trackitems',
 			username : expensetracker.util.Session.getUsername()
 		});
-		itemgrid.bindStore(store);
+		combobox.bindStore(store);
 	}
 });

@@ -49,9 +49,12 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var date = new Date(expensetracker.util.Session.getExpenseYear(), expensetracker.util.Session.getExpenseMonth() - 1);
 
 		var expenseWindow = Ext.create('expensetracker.view.expense.ExpenseWindow', {
-			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth(),
+			height : expensetracker.util.Constants.getWindowHeight(),
+			width : expensetracker.util.Constants.getWindowWidth(),
+			x : expensetracker.util.Constants.getWindowX(),
+			y : expensetracker.util.Constants.getWindowY(),
 			resizable : false,
+			constrain : true,
 			modal : true
 		});
 
@@ -68,8 +71,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	onOpenIncomeSheet : function() {
 		var me = this;
 		var incomeWindow = Ext.create('expensetracker.view.income.IncomeWindow', {
-			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth(),
+			height : expensetracker.util.Constants.getWindowHeight(),
+			width : expensetracker.util.Constants.getWindowWidth(),
+			x : expensetracker.util.Constants.getWindowX(),
+			y : expensetracker.util.Constants.getWindowY(),
 			modal : true
 		});
 		var model = incomeWindow.getViewModel();
@@ -84,8 +89,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	onOpenInventory : function() {
 		var me = this;
 		var inventoryWindow = Ext.create('expensetracker.view.inventory.InventoryWindow', {
-			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth(),
+			height : expensetracker.util.Constants.getWindowHeight(),
+			width : expensetracker.util.Constants.getWindowWidth(),
+			x : expensetracker.util.Constants.getWindowX(),
+			y : expensetracker.util.Constants.getWindowY(),
 			modal : true
 		});
 		var model = inventoryWindow.getViewModel();
@@ -99,8 +106,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 	onOpenReport : function() {
 		var me = this;
 		var pdfWindow = Ext.create('expensetracker.view.report.ReportWindow', {
-			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth(),
+			height : expensetracker.util.Constants.getWindowHeight(),
+			width : expensetracker.util.Constants.getWindowWidth(),
+			x : expensetracker.util.Constants.getWindowX(),
+			y : expensetracker.util.Constants.getWindowY(),
 			modal : true,
 			reportUrl : expensetracker.util.Url.getReportingService() + '?username=' + expensetracker.util.Session.getUsername() + '&year=' + expensetracker.util.Session.getExpenseYear() + '&month='
 					+ expensetracker.util.Session.getExpenseMonth()

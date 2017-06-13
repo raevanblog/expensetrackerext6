@@ -135,9 +135,8 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			store : 'ExpenseCategory',
 			forceSelection : true,
 			allowBlank : false,
-			typeAhead : true,
-			queryMode : 'local',
-			selectOnFocus : true,
+			editable : false,			
+			queryMode : 'local',			
 			triggerAction : 'all'
 		},
 		dataIndex : 'category',
@@ -154,10 +153,9 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			valueField : 'exptype',
 			allowBlank : false,
 			store : 'ExpenseType',
-			forceSelection : true,
-			typeAhead : true,
+			forceSelection : true,			
 			queryMode : 'local',
-			selectOnFocus : true,
+			editable : false,			
 			triggerAction : 'all'
 		},
 		filter : {
@@ -192,8 +190,7 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 			xtype : 'numberfield',
 			hideTrigger : true,
 			allowBlank : false,
-			reference : 'gridQty',
-			selectOnFocus : true,
+			reference : 'gridQty',			
 			listeners : {
 				change : 'onQtyChange'
 			}
@@ -204,14 +201,13 @@ Ext.define('expensetracker.view.expense.ExpenseGrid', {
 		align : 'center',
 		editor : {
 			xtype : 'combobox',
-			displayField : 'display',
+			displayField : 'unit',
 			valueField : 'unit',
 			store : 'Units',
 			forceSelection : true,
-			allowBlank : false,
-			typeAhead : true,
-			queryMode : 'local',
-			selectOnFocus : true,
+			editable : false,
+			allowBlank : false,			
+			queryMode : 'local',			
 			triggerAction : 'all'
 		},
 		dataIndex : 'unit',

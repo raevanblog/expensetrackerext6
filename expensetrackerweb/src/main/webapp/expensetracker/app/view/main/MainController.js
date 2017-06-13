@@ -153,16 +153,20 @@ Ext.define('expensetracker.view.main.MainController', {
 		var model = me.getView().getViewModel();
 		var profileWindow = Ext.create('expensetracker.view.profile.User', {
 			modal : true,
-			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth()
+			height : expensetracker.util.Constants.getWindowHeight(),
+			width : expensetracker.util.Constants.getWindowWidth(),
+			x : expensetracker.util.Constants.getWindowX(),
+			y : expensetracker.util.Constants.getWindowY()
 		});
 		profileWindow.show();
 	},
 	onChangePwd : function(chgPwdBtn) {			
 		var chgPwdWindow = Ext.create('expensetracker.view.profile.ChangePassword', {
 			modal : true,			
-			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth()
+			height : expensetracker.util.Constants.getWindowHeight(),
+			width : expensetracker.util.Constants.getWindowWidth(),
+			x : expensetracker.util.Constants.getWindowX(),
+			y : expensetracker.util.Constants.getWindowY()
 		});
 		chgPwdWindow.show();
 	},
@@ -226,8 +230,10 @@ Ext.define('expensetracker.view.main.MainController', {
 			modal : true,
 			title : 'Message',
 			closeToolText : 'Close',
-			height : Ext.Element.getViewportHeight(),
-			width : Ext.Element.getViewportWidth(),
+			height : expensetracker.util.Constants.getWindowHeight(),
+			width : expensetracker.util.Constants.getWindowWidth(),
+			x : expensetracker.util.Constants.getWindowX(),
+			y : expensetracker.util.Constants.getWindowY(),
 			layout : {
 				type : 'fit'
 			},

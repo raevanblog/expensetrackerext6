@@ -18,18 +18,6 @@ Ext.define('expensetracker.view.analyzer.ItemDetails', {
 		align : 'left',
 		flex : 1
 	}, {
-		text : 'Year',
-		xtype : 'widgetcolumn',
-		flex : 1,
-		widget : {
-			xtype: 'slider',
-			bind : {
-				minValue: '{record.start_year}',
-				maxValue: '{record.end_year}',
-			},
-			increment : 1			
-		}
-	}, {
 		xtype : 'actioncolumn',
 		align : 'center',
 		tooltip : 'View Price Graph',
