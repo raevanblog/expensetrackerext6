@@ -4,5 +4,5 @@ import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 
 public interface GraphWebService {
-	public Response getGraph(String username, Integer year, Integer month, String type) throws ExpenseTrackerException;
+	public Response getGraph(String username, Integer year, Integer month, String name, String type) throws ExpenseTrackerException;
 }

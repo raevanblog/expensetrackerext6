@@ -4,7 +4,7 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 	alias : 'view.analyzerview',
 	layout : 'responsivecolumn',
 	controller : 'analyzerviewcontroller',
-	requires :  ['expensetracker.view.analyzer.ItemDetails', 'expensetracker.view.analyzer.AnalyzerViewController'],
+	requires :  ['expensetracker.view.analyzer.PriceGraphWindow', 'expensetracker.view.analyzer.AnalyzerViewController'],
 	items : [{
 		xtype : 'panel',
 		title : 'Price Graph',
@@ -14,6 +14,7 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 		items : [{
 			xtype : 'image',
 			src : 'resources/images/graph.png',
+			alt : 'pricegraph',
 			height : '60%',
 			cls : 'shadow',
 			width : '100%' 
@@ -35,6 +36,7 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 				queryMode : 'local',
 				editable : false,
 				allowBlank : false,
+				reference : 'itemcombo',
 				listeners : {
 					afterrender : 'onRenderItemCombo'
 				}				
@@ -42,6 +44,7 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 				xtype : 'button',
 				text : 'View',
 				formBind : true,
+				handler : 'onShowPriceGraph',
 				scale : 'large',
 				margin : '5	5 5	5',
 				ui : 'soft-green'
@@ -49,12 +52,13 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 		}]
 	}, {
 		xtype : 'panel',
-		title : 'Expense Trend',
+		title : 'Expense Trend',		
 		titleAlign : 'center',		
 		height : 400,
 		cls : 'big-20 small-100 dash-panel shadow',
 		items : [{
 			xtype : 'image',
+			alt : 'expensetrend',
 			src : 'resources/images/pie.png',
 			height : '60%',
 			cls : 'shadow',

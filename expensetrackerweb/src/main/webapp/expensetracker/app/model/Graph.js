@@ -5,6 +5,13 @@ Ext.define('expensetracker.model.Graph', {
 		name : 'month',
 		type : 'int'
 	}, {
+		name : 'monthname',
+		type : 'string',
+		persist : false,
+		calculate: function (data) {
+         return data.month != null ? expensetracker.util.Calendar.getName(data.month) : null;
+		}
+	}, {
 		name : 'year',
 		type : 'int'
 	}, {
@@ -16,5 +23,11 @@ Ext.define('expensetracker.model.Graph', {
 	}, {
 		name : 'type',
 		type : 'string'
+	},{
+		name : 'name',
+		type : 'string'		
+	}, {
+		name : 'avgprice',
+		type : 'float'
 	} ]
 });

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.slabs.expensetracker.common.constants.Constants;
 import com.slabs.expensetracker.common.database.entity.Graph;
 import com.slabs.expensetracker.common.exception.ExpenseTrackerException;
 import com.slabs.expensetracker.common.services.ExpenseService;
@@ -18,6 +19,7 @@ import com.slabs.expensetracker.common.services.IncomeService;
 import com.slabs.expensetracker.common.webservice.response.Operation;
 import com.slabs.expensetracker.common.webservice.response.Response;
 import com.slabs.expensetracker.common.webservices.GraphWebService;
+import com.slabs.expensetracker.webservices.core.MessageConstants;
 import com.slabs.expensetracker.webservices.response.ResponseGenerator;
 
 /**
@@ -31,10 +33,6 @@ import com.slabs.expensetracker.webservices.response.ResponseGenerator;
 @RequestMapping(value = "api")
 public class GraphWebServiceImpl implements GraphWebService {
 
-	private static final String EXPENSE_VS_INCOME_MONTHLY = "EXPENSE_VS_INCOME_MONTHLY";
-
-	private static final String CATEGORY_EXPENSE_TOTAL = "CATEGORY_EXPENSE_TOTAL";
-
 	@Autowired
 	private ExpenseService eService;
 
@@ -47,25 +45,65 @@ public class GraphWebServiceImpl implements GraphWebService {
 	 *            {@link String} - Username of the year
 	 * @param year
 	 *            {@link Integer} - Year for which data need to be retrieved
+	 * @param month
+	 *            {@link Integer} - Month for which data need to be retrieved
+	 * 
+	 * @param name
+	 *            {@link String} - Item name for which data need to be retrieved
+	 * 
+	 * @param type
+	 *            {@link String} - Type of Graph. Supported types are
+	 *            EXPENSE_VS_INCOME_MONTHLY, CATEGORY_EXPENSE_TOTAL,
+	 *            PRICE_GRAPH, PRICE_GRAPH_YEARLY
+	 * 
 	 * @return {@link com.slabs.expense.tracker.webservice.response.Response}
 	 * @throws ExpenseTrackerException
 	 *             throws {@link ExpenseTrackerException}
+	 * 
+	 *             ------------- EXPENSE_VS_INCOME_MONTHLY --------------
+	 * 
+	 *             Required Parameters - username, year
+	 * 
+	 *             ------------- CATEGORY_EXPENSE_TOTAL -------------
+	 * 
+	 *             Required Parameters - username, year, month
+	 * 
+	 *             ------------- PRICE_GRAPH -------------
+	 * 
+	 *             Required Parameters - username, name
+	 * 
+	 *             ------------- PRICE_GRAPH_YEARLY --------------
+	 * 
+	 *             Required Parameters - username, name, year
 	 */
 	@RequestMapping(value = "graph", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getGraph(@RequestParam(name = "username") String username, @RequestParam(name = "year") Integer year,
-			@RequestParam(name = "month", required = false) Integer month, @RequestParam(name = "type") String type) throws ExpenseTrackerException {
+	public Response getGraph(@RequestParam(name = "username") String username, @RequestParam(name = "year", required = false) Integer year,
+			@RequestParam(name = "month", required = false) Integer month, @RequestParam(name = "name", required = false) String name, @RequestParam(name = "type") String type)
+			throws ExpenseTrackerException {
 		try {
-			if (EXPENSE_VS_INCOME_MONTHLY.equals(type)) {
+			if (Constants.EXPENSE_VS_INCOME_MONTHLY.equals(type)) {
 				return ResponseGenerator.getSuccessResponse(getMonthlyExpenseVsIncome(username, year), Operation.SELECT);
-			} else if (CATEGORY_EXPENSE_TOTAL.equals(type)) {
+			} else if (Constants.CATEGORY_EXPENSE_TOTAL.equals(type)) {
 				return ResponseGenerator.getSuccessResponse(getCategoryWiseTotalExpense(username, year, month), Operation.SELECT);
+			} else if (Constants.PRICE_GRAPH.equals(type)) {
+				return ResponseGenerator.getSuccessResponse(getPriceGraph(name, username), Operation.SELECT);
+			} else if (Constants.PRICE_GRAPH_YEARLY.equals(type)) {
+				return ResponseGenerator.getSuccessResponse(getPriceGraphForYear(name, year, username), Operation.SELECT);
 			} else {
-				return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Requested graph type is Wrong");
+				return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Invalid Graph Type");
 			}
 		} catch (Exception e) {
-			throw new ExpenseTrackerException(e);
+			throw new ExpenseTrackerException(MessageConstants.EXCEPTION, e);
 		}
+	}
+
+	private List<Graph> getPriceGraph(String name, String username) throws Exception {
+		return eService.getPriceGraph(name, username);
+	}
+
+	private List<Graph> getPriceGraphForYear(String name, Integer year, String username) throws Exception {
+		return eService.getPriceGraphForYear(name, year, username);
 	}
 
 	private List<Graph> getMonthlyExpenseVsIncome(String username, Integer year) throws Exception {

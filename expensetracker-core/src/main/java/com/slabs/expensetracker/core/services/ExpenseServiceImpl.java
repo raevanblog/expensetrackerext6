@@ -235,11 +235,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
-	public List<Integer> getExpenseRange(String username) throws Exception {
+	public List<Integer> getExpenseRange(String username, String itemName) throws Exception {
 		List<Integer> result = new ArrayList<Integer>();
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-		Map<String, Integer> expenseRange = mapper.getExpenseRange(username);
+		Map<String, Integer> expenseRange = mapper.getExpenseRange(username, itemName);
 
 		if (expenseRange != null && !expenseRange.isEmpty()) {
 			Integer minYear = expenseRange.get(String.valueOf(1));
@@ -262,6 +262,38 @@ public class ExpenseServiceImpl implements ExpenseService {
 			result.add(currentYear);
 		}
 		return result;
+	}
+
+	/**
+	 * @param itemName
+	 *            - Item Name
+	 * @param username
+	 *            - Username of the user.
+	 * 
+	 * @return {@link Graph} - List of Graph data.
+	 * @throws {@link
+	 *             Exception}
+	 */
+	@Override
+	public List<Graph> getPriceGraph(String itemName, String username) throws Exception {
+		return mapper.getPriceGraph(itemName, username);
+	}
+
+	/**
+	 * @param itemName
+	 *            - Item Name
+	 * @param year
+	 *            - Expense year
+	 * @param username
+	 *            - Username of the user.
+	 * 
+	 * @return {@link Graph} - List of Graph data.
+	 * @throws {@link
+	 *             Exception}
+	 */
+	@Override
+	public List<Graph> getPriceGraphForYear(String itemName, Integer year, String username) throws Exception {
+		return mapper.getPriceGraphForYear(itemName, year, username);
 	}
 
 }
