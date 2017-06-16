@@ -270,9 +270,14 @@ public class ExpenseWebServiceImpl implements ExpenseWebService {
 
 	@RequestMapping(value = "expenserange", method = { RequestMethod.GET }, produces = { "application/json", "application/xml" })
 	@Override
-	public Response getExpenseRange(@RequestParam(name = "username") String username, @RequestParam(name = "name", required = false) String itemName) throws ExpenseTrackerException {
+	public Response getExpenseRange(@RequestParam(name = "username") String username, @RequestParam(name = "name", required = false) String itemName, @RequestParam(name = "year", required=false) Integer year)
+			throws ExpenseTrackerException {
 		try {
-			return ResponseGenerator.getSuccessResponse(service.getExpenseRange(username, itemName), Operation.SELECT);
+			if (year == null) {
+				return ResponseGenerator.getSuccessResponse(service.getExpenseYearRange(username, itemName), Operation.SELECT);
+			} else {
+				return ResponseGenerator.getSuccessResponse(service.getExpenseMonthRange(username, year, itemName), Operation.SELECT);
+			}
 		} catch (Exception e) {
 			throw new ExpenseTrackerException(e);
 		}

@@ -16,5 +16,5 @@ Ext.define('expensetracker.view.charts.SummaryPie', {
 		series : [ {
 			type : 'pieseries3d'
 		} ]
-	} ]
+	} ]	
 });

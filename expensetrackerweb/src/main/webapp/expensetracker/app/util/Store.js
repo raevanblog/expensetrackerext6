@@ -3,7 +3,7 @@ Ext.define('expensetracker.util.Store', {
 	loadStaticStore : function() {
 		var me = this;
 		
-		Ext.getStore('Month').load();
+		Ext.getStore('Calendar').load();
 		Ext.getStore('ExpenseType').load();		
 		Ext.getStore('IncomeType').load();
 		Ext.getStore('Currency').load();

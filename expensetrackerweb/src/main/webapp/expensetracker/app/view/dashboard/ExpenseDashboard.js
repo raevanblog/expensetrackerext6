@@ -37,7 +37,7 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboard', {
 			valueField : 'monthNo',
 			editable : false,
 			allowBlank : false,
-			store: 'Month',
+			store: 'Calendar',
 			margin : '5 5 5 5',
 			reference : 'expensemonth',
 			value : expensetracker.util.Session.getExpenseMonth()			

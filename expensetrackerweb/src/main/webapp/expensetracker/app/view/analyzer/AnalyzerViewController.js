@@ -14,6 +14,19 @@ Ext.define('expensetracker.view.analyzer.AnalyzerViewController', {
 		});
 		graphWindow.show();
 	},
+	onShowExpenseTrend : function(button) {
+		var me = this;
+		var yearcombo = me.lookup('trendyearcombo');
+		console.log("asdadaads");
+		var graphWindow = Ext.create('expensetracker.view.analyzer.ExpenseTrendWindow', {
+			viewModel : {
+				data : {
+					year : yearcombo.getValue()
+				}
+			}
+		});		
+		graphWindow.show();
+	},
 	onRenderItemCombo : function(combobox) {
 		var store = expensetracker.util.Store.loadStore(Ext.create('expensetracker.store.Item'), {
 			type : 'trackitems',

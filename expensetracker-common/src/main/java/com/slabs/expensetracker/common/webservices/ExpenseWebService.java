@@ -34,5 +34,5 @@ public interface ExpenseWebService {
 
 	public Response deleteExpense(List<Expense> records) throws ExpenseTrackerException;
 
-	public Response getExpenseRange(String username, String itemName) throws ExpenseTrackerException;
+	public Response getExpenseRange(String username, String itemName, Integer year) throws ExpenseTrackerException;
 }

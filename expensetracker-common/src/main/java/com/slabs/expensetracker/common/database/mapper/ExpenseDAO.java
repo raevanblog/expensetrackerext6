@@ -56,7 +56,9 @@ public interface ExpenseDAO {
 
 	public Integer deleteExpenseUnits(Units record);
 	
-	public Map<String, Integer> getExpenseRange(String username, String itemName);
+	public Map<String, Integer> getExpenseYearRange(String username, String itemName);
+	
+	public Map<String, Integer> getExpenseMonthRange(String username, Integer year, String itemName);
 	
 	public List<Graph> getPriceGraph(String itemName, String username);
 	

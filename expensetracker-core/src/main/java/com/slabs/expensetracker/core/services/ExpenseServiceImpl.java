@@ -235,15 +235,15 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
-	public List<Integer> getExpenseRange(String username, String itemName) throws Exception {
+	public List<Integer> getExpenseYearRange(String username, String itemName) throws Exception {
 		List<Integer> result = new ArrayList<Integer>();
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-		Map<String, Integer> expenseRange = mapper.getExpenseRange(username, itemName);
+		Map<String, Integer> expenseRange = mapper.getExpenseYearRange(username, itemName);
 
 		if (expenseRange != null && !expenseRange.isEmpty()) {
-			Integer minYear = expenseRange.get(String.valueOf(1));
-			Integer maxYear = expenseRange.get(String.valueOf(2));
+			Integer minYear = expenseRange.get("minm");
+			Integer maxYear = expenseRange.get("maxm");
 
 			if (minYear == maxYear) {
 				result.add(maxYear);
@@ -264,26 +264,39 @@ public class ExpenseServiceImpl implements ExpenseService {
 		return result;
 	}
 
-	/**
-	 * @param itemName
-	 *            - Item Name
-	 * @param username
-	 *            - Username of the user.
-	 * 
-	 * @return {@link Graph} - List of Graph data.
-	 * @throws {@link
-	 *             Exception}
-	 */
 	@Override
-	public List<Graph> getPriceGraph(String itemName, String username) throws Exception {
-		return mapper.getPriceGraph(itemName, username);
+	public List<Integer> getExpenseMonthRange(String username, Integer year, String itemName) throws Exception {
+		List<Integer> result = new ArrayList<Integer>();
+		int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+
+		Map<String, Integer> expenseRange = mapper.getExpenseMonthRange(username, year, itemName);
+
+		if (expenseRange != null && !expenseRange.isEmpty()) {
+			Integer minMonth = expenseRange.get("minm");
+			Integer maxMonth = expenseRange.get("maxm");
+
+			if (minMonth == maxMonth) {
+				result.add(maxMonth);
+			} else {
+
+				for (int i = minMonth; i <= maxMonth; i++) {
+					result.add(i);
+				}
+
+				if (!result.contains(currentMonth)) {
+					result.add(currentMonth);
+				}
+			}
+
+		} else {
+			result.add(currentMonth);
+		}
+		return result;
 	}
 
 	/**
 	 * @param itemName
 	 *            - Item Name
-	 * @param year
-	 *            - Expense year
 	 * @param username
 	 *            - Username of the user.
 	 * 
@@ -292,8 +305,44 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 *             Exception}
 	 */
 	@Override
-	public List<Graph> getPriceGraphForYear(String itemName, Integer year, String username) throws Exception {
-		return mapper.getPriceGraphForYear(itemName, year, username);
+	public List<Graph> getPriceGraph(String username, String itemName, Integer year) throws Exception {
+		if (year == null || year == 0) {
+			return mapper.getPriceGraph(itemName, username);
+		} else {
+			return mapper.getPriceGraphForYear(itemName, year, username);
+		}
+	}
+
+	/**
+	 * 
+	 * @param month
+	 *            {@link Integer} - Expense Month
+	 * 
+	 * @param year
+	 *            {@link Integer} - Expense Year
+	 * 
+	 * @param username
+	 *            {@link String} - Username of the user
+	 * 
+	 * @return {@link Graph} - List of Graph data.
+	 * @throws {@link
+	 *             Exception}
+	 * 
+	 */
+	@Override
+	public List<Graph> getExpenseTrend(String username, Integer year, Integer month) throws Exception {
+		List<Graph> categoryWiseTotalExpense = mapper.getCategoryWiseTotalExpense(username, year, month);
+		double totalExpense = 0;
+
+		for (Graph graph : categoryWiseTotalExpense) {
+			totalExpense = totalExpense + graph.getExpense();
+		}
+
+		for (Graph graph : categoryWiseTotalExpense) {
+			graph.setAvg((graph.getExpense() / totalExpense) * 100);
+		}
+
+		return categoryWiseTotalExpense;
 	}
 
 }

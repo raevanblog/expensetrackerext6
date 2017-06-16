@@ -315,10 +315,10 @@ Ext.define('expensetracker.view.dashboard.ExpenseDashboardController', {
 		var report = me.lookup('reportdash');
 		var expSheetStore, incSheetStore, invSheetStore, reportStore;
 		
-		expSheetStore = Ext.create('expensetracker.store.Month');
-		incSheetStore = Ext.create('expensetracker.store.Month');
-		invSheetStore = Ext.create('expensetracker.store.Month');
-		reportStore = Ext.create('expensetracker.store.Month');
+		expSheetStore = Ext.create('expensetracker.store.Calendar');
+		incSheetStore = Ext.create('expensetracker.store.Calendar');
+		invSheetStore = Ext.create('expensetracker.store.Calendar');
+		reportStore = Ext.create('expensetracker.store.Calendar');
 		
 
 		expSheetStore.removeAll();

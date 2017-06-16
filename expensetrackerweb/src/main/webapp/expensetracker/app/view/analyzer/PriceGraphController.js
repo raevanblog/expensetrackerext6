@@ -5,10 +5,7 @@ Ext.define('expensetracker.view.analyzer.PriceGraphController', {
 		var me = this;
 		var model = me.getView().getViewModel();
 		var store = Ext.create('expensetracker.store.Graph');
-		me.loadPriceGraphStore(store, 'PRICE_GRAPH',  model.get('itemName'));
-		pricegraphwindow.addGraphSeries({
-			type : 'priceyearseries'
-		});		
+		me.loadPriceGraphStore(store, 'PRICE_GRAPH',  model.get('itemName'));		
 		pricegraphwindow.bindGraphStore(store);		
 	},
 	onRenderYearCombo : function(combobox) {

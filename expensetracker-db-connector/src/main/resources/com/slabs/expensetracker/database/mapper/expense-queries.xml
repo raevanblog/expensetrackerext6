@@ -198,16 +198,24 @@
 		</if>
 	</delete>
 
-	<select id="getExpenseRange" resultType="map">
-		select MIN(YEAR(EXPDATE)), MAX(YEAR(EXPDATE)) from EXPENSETRACKER.EXPENSE where USERNAME=#{param1}
+	<select id="getExpenseYearRange" resultType="map">
+		select MIN(YEAR(EXPDATE)) as "minm", MAX(YEAR(EXPDATE)) as "maxm" from EXPENSETRACKER.EXPENSE where USERNAME=#{param1}
 		<if test="param2 != null">
 			and ITEMNAME = #{param2}
 		</if>
 	</select>
 
+	<select id="getExpenseMonthRange" resultType="map">
+		select MIN(MONTH(EXPDATE)) as "minm", MAX(MONTH(EXPDATE)) as "maxm" from EXPENSETRACKER.EXPENSE where USERNAME=#{param1}
+		and YEAR(EXPDATE) = #{param2}
+		<if test="param3 != null">
+			and ITEMNAME = #{param3}
+		</if>
+	</select>
+
 	<select id="getPriceGraph" resultType="com.slabs.expensetracker.common.database.entity.Graph">
 		select ITEMNAME as "name", CATEGORY as "category", YEAR(EXPDATE) as "year",
-		SUM(PRICEPERUNIT)/COUNT(PRICEPERUNIT) as "avgprice"
+		SUM(PRICEPERUNIT)/COUNT(PRICEPERUNIT) as "avg"
 		from EXPENSE
 		where ITEMNAME=#{param1} and USERNAME=#{param2} group by ITEMNAME, CATEGORY,
 		YEAR(EXPDATE)
@@ -215,7 +223,7 @@
 
 	<select id="getPriceGraphForYear" resultType="com.slabs.expensetracker.common.database.entity.Graph">
 		select ITEMNAME as "name", CATEGORY as "category", month(EXPDATE) as "month",
-		SUM(PRICEPERUNIT)/COUNT(PRICEPERUNIT) as "avgprice"
+		SUM(PRICEPERUNIT)/COUNT(PRICEPERUNIT) as "avg"
 		from EXPENSE
 		where
 		ITEMNAME=#{param1} and year(EXPDATE)=#{param2} and USERNAME=#{param3} group by

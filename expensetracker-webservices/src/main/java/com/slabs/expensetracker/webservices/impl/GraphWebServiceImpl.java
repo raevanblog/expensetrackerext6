@@ -87,9 +87,13 @@ public class GraphWebServiceImpl implements GraphWebService {
 			} else if (Constants.CATEGORY_EXPENSE_TOTAL.equals(type)) {
 				return ResponseGenerator.getSuccessResponse(getCategoryWiseTotalExpense(username, year, month), Operation.SELECT);
 			} else if (Constants.PRICE_GRAPH.equals(type)) {
-				return ResponseGenerator.getSuccessResponse(getPriceGraph(name, username), Operation.SELECT);
+				return ResponseGenerator.getSuccessResponse(getPriceGraph(username, name, null), Operation.SELECT);
 			} else if (Constants.PRICE_GRAPH_YEARLY.equals(type)) {
-				return ResponseGenerator.getSuccessResponse(getPriceGraphForYear(name, year, username), Operation.SELECT);
+				return ResponseGenerator.getSuccessResponse(getPriceGraph(username, name, year), Operation.SELECT);
+			} else if (Constants.EXPENSE_TREND.equals(type)) {
+				return ResponseGenerator.getSuccessResponse(getExpenseTrend(username, year, null), Operation.SELECT);
+			} else if (Constants.EXPENSE_TREND_MONTHLY.equals(type)) {
+				return ResponseGenerator.getSuccessResponse(getExpenseTrend(username, year, month), Operation.SELECT);
 			} else {
 				return ResponseGenerator.getExceptionResponse(HttpStatus.BAD_REQUEST, "Invalid Graph Type");
 			}
@@ -98,12 +102,12 @@ public class GraphWebServiceImpl implements GraphWebService {
 		}
 	}
 
-	private List<Graph> getPriceGraph(String name, String username) throws Exception {
-		return eService.getPriceGraph(name, username);
+	private List<Graph> getExpenseTrend(String username, Integer year, Integer month) throws Exception {
+		return eService.getExpenseTrend(username, year, month);
 	}
 
-	private List<Graph> getPriceGraphForYear(String name, Integer year, String username) throws Exception {
-		return eService.getPriceGraphForYear(name, year, username);
+	private List<Graph> getPriceGraph(String username, String name, Integer year) throws Exception {
+		return eService.getPriceGraph(username, name, year);
 	}
 
 	private List<Graph> getMonthlyExpenseVsIncome(String username, Integer year) throws Exception {

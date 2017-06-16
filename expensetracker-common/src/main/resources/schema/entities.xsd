@@ -338,7 +338,7 @@
 			<element name="year" type="int" />
 			<element name="income" type="double" />
 			<element name="expense" type="double" />
-			<element name="avgprice" type="double" />
+			<element name="avg" type="double" />
 			<element name="name" type="string" />
 		</sequence>
 	</complexType>

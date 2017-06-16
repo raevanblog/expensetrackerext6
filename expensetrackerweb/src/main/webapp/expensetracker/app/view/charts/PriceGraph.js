@@ -3,7 +3,7 @@ Ext.define('expensetracker.view.charts.PriceGraph', {
 	xtype : 'pricegraph',
 	alias : 'view.pricegraph',
 	layout : 'fit',
-	requires: ['expensetracker.view.charts.theme.BaseTheme', 'expensetracker.view.charts.PriceYearSeries'],
+	requires: ['expensetracker.view.charts.theme.BaseTheme', 'expensetracker.view.charts.series.PriceGraph'],
 	tbar : [ '->', {
 		xtype : 'checkbox',
 		checked : false,
@@ -64,7 +64,10 @@ Ext.define('expensetracker.view.charts.PriceGraph', {
 			label : {
 				rotate : -45
 			}
-		}]	
+		}],
+		series : {
+			type : 'priceseries'
+		}
 	} ],
 	bindStore : function(store) {
 		var me = this;

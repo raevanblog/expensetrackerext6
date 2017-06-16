@@ -8,7 +8,7 @@ Ext.define('expensetracker.Application', {
 
 	name : 'expensetracker',
 
-	stores : [ 'Month', 'Year', 'ExpenseType', 'ExpenseCategory', 'Item', 'Expense', 'IncomeType', 'Currency', 'Units' ],
+	stores : [ 'Calendar', 'Year', 'ExpenseType', 'ExpenseCategory', 'Item', 'Expense', 'IncomeType', 'Currency', 'Units' ],
 
 	requires : [ 'expensetracker.util.Url', 'expensetracker.util.Constants', 'expensetracker.util.Session', 'expensetracker.util.Grid', 'expensetracker.util.Store', 'expensetracker.view.login.Login',
 			'expensetracker.view.login.Activation', 'expensetracker.view.message.ContactUs', 'expensetracker.util.Message', 'expensetracker.view.main.Main', 'Ext.data.validator.Presence',

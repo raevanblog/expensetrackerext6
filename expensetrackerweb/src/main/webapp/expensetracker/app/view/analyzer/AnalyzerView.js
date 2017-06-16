@@ -4,7 +4,7 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 	alias : 'view.analyzerview',
 	layout : 'responsivecolumn',
 	controller : 'analyzerviewcontroller',
-	requires :  ['expensetracker.view.analyzer.PriceGraphWindow', 'expensetracker.view.analyzer.AnalyzerViewController'],
+	requires :  ['expensetracker.view.analyzer.PriceGraphWindow', 'expensetracker.view.analyzer.ExpenseTrendWindow', 'expensetracker.view.analyzer.AnalyzerViewController'],
 	items : [{
 		xtype : 'panel',
 		title : 'Price Graph',
@@ -74,6 +74,7 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 				xtype : 'combobox',
 				fieldLabel : 'Select Year',
 				labelSeparator : '',
+				reference : 'trendyearcombo',
 				labelAlign : 'top',
 				store : 'Year',
 				valueField : 'year',
@@ -85,6 +86,7 @@ Ext.define('expensetracker.view.analyzer.AnalyzerView',{
 			},{
 				xtype : 'button',
 				text : 'View',
+				handler : 'onShowExpenseTrend',
 				formBind : true,
 				margin : '5 5 5 5',
 				ui : 'soft-green',

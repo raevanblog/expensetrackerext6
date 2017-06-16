@@ -27,7 +27,7 @@ Ext.define('expensetracker.model.Graph', {
 		name : 'name',
 		type : 'string'		
 	}, {
-		name : 'avgprice',
+		name : 'avg',
 		type : 'float'
 	} ]
 });

@@ -32,10 +32,12 @@ public interface ExpenseService {
 
 	public Integer createExpenseUnits(List<Units> records) throws Exception;
 
-	public List<Integer> getExpenseRange(String username, String itemName) throws Exception;
+	public List<Integer> getExpenseYearRange(String username, String itemName) throws Exception;
 	
-	public List<Graph> getPriceGraph(String itemName, String username) throws Exception;
+	public List<Integer> getExpenseMonthRange(String username, Integer year, String itemName) throws Exception;
 	
-	public List<Graph> getPriceGraphForYear(String itemName, Integer year, String username) throws Exception;
-
+	public List<Graph> getPriceGraph(String username, String itemName, Integer year) throws Exception;		
+	
+	public List<Graph> getExpenseTrend(String username, Integer year, Integer month) throws Exception;
+		
 }

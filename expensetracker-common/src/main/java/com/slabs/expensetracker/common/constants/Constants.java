@@ -59,4 +59,8 @@ public class Constants {
 	public static final String PRICE_GRAPH = "PRICE_GRAPH";
 
 	public static final String PRICE_GRAPH_YEARLY = "PRICE_GRAPH_YEARLY";
+	
+	public static final String EXPENSE_TREND = "EXPENSE_TREND";
+	
+	public static final String EXPENSE_TREND_MONTHLY = "EXPENSE_TREND_MONTHLY";
 }
